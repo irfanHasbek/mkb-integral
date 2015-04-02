@@ -169,10 +169,9 @@ function removeFromBasketAndTable(id){
 
 function formHandlers(){
      $('#formOffer').ajaxForm(function(data){
-        console.log(data);
         $("#btnPdfYazdir").removeAttr("disabled");
         if($('#formOffer').attr('action') == '/wsoffer/addnew'){
-            $("#btnPdfYazdir").attr("href","/teklif_yazdir?id="+data.response._id);
+            $("#btnPdfYazdir").attr("href","/teklif_yazdir?id="+data.response._id + '&code=' + $('#inpFirmCode').val() + '');
             clearInputs("divOffer");
             clearTextareas("divOffer");
             restoreSelects("divOffer");

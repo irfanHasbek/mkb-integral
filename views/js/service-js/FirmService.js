@@ -118,7 +118,7 @@ FirmService.prototype.getInformation = function(name, callback){
     });
 }
 FirmService.prototype.getInformationFirmCode = function(firmCode, callback){
-    console.log('firmCode : ' + firmCode);
+    console.log('firmCode-Service : ' + firmCode);
     FirmModel.findOne({ firmCode : firmCode }, function(error, firmInfo){
         if(error){
             callback(false, error);

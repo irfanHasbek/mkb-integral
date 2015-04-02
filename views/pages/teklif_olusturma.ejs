@@ -21,6 +21,7 @@
                 </section>
 
                 <!-- Main content -->
+                <input id="inpFirmCode" type="text" style="display:none;" value="<%=session.user.firmCode%>">
                 <section class="content">
                  <div id="divOffer">
                     <div class="row">
@@ -489,7 +490,7 @@
                                                 </div>
                                                     <div style="text-align:center;">
                                                         <button type="submit" class="btn btn-primary">Kaydet</button>
-                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.user.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
                                                     </div>
                                                 </div>
                                             </div>

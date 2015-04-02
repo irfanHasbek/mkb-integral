@@ -152,8 +152,13 @@ function addTable(user){
     if(user.isActive == 'no'){
         tdIsActive = $('<td class="text-center">' + '<i style="color:#911E29;" class="fa fa-times"></i>' + '</td>');
     }
-    var tdButtons = $('<td><button class="btn btn-info btn-sm btn-flat edit"><i class="fa fa-pencil"></i></button>' + '<span> </span>' +
-        '<button class="btn btn-danger btn-sm btn-flat remove"><i class="fa fa-trash-o"></i></button></td>');
+    var tdButtons;
+    if(user.role == "Administrator"){
+        tdButtons = $('<td><button class="btn btn-info btn-sm btn-flat edit"><i class="fa fa-pencil"></i></button></td>');   
+    }else{
+        tdButtons = $('<td><button class="btn btn-info btn-sm btn-flat edit"><i class="fa fa-pencil"></i></button>' + '<span> </span>' +
+        '<button class="btn btn-danger btn-sm btn-flat remove"><i class="fa fa-trash-o"></i></button></td>');   
+    }
     
     tr.append(tdCount);tr.append(tdName);tr.append(tdRole);tr.append(tdTask);tr.append(tdGsm);tr.append(tdEposta);tr.append(tdIsActive);tr.append(tdButtons);
     table.append(tr);

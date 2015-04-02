@@ -852,9 +852,16 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         offerService.getOffer(req.param('id'),function(stateOffer,resposeOffer){
           if(!stateOffer){
               console.error(resposeOffer);
-              res.render("/pages/index",{layout : false, session : req.session});
+              res.render("/pages/index",{layout : false});
             }
-        res.render('pages/teklif_yazdir', {layout : false, session : req.session,offer:resposeOffer});   
+            var code = req.param('code');
+            firmService.getInformationFirmCode(code, function(stateFirm, responseFirm){
+                if(!stateFirm){
+                    console.error(responseFirm);
+                    res.render("/pages/index",{layout : false});
+                }
+                res.render('pages/teklif_yazdir', {layout : false ,offer:resposeOffer , firm : responseFirm});  
+            });  
         });
       });
     //Tamamlanmıs End
@@ -1056,8 +1063,14 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     var wkhtmltopdf = require('wkhtmltopdf');
     app.post("/wscreatepdf", function(req, res){
-        wkhtmltopdf(req.body.pageUrl, { output: './views/pdfs/' + req.body.pageName });
-        res.send({fileName : req.body.pageName, contents : '/pdfs/' + req.body.pageName});
+        wkhtmltopdf(req.body.pageUrl, { output: './views/pdfs/' + req.body.pageName }, function(error, createdPdf){
+            if(error){
+                res.send({state : false, response : error});
+                return;
+            }
+            res.send({fileName : req.body.pageName, contents : '/pdfs/' + req.body.pageName});
+        });
+        
     });
     
     function sleepFor( sleepDuration ){
@@ -1091,10 +1104,10 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     filePath: 'http://localhost:3000' + attachs.contents
                 }]
             };
-            sleepFor(12000);
-            smtpTransport.sendMail(mail, function(stateMail, response){
-                if(!stateMail){
-                    console.log(stateMail);
+            //sleepFor(12000);
+            smtpTransport.sendMail(mail, function(errorMail, response){
+                if(errorMail){
+                    console.log(errorMail);
                     res.send({message : 'Mail Gonderme hatasi'});
                     return;
                 }

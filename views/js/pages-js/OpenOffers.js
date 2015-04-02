@@ -113,7 +113,11 @@ function clickHandlers(){
                     console.log(error);
                     return;
                 }
-                wsPost('wscreatepdf', {pageUrl : 'http://localhost:3000/teklif_yazdir?id=' + offerId, pageName : 'offer_' + offerId + '.pdf'}, function(errorPdf, responsePdf){
+                var optionPdf = {
+                    pageUrl : 'http://localhost:3000/teklif_yazdir?id=' + offerId + '&code=' + $('#inpFirmCode').val(), 
+                    pageName : 'offer_' + offerId + '.pdf'
+                };
+                wsPost('wscreatepdf', optionPdf, function(errorPdf, responsePdf){
                     if(errorPdf){
                         console.log(errorPdf);
                         return;
@@ -155,16 +159,6 @@ function clickHandlers(){
     
     $('#btnHatirlatma').on('click', function(){
         var offerId = $('#inpOfferIdRememberModal').val();
-        
-        /*
-            activities : [{
-                activityType : String,
-                content : String,
-                activityDate : Date,
-                owner : String,
-                activityStatus : String
-            }]
-        */
         var activity = {
             activityType : 'remember',
             content : $('#inpRecallReason').val(),

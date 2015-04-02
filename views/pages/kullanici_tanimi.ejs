@@ -181,7 +181,7 @@
                                                         <td class="text-center"><%if(users[i].isActive == 'no'){%><i style="color:#911E29;" class="fa fa-times"></i><%}else{%><i style="color:#0DA611;" class="fa fa-check"></i><%}%></td>
                                                         <td>
                                                             <button class="btn btn-info btn-sm btn-flat edit"><i class="fa fa-pencil"></i></button>
-                                                            <%if( i > 4 && users[i]._id != session.user._id){%>
+                                                            <%if( users[i].role != 'Administrator' && users[i]._id != session.user._id){%>
                                                                 <button class="btn btn-danger btn-sm btn-flat remove"><i class="fa fa-trash-o"></i></button>
                                                             <%}%>
                                                         </td>
