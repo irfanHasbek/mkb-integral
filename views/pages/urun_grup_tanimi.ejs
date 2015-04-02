@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Ürün Grupları Tanımı Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Ürün Grupları Tanımı</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="frmProductGroupDefinition"  role="form" method="post" action="/wsproductgroupdefinition/addnew"  >
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-md-offset-1">
+                                                        <label >Ürün Grup Adı</label>
+                                                        <input type="text" class="form-control" name="productGroupName"   placeholder="Grup Adı Giriniz" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Ürün Grupları Listeleme</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table table-bordered productGroups">
+                                            <tr style="border-bottom:3px solid #3c8dbc;">
+                                                <th class="text-center" style="width: 40px">#</th>
+                                                <th>Grup Adı</th>
+                                                <th>İşlemi Yapan</th>
+                                                <th class="text-center" style="width: 40px"></th>
+                                            </tr>
+                                            <tbody>
+                                              <%for(var i=0;i<productGroups.length;i++){%>
+                                                <tr id="<%=productGroups[i]._id%>">
+                                                <td class="text-center"><%=i+1%>.</td>
+                                                <td><%=productGroups[i].productGroupName%></td>
+                                                <td><%=productGroups[i].setBy%></td>
+                                                <td st id="<%=productGroups[i]._id%>">
+                                                    <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+        <script src="../js/helper-js/Helper.js"></script>
+        <script src="../js/pages-js/ProductGroupDefinitionPage.js"></script>
+    </body>
+</html>

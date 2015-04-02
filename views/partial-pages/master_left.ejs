@@ -1,0 +1,147 @@
+<label id="currentPage" style="display:none;"><%=session.currentPage%></label>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="left-side sidebar-offcanvas">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/<%=session.user.pictureUrl%>" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+                <p>Merhaba,  <%=session.user.surname%></p>
+                
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li>
+                <a href="/index">
+                    <i class="fa fa-home"></i> <span>Anasayfa</span>
+                </a>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'tanimlamalar' || session.pageLabel == 'tanimlamalar/teklifTanim'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span>Tanımlamalar</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/il_ilce_tanimlari"><i class="fa fa-angle-double-right"></i> İl İlçe Tanımları</a></li>
+                    <li><a href="/firma_tanimlari"><i class="fa fa-angle-double-right"></i> Firma Tanımları</a></li>
+                    <li><a href="/musteri_grup_tanimlari"><i class="fa fa-angle-double-right"></i> Müşteri Grup Tanımları</a></li>
+                    <li><a href="/vade_tanimlari"><i class="fa fa-angle-double-right"></i> Vade Tanımları</a></li>
+                    <li class="treeview <%if(session.pageLabel == 'tanimlamalar/teklifTanim'){%>active<%}%>">
+                        <a href="#"><i class="fa fa-angle-double-right"></i> Teklif Tanımları <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/teklif_konu_tanimlari"><i class="fa fa-angle-right"></i> Teklif Konu Tanımları</a></li>
+                            <li><a href="/teklif_durum_tanimlari"><i class="fa fa-angle-right"></i> Teklif Durum Tanımları</a></li>
+                            <li><a href="/kaybetme_nedenleri"><i class="fa fa-angle-right"></i> Kaybetme Nedenleri</a></li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'kullanicilar'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Kullanıcılar</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/rol_tanimi"><i class="fa fa-angle-double-right"></i> Rol Tanımi</a></li>
+                    <li><a href="/gorev_tanimi"><i class="fa fa-angle-double-right"></i> Görev Tanımi</a></li>
+                    <li><a href='/kullanici_tanimi'><i class="fa fa-angle-double-right"></i> Kullanıcı Tanımi</a></li>
+                    <li><a href="/kullanici_izinleri"><i class="fa fa-angle-double-right"></i> Kullanıcı İzinleri</a></li>
+                </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'urunler' || session.pageLabel == 'urunler/ozellikler'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Ürünler</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/urun_grup_tanimi"><i class="fa fa-angle-double-right"></i> Ürün Grup Tanimi</a></li>
+                    <li class="treeview <%if(session.pageLabel == 'urunler/ozellikler'){%>active irfan<%}%>">
+                        <a href="#"><i class="fa fa-angle-double-right"></i> Ürün Özellik Tanimi <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/montaj_sekli"><i class="fa fa-angle-right"></i> Montaj Şekli</a></li>
+                            <li><a href="/kaplama_sekli"><i class="fa fa-angle-right"></i> Kaplama Şekli</a></li>
+                            <li><a href="/ayar_mekanizmasi"><i class="fa fa-angle-right"></i> Ayar Mekanizması</a></li>
+                            <li><a href="/aksesuar"><i class="fa fa-angle-right"></i> Aksesuar</a></li>
+                            <li><a href="/kasa_tipi"><i class="fa fa-angle-right"></i> Kasa Tipi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/urun_tanimlari?id=0"><i class="fa fa-angle-double-right"></i> Ürün Tanımları</a></li>
+                    <li><a href="/urun_fiyat_tanimi"><i class="fa fa-angle-double-right"></i> Ürün Fiyat Tanimi</a></li>
+                    <li><a href="/urun_listeleme"><i class="fa fa-angle-double-right"></i> Ürün Listeleme</a></li>
+                </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'musteri'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-user-md"></i> <span>Müşteri Yönetimi</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/musteri_tanimi?id=0"><i class="fa fa-angle-double-right"></i> Müşteri Tanımı</a></li>
+                    <li><a href="/musteri_listesi"><i class="fa fa-angle-double-right"></i> Müşteri Listesi</a></li>
+                </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'B2B'){%>active<%}%>">
+               <a href="">
+                   <i class="fa fa-briefcase"></i> <span>B2B Yönetim</span>
+                   <i class="fa fa-angle-left pull-right"></i>
+               </a>
+               <ul class="treeview-menu">
+                   <li><a href="/hesap_bilgileri"><i class="fa fa-angle-double-right"></i> Hesap Bilgileri</a></li>
+               </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == '/teklifYonetim' || session.pageLabel == '/teklifYonetim/kapali'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>Teklif Yönetimi</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/teklif_olusturma?id=0"><i class="fa fa-angle-double-right"></i> Teklif Oluşturma</a></li>
+                    <li><a href="/acik_teklifler"><i class="fa fa-angle-double-right"></i> Açık Teklifler</a></li>
+                    <li  class="treeview <%if(session.pageLabel == '/teklifYonetim/kapali'){%>active<%}%>">
+                        <a href="#"><i class="fa fa-angle-double-right"></i> Kapalı Teklifler <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/kazanilmis"><i class="fa fa-angle-right"></i> Kazanılmış</a></li>
+                            <li><a href="/kaybedilmis"><i class="fa fa-angle-right"></i> Kaybedilmiş</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'isEmri'){%>active<%}%>">
+               <a href="">
+                   <i class="fa fa-briefcase"></i> <span>İş Emirleri</span>
+                   <i class="fa fa-angle-left pull-right"></i>
+               </a>
+               <ul class="treeview-menu">
+                   <li><a href="/is_emri/onay_bekleyen"><i class="fa fa-angle-double-right"></i> Onay Bekleyen</a></li>
+                   <li><a href="/is_emri/devam_eden"><i class="fa fa-angle-double-right"></i> Devam Eden</a></li>
+                   <li><a href="/is_emri/tamamlanmis"><i class="fa fa-angle-double-right"></i> Tamamlanmış</a></li>
+               </ul>
+                
+            </li>
+            <li class="treeview <%if(session.pageLabel == 'raporlar'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-bar-chart-o"></i> <span>Raporlar</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/musteri_rapor"><i class="fa fa-angle-double-right"></i> Müşteri Raporu</a></li>
+                    <li><a href="/urun_rapor"><i class="fa fa-angle-double-right"></i> Ürün Raporu</a></li>
+                </ul>
+            </li>
+            <!--<li class="<%if(session.pageLabel == 'testler'){%>active<%}%>">
+                  <a href="/test_sayfasi">
+                    <i class="fa fa-laptop"></i> <span>Test Sayfasi</span>
+                </a>    
+            </li>-->
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

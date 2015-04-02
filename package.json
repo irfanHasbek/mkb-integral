@@ -1,0 +1,19 @@
+{
+  "name": "testnode",
+  "version": "1.0.0",
+  "description": "test project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "irfan hasbek",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.0.0rc4",
+    "mongoose": "^3.8.17",
+    "nodemailer": "~0.6.1",
+    "wkhtmltopdf": "^0.1.5",
+    "connect-mongo": "*"
+  }
+}

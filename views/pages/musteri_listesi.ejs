@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                       Müşteri Listeleme Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Müşteri Listeleme</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                       
+                                        <div class="box-body">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <select class="form-control" id="slctCustGroup">
+                                                            <option value="Müşteri Grubu Seçiniz">Müşteri Grubu Seçiniz</option>
+                                                            <%for(var i=0;i<custGroups.length;i++){%>
+                                                            <option value="<%=custGroups[i].groupName%>"><%=custGroups[i].groupName%></option>
+                                                            <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <select class="form-control" id="slctCustAgent">
+                                                            <option value="Müşteri Temsilcisi Seçiniz">Müşteri Temsilcisi Seçiniz</option>
+                                                            <%for(var i=0;i<custAgents.length;i++){%>
+                                                            <option value="<%=custAgents[i].name%> <%=custAgents[i].surname%>"><%=custAgents[i].name%> <%=custAgents[i].surname%></option>
+                                                            <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <input type="text" id="inpCustomerTitle" class="search-query form-control" placeholder="Firma Ünvanı" />
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <input type="text" id="inpCustomerName" class=" search-query form-control" placeholder="Müşteri Adı" />
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <select class="form-control" id="">
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                        <option value="">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <table class="table table-bordered tblCustDef">
+                                               <thead>
+                                                <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                    <th class="text-center" style="width: 40px">#</th>
+                                                    <th>Müşteri Grubu</th>
+                                                    <th>Firma Ünvanı</th>
+                                                    <th>Müşteri Temsilcisi</th>
+                                                    <th>Müşteri Adı</th>
+                                                    <th>Kullanıcı Adı</th>
+                                                    <th>Web Erişim</th>
+                                                    <th>Web Sipariş</th>
+                                                    <th class="text-center" style="width: 100px">Operasyon</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <%for(var i=0;i<customers.length;i++){%>
+                                                  <tr id="<%=customers[i]._id%>">
+                                                      <td class="text-center"><%=i+1%>.</td>
+                                                      <td><%=customers[i].customerGroup%></td>
+                                                      <td><%=customers[i].customerTitle%></td>
+                                                      <td><%=customers[i].customerAgent%></td>
+                                                      <td><%=customers[i].customerName%></td>
+                                                      <td><%=customers[i].userName%></td>
+                                                      <td class="text-center"><%if(customers[i].webAccess==true){%><i class="fa fa-check" style="color:green;"></i><%}else{%><i class="fa fa-times" style="color:red;"><%}%></td>
+                                                      <td class="text-center"><%if(customers[i].webOrder==true){%><i class="fa fa-check" style="color:green;"></i><%}else{%><i class="fa fa-times" style="color:red;"><%}%></td>
+                                                      <td id="<%=customers[i]._id%>">
+                                                        <button class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                    </td>
+                                                  </tr>
+                                                <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/CustomerListPage.js"></script>
+    </body>
+</html>

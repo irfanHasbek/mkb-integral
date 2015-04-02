@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Ürün Fiyat Tanımı Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Ürün Fiyat Tanımı</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <div class="box-body">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label for="">Ürün Filtrele</label>
+                                                                <input class="form-control" id="textbox" type="text" />
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <label for="">Ürün Seçiniz</label>
+                                                                <select id="slProduct" class="select form-control">
+                                                                   <option value="Ürün Seçiniz" selected disabled>Ürün Seçiniz</option>
+                                                                    <%for(var i = 0; i < products.length; i++){%>
+                                                                        <option value="<%=products[i]._id%>"><%=products[i].name%></option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="" ></label>
+                                                                <button id="btnGetPrice" class="btn btn-info btn-block" style="margin-top:5px;">Fiyat Getir</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <form id="formPrice" action="/wsproductprice/update" method="post">
+                                                        <input name="productId" type="text" id="inpProductId"  class="form-control" style="display:none;">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label for="" style="margin-bottom:15px;">Tip Seçiniz</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 no-padding">
+                                                                            <div class="col-md-6">
+                                                                                <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <input type="text" id="inpSizeType" style="display:none;" name="dimensionType">
+                                                            <div id="divRec" class="row" style="display:none;">
+                                                                <div class="col-md-9 no-padding">
+                                                                    <div class="col-md-4">
+                                                                        <input id="inpEn" name="W" type="number" class="form-control" placeholder="En Giriniz">
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <input id="inpBoy" name="H" type="number" class="form-control" placeholder="Yukseklik Giriniz">
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <input id="inpUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="divCir" class="row" style="display:none;">
+                                                                <div class="col-md-6 no-padding">
+                                                                    <div class="col-md-6">
+                                                                        <input id="inpCap" name="W" type="number" class="form-control" placeholder="Çap Giriniz">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input id="inpDaireUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                             <div class="row">
+                                                                 <div class="col-md-12">
+                                                                     <label for="">Fiyat Giriniz</label>
+                                                                     <input type="text" class="form-control" id="inpPrice" name="price" placeholder="0.00 TL">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <div style="text-align:center">
+                                            <button id="btnSubmitPrice" class="btn btn-primary btn-flat">Kaydet</button>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Ürün Fiyat Listesi</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class=" table table-bordered ">
+                                            <tr style="border-bottom:3px solid #3c8dbc;">
+                                                <th class="text-center" style="width: 40px">#</th>
+                                                <th>Tip</th>
+                                                <th>Ölçü</th>
+                                                <th>Fiyat</th>
+                                                <th style="width: 40px">Operasyon</th>
+                                            </tr>
+                                            <tbody id="priceTable">
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/ProductPriceDefinition.js"></script>
+    </body>
+</html>

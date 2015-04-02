@@ -1,0 +1,186 @@
+function wsPost(url, data, cb) {
+    $.ajax({
+        dataType: 'json',
+        headers: {
+            "Content-Type" :"application/json"
+        },
+        type:'POST',
+        data: JSON.stringify(data),
+        url: url,
+        success: function(data)
+        {
+            cb(null, data);
+        },
+        error: function(data)
+        {
+            cb(data, null);
+        }
+    });
+}
+
+function wsGet(url, cb) {
+    $.ajax({
+        dataType: 'json',
+        headers: {
+            Accept :"application/json"
+        },
+        type:'GET',
+        url: url,
+        success: function(data)
+        {
+            cb(null, data);
+        },
+        error: function(data)
+        {
+            cb(data, null);
+        }
+    });
+}
+
+function reset () {
+    $("#toggleCSS").attr("href", "/css/alertify.default.css");
+    alertify.set({
+        labels : {
+            ok     : "Onayla",
+            cancel : "İptal Et"
+        },
+        delay : 5000,
+        buttonReverse : false,
+        buttonFocus   : "ok"
+    });
+}
+
+function giveMessage(message,type)
+{
+    if(type == "standart")
+    {
+        reset();
+        alertify.log(message);
+    }
+    if(type == "success")
+    {
+        reset();
+        alertify.success(message);
+    }
+    if(type == "error")
+    {
+        reset();
+        alertify.error(message);
+    }
+}
+var myLocation;
+function showPosition(position)
+{
+    if(myLocation){
+        myLocation.setMap(null);   
+    }
+    var lat = position.coords.latitude;
+    var lang = position.coords.longitude;
+    
+    var latLng = new google.maps.LatLng(lat, lang);
+    map.setZoom(17);
+    map.panTo(latLng);
+    myLocation = new google.maps.Marker({
+        position : latLng,
+        map : map,
+        icon : "/my_location_2.GIF",
+        draggable : true
+    });
+    ///my_location.PNG"
+    $('#latitude').attr('placeholder', lat);
+    $('#longitude').attr('placeholder', lang);
+    
+    $('#liLoading').attr('style','display:none;');
+}
+
+function reset () {
+    $("#toggleCSS").attr("href", "/css/alertify.default.css");
+    alertify.set({
+        labels : {
+            ok     : "Onayla",
+            cancel : "İptal Et"
+        },
+        delay : 5000,
+        buttonReverse : false,
+        buttonFocus   : "ok"
+    });
+}
+function removeFromTable(tableClass,url,callback){
+    
+    $("."+tableClass).on("click",".sil",function(){
+        var id=$(this).closest("td").attr("id");
+        var tr=$("."+tableClass).find("tbody").find("tr[id="+id+"]");
+        wsPost(url,{_id:id},function(err,data){
+            if(err){
+                console.error(err);
+                return;
+            }
+            tr.remove();
+            callback(id);
+        });        
+    });
+}
+
+function regexMultiKriterOlustur(string) {
+    string = string.trim();
+    var words = string.split(" ");
+ 
+    var searchString = "";
+    for(var i=0; i<words.length; i++) {
+        var word = words[i].trim();
+ 
+        if(i + 1 == words.length)
+            searchString += word;
+        else
+            searchString += word + " ";
+    }
+ 
+    return {
+        $regex : searchString,
+        $options : 'i'
+    };
+}
+//divId içini silmek istediğiniz div'in id'sidir
+function clearInputs(divId){
+    $("#"+divId+" input[type='text']").val("");
+    $("#"+divId+" input[type='password']").val("");
+    $("#"+divId+" input[type='number']").val("");
+    $("#"+divId+" input[type='email']").val("");
+    $("#"+divId+" input[type='url']").val("");
+    $("#"+divId+" input[type='checkbox']").prop('checked', false);
+}
+function restoreSelects(divId){
+    $("#"+divId+" select").find('option:contains("Seçiniz")').attr('selected', true);
+}
+function clearSelects(divId){
+    $("#"+divId+" select").empty();
+}
+function clearTextareas(divId){
+   $("#"+divId+" textarea[type='text']").text("");
+   $("#"+divId+" textarea[type='text']").val("");
+}
+function clearTable(tableId){
+    $("#"+tableId+" tbody").empty();
+}
+
+function getTodayDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
+}
+
+function isNumber(o) {
+  return ! isNaN (o-0) && o !== null && o !== "" && o !== false;
+}

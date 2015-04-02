@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Hesap Bilgileri Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Hesap Bilgileri</li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                   <form id="formAccountB2b" action="wscustomerdefinition/updateb2binformation" method="post">
+                                        <div class="box-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label for="">Müşteri Filtrele</label>
+                                                                    <input class="form-control" id="textbox" type="text" />
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label for="">Müşteri Seçiniz</label>
+                                                                    <select class="select form-control" name="_id">
+                                                                       <option value="Ürün Seçiniz" selected disabled>Müşteri Seçiniz</option>
+                                                                       <%for(var i = 0; i < customers.length; i++){%>
+                                                                           <option value="<%=customers[i]._id%>"><%=customers[i].customerName%></option>
+                                                                       <%}%>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label for="">Kullanıcı Adı</label>
+                                                                    <input name="userName" type="text" class="form-control" placeholder="Kullanıcı Adı Giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="">Şifre</label>
+                                                                    <input name="password" type="password" class="form-control" placeholder="Şifre Giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="">Web Erişim</label>
+                                                                    <p>
+                                                                        <input name="webAccess" type="checkbox" class="form-control" checked>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="">Webden Sipariş</label>
+                                                                    <p>
+                                                                        <input name="webOrder" type="checkbox" class="form-control" checked>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <div style="text-align:center">
+                                                <button id="btnUpdateB2b" class="btn btn-primary btn-flat">Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/pages-js/AccountInfo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Teklif Yazdır</title>
+    <link rel="stylesheet" href="../css/utility-css/bootstrap.css">
+</head>
+<body>
+    
+    <section class="content" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                   <div class="row">
+                       <div class="col-xs-12">
+                           <div class="col-xs-4" style="padding:0;">
+                               <table class="table ">
+                                   <tbody>
+                                     <tr>
+                                        <td><strong>Teklif No:</strong> <span><%=offer.offerNo%></span></td>
+                                     </tr>
+                                     <tr>
+                                         <td><strong>Teklif Tarihi:</strong> <span><%=offer.offerDate%></span></td>
+                                     </tr>
+                                     <tr>
+                                        <td><strong>Teklif Durumu:</strong> <span><%=offer.offerStatus%></span></td>
+                                     </tr>
+                                     <tr>
+                                         <td><strong>Teklif Konusu:</strong> <span><%=offer.offerTopic%></span></td>
+                                     </tr>
+                                     <tr>
+                                         <td><strong>Müşteri Adı:</strong> <span><%=offer.customerInfo.customerName%></span></td>
+                                     </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                           <div class="col-xs-4"></div>
+                           <div class="col-xs-4">
+                               <%if(session.user){%>
+                                   <img src="<%=session.user.pictureUrl%>"  class="img-responsive pull-right" style="max-width:80px;">
+                               <%}%>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-xs-12">
+                           <div class="col-xs-4">
+                               <h4 class="text-center" style="border-bottom:1px solid #000;">Yetkili Bilgileri</h4>
+                               <p><strong>Yetkili : </strong><%=offer.competentInfo.competentName%></p>
+                           </div>
+                           <div class="col-xs-4">
+                               <h4 class="text-center" style="border-bottom:1px solid #000;">Teklifi H. Bilgileri</h4>
+                               <p><strong>Ad Soyad : </strong><%=offer.personPrepareOfferInfo.personName%></p>
+                           </div>
+                           <div class="col-xs-4">
+                               <h4 class="text-center" style="border-bottom:1px solid #000;">Ödeme Bilgileri</h4>
+                               <p><strong>Ödeme Şekli : </strong><%=offer.payMethod.payMethod%></p>
+                               <p><strong>Not : </strong><%=offer.payMethod.note%></p>
+                           </div>
+                       </div>
+                   </div>
+                   
+                    <div >
+                        <table class="table table-bordered ">
+                            <thead>	
+                                <tr style="border-bottom:3px solid #3c8dbc;">
+                                    <th class="text-center" style="width: 40px">#</th>
+                                    <th>Miktar</th>
+                                    <th>Ürün</th>
+                                    <th>Tip</th>
+                                    <th>Ölçüler</th>
+                                    <th>Montaj Şekli</th>
+                                    <th>Kaplama Şekli</th>
+                                    <th>Ayar Mekanizması</th>
+                                    <th>Aksesuar</th>
+                                    <th>Satır İskontosu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var i=0;i<offer.basket.length;i++){%>
+                                <tr>
+                                    <td class="text-center"><%=(i+1)%></td>
+                                    <td><%=offer.basket[i].amount%></td>
+                                    <td><%=offer.basket[i].productName%></td>
+                                    <td><%=offer.basket[i].productSizeType%></td>
+                                    <%if(offer.basket[i].productSizeType=="dikdörtgen"){%>
+                                    <td><%=offer.basket[i].productSizeWidthOrDiameter%>x<%=offer.basket[i].productSizeLength%>x<%=offer.basket[i].productSizeHeight%></td>
+                                    <%}else{%>
+                                        <td><%=offer.basket[i].productSizeWidthOrDiameter%>x<%=offer.basket[i].productSizeLength%></td>
+                                    <%}%>
+                                    <td><%=offer.basket[i].montageType%></td>
+                                    <td><%=offer.basket[i].coverType%></td>
+                                    <td><%=offer.basket[i].setMechanism%></td>
+                                    <td><%=offer.basket[i].accessory%></td>
+                                    <td><%=offer.basket[i].lineDiscount%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed table-bordered table-responsive" style="width:100%;">
+                            <tr>
+                                <td class="col-xs-9">
+                                    <span class="pull-right">Genel İskonto</span>
+                                </td>
+                                <td class="col-xs-3">
+                                    <input id="" type="text" class="form-control" value="<%=offer.cost.generalDiscount%>" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-9">
+                                    <span class="pull-right">Yuvarlama İskontosu</span>
+                                </td>
+                                <td class="col-xs-3">
+                                    <input type="text" class="form-control" value="<%=offer.cost.roundingDiscount%>" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-9">
+                                    <span class="pull-right">Toplam</span>
+                                </td>
+                                <td class="col-xs-3">
+                                    <input  type="text" class=" form-control" id="" value="<%=offer.cost.sum%>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-9">
+                                    <span class="pull-right">K.D.V</span>
+                                </td>
+                                <td class="col-xs-3">
+                                    <input type="text"  class="form-control"  id="" value="<%=offer.cost.kdv%>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-9">
+                                    <span class="pull-right">Genel Toplam</span>
+                                </td>
+                                <td class="col-xs-3">
+                                     <input type="text" class="form-control"  id="" value="<%=offer.cost.total%>">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <a href="javascript:window.print()"  class="btn btn-success">YAZDIR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section><!-- /.content -->
+    
+    <script src="../js/utility-js/jquery-2.1.3.js"></script>
+    <script src="../js/utility-js/bootstrap.min.js"></script>
+</body>
+</html>

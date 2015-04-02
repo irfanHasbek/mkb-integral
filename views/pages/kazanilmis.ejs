@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+             <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Kazanılmış Teklifler Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Kazanılmış Teklifler</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <input id="inpOfferTopic" type="text"  class=" form-control" placeholder="Teklif Konusu" />
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <input id="inpCustomerName" type="text"  class=" form-control" placeholder="Müşteri Adı" />
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <input id="inpOfferDate" type="date"  class=" form-control" placeholder="Tarih" />
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button">
+                                                                    <span class=" glyphicon glyphicon-search pull-left"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                        <option value="">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <table class="table table-bordered tblWinningOffer">
+                                                <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                    <th class="text-center" style="width: 40px">#</th>
+                                                    <th>Teklif Adı</th>
+                                                    <th>Müşteri Adı</th>
+                                                    <th>Tarih</th>
+                                                    <th>İşlemi Yapan</th>
+                                                    <th class="text-center" style="width: 40px"></th>
+                                                </tr>
+                                                <tbody>
+                                                    <%for(var i=0;i<offers.length;i++){%>
+                                                    <tr id='<%=offers[i]._id%>'>
+                                                        <td class="text-center"><%=i+1%>.</td>
+                                                        <td><%=offers[i].offerTopic%></td>
+                                                        <td><%=offers[i].customerInfo.customerName%></td>
+                                                        <td><%=offers[i].offerDate%></td>
+                                                        <td><%=offers[i].personPrepareOfferInfo.personName%></td>
+                                                        <td id='<%=offers[i]._id%>'>
+                                                            <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+        
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/WinningOfferPage.js"></script>
+    </body>
+</html>

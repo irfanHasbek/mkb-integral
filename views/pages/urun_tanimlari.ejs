@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+        <link href="../css/utility-css/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+             <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Ürün Tanımları Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Ürün Tanımları</li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                        <div class="box-body">
+                                           <div class='box-header'>
+                                                <h3 class='box-title'>Ürün Resmi</h3>
+                                            </div><!-- /.box-header -->
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                   <form id="formPicture" method="post" action="/wspicture/upload" enctype="multipart/form-data">
+                                                      <div class="form-group ">
+                                                           <div class="well">
+                                                                <div class="row">
+                                                                    <img id="imgProduct" src="<%if(operation == 'update'){%><%=product.pictureUrl%><% }else{%>/uploads/empty.png<%}%>" alt="" class="img-responsive" style="max-height:80px; display:block; margin-left:auto; margin-right:auto;">
+
+                                                                </div>
+                                                            </div>
+                                                            <input class="btn btn-flat" id="inpPictureUpload" type="file" name="image" accept="image/*"/>              
+                                                            <button type="submit" class="btn btn-info btn-flat btn-block">Yükle</button>
+                                                        </div>
+                                                   </form>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class='box-header'>
+                                                <h3 class='box-title'>Ürün Bilgileri</h3>
+                                            </div><!-- /.box-header -->
+                                            <form id="formProductAdd" action="<%if(operation == 'add'){%>/wsproduct/add<%}else{%>/wsproduct/update<%}%>" method="post" role="form">
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-12">
+                                                         <div class="row">
+                                                            <div class="">
+                                                                <div class="form-group ">
+                                                                    <label>Ürün Kodu</label>
+                                                                    <input id="inpPictureUrl" style="display:none;" name="pictureUrl" value="<%if(operation == 'update'){%><%=product.pictureUrl%><%}else{%>/uploads/empty.png<%}%>">
+                                                                    <input id="inpProductCode" name="code" type="text" class="form-control "  placeholder="Ürün Kodu Giriniz" value="<%if(operation == 'update'){%><%=product.code%><%}%>" required>
+                                                                    <input id="inpProductId" style="display:none;" name="_id" value="<%if(operation == 'update'){%><%=product._id%><%}else{%>/uploads/empty.png<%}%>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="">
+                                                                <div class="form-group ">
+                                                                    <label>Ürün Adı</label>
+                                                                    <input id="inpProductName" name="name" type="text" class="form-control "  placeholder="Ürün Adı Giriniz" value="<%if(operation == 'update'){%><%=product.name%><%}%>" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="">
+                                                                <div class="form-group">
+                                                                    <label>Ürün Grubu</label>
+                                                                    <select id="slGroup" name="group" class="form-control" required>
+                                                                        <option style="padding-left:0px;" selected disabled value="">Seçiniz</option>
+                                                                        <%for(var i = 0; i < groups.length; i++){%>
+                                                                            <option <%if(operation == 'update' && product.group == groups[i].productGroupName){%>selected<%}%> value="<%=groups[i].productGroupName%>"><%=groups[i].productGroupName%></option>
+                                                                        <%}%>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <label>Vade (Gün)</label> 
+                                                    <div class="input-group">
+                                                        <select id="slTime" name="time" class="form-control">
+                                                            <option style="padding-left:0px;" >Seçiniz</option>
+                                                            <%for(var i = 0; i < credits.length; i++){%>
+                                                                <option <%if(operation == 'update' && product.time == credits[i].percent){%>selected<%}%> value="<%=credits[i].percent%>"><%=credits[i].credit%></option>
+                                                            <%}%>
+                                                        </select>
+                                                        <span class="input-group-addon">Gün</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class='box'>
+                                                        <div class='box-header'>
+                                                            <h3 class='box-title'>Ürün Açıklaması</h3>
+                                                        </div><!-- /.box-header -->
+                                                        <div class='box-body pad'>                                                            
+                                                            <textarea id="inpDescription" name="description" class="textarea" placeholder="Aciklama giriniz" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><%if(operation == 'update'){%><%=product.description%><%}%></textarea>     
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <div style="text-align:center">
+                                                <button id="btnSave" type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/utility-js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+       <script src="../js/pages-js/ProductDefination.js" type="text/javascript"></script>
+
+        <!-- Page script -->
+        
+        <script type="text/javascript">
+            $(function() {
+                $(".textarea").wysihtml5();
+            });
+        </script>
+    </body>
+</html>

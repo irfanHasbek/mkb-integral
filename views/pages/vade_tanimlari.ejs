@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Vade Tanımları Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Vade Tanımları</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="frmCredit" role="form" method="post" action="/wscredit/addnew">
+                                        <div class="box-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control vade" name="credit" required placeholder="gün giriniz">
+                                                                <span class="input-group-addon">gün</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                               <span class="input-group-addon">%</span>
+                                                                <input type="text" class="form-control vade" name="percent" required placeholder="yüzde giriniz">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                           
+                                        </div><!-- /.box-body -->
+                                        
+                                        <div class="box-footer">
+                                            <div style="text-align:center">
+                                                <button type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Vade Listesi</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class=" table table-bordered credits">
+                                            <tr style="border-bottom:3px solid #3c8dbc;">
+                                                <th class="text-center" style="width: 40px">#</th>
+                                                <th>Vade Süresi</th>
+                                                <th>Yüzde</th>
+                                                <th>Ekleyen</th>
+                                                <th style="width: 40px">Operasyon</th>
+                                            </tr>
+                                             <%for(var i=0;i<credits.length;i++){%>
+                                            <tr id="<%=credits[i]._id%>">
+                                                <td class="text-center"><%=i+1%>.</td>
+                                                <td><%=credits[i].credit%> gün</td>
+                                                <td>%<%=credits[i].percent%></td>
+                                                <td><%=credits[i].setBy%></td>
+                                                <td class="text-center" id="<%=credits[i]._id%>">
+                                                    <button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button></td>
+                                            </tr>
+                                            <%}%>
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/pages-js/creditPage.js"></script>
+       <script src="../js/helper-js/Helper.js"></script>
+    </body>
+</html>

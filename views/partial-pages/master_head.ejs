@@ -1,0 +1,132 @@
+<meta charset="UTF-8">
+<title>Integral Havalandirma</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+<a class="logo">
+    <!-- Add the class icon to your logo image or logo icon to add the margining -->
+    <%if(session.user.firmCode == 'administrator'){%>
+        Yönetici
+    <%}%>
+    <%if(session.user.firmCode == 'mkbAlize'){%>
+        Alize
+    <%}%>
+    <%if(session.user.firmCode == 'mkbEntalpi'){%>
+        Entalpi
+    <%}%>
+    <%if(session.user.firmCode == 'mkbIntegral'){%>
+        Integral
+    <%}%>
+    <%if(session.user.firmCode == 'mkbDamla'){%>
+        Damla
+    <%}%>
+</a>
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    <div class="navbar-right">
+        <ul class="nav navbar-nav">
+            
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-warning"></i>
+                    <span class="label label-success">8</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">8 yeni bildirim</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-warning danger"></i>1 yeni ürün eklendi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-person success"></i> Kullanıcı adını değiştirdiniz
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#"></a></li>
+                </ul>
+            </li>
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span><%=session.user.name%> <%=session.user.surname%> <i class="caret"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header bg-light-blue">
+                        <img src="/<%=session.user.pictureUrl%>" class="img-circle" alt="User Image" />
+                        <p>
+                            <%=session.user.name%> <%=session.user.surname%>
+                            <small>
+                                <%if(session.user.firmCode == 'administrator'){%>
+                                    Administrator / Yönetici
+                                <%}%>
+                                <%if(session.user.firmCode == 'mkbAlize'){%>
+                                    ALIZE / Yönetici
+                                <%}%>
+                                <%if(session.user.firmCode == 'mkbEntalpi'){%>
+                                    ENTALPI / Yönetici
+                                <%}%>
+                                <%if(session.user.firmCode == 'mkbIntegral'){%>
+                                    INTEGRAL / Yönetici
+                                <%}%>
+                                <%if(session.user.firmCode == 'mkbDamla'){%>
+                                    DAMLA / Yönetici
+                                <%}%>
+                            </small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="#"></a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#"></a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#"></a>
+                        </div>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat">Şifremi Değiştir</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/logout" class="btn btn-default btn-flat">Çıkış</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+</header>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>İş Emri Yazdır</title>
+    <link rel="stylesheet" href="../css/utility-css/bootstrap.css">
+</head>
+<body>
+    
+    <section class="content" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                   <div class="col-xs-3" style="padding:0;">
+                       <table class="table ">
+                           <tbody>
+                               <tr>
+                                   <td><%=session.user.name%> <%=session.user.surname%></td>
+                               </tr>
+                               <tr>
+                                   <td><%=offer.offerDate%></td>
+                               </tr>
+                               <tr>
+                                   <td><%=session.user.gsm1%></td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
+                   <div class="col-xs-6"></div>
+                   <div class="col-xs-3">
+                       <img src="<%=session.user.pictureUrl%>"  class="img-responsive pull-right" style="max-width:80px;">
+                   </div>
+                    <div >
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr style="border-bottom:3px solid #3c8dbc;">
+                                    <th class="text-center" style="width: 40px">#</th>
+                                    <th >İ.E.No</th>
+                                    <th>Firma</th>
+                                    <th>Ana Ürün Adı</th>
+                                    <th>Ölçüler</th>
+                                    <th>M.Şekli</th>
+                                    <th>Kaplama</th>
+                                    <th>A.Mekanizması</th>
+                                    <th>Aksesuar</th>
+                                    <th>Kasa Tipi</th>
+                                    <th>Miktar</th>
+                                    <th>T.Tarihi</th>
+                                    <th>Açıklama</th>
+                                    <th>İ.V Tarihi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var i=0;i<offer.basket.length;i++){%>
+                                <tr>
+                                    <td class="text-center"><%=(i+1)%></td>
+                                    <td class="text-center"><%=(i+1)%></td>
+                                    <td><%=offer.customerInfo.customerName%></td>
+                                    <td><%=offer.basket[i].productName%></td>
+                                    <%if(offer.basket[i].productSizeType=="dikdörtgen"){%>
+                                    <td><%=offer.basket[i].productSizeWidthOrDiameter%>x<%=offer.basket[i].productSizeHeight%>x<%=offer.basket[i].productSizeLength%></td>
+                                    <%}else{%>
+                                    <td><%=offer.basket[i].productSizeWidthOrDiameter%>x<%=offer.basket[i].productSizeLength%></td>
+                                    <%}%>
+                                    <td><%=offer.basket[i].montageType%></td>
+                                    <td><%=offer.basket[i].coverType%></td>
+                                    <td><%=offer.basket[i].setMechanism%></td>
+                                    <td><%=offer.basket[i].accessory%></td>
+                                    <td>...</td>
+                                    <td><%=offer.basket[i].amount%></td>
+                                    <td><%=offer.dates.deliveryDate%></td>
+                                    <td><%=offer.basket[i].note%></td>
+                                    <td><%=offer.dates.startJobDate%></td>
+                                </tr> 
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+           <div class="col-md-12">
+              <div class="text-center">
+                 <a href="javascript:window.print()"  class="btn btn-success">YAZDIR</a>
+             </div>
+          </div>
+        </div>
+
+    </section><!-- /.content -->
+    
+    <script src="../js/utility-js/jquery-2.1.3.js"></script>
+    <script src="../js/utility-js/bootstrap.min.js"></script>
+</body>
+</html>

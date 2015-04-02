@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+             <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Teklif Oluşturma Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Teklif Oluşturma</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                 <div id="divOffer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="formOffer" role="form" method="post" action="<%if(operation == 'update'){%>/wsoffer/update<%}else{%>/wsoffer/addnew<%}%>">
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif No</label>
+                                                        <input name="_id" type="text" style="display:none;" value='<%if(operation == "update"){%><%=offer._id%><%}%>'>
+                                                        <input disabled type="text" class="form-control " name="offerNo"  placeholder="Teklif No otomatik doldurulacaktir" <%if(operation == "update"){%> value="<%=offer.offerNo%>"<%}%>>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif Tarihi</label>
+                                                        <input id="inpOfferDate" type="date" class="form-control " name="offerDate"  placeholder="Teklif Tarihi Giriniz" <%if(operation == "update"){%> value="<%=offer.offerDate%>"<%}%>>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif Durumu</label>
+                                                        <select class="form-control" name="offerStatus" required>
+                                                             <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                               <%for(var i = 0; i < offerStatus.length; i++){%>
+                                                                <option <%if(operation == 'update' && offer.offerStatus == offerStatus[i].offerStatus){%>selected<%}%> value="<%=offerStatus[i].offerStatus%>"><%=offerStatus[i].offerStatus%>%></option>
+                                                                <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif Konusu</label>
+                                                        <select class="form-control" name="offerTopic">
+                                                             <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                               <%for(var i = 0; i < offerTopics.length; i++){%>
+                                                                <option <%if(operation == 'update' && offer.offerTopic == offerTopics[i].offerTopic){%>selected<%}%> value="<%=offerTopics[i].offerTopic%>"><%=offerTopics[i].offerTopic%>%></option>
+                                                                <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group ">
+                                                                <label>Müşteri Adı</label>
+                                                                <select name="customerId" id="selectCustomer" class="form-control">
+                                                                    <option value="Ad Seçiniz" selected disabled>Ad Seçiniz</option>
+                                                                    <%for(var i=0;i<customers.length;i++){%>
+                                                                    <option value="<%=customers[i]._id%>" discount='<%=customers[i].discountInfo%>' <%if(operation=='update' && customers[i]._id==offer.customerInfo.customerId){%>selected<%}%>><%=customers[i].customerName%></option>
+                                                                    <%}%>
+                                                                </select>
+                                                                <input name="customerName" id="inpCustName" style="display:none;" <%if(operation=="update"){%> value="<%=offer.customerInfo.customerName%>"<%}%>>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="col-md-3" style="margin-top:4px;">
+                                                            <div class="form-group">
+                                                                <input id="inpCustSearch" class="form-control" placeholder="Musteri adi giriniz"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3" style="margin-top:4px;">
+                                                            <div class="form-group">
+                                                                <a type="button" class="btn btn-primary btn-flat form-control" href="/musteri_tanimi?id=0" >Yeni Müşteri Ekle</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="">
+                                    <!-- Custom Tabs -->
+                                    <div class="nav-tabs-custom">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
+                                            <li><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
+                                            <li><a href="#tab_3" data-toggle="tab">Teklifi Haz. Bilgileri</a></li>
+                                            <li><a href="#tab_4" data-toggle="tab">Ürün Seçimi</a></li>
+                                            <li><a href="#tab_7" data-toggle="tab">Ürün Sepeti</a></li>
+                                            <li><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
+                                        </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_1">
+                                                    <div id="divCompetent" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label>Yetkili</label>
+                                                                       <%if(operation=='update'){
+                                                                           var competentInfoIndex=0;
+                                                                        }%>
+                                                                        <select id="slctCompetent" name="competentId" type="text"  class="form-control">
+                                                                            <option value="Seçiniz" selected disabled>Yetkili Seçiniz</option>
+                                                                             <%if(operation=='update'){%>
+                                                                               <%for(var i=0;i<custDef.competentInfo.length;i++){%>
+                                                                                  <option <%if(custDef.competentInfo[i]._id==offer.competentInfo.competentId){ competentInfoIndex=i;%> selected <%}%>value="<%=custDef.competentInfo[i]._id%>" ><%=custDef.competentInfo[i].name%></option>
+                                                                               <%}%>
+                                                                            <%}%>
+                                                                        </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Yetkili Adı</label>
+                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].name%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Görev</label>
+                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].task%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>GSM</label>
+                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].gsm%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >E-mail</label>
+                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].email%>"<%}%>>
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_2">
+                                                    <div id="divContact" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label >Adres</label>
+                                                                    <textarea id="inpContactInfoAddress" type="text" class="form-control contAddress" disabled rows="2" style="resize:vertical;" <%if(operation=='update'){%>value="<%=custDef.contactInfo.address%>"<%}%>><%if(operation=='update'){%><%=custDef.contactInfo.address%><%}%></textarea>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label >İl</label>
+                                                                            <input id="inpContactInfoCity" type="text" disabled class="form-control" <%if(operation=='update'){%>value="<%=custDef.contactInfo.city%>"<%}%>>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label >İlçe</label>                                                                                                                                                                                                 <input id="inpContactInfoState" type="text" disabled class="form-control" <%if(operation=='update'){%>value="<%=custDef.contactInfo.state%>"<%}%>>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                
+                                                                <div class="form-group">
+                                                                    <label >İş Tel</label>
+                                                                    <input id="inpContactInfoBusinessPhone" type="text" class="form-control contTel" name="contactInfoBusinessPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled <%if(operation=='update'){%>value="<%=custDef.contactInfo.businessPhone%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Fax</label>
+                                                                    <input id="inpContactInfoFax" type="text" class="form-control contFax" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled <%if(operation=='update'){%>value="<%=custDef.contactInfo.fax%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Web Adresi</label>
+                                                                    <input id="inpContactInfoWeb" type="text" class="form-control contWeb" disabled <%if(operation=='update'){%>value="<%=custDef.contactInfo.webAddress%>"<%}%>>
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_3">
+                                                    <div class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label >Adı Soyadı</label>
+                                                                    <select name="personId" id="personId" class="form-control">
+                                                                         <%if(operation=='update'){%>
+                                                                                  <option value="<%=offer.personPrepareOfferInfo.personId%>"><%=offer.personPrepareOfferInfo.personName%></option>
+                                                                    
+                                                                            <%}else{%>
+                                                                                <option value="<%=session.user._id%>"><%=session.user.name%> <%=session.user.surname%></option> 
+                                                                            <%}%>
+                                                                    </select>
+                                                                    <input value="<%=session.user.name%> <%=session.user.surname%>" name="personName" style="display:none;">
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_4">
+                                                    <div  id="divProduct" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label for="">Ürün Grubu</label>
+                                                                    <select name="productGroup" id="productGroup" class="form-control">
+                                                                        <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                                           <%for(var i = 0; i < productGroups.length; i++){%>
+                                                                            <option <%if(operation == 'update' && productGroups[i].productGroupName== offer.basket.productGroup){%>selected<%}%> value="<%=productGroups[i].productGroupName%>"><%=productGroups[i].productGroupName%></option>
+                                                                          <%}%>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="">Ürün Adı</label>    
+                                                                    <select name="" id="selectProduct" class="form-control">
+                                                                        <option value="Seçiniz" disabled selected>Ürün Seçiniz</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <label for="" style="margin-bottom:15px;">Girmek İstediğiniz Değeri Seçiniz</label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 no-padding">
+                                                                                    <div class="col-md-6">
+                                                                                        <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                   <input id="inpSizeType" style="display:none;">
+                                                                   <input id="inpBasket" name="basket" style="display:none;" <%if(operation=="update"){%>value="<%=JSON.stringify(offer.basket)%>"<%}%>> 
+                                                                 <div id="divRec" class="row" style="display:none;">
+                                                                    <div class="col-md-9 no-padding">
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpEn" type="number" class="form-control" placeholder="En Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpYukseklik" type="number" class="form-control" placeholder="Yükselik Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpBoy" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="divCir" class="row" style="display:none;">
+                                                                        <div class="col-md-6 no-padding">
+                                                                            <div class="col-md-6">
+                                                                                <input id="inpCap" type="number" class="form-control" placeholder="Çap Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <input id="inpUzunluk" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="">Montaj Şekli</label>
+                                                                            <select id="montageType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < montageTypes.length; i++){%>
+                                                                                    <option <%if(operation == 'update' && montageTypes[i].montageType== offer.basket.montageType){%>selected<%}%> data="<%=montageTypes[i].cost%>" value="<%=montageTypes[i].montageType%>"><%=montageTypes[i].montageType%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="">Kaplama Şekli</label>
+                                                                            <select id="coverType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < coverTypes.length; i++){%>
+                                                                                    <option <%if(operation == 'update' && coverTypes[i].coverType== offer.basket.coverType){%>selected<%}%> data="<%=coverTypes[i].cost%>" value="<%=coverTypes[i].coverType%>"><%=coverTypes[i].coverType%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="">Ayar Mekanizması</label>
+                                                                            <select  id="setMechanism" class="form-control">
+                                                                                 <option style="padding-left:0px;" data='0' selected disabled value="" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < setMechanisms.length; i++){%>
+                                                                                    <option <%if(operation == 'update' && setMechanisms[i].setMechanism== offer.basket.setMechanism){%>selected<%}%> data="<%=setMechanisms[i].cost%>" value="<%=setMechanisms[i].setMechanism%>"><%=setMechanisms[i].setMechanism%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="">Aksesuar</label>
+                                                                            <select  id="accessory" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < accessories.length; i++){%>
+                                                                                    <option <%if(operation == 'update' && accessories[i].accessory== offer.basket.accessory){%>selected<%}%> data="<%=accessories[i].cost%>" value="<%=accessories[i].accessory%>"><%=accessories[i].accessory%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Miktar</label>
+                                                                    <input type="text" class="form-control" id="amount" placeholder="Miktar Giriniz" <%if(operation == "update"){%> value="<%=offer.basket.amount%>"<%}%>>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Satır İskonto</label>
+                                                                    <input type="text" class="form-control" id="lineDiscount" placeholder="Satır İskonto Giriniz" <%if(operation == "update"){%> value="<%=offer.basket.lineDiscount%>"<%}%>>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <a id="btnAddBasket" class="btn btn-success btn-flat" id="btnAddChart">Sepete Ekle</a>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_7">
+                                                    <div id="divProductChart" class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="box-body table-scroll">
+                                                                <table id="tblProduct" class="table table-bordered table-condensed table-responsive">
+                                                                    <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                                        <th style="width:40px">#</th>
+                                                                        <th style="width:40px">Miktar</th>
+                                                                        <th>Ürün </th>
+                                                                        <th>Tip </th>
+                                                                        <th>Ölçüler </th>
+                                                                        <th>Montaj Şekli</th>
+                                                                        <th>Kaplama Şekli</th>
+                                                                        <th>Ayar Mekanizması</th>
+                                                                        <th>Aksesuar</th>
+                                                                        <th style="width:140px">Satır İskontosu</th>
+                                                                        <th style="width:40px"> </th>
+                                                                    </tr>
+                                                                    <tbody id="tableBasket">
+                                                                        <!--<tr>
+                                                                            <td>1</td>
+                                                                            <td>2</td>
+                                                                            <td><span>A Grubu</span> - <span>Ürün 1</span></td>
+                                                                            <td>Dikdörtgen</td>
+                                                                            <td>12x24</td>
+                                                                            <td>montaj 1</td>
+                                                                            <td>kaplama 1</td>
+                                                                            <td>ayar 1</td>
+                                                                            <td>aksesuar 1</td>
+                                                                            <td>4</td>
+                                                                            <td><button class="btn btn-danger btn-flat btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                                                                        </tr>-->
+                                                                        <%if(operation=='update'){%>
+                                                                        <%for(var i=0;i<offer.basket.length;i++){%>
+                                                                            <tr id="<%=offer.basket[i]._id%>">
+                                                                            <td><%=(i+1)%></td>
+                                                                            <td><%=offer.basket[i].amount%></td>
+                                                                            <td><%=offer.basket[i].productGroup%> - <%=offer.basket[i].productName%></td>
+                                                                            <td><%=offer.basket[i].productSizeType%></td>
+                                                                            <%if(offer.basket[i].productSizeType=='dikdörtgen'){%>
+                                                                            <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeHeight%> x <%=offer.basket[i].productSizeLength%><font size="1" color="blue">  (genişlik*yükseklik*uzunluk)</font></td>
+                                                                            <%}else{%>
+                                                                            <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeLength%> <font size="1" color="blue">  (çap*uzunluk)</font></td>
+                                                                            <%}%>
+                                                                            <td><%=offer.basket[i].montageType%></td>
+                                                                            <td><%=offer.basket[i].coverType%></td>
+                                                                            <td><%=offer.basket[i].setMechanism%></td>
+                                                                            <td><%=offer.basket[i].accessory%></td>
+                                                                            <td><%=offer.basket[i].lineDiscount%></td>
+                                                                            <td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                        <%}%>
+                                                                    </tbody>
+
+
+                                                                </table>
+                                                                <table class="table table-condensed table-bordered table-responsive" style="width:100%;">
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Genel İskonto</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input id="generalDiscount" type="text" class="form-control" name="generalDiscount"<%if(operation == "update"){%> value="<%=offer.cost.generalDiscount%>"<%}else{%><%}%>>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Yuvarlama İskontosu</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input type="text" class="form-control" name="productRoundingDiscount" id="RoundingDiscount" <%if(operation == "update"){%> value="<%=offer.cost.roundingDiscount%>"<%}%>>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Tutar</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input  type="text" class=" form-control" name="sum" id="productSum" <%if(operation == "update"){%> value="<%=offer.cost.sum%>"<%}%>>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">K.D.V</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input type="text"  class="form-control" name="productKDV" id="productKDV" <%if(operation == "update"){%> value="<%=offer.cost.kdv%>"<%}%>>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Toplam</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                             <input type="text" class="form-control" name="total" id="productTotal" <%if(operation == "update"){%> value="<%=offer.cost.total%>"<%}%>>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_5">
+                                                    <div id="divPayMethod" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label >Ödeme Şekli</label>
+                                                                    <select name="payMethod" id="" class="form-control" >
+                                                                        <option value="Nakit" <%if(operation == "update" && offer.payMethod.payMethod=="Nakit" ){%>selected<%}%>>Nakit</option>
+                                                                        <option value="Çek" <%if(operation == "update" && offer.payMethod.payMethod=="Çek" ){%>selected<%}%>>Çek</option>
+                                                                        <option value="Kredi Kartı" <%if(operation == "update" && offer.payMethod.payMethod=="Kredi Kartı" ){%>selected<%}%>>Kredi Kartı</option>
+                                                                        <option value="Senet" <%if(operation == "update" && offer.payMethod.payMethod=="Senet" ){%>selected<%}%>>Senet</option>
+                                                                        <option value="Devir" <%if(operation == "update" && offer.payMethod.payMethod=="Devir" ){%>selected<%}%>>Devir</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Not</label>
+                                                                    <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;" <%if(operation == "update"){%> value="<%=offer.note%>"<%}%>><%if(operation == "update"){%><%=offer.payMethod.note%><%}%></textarea>
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div style="text-align:center;">
+                                                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- /.tab-content -->
+                                    </div><!-- nav-tabs-custom -->
+                                </div><!-- /.col -->
+                            </div><!-- /.box -->
+                        </div>
+                    </div>
+                </div>
+                    
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/OfferPage.js"></script>
+    </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+        <link rel="stylesheet" href="../css/utility-css/fullcalendar/fullcalendar.css">
+        <link rel="stylesheet" href="../css/utility-css/fullcalendar/fullcalendar.print.css">
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="">
+                                    <!-- form start -->
+                                    <form  role="form" method="post" >
+                                        <div class="box-body">
+                                            <!-- Small boxes (Stat box) -->
+                                            <div class="row">
+                                               <div class="col-lg-3 col-xs-6">
+                                                    <!-- small box -->
+                                                    <div class="small-box bg-yellow">
+                                                        <div class="inner">
+                                                            <h3>
+                                                                6
+                                                            </h3>
+                                                            <p>
+                                                                Müşteri Sayısı
+                                                            </p>
+                                                        </div>
+                                                        <div class="icon">
+                                                            <i class="ion ion-person-stalker"></i>
+                                                        </div>
+                                                        <a href="#" class="small-box-footer">
+                                                            Daha Fazla Bilgi <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div><!-- ./col -->
+                                                <div class="col-lg-3 col-xs-6">
+                                                    <!-- small box -->
+                                                    <div class="small-box bg-aqua">
+                                                        <div class="inner">
+                                                            <h3>
+                                                                15
+                                                            </h3>
+                                                            <p>
+                                                                Onay Bekleyen Teklifler
+                                                            </p>
+                                                        </div>
+                                                        <div class="icon">
+                                                            <i class="ion ion-ios7-reloading"></i>
+                                                        </div>
+                                                        <a href="#" class="small-box-footer">
+                                                            Daha Fazla Bilgi <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div><!-- ./col -->
+                                                <div class="col-lg-3 col-xs-6">
+                                                    <!-- small box -->
+                                                    <div class="small-box bg-green">
+                                                        <div class="inner">
+                                                            <h3>
+                                                                53<sup style="font-size: 20px">%</sup>
+                                                            </h3>
+                                                            <p>
+                                                                Onaylanan Teklifler
+                                                            </p>
+                                                        </div>
+                                                        <div class="icon">
+                                                            <i class="ion ion-checkmark-round"></i>
+                                                        </div>
+                                                        <a href="#" class="small-box-footer">
+                                                            Daha Fazla Bilgi <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div><!-- ./col -->
+                                                
+                                                <div class="col-lg-3 col-xs-6">
+                                                    <!-- small box -->
+                                                    <div class="small-box bg-red">
+                                                        <div class="inner">
+                                                            <h3>
+                                                                65
+                                                            </h3>
+                                                            <p>
+                                                                Kaybedilen Teklifler
+                                                            </p>
+                                                        </div>
+                                                        <div class="icon">
+                                                            <i class="ion ion-android-close"></i>
+                                                        </div>
+                                                        <a href="#" class="small-box-footer">
+                                                            Daha Fazla Bilgi <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                    </div>
+                                                </div><!-- ./col -->
+                                            </div><!-- /.row -->
+
+                                        </div><!-- /.box-body -->
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <table class="table">
+                                            <tr style="border-bottom: 2px solid #00c0ef">
+                                                <td><b style="color: #00c0ef"> <i class="fa fa-calendar" style="margin-right:10px;"></i> AJANDA </b></td>
+                                            </tr>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="box box-primary">                                
+                                                    <div class="box-body no-padding">
+                                                        <!-- THE CALENDAR -->
+                                                        <div id="calendar"></div>
+                                                    </div><!-- /.box-body -->
+                                                </div><!-- /. box -->
+                                            </div>
+                                        </div><!-- /.row -->
+                                    </div>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside>
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>       
+       <script src="../js/utility-js/jquery-ui-1.10.3.min.js"></script>
+       <script src="../js/utility-js/jquery.blockUI.js"></script>
+       <script src="../js/utility-js/plugins/fullcalendar/fullcalendar.js"></script>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/index.js"></script>
+    </body>
+</html>

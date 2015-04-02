@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                       İş Emri Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">İş Emri</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <label for="">Firma</label>
+                                                        <select class="form-control" id="">
+                                                            <option value="" selected disabled>Firma Seçiniz</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <label for="">Teslim Tarihi</label>
+                                                            <input type="date" id="" class="form-control"/>
+                                                            <span class="input-group-btn" >
+                                                                <button class="btn btn-danger search" type="button" style="margin-top:25px;">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                   <div id="custom-search-input">
+                                                        <div class="input-group">
+                                                            <label for="">İmalata Veriliş Tarihi</label>
+                                                            <input type="date" id="" class="form-control"/>
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-danger search" type="button" style="margin-top:25px;">
+                                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <br>
+                                            <div class="table-scroll">
+                                                <table class="table table-bordered ">
+                                                   <thead>
+                                                    <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                        <th class="text-center" style="width: 40px">#</th>
+                                                        <th ><span data-toggle="tooltip" data-placement="top" title="İş Emri No">İ.E.No</span></th>
+                                                        <th>Firma</th>
+                                                        <th>Ana Ürün Adı</th>
+                                                        <th>Ölçüler</th>
+                                                        <th><span data-toggle="tooltip" data-placement="top" title="Montaj Şekli">M.Şekli</span></th>
+                                                        <th>Kaplama</th>
+                                                        <th><span data-toggle="tooltip" data-placement="top" title="Ayar Mekanizması">A.Mekanizması</span></th>
+                                                        <th>Aksesuar</th>
+                                                        <th>Kasa Tipi</th>
+                                                        <th>Miktar</th>
+                                                        <th ><span data-toggle="tooltip" data-placement="top" title="Teslim Tarihi">T.Tarihi</span></th>
+                                                        <th>Açıklama</th>
+                                                        <th><span data-toggle="tooltip" data-placement="top" title="İmalata Veriliş Tarihi">İ.V Tarihi</span></th>
+                                                        <th class="text-center" style="width: 40px"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>                                                        
+                                                      <%for(var i=0;i<offers.length;i++){%>
+                                                         <%for(var j=0;j<offers.length;j++){%>
+                                                        <tr id="<%=offers[i]._id%>">
+                                                            <td class="text-center"><%=(i+1)%></td>
+                                                            <td class="text-center"><%=(i+1)%></td>
+                                                            <td><%=offers[i].customerInfo.customerName%></td>
+                                                            <td><%=offers[i].basket[j].productName%></td>
+                                                            <%if(offers[i].basket[j].productSizeType=="dikdörtgen"){%>
+                                                            <td><%=offers[i].basket[j].productSizeWidthOrDiameter%>x<%=offers[i].basket[j].productSizeLength%>x<%=offers[i].basket[j].productSizeHeight%></td>
+                                                            <%}else{%>
+                                                            <td><%=offers[i].basket[j].productSizeWidthOrDiameter%>x<%=offers[i].basket[j].productSizeLength%></td>
+                                                            <%}%>
+                                                            <td><%=offers[i].basket[j].montageType%></td>
+                                                            <td><%=offers[i].basket[j].coverType%></td>
+                                                            <td><%=offers[i].basket[j].setMechanism%></td>
+                                                            <td><%=offers[i].basket[j].accessory%></td>
+                                                            <td>...</td>
+                                                            <td><%=offers[i].basket[j].amount%></td>
+                                                            <td style="width:100px"><input type="date" class=""></td>
+                                                            <td><%=offers[i].payMethod.note%></td>
+                                                            <td style="width:100px"><input type="date" class=""></td>
+                                                            <td>
+                                                              <button class="btn btn-success btn-sm btn flat" data-toggle="tooltip" data-placement="top" title="Kaydet"><i class="fa fa-save"></i></button>
+                                                          </td>
+                                                        </tr>  
+                                                      <%}%>
+                                                    <%}%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/pages-js/job.js"></script>
+    </body>
+</html>
