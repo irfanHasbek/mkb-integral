@@ -22,6 +22,9 @@ function otherScripts(){
                             event.title = response.response[i].activities[j].content;
                             event.start = new Date(response.response[i].activities[j].activityDate);
                             event.end = new Date(response.response[i].activities[j].activityDate);
+                            event.backgroundColor = "#f00";
+                            event.borderColor = "#fff";
+                            event.ownerName = response.response[i].activities[j].owner.ownerName;
                             newEvents.push(event);
                         }
                     }
@@ -45,7 +48,10 @@ function otherScripts(){
                     day: 'Gün'
                 },
                 defaultView: 'month',
-                lang:'tr'
+                lang:'tr',
+                eventClick: function(event) {
+                    alert(event.ownerName);
+                }
             });
             $('#calendar').fullCalendar('addEventSource', newEvents);
             $('#calendar').fullCalendar('rerenderEvents');
