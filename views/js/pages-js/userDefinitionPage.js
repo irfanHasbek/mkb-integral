@@ -54,17 +54,27 @@ function clickHandlers(){
     });
     
     $('#userTable').on('click','.remove', function(){
+        $.blockUI({ message: "<h1>Silme islemi gerceklestiriliyor...</h1>" });
         var tr = $(this).closest('tr');
         var id = tr.attr('id');
-        wsPost('/wsuser/remove', {_id : id}, function(error, response){
-            if(error){
-                console.log('Hata : kullanici silinemedi.');
-                return;
-            }
-            tr.remove();
-            console.log('Kullanici basariyla silindi.');
-        });
+        removeUser(id, tr);
+        
     });
+    $('#no').click(function() { 
+        $.unblockUI(); 
+        return false; 
+    }); 
+}
+function removeUser(id, tr){
+    wsPost('/wsuser/remove', {_id : id}, function(error, response){
+        if(error){
+            console.log('Hata : kullanici silinemedi.');
+            return;
+        }
+        tr.remove();
+        console.log('Kullanici basariyla silindi.');
+        $.unblockUI();
+    });   
 }
 function formHandlers(){
     $('#formPicture').ajaxForm(function(data){
