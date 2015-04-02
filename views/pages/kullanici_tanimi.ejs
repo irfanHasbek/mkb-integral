@@ -93,7 +93,7 @@
                                                                             <br>
                                                                             <img id="userPicture" src="../uploads/3df7051c2a31638ac8c2e86068432939eac2f518.png" class="img-responsive" style="max-height:250px; width:auto;" alt="">
                                                                             <input class="btn btn-flat" id="inpPictureUpload" type="file" name="image" accept="image/*"/>
-                                                                            <button type="submit" class="btn btn-info btn-flat btn-block" type="button">Yükle</button>
+                                                                            <button id="btnSavePicture" type="submit" class="btn btn-info btn-flat btn-block" type="button">Yükle</button>
                                                                         </div><!-- /input-group -->
                                                                     </div>
                                                                 </div>
@@ -199,6 +199,7 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
        <%include ../partial-pages/script.ejs%>
+       <script src="../js/utility-js/jquery.blockUI.js"></script>
        <script src="../js/helper-js/Helper.js"></script>
        <script src="../js/pages-js/userDefinitionPage.js"></script>
     </body>

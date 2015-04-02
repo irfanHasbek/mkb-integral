@@ -1,6 +1,9 @@
 var isUpdate = false;
 var requiredField = true;
 function clickHandlers(){
+    $('#btnSavePicture').on('click',function(){
+        $.blockUI({ css: { backgroundColor: '#f00', color: '#fff'}, message: '<h1>Yükleniyor...</h1>' });
+    });
     $('#btnSave').on('click', function(){
         var userPass = $('#userPass').val();
         var userRePass = $('#userRePass').val();
@@ -68,6 +71,7 @@ function formHandlers(){
         $('#userPicture').attr('src', JSON.parse(data).url);
         $('#pictureUrl').val(JSON.parse(data).url);
         console.log('url : ' + JSON.parse(data).url);
+        $.unblockUI();
     }); 
 }
 function otherScripts(){

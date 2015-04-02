@@ -1,5 +1,7 @@
 function clickHandlers(){
-    
+    $('#btnSavePicture').on('click', function(){
+        $.blockUI({ css: { backgroundColor: '#f00', color: '#fff'}, message: '<h1>Yükleniyor...</h1>' }); 
+    });
 }
 
 function formHandlers(){
@@ -7,6 +9,7 @@ function formHandlers(){
         var data = JSON.parse(response);
         $('#imgProduct').attr('src', '/' + data.url);
         $('#inpPictureUrl').val(data.url);
+        $.unblockUI();
     });
     
     $('#formProductAdd').ajaxForm(function(data){
