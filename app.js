@@ -637,6 +637,11 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                              console.error(responseAccessory);
                              res.render("/pages/index",{layout : false, session : req.session});
                          }
+               bts.listAll(req.session.user.firmCode,function(stateBodyType,responseBodyType){
+                      if(!stateBodyType){
+                             console.error(responseBodyType);
+                             res.render("/pages/index",{layout : false, session : req.session});
+                         }
                custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId,function(stateCustId,responseCustId){
                      if(!stateCustId){
                          console.error(responseCustId);
@@ -657,7 +662,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                             console.log(responseCust);
                             res.render("/pages/index",{layout : false, session : req.session});
                         }
-                     res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,offer : resposeOffer,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust,setMechanisms : responseSetMec,accessories : responseAccessory, custDef:responseCustId, productGroups:responseProductGroup,offerStatus :responseOfferStatus,operation : "update"}); 
+                     res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,offer : resposeOffer,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust,setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType, custDef:responseCustId, productGroups:responseProductGroup,offerStatus :responseOfferStatus,operation : "update"}); 
                      });
                     });
                    });
@@ -668,6 +673,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
          });
        });
     });
+  });
         }else{
                 ots.listAll(req.session.user.firmCode,function(stateOfferTopic,responseOfferTopic){
                     if(!stateOfferTopic){
@@ -694,6 +700,11 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                          console.error(responseAccessory);
                          res.render("/pages/index",{layout : false, session : req.session});
                          }
+                bts.listAll(req.session.user.firmCode,function(stateBodyType,responseBodyType){
+                      if(!stateBodyType){
+                         console.error(responseBodyType);
+                         res.render("/pages/index",{layout : false, session : req.session});
+                         }
                 pds.listAll(req.session.user.firmCode, function(stateProductGroup,responseProductGroup){
                         if(!stateProductGroup){
                             console.log(responseProductGroup);
@@ -709,7 +720,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                             console.log(responseCust);
                             res.render("/pages/index",{layout : false, session : req.session});
                         }
-                         res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust, setMechanisms : responseSetMec,accessories : responseAccessory,productGroups:responseProductGroup, offerStatus :responseOfferStatus, operation : "add"}); 
+                         res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust, setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType,productGroups:responseProductGroup, offerStatus :responseOfferStatus, operation : "add"}); 
                 });
                });
              });
@@ -718,6 +729,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
        });
      }); 
    });
+  });
  }
 });
     app.get("/acik_teklifler" ,AccountController.sessionCheck ,function(req, res){

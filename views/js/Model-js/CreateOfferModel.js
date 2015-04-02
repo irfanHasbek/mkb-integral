@@ -41,6 +41,7 @@ var OfferScheme = new mongoose.Schema({
         coverType :String,
         setMechanism :String,
         accessory : String,
+        bodyType : String,
         amount :String,
         note :String,
         lineDiscount :String,

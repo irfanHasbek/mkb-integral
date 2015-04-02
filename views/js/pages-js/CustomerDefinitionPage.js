@@ -8,11 +8,7 @@ function clickHandlers(){
         }
         fillItemToCompetentInfo(CompetentInfoItem);
         var competentInfo;
-        if($('#inpCompetentInfo').val()==""){
-            competentInfo=[];
-        }else{
-         competentInfo= JSON.parse($('#inpCompetentInfo').val());
-        }
+        competentInfo= JSON.parse($('#inpCompetentInfo').val());
         console.log("com : "+JSON.stringify(competentInfo));
         competentInfo.push(CompetentInfoItem);
         console.log("2 "+JSON.stringify(competentInfo));
@@ -94,11 +90,7 @@ function clickHandlers(){
         };
         fillItemToForwardingInfo(forwardingInfoItem);
         var forwardingInfo;
-        if($('#inpForwardingInfo').val()==""){
-            forwardingInfo=[];
-        }else{
-             forwardingInfo = JSON.parse($('#inpForwardingInfo').val());
-        }
+        forwardingInfo = JSON.parse($('#inpForwardingInfo').val());
         forwardingInfo.push(forwardingInfoItem);
         console.log($('#inpForwardingInfo').val());
         $('#inpForwardingInfo').val(JSON.stringify(forwardingInfo));

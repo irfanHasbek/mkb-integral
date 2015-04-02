@@ -135,7 +135,7 @@
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
-                                                    <input style="display:none;" id="inpCompetentInfo" name="competent" <%if(operation=="update"){%>value="<%=JSON.stringify(respCustDef.competentInfo)%>"<%}%>>
+                                                    <input style="display:none;" id="inpCompetentInfo" name="competent" <%if(operation=="update"){%>value="<%=JSON.stringify(respCustDef.competentInfo)%>"<%}else{%>value="[]"<%}%>>
                                                     <br>
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -330,7 +330,7 @@
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
-                                                    <input style="display:none;" id="inpForwardingInfo" name="forwarding" <%if(operation=="update"){%>value="<%=JSON.stringify(respCustDef.forwardingInfo)%>"<%}%>>
+                                                    <input style="display:none;" id="inpForwardingInfo" name="forwarding" <%if(operation=="update"){%>value="<%=JSON.stringify(respCustDef.forwardingInfo)%>"<%}else{%>value="[]"<%}%>>
                                                     <br>
                                                     <div class="row">
                                                         <div class="col-md-12">

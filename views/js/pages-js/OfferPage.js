@@ -32,6 +32,7 @@ function clickHandlers(){
             coverType : $('#coverType').val(),
             setMechanism : $('#setMechanism').val(),
             accessory : $('#accessory').val(),
+            bodyType : $('#bodyType').val(),
             amount : $('#amount').val(),
             lineDiscount : $('#lineDiscount').val(),
             productPrice : ''
@@ -53,6 +54,7 @@ function clickHandlers(){
             coverCost : $('#coverType option:selected').attr('data'),
             setMechCost : $('#setMechanism option:selected').attr('data'),
             accessory : $('#accessory option:selected').attr('data'),
+            bodyType : $('#bodyType option:selected').attr('data'),
             amount : basketItem.amount,
             lineDiscount : basketItem.lineDiscount,
             productType : basketItem.productSizeType,
@@ -121,11 +123,12 @@ function fillItemToBasket(item){
     var tdCoverType = $('<td>' + item.coverType + '</td>');
     var tdsetMech = $('<td>' + item.setMechanism + '</td>');
     var tdAccessory = $('<td>' + item.accessory + '</td>');
+    var tdBodyType = $('<td>' + item.bodyType + '</td>');
     var tdLineDiscount = $('<td>' + item.lineDiscount + '</td>');
     var tdButton = $('<td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>');
     
     tr.append(tdCount);tr.append(tdAmount);tr.append(tdProduct);tr.append(tdType);tr.append(tdSize);tr.append(tdMontageType);tr.append(tdCoverType);tr.append(tdsetMech);
-    tr.append(tdAccessory);tr.append(tdLineDiscount);tr.append(tdButton);
+    tr.append(tdAccessory);tr.append(tdBodyType);tr.append(tdLineDiscount);tr.append(tdButton);
     table.append(tr);
     
     calculatePriceAfterOperation();

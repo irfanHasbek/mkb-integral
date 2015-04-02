@@ -283,7 +283,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Montaj Şekli</label>
                                                                             <select id="montageType" class="form-control">
@@ -294,7 +294,7 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Kaplama Şekli</label>
                                                                             <select id="coverType" class="form-control">
@@ -305,7 +305,7 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Ayar Mekanizması</label>
                                                                             <select  id="setMechanism" class="form-control">
@@ -316,13 +316,24 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Aksesuar</label>
                                                                             <select  id="accessory" class="form-control">
                                                                                 <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
                                                                                    <%for(var i = 0; i < accessories.length; i++){%>
                                                                                     <option <%if(operation == 'update' && accessories[i].accessory== offer.basket.accessory){%>selected<%}%> data="<%=accessories[i].cost%>" value="<%=accessories[i].accessory%>"><%=accessories[i].accessory%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Kasa Tipi</label>
+                                                                            <select  id="bodyType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < bodyTypes.length; i++){%>
+                                                                                    <option <%if(operation == 'update' && bodyTypes[i].bodyType== offer.basket.bodyType){%>selected<%}%> data="<%=bodyTypes[i].cost%>" value="<%=bodyTypes[i].bodyType%>"><%=bodyTypes[i].bodyType%></option>
                                                                                   <%}%>
                                                                             </select>
                                                                         </div>
@@ -363,6 +374,7 @@
                                                                         <th>Kaplama Şekli</th>
                                                                         <th>Ayar Mekanizması</th>
                                                                         <th>Aksesuar</th>
+                                                                        <th>Kasa Tipi</th>
                                                                         <th style="width:140px">Satır İskontosu</th>
                                                                         <th style="width:40px"> </th>
                                                                     </tr>
@@ -396,6 +408,7 @@
                                                                             <td><%=offer.basket[i].coverType%></td>
                                                                             <td><%=offer.basket[i].setMechanism%></td>
                                                                             <td><%=offer.basket[i].accessory%></td>
+                                                                            <td><%=offer.basket[i].bodyType%></td>
                                                                             <td><%=offer.basket[i].lineDiscount%></td>
                                                                             <td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>
                                                                         </tr>

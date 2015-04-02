@@ -36,9 +36,11 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.setMechCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.accessory) / 100));
-
+                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.bodyType) / 100));
+                
                 choosenPrice = choosenPrice * parseFloat(info.amount);
-
+                
+                console.log(info);
                 callback(true, choosenPrice);        
             }
             else{
@@ -76,7 +78,8 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.setMechCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.accessory) / 100));
-
+                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.bodyType) / 100));
+                
                 choosenPrice = choosenPrice * parseFloat(info.amount); 
                 callback(true, choosenPrice);
             }
