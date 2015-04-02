@@ -118,7 +118,7 @@ function clickHandlers(){
                         console.log(errorPdf);
                         return;
                     }
-                    wsPost('wssendmail', {attachs : responsePdf}, function(errorMail, responseMail){
+                    wsPost('wssendmail', {attachs : responsePdf, mailTo : $('#inpCustomerMail').val()}, function(errorMail, responseMail){
                         if(errorPdf){
                             console.log(errorMail);
                             return;

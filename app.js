@@ -1055,38 +1055,44 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     var nodemailer = require('nodemailer');
     app.post("/wssendmail", function(req, res){
         var attachs = req.body.attachs;
-        var smtpTransport = nodemailer.createTransport("SMTP",{
-            service: "Gmail",
-            auth: {
-                user: "irfanhasbek@gmail.com",
-                pass: "2008510030"
+        firmService.getInformationFirmCode(req.session.user.firmCode, function(stateFirm, responseFirm){
+            if(!stateFirm){
+                console.log(stateFirm);
+                res.send({message : 'Email configuration hatasi'});
+                return; 
             }
-        });
+            var smtpTransport = nodemailer.createTransport("SMTP",{
+                service: "Gmail",
+                auth: {
+                    user: responseFirm.email,
+                    pass: responseFirm.password
+                }
+            });
+            var mail = {
+                from : req.session.user.name + ' ' + req.session.user.surname + '<' + responseFirm.email + '>',
+                to: req.body.mailTo,
+                subject: responseFirm.name + " Bilgilendirme maili",
+                text: "Bu mail bilgilendirmek icindir,Lutfen Cevaplamayiniz.",
+                html: "",
+                attachments : [{
+                    fileName : attachs.fileName,
+                    filePath: 'http://localhost:3000' + attachs.contents
+                }]
+            };
+            sleepFor(12000);
+            smtpTransport.sendMail(mail, function(stateMail, response){
+                if(!stateMail){
+                    console.log(stateMail);
+                    res.send({message : 'Mail Gonderme hatasi'});
+                    return;
+                }
+                else{
+                    console.log("Message sent: " + response.message);
+                }
+                smtpTransport.close();
+                res.send({response : response.message});
 
-        var mail = {
-            from: "irfan Hasbek <irfanhasbek@gmail.com>",
-            to: "irfanhasbek@gmail.com",
-            subject: "Integral Havalandirma Bilgilendirme maili",
-            text: "Bu mail bilgilendirmek icindir,Lutfen Cevaplamayiniz.",
-            html: "",
-            attachments : [{
-                fileName : attachs.fileName,
-                filePath: 'http://localhost:3000' + attachs.contents
-            }]
-        };
-        sleepFor(8000);
-        smtpTransport.sendMail(mail, function(error, response){
-            if(error){
-                console.log(error);
-                res.send({message : 'Mail Gonderme hatasi'});
-                return;
-            }
-            else{
-                console.log("Message sent: " + response.message);
-            }
-            smtpTransport.close();
-            res.send({response : response.message});
-
+            });
         });
     });
     

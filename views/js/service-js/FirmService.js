@@ -11,6 +11,7 @@ function createFirm(firmSpec){
         name : firmSpec.name,
         logoUrl : firmSpec.logoUrl,
         email : firmSpec.email,
+        password : firmSpec.password,
         competentInformation : {
             name : firmSpec.competentInformationName,
             task : firmSpec.competentInformationTask,
@@ -51,6 +52,7 @@ FirmService.prototype.updatePart1 = function(firm, callback){
             return;   
         }
         foundFirm.email = newFirm.email;
+        foundFirm.password = newFirm.password;
         foundFirm.logoUrl = newFirm.logoUrl;
         //foundFirm.competentInformation = newFirm.competentInformation;
         //foundFirm.contactInformation = newFirm.contactInformation;
@@ -108,6 +110,16 @@ FirmService.prototype.listAll = function(callback){
 
 FirmService.prototype.getInformation = function(name, callback){
     FirmModel.findOne({ name : name }, function(error, firmInfo){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, firmInfo);
+    });
+}
+FirmService.prototype.getInformationFirmCode = function(firmCode, callback){
+    console.log('firmCode : ' + firmCode);
+    FirmModel.findOne({ firmCode : firmCode }, function(error, firmInfo){
         if(error){
             callback(false, error);
             return;

@@ -5,6 +5,7 @@ var FirmSchema = new mongoose.Schema({
     name : String,
     logoUrl : String,
     email : String,
+    password : String,
     competentInformation : {
         name : String,
         task : String,

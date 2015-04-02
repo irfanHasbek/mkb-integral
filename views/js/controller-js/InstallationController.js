@@ -16,6 +16,7 @@ function createFirm(firmName, firmCode){
         name : firmName,
         logoUrl : '',
         email : '',
+        password : '',
         competentInformationName : '',
         competentInformationTask : '',
         competentInformationGsm : '',

@@ -13,6 +13,7 @@ function clickHandlers(){
             console.log(response);
             $('#inpUpdate2Name').val(response.name);  
             $('#inpFirmEmail').val(response.email); 
+            $('#inpFirmPass').val(response.password); 
             $('#imgFirmLogo').attr('src', response.logoUrl);
             $('#inpCompetentName').val(response.competentInformation.name);
             $('#inpCompetentTask').val(response.competentInformation.task);
