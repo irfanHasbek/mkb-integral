@@ -41,6 +41,7 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 choosenPrice = choosenPrice * parseFloat(info.amount);
                 
                 console.log(info);
+                console.log("price : "+choosenPrice);
                 callback(true, choosenPrice);        
             }
             else{

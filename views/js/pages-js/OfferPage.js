@@ -159,7 +159,7 @@ function removeFromBasketAndTable(id){
     var basket = JSON.parse($('#inpBasket').val()); 
     var index = 0;
     for(var i = 0; i < basket.length; i++){
-        if(basket[i].productId === id){
+        if(basket[i]._id === id){
             index = i;
         }
     }
