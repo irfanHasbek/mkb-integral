@@ -223,6 +223,14 @@ CreateOfferService.prototype.search = function(criteria, callback){
         callback(true, offers);
     });
 }
-
+CreateOfferService.prototype.searchandGetCount = function(criteria, callback){
+    CreateOfferModel.count(criteria,function(error, offers){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, offers);
+    });
+}
 
 module.exports = CreateOfferService;

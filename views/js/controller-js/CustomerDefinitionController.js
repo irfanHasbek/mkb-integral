@@ -96,6 +96,15 @@ module.exports = {
             res.send({state : state, response : response});   
         });   
     },
+    getCount : function(req, res){
+        cds.getCount(req.session.user.firmCode,function(state, response){
+            if(!state){
+                res.send({state : state, response : response});   
+                return;
+            }
+            res.send({state : state, response : response});   
+        });   
+    },
     getCustomerDefinition : function(req, res){
         cds.getCustomerDefinition({_id : req.body}, function(state, response){
             if(!state){

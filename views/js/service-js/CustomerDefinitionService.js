@@ -81,6 +81,15 @@ CustomerDefinitionService.prototype.listAll = function(criteria,callback){
         callback(true, custDefs);
     });
 }
+CustomerDefinitionService.prototype.getCount = function(criteria,callback){
+    CustomerDefinitionModel.count({ firmCode : criteria }, function(error, count){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, count);
+    });
+}
 
 CustomerDefinitionService.prototype.getCustomerDefinition = function(customerId, callback){
     CustomerDefinitionModel.findOne({ _id : customerId }, function(error, custDef){

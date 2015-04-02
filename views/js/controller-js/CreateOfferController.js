@@ -209,6 +209,17 @@ module.exports = {
             }
             res.send({state : state, response : response});
         });   
+    },
+    searchandGetCount : function(req, res){
+        var criteria = req.body;
+        criteria.firmCode = req.session.user.firmCode;
+        cos.searchandGetCount(criteria, function(state, response){
+            if(!state){
+                res.send({state : state, response : response});
+                return;
+            }
+            res.send({state : state, response : response});
+        });   
     }
 }
     

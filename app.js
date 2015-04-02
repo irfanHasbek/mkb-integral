@@ -163,7 +163,31 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/index" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/index";
         req.session.pageLabel = "anasayfa";
-        res.render('pages/index', {layout : false, session : req.session});   
+        custservice.getCount(req.session.user.firmCode,function(stateCust,responseCust){
+            if(!stateCust){
+                res.render('pages/index', {layout : false, session : req.session});
+                return;
+            }
+        offerService.searchandGetCount({"status.offerCase": "acik_teklifler"},function(statePending,responsePending){
+            if(!statePending){
+                res.render('pages/index', {layout : false, session : req.session});
+                return;
+            }
+        offerService.searchandGetCount({"status.offerCase": "kazanilmis"},function(statePending,responseContinue){
+            if(!statePending){
+                res.render('pages/index', {layout : false, session : req.session});
+                return;
+            }
+        offerService.searchandGetCount({"status.offerCase": "kaybedilmis"},function(statePending,responseFinish){
+            if(!statePending){
+                res.render('pages/index', {layout : false, session : req.session});
+                return;
+            }
+             res.render('pages/index', {layout : false, session : req.session,customerCount:responseCust,openOfferCount:responsePending,winningOffer:responseContinue,losingOffer:responseFinish});  
+                });
+            });
+          }); 
+        });
     });
     // Raporlar
     app.get("/musteri_rapor" ,AccountController.sessionCheck ,function(req, res){

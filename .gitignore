@@ -10,3 +10,5 @@ views/uploads/
 .Trashes
 ehthumbs.db
 Thumbs.db
+mongorun.bat
+noderun.bat
