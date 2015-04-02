@@ -19,7 +19,7 @@ function clickHandlers(){
     
     $('#tableOpenOffers').on('click','.save', function(){
         var offerId = $(this).closest('tr').attr('id');
-        var offerStatus = $('#slctOrderStatus').val();
+        var offerStatus = $('#slctOrderStatus'+offerId).val();
         if(offerId){
             wsPost('/wsoffer/updatestatus',{_id : offerId, offerStatus : offerStatus}, function(error, response){
                 if(error){
@@ -179,7 +179,85 @@ function clickHandlers(){
             });   
         }
     });
+    $('.search').on('click', function(){
+        listOfferStatus();
+    });
 }
 function formHandlers(){
     
+}
+function searchAndFillTable(){
+    var offerTopic = $('#inpOfferTopic').val();
+    var customerName = $('#inpCustomerName').val();
+    var offerDate = $('#inpOfferDate').val();
+    
+    var searchCriteria = {
+        "offerTopic": regexMultiKriterOlustur(offerTopic),
+        "customerInfo.customerName" : regexMultiKriterOlustur(customerName),
+        "offerDate":regexMultiKriterOlustur(offerDate),
+        "status.offerCase":"acik_teklifler"
+    };
+    searchCriteria['firmCode'] = '';
+    console.log(searchCriteria);
+    wsPost('/wsoffer/search', {search : searchCriteria}, function(error, data){
+        if(error){
+            console.error(error);
+            return;
+        }
+        fillTable(data.response);
+    });
+}
+
+function fillTable(response,respOfferStatus){
+    $('#tableOpenOffers').empty();
+    for(var i = 0; i < response.length; i++){
+        var tr = $('<tr id="'+response[i]._id+'"></tr>');
+        var tdCount = $('<td class="text-center">' + (i+1) +'</td>');
+        var tdOfferTopic = $('<td>' + response[i].offerTopic + '</td>');
+        var tdCustName = $('<td>' + response[i].customerInfo.customerName + '</td>');
+        var tdOfferStatus = $('<td></td>');
+        var select=$('<select id="slctOrderStatus'+response[i]._id+'" class="form-control"></select>');
+        for(var j=0;j<respOfferStatus.length;j++){
+            if(response[i].offerStatus==respOfferStatus[j].offerStatus){
+                var op=$('<option id="'+respOfferStatus[j]._id+'" value="'+respOfferStatus[j].offerStatus+'"selected>'+respOfferStatus[j].offerStatus+'</option>');
+            }else{
+                var op=$('<option id="'+respOfferStatus[j]._id+'" value="'+respOfferStatus[j].offerStatus+'">'+respOfferStatus[j].offerStatus+'</option>');
+            }
+           select.append(op);
+        }
+        tdOfferStatus.append(select);
+        var tdOfferDate = $('<td>' + response[i].offerDate + '</td>');
+        var tdPerson = $('<td>' + response[i].personPrepareOfferInfo.personName + '</td>');
+        var tdButtons = $('<td id="'+response[i]._id+'"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li></ul></div></td>');
+        
+        tr.append(tdCount);tr.append(tdOfferTopic);tr.append(tdCustName);tr.append(tdOfferStatus);tr.append(tdOfferDate);tr.append(tdPerson);tr.append(tdButtons);
+        $('#tableOpenOffers').append(tr);
+      }
+}
+function listOfferStatus(response){
+    wsGet("/wsofferstatus/listall",function(error,respOfferStatus){
+         if(error){
+            console.error(error);
+            return;
+        }
+        var offerTopic = $('#inpOfferTopic').val();
+        var customerName = $('#inpCustomerName').val();
+        var offerDate = $('#inpOfferDate').val();
+
+        var searchCriteria = {
+            "offerTopic": regexMultiKriterOlustur(offerTopic),
+            "customerInfo.customerName" : regexMultiKriterOlustur(customerName),
+            "offerDate":regexMultiKriterOlustur(offerDate),
+            "status.offerCase":"acik_teklifler"
+        };
+        searchCriteria['firmCode'] = '';
+        console.log(searchCriteria);
+        wsPost('/wsoffer/search', {search : searchCriteria}, function(error, data){
+            if(error){
+                console.error(error);
+                return;
+            }
+            fillTable(data.response,respOfferStatus.data);
+        });    
+ });
 }

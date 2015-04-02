@@ -15,12 +15,11 @@ function searchAndFillTable(){
     var offerTopic = $('#inpOfferTopic').val();
     var customerName = $('#inpCustomerName').val();
     var offerDate = $('#inpOfferDate').val();
-    
     var searchCriteria = {
-        offerTopic : regexMultiKriterOlustur(offerTopic),
-        customerInfo:{customerName : regexMultiKriterOlustur(customerName)},
-        offerDate:offerDate,
-        status:{offerCase:"kazanilmis"}
+        "offerTopic": regexMultiKriterOlustur(offerTopic),
+        "customerInfo.customerName" : regexMultiKriterOlustur(customerName),
+        "offerDate":regexMultiKriterOlustur(offerDate),
+        "status.offerCase":"kazanilmis"
     };
     searchCriteria['firmCode'] = '';
     
