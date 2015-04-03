@@ -1019,6 +1019,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsproductprice/add", ProductPriceController.add);
     app.post("/wsproductprice/update", ProductPriceController.update);
     app.post("/wsproductprice/remove", ProductPriceController.remove);
+    app.post("/wsproductprice/removeproduct", ProductPriceController.removeProduct);
     app.get("/wsproductprice/listall", ProductPriceController.listAll);
     app.get("/wsproductprice/removeall", ProductPriceController.removeAll);
     app.post("/wsproductprice/listproductprice", ProductPriceController.listProductPrice);

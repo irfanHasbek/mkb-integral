@@ -86,4 +86,14 @@ ProductPriceService.prototype.listAll = function(callback){
         callback(true, priceList);
     });
 }
+
+ProductPriceService.prototype.removeProduct = function(productId, callback){
+    ProductPriceModel.remove({ productId : productId }, function(error){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, 'Basari ile silindi.');
+    });
+}
 module.exports = ProductPriceService;

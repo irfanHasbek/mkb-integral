@@ -115,7 +115,7 @@ function formHandlers(){
         addPriceToTable();
     });
     $('#formUploadCsv').ajaxForm(function(data){
-        //console.log(data);
+        console.log(data);
     });
 }
 

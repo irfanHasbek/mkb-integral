@@ -12,6 +12,13 @@ function clickHandlers(){
                         }
                         //console.log(response);
                         tr.remove();
+                        wsPost('/wsproductprice/removeproduct' , {productId : id}, function(errorRemove ,responseRemove){
+                            if(errorRemove){
+                                console.log('silinemedi');
+                                return;
+                            }   
+                            console.log(responseRemove);
+                        })
                     });   
                 }
                 alertify.success('Başarı ile silindi.');

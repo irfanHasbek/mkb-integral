@@ -70,5 +70,14 @@ module.exports = {
             }
             res.send(createResponse(true, response, "urun fiyatlari başarıyla listelendi"));
         });   
+    },
+    removeProduct : function(req, res, next){
+        ps.removeProduct(req.body.productId, function(state, response){
+            if(!state){
+                res.send(createResponse(state,response, "hata oluştu "));   
+                return;
+            }
+            res.send(createResponse(state,response, ''));
+        });
     }
 };
