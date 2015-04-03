@@ -148,7 +148,7 @@ CreateOfferService.prototype.addActivity = function(id, activity, callback){
     });
 }
 CreateOfferService.prototype.removeActivity = function(id,activityId,callback){
-    CreateOfferModel.update({_id:id},{$pull : {"activities.$._id":activityId}},function(error,respOffer){
+    CreateOfferModel.update({_id:id},{$pull : {activities:{_id:activityId}}},function(error,respOffer){
         if(error){
             callback(false,error);
             return;

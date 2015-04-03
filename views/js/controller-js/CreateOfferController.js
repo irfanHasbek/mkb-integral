@@ -165,7 +165,7 @@ module.exports = {
     },
     removeActivity : function(req,res){
         var offerId = req.body.offerId;
-        var activityId = req.body.activies.activityId;
+        var activityId = req.body.activityId;
         cos.removeActivity(offerId,activityId,function(state,response){
             if(!state){
                 res.send({state: state,response : response});

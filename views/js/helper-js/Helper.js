@@ -110,14 +110,21 @@ function removeFromTable(tableClass,url,callback){
     $("."+tableClass).on("click",".sil",function(){
         var id=$(this).closest("td").attr("id");
         var tr=$("."+tableClass).find("tbody").find("tr[id="+id+"]");
-        wsPost(url,{_id:id},function(err,data){
-            if(err){
-                console.error(err);
-                return;
-            }
-            tr.remove();
-            callback(id);
-        });        
+        alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                wsPost(url,{_id:id},function(err,data){
+                    if(err){
+                        console.error(err);
+                        return;
+                    }
+                    tr.remove();
+                    callback(id);
+                }); 
+                alertify.success('Başarı ile silindi.');
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });       
     });
 }
 

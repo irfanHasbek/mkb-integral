@@ -57,8 +57,14 @@ function clickHandlers(){
         $.blockUI({ message: "<h1>Silme islemi gerceklestiriliyor...</h1>" });
         var tr = $(this).closest('tr');
         var id = tr.attr('id');
-        removeUser(id, tr);
-        
+        alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                removeUser(id, tr);
+                alertify.success('Başarı ile silindi.');
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });  
     });
     $('#no').click(function() { 
         $.unblockUI(); 
