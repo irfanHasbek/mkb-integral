@@ -15,6 +15,16 @@ ProductPriceService.prototype.addNew = function(price, callback){
     });
 }
 
+ProductPriceService.prototype.bulkInsert = function(prices, callback){
+    ProductPriceModel.update({ productId : prices.productId }, { dimension : prices.dimension, dimensionType : prices.dimensionType}, function(err, affectedRow){
+        if(err){
+            callback(false,error);
+            return;
+        }
+        callback(true,affectedRow);
+    });
+}
+
 ProductPriceService.prototype.removeAll = function(callback){
     ProductPriceModel.remove(function(error){
         if(error){

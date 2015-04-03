@@ -1121,12 +1121,17 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
             });
         });
     });
-    var convertService = require('./views/js/service-js/ConvertService');
-    app.get('/wsconvert2json',function(req, res){
-        var files = [];
-        convertService.getFiles('./views/assets/csv_files', files, 'csv');
-        console.log('files : ' + JSON.stringify(files));
-        res.send({res : 'ok'});
+    var Convert=require("./views/js/service-js/ConvertService");
+    app.post('/wsuploadprice', function(req, res){
+        Convert.convertToJson(req.files.csvFile.path, req.body.productId, req.body.dimensionType, function(state, response){
+            productPriceService.bulkInsert(response, function(state, count){
+                if(!state){
+                    res.send({response : count}); 
+                    return;
+                }
+                res.send({AffectedRow : count});
+            });
+        });
     });
     app.listen(3000);
     console.log("app > listening port 3000...");

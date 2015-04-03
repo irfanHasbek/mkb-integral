@@ -14,7 +14,6 @@
     "ejs": "*",
     "express": "3.0.0rc4",
     "iced-coffee-script": "^1.8.0-d",
-    "js-beautify": "^1.5.5",
     "line-reader-sync": "0.0.1",
     "mongoose": "^3.8.17",
     "nodemailer": "~0.6.1",

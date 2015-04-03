@@ -54,6 +54,19 @@
                                                                 <button id="btnGetPrice" class="btn btn-info btn-block" style="margin-top:5px;">Fiyat Getir</button>
                                                             </div>
                                                         </div>
+                                                        <br>
+                                                        <form id="formUploadCsv" action="/wsuploadprice" method="post">
+                                                            <input name="productId" type="text" id="productIdForPrice"  class="form-control" style="display:none;">
+                                                            <input type="text" id="inpSizeTypeForPrice" style="display:none;" name="dimensionType">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <input id="inpCsvFile" name="csvFile" type="file" class="form-control" accept=".csv">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <button type="submit" id="btnChooseFile" class="btn btn-block btn-success">Yükle</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                     
                                                     <form id="formPrice" action="/wsproductprice/update" method="post">

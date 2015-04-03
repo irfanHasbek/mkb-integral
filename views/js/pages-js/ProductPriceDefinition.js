@@ -1,5 +1,10 @@
 function clickHandlers(){
-    
+    $('#btnChooseFile').on('click', function(e){
+        if($('#inpCsvFile').val() == '' || $('#productIdForPrice').val() == '' || $('#inpSizeTypeForPrice').val() == ''){
+            e.preventDefault();
+            alert('urun veya urun tipi seciniz!');
+        }
+    });
     $('#btnRect').click(function(e){
        e.preventDefault();
        $('#divCir').slideUp('800');
@@ -10,6 +15,7 @@ function clickHandlers(){
        $('#inpBoy').removeAttr('disabled');
        $('#inpUzunluk').removeAttr('disabled');
        $('#inpSizeType').val('dikdörtgen');
+       $('#inpSizeTypeForPrice').val('dikdörtgen');
    });
     
    $('#btnCir').click(function(e){
@@ -22,13 +28,17 @@ function clickHandlers(){
         $('#inpBoy').attr('disabled','disabled');
         $('#inpUzunluk').attr('disabled','disabled');
         $('#inpSizeType').val('daire');
+        $('#inpSizeTypeForPrice').val('daire');
    });
     
     
     $('#btnGetPrice').on('click', function(){
         //console.log($('#slProduct').val());
         var pId = $('#slProduct').val();
+        
         if(pId != '' && pId != undefined){
+            $('#inpProductId').val(pId);
+            $('#productIdForPrice').val(pId);
             wsPost('/wsproductprice/listproductprice', {productId : pId}, function(error, response){
                if(error){
                     console.error(error);
@@ -43,7 +53,6 @@ function clickHandlers(){
                     //console.log(i);
                     fillPriceTable(priceList, priceList.dimension[i], count++);
                 }
-                $('#inpProductId').val(pId);
             });
         }
         
@@ -101,9 +110,13 @@ function fillPriceTable(product, dimension, count){
 }
 
 function formHandlers(){
-     $('#formPrice').ajaxForm(function(data){
-            addPriceToTable();
-     });
+    $('#formPrice').ajaxForm(function(data){
+        //console.log(data);
+        addPriceToTable();
+    });
+    $('#formUploadCsv').ajaxForm(function(data){
+        //console.log(data);
+    });
 }
 
 function addPriceToTable(){
