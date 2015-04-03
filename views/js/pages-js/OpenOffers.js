@@ -136,10 +136,11 @@ function clickHandlers(){
     
     $('#btnAddNote').on('click', function(){
         var offerId = $('#inpOfferIdNoteModal').val();
+        var noteDate=new Date($('#inpNoteDate').val());
         var activity = {
-            activityType : 'note',
+            activityType : 'not',
             content : $('#txtOfferNote').val(),
-            activityDate : $('#inpNoteDate').val(),
+            activityDate : noteDate.getDate()+"-"+noteDate.getMonth()+"-"+noteDate.getFullYear(),
             owner : {
                 ownerId : $('#slctActivityOwnerNote option:selected').val(),
                 ownerName : $('#slctActivityOwnerNote option:selected').text()
@@ -158,11 +159,12 @@ function clickHandlers(){
     });
     
     $('#btnHatirlatma').on('click', function(){
+        var recallDate=new Date($('#inpRecallDate').val());
         var offerId = $('#inpOfferIdRememberModal').val();
         var activity = {
-            activityType : 'remember',
+            activityType : 'Hatırlatma',
             content : $('#inpRecallReason').val(),
-            activityDate : $('#inpRecallDate').val(),
+            activityDate : recallDate.getDate()+"-"+recallDate.getMonth()+"-"+recallDate.getFullYear(),
             owner : {
                 ownerId : $('#slctActivityOwnerRemember option:selected').val(),
                 ownerName : $('#slctActivityOwnerRemember option:selected').text()

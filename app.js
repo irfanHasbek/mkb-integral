@@ -1049,6 +1049,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsoffer/updatenote", CreateOfferController.updateProductNote);
     app.post("/wsoffer/updateoffercase", CreateOfferController.updateOfferCase);
     app.post("/wsoffer/addactivity", CreateOfferController.addActivity);
+    app.post("/wsoffer/removeactivity", CreateOfferController.removeActivity);
     //end
     
     app.post("/wspricecalculate/calculate", function(req, res){

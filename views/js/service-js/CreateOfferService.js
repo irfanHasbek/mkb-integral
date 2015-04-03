@@ -147,6 +147,15 @@ CreateOfferService.prototype.addActivity = function(id, activity, callback){
         callback(true, 'success : affected row : ' + respOffer);
     });
 }
+CreateOfferService.prototype.removeActivity = function(id,activityId,callback){
+    CreateOfferModel.update({_id:id},{$pull : {"activities.$._id":activityId}},function(error,respOffer){
+        if(error){
+            callback(false,error);
+            return;
+        }
+        callback("true","success : affected row : "+respOffer);
+    });
+}
 CreateOfferService.prototype.updateOfferCase = function(id, offerStatus, acceptPerson, forwardingInfo, acceptOfferDate, callback){
     CreateOfferModel.findOne({ _id : id }, function(error,respOffer){
      if(error){

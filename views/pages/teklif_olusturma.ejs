@@ -122,6 +122,11 @@
                                             <li><a href="#tab_4" data-toggle="tab">Ürün Seçimi</a></li>
                                             <li><a href="#tab_7" data-toggle="tab">Ürün Sepeti</a></li>
                                             <li><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
+                                            <%if(operation=='update'){%>
+                                            <li><a href="#tab_6" data-toggle="tab">Aktivite Listesi</a></li>
+                                            <%}else{%>
+                                            <li style="display:none;"><a href="#tab_6" data-toggle="tab">Aktivite Listesi</a></li>
+                                            <%}%>
                                         </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_1">
@@ -380,19 +385,6 @@
                                                                         <th style="width:40px"> </th>
                                                                     </tr>
                                                                     <tbody id="tableBasket">
-                                                                        <!--<tr>
-                                                                            <td>1</td>
-                                                                            <td>2</td>
-                                                                            <td><span>A Grubu</span> - <span>Ürün 1</span></td>
-                                                                            <td>Dikdörtgen</td>
-                                                                            <td>12x24</td>
-                                                                            <td>montaj 1</td>
-                                                                            <td>kaplama 1</td>
-                                                                            <td>ayar 1</td>
-                                                                            <td>aksesuar 1</td>
-                                                                            <td>4</td>
-                                                                            <td><button class="btn btn-danger btn-flat btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                                                                        </tr>-->
                                                                         <%if(operation=='update'){%>
                                                                         <%for(var i=0;i<offer.basket.length;i++){%>
                                                                             <tr id="<%=offer.basket[i]._id%>">
@@ -485,6 +477,38 @@
                                                                     <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;" <%if(operation == "update"){%> value="<%=offer.note%>"<%}%>><%if(operation == "update"){%><%=offer.payMethod.note%><%}%></textarea>
                                                                 </div>
                                                             </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_6">
+                                                    <div id="divActivity" class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="box-body table-scroll">
+                                                                <table id="tblActivity" class="table table-bordered table-condensed table-responsive">
+                                                                    <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                                        <th style="width:40px">#</th>
+                                                                        <th style="width:200px">Activite Türü</th>
+                                                                        <th>İçerik </th>
+                                                                        <th style="width:200px">Tarih </th>
+                                                                        <th style="width:200px">İşlemi Yapan</th>
+                                                                        <th style="width:40px"> </th>
+                                                                    </tr>
+                                                                    <tbody>
+                                                                        <%if(operation=='update'){%>
+                                                                        <%for(var i=0;i<offer.activities.length;i++){%>
+                                                                            <tr id="<%=offer.activities[i]._id%>">
+                                                                            <td><%=(i+1)%></td>
+                                                                            <td><%=offer.activities[i].activityType%></td>
+                                                                            <td><%=offer.activities[i].content%></td>
+                                                                            <td><%=offer.activities[i].activityDate%></td>
+                                                                            <td><%=offer.activities[i].owner.ownerName%></td>
+                                                                            <td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                        <%}%>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -163,6 +163,17 @@ module.exports = {
             res.send({state : state, response : response});   
         });   
     },
+    removeActivity : function(req,res){
+        var offerId = req.body.offerId;
+        var activityId = req.body.activies.activityId;
+        cos.removeActivity(offerId,activityId,function(state,response){
+            if(!state){
+                res.send({state: state,response : response});
+                return;
+            }
+            res.send({state:state,response:response});
+        });
+    },
     remove : function(req, res){
         cos.remove(req.body,function(state, response){
             if(!state){
