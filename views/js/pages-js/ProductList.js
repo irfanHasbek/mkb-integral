@@ -2,6 +2,23 @@ function clickHandlers(){
     $('#tableProducts').on('click', '.remove', function(){
         var tr = $(this).closest('tr');
         var id = tr.attr('id');
+        alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                if(id != "" && id != undefined){
+                    wsPost('/wsproduct/remove',{ _id : id }, function(error, response){
+                        if(error){
+                            console.log('silinemedi');
+                            return;
+                        }
+                        //console.log(response);
+                        tr.remove();
+                    });   
+                }
+                alertify.success('Başarı ile silindi.');
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });  
         if(id != "" && id != undefined){
             wsPost('/wsproduct/remove',{ _id : id }, function(error, response){
                 if(error){

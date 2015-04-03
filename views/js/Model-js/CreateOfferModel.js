@@ -67,7 +67,7 @@ var OfferScheme = new mongoose.Schema({
     activities : [{
         activityType : String,
         content : String,
-        activityDate : Date,
+        activityDate : String,
         owner : {
             ownerId : String,
             ownerName : String

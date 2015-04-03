@@ -62,18 +62,24 @@ function clickHandlers(){
         e.preventDefault();
         var tr = $(this).closest('tr');
         var count = tr.attr('id');
-        console.log("tr : "+tr+" count : "+count);
-        if(count){
-            tr.remove();
-            removeFromCompetentAndTable(count);
-        }
-        var tableSize=$('#tableCompetentInfo tr').size();
-        var trs=$('#tableCompetentInfo').find("tr");
-        for(var i=0;i<tableSize;i++){
-           trs.eq(i).attr("id",i+1);
-           trs.eq(i).find("td").eq(0).text(i+1);
-            
-        }
+        alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                if(count){
+                    tr.remove();
+                    removeFromCompetentAndTable(count);
+                }
+                var tableSize=$('#tableCompetentInfo tr').size();
+                var trs=$('#tableCompetentInfo').find("tr");
+                for(var i=0;i<tableSize;i++){
+                   trs.eq(i).attr("id",i+1);
+                   trs.eq(i).find("td").eq(0).text(i+1);
+
+                }
+                alertify.success('Başarı ile silindi.');
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });
     });
     
     $('#btnAddCompetent').on('click', function(){
@@ -105,18 +111,24 @@ function clickHandlers(){
         e.preventDefault();
         var tr = $(this).closest('tr');
         var count = tr.attr('id');
-        
-        if(count){
-            tr.remove();
-            removeFromForwardingAndTable(count);
-        }
-        var tableSize=$('#tableForwardingInfo tr').size();
-        var trs=$('#tableForwardingInfo').find("tr");
-        for(var i=0;i<tableSize;i++){
-           trs.eq(i).attr("id",i+1);
-           trs.eq(i).find("td").eq(0).text(i+1);
-            
-        }
+        alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                if(count){
+                    tr.remove();
+                    removeFromForwardingAndTable(count);
+                }
+                var tableSize=$('#tableForwardingInfo tr').size();
+                var trs=$('#tableForwardingInfo').find("tr");
+                for(var i=0;i<tableSize;i++){
+                   trs.eq(i).attr("id",i+1);
+                   trs.eq(i).find("td").eq(0).text(i+1);
+
+                }
+                alertify.success('Başarı ile silindi.');
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });
     });
     
     $('#btnAddForwarding').on('click', function(){
