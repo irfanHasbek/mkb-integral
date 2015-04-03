@@ -1120,7 +1120,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
             });
         });
     });
-    
+    var convertService = require('./views/js/service-js/ConvertService');
+    app.get('/wsconvert2json',function(req, res){
+        var files = [];
+        convertService.getFiles('./views/assets/csv_files', files, 'csv');
+        console.log('files : ' + JSON.stringify(files));
+        res.send({res : 'ok'});
+    });
     app.listen(3000);
     console.log("app > listening port 3000...");
 });
