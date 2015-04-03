@@ -1,8 +1,12 @@
 var isUpdate = false;
 var requiredField = true;
 function clickHandlers(){
-    $('#btnSavePicture').on('click',function(){
+    $('#btnSavePicture').on('click',function(e){
+        if($("#inpPictureUpload").val()==""){
+            e.preventDefault();
+        }else{
         $.blockUI({ css: { backgroundColor: '#f00', color: '#fff'}, message: '<h1>Yükleniyor...</h1>' });
+        }
     });
     $('#btnSave').on('click', function(){
         var userPass = $('#userPass').val();
@@ -82,10 +86,15 @@ function removeUser(id, tr){
 }
 function formHandlers(){
     $('#formPicture').ajaxForm(function(data){
-        $('#userPicture').attr('src', JSON.parse(data).url);
-        $('#pictureUrl').val(JSON.parse(data).url);
-        console.log('url : ' + JSON.parse(data).url);
-        $.unblockUI();
+         if(data.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+            $('#userPicture').attr('src', JSON.parse(data).url);
+            $('#pictureUrl').val(JSON.parse(data).url);
+            console.log('url : ' + JSON.parse(data).url);
+            $.unblockUI();
+        }else{
+            alertify.error("İşlem başarısız.");
+        }
     }); 
 }
 function otherScripts(){

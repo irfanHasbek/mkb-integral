@@ -54,6 +54,7 @@ function removeTown() {
 function addTown() {
     $("#btnAddTown").click(function() {
         if ($("#slctCity option:selected").text() !== "İl Seçiniz") {
+            if($("#inpTown").val()!=""){
             var cityId = $("#slctCity option:selected").attr("id");
             var townName = $("#inpTown").val();
             wsPost("/wscity/addtown", {
@@ -76,6 +77,9 @@ function addTown() {
                 $(".towns tbody").last().append(tr);
                 $("input[type='text']").val("");
             });
+         }else{
+            alert("Lütfen ilçe adı giriniz");
+         }
         } else {
             alert("lütfen şehir ismi seçiniz");
         }
@@ -87,22 +91,19 @@ function otherScripts() {
 }
 
 function clickHandlers() {
-     alertify.confirm("Silmek istediğinizden emin misiniz?",
-        function(){
-            removeFromTable("citys", "/wscity/remove", function(data) {
-                $("#slctCity option[id='" + data + "']").remove();
-            });
-            removeTown();
-            addTown();
-            alertify.success('Başarı ile silindi.');
-            },
-        function() {
-           alertify.error('İşlem iptal edildi.');
-    });
+     removeFromTable("citys", "/wscity/remove", function(data) {
+         $("#slctCity option[id='" + data + "']").remove();
+     });
+     removeTown();
+     addTown();
+
 }
 
 function formHandlers() {
     $("#frmCity").ajaxForm(function(resp) {
+        if(resp.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+        }
         var count = $(".citys tbody tr").size();
         var tr = $("<tr id=" + resp.data._id + "></tr>");
         var td1 = $("<td class='text-center'>" + count + ".</td>");

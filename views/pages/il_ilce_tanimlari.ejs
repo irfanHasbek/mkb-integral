@@ -34,7 +34,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="city">
+                                                                <input type="text" class="form-control" name="city" required>
                                                                 <div class="input-group-btn">
                                                                     <button type="submit" class="btn btn-info" style="border-radius:0;" style="border-radius:0;">İl Ekle</button>
                                                                 </div><!-- /btn-group -->
@@ -48,7 +48,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input id="inpTown" type="text" class="form-control">
+                                                                <input id="inpTown" type="text" class="form-control" required>
                                                                 <div class="input-group-btn">
                                                                     <button id="btnAddTown" type="button" class="btn btn-info" style="border-radius:0;">İlçe Ekle</button>
                                                                 </div><!-- /btn-group -->
@@ -64,7 +64,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <select id="slctCity" name="city" class="icon-menu btn-block btn-default" style="height:35px;">
-                                                                <option style="padding-left:0px;" >İl Seçiniz</option>
+                                                                <option style="padding-left:0px;" value="">İl Seçiniz</option>
                                                                 <%for(var i=0;i<citys.length;i++){%>
                                                                         <option id="<%=citys[i]._id%>" value="<%=citys[i].city%>"><%=citys[i].city%></option>
                                                                 <%}%>

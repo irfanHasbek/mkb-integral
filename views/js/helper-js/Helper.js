@@ -117,10 +117,10 @@ function removeFromTable(tableClass,url,callback){
                         console.error(err);
                         return;
                     }
+                    alertify.success('Başarı ile silindi.');
                     tr.remove();
                     callback(id);
                 }); 
-                alertify.success('Başarı ile silindi.');
                 },
             function() {
                alertify.error('İşlem iptal edildi.');

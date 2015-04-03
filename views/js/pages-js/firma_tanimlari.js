@@ -61,12 +61,22 @@ function formHandlers(){
     });  
     
     $('#formFirm').ajaxForm(function(data) {
-        var parsedData = JSON.parse(data);
-        console.log(parsedData);
+        if(data.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+            var parsedData = JSON.parse(data);
+            console.log(parsedData);
+        }else{
+            alertify.error("İşlem başarısız.");
+        }
     });  
     $('#formFirm2').ajaxForm(function(data) {
-        var parsedData = JSON.parse(data);
-        console.log(parsedData);
+        if(data.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+            var parsedData = JSON.parse(data);
+            console.log(parsedData);
+        }else{
+            alertify.error("İşlem başarısız.");
+        }
     });  
 }
 function otherScripts(){

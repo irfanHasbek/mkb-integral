@@ -69,15 +69,21 @@ function clickHandlers(){
     $('#priceTable').on('click', '.remove', function(){
         var tr = $(this).closest('tr');
         var id = tr.attr('id');
-        console.log('asd');
-        wsPost('/wsproductprice/remove', { _id : id }, function(error, response){
+         alertify.confirm("Silmek istediğinizden emin misiniz?",
+            function(){
+                wsPost('/wsproductprice/remove', { _id : id }, function(error, response){
             if(error){
                 console.error(error);
                 return;
             }
+            alertify.success('Başarı ile silindi.');
             tr.remove();
             //console.log(response);
-        });
+            }); 
+          },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        }); 
     });
 }
 
@@ -111,8 +117,12 @@ function fillPriceTable(product, dimension, count){
 
 function formHandlers(){
     $('#formPrice').ajaxForm(function(data){
-        //console.log(data);
-        addPriceToTable();
+         if(data.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+            addPriceToTable(); 
+        }else{
+            alertify.error("İşlem başarısız.");
+        }
     });
     $('#formUploadCsv').ajaxForm(function(data){
         console.log(data.response);

@@ -229,8 +229,13 @@ function removeFromForwardingAndTable(count){
 function formHandlers(){
      $('#frmCustomerDefinition').ajaxForm(function(data){
         console.log('basarili');
-        if($('#frmCustomerDefinition').attr('action') == '/wscustomerdefinition/addnew'){
+         if(data.state==true){
+            alertify.success("İşlem başarı ile gerçekleştirildi.");
+            if($('#frmCustomerDefinition').attr('action') == '/wscustomerdefinition/addnew'){
             clearUI();
+        }
+        }else{
+            alertify.error("İşlem başarısız.");
         }
     });
 }
