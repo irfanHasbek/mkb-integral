@@ -16,6 +16,10 @@ ProductPriceService.prototype.addNew = function(price, callback){
 }
 
 ProductPriceService.prototype.bulkInsert = function(prices, callback){
+    if(prices.dimension.length <= 0){
+        callback(false, null);
+        return;
+    }
     ProductPriceModel.update({ productId : prices.productId }, { dimension : prices.dimension, dimensionType : prices.dimensionType}, function(err, affectedRow){
         if(err){
             callback(false,error);

@@ -115,7 +115,10 @@ function formHandlers(){
         addPriceToTable();
     });
     $('#formUploadCsv').ajaxForm(function(data){
-        console.log(data);
+        console.log(data.response);
+        if(data.response == null){
+            alert('Dosya hatali...');   
+        }
     });
 }
 
