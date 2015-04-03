@@ -54,22 +54,20 @@ function clickHandlers(){
     });
     
     $('#userTable').on('click','.remove', function(){
-        $.blockUI({ message: "<h1>Silme islemi gerceklestiriliyor...</h1>" });
+        $.blockUI({ message: "" });
         var tr = $(this).closest('tr');
         var id = tr.attr('id');
         alertify.confirm("Silmek istediğinizden emin misiniz?",
             function(){
                 removeUser(id, tr);
                 alertify.success('Başarı ile silindi.');
-                },
+                $.unblockUI();
+            },
             function() {
                alertify.error('İşlem iptal edildi.');
+               $.unblockUI();
         });  
     });
-    $('#no').click(function() { 
-        $.unblockUI(); 
-        return false; 
-    }); 
 }
 function removeUser(id, tr){
     wsPost('/wsuser/remove', {_id : id}, function(error, response){
