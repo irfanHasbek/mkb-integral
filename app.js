@@ -1130,7 +1130,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     res.send({response : count}); 
                     return;
                 }
-                res.send({AffectedRow : count});
+                res.send({response : count});
             });
         });
     });
