@@ -87,7 +87,9 @@ function removeUser(id, tr){
 }
 function formHandlers(){
     $('#formPicture').ajaxForm(function(data){
-         if(data.state==true){
+        var resp=JSON.parse(data);
+        console.log(resp.code);
+         if(resp.code==200){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             $('#userPicture').attr('src', JSON.parse(data).url);
             $('#pictureUrl').val(JSON.parse(data).url);
