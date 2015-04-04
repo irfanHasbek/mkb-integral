@@ -13,20 +13,28 @@ function otherScripts(){
             if(response.response.length > 0){
                 for(var i = 0; i < response.response.length; i++){
                     for(var j = 0; j < response.response[i].activities.length; j++){
+                        var event = {
+                            title: '',
+                            start: new Date(),
+                            end: new Date(),
+                            content : ''
+                        };
                         if(response.response[i].activities[j].activityType == 'Hatırlatma'){
-                            var event = {
-                                title: '',
-                                start: new Date(),
-                                end: new Date()
-                            };
+                            event.content = response.response[i].activities[j].owner.ownerName;
                             event.title = response.response[i].activities[j].content;
                             event.start = new Date(response.response[i].activities[j].activityDate);
                             event.end = new Date(response.response[i].activities[j].activityDate);
                             event.backgroundColor = "#f00";
                             event.borderColor = "#fff";
-                            event.ownerName = response.response[i].activities[j].owner.ownerName;
-                            newEvents.push(event);
                         }
+                        if("Administrator" == $('#inpUserRole').val()){
+                            newEvents.push(event);
+                        }else{
+                            if($('#inpUsername').val() == response.response[i].activities[j].owner.ownerName){
+                                newEvents.push(event);
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -48,10 +56,7 @@ function otherScripts(){
                     day: 'Gün'
                 },
                 defaultView: 'month',
-                lang:'tr',
-                eventClick: function(event) {
-                    alert(event.ownerName);
-                }
+                lang:'tr'
             });
             $('#calendar').fullCalendar('addEventSource', newEvents);
             $('#calendar').fullCalendar('rerenderEvents');

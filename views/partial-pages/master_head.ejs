@@ -30,6 +30,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </a>
+    <input id='inpUserRole' value='<%=session.user.role%>' style="display:none">
+    <input id='inpUsername' value='<%=session.user.name%> <%=session.user.surname%>' style="display:none">
     <div class="navbar-right">
         <ul class="nav navbar-nav">
            <%if(session.currentPage == '/index'){%> 
