@@ -32,47 +32,28 @@
     </a>
     <div class="navbar-right">
         <ul class="nav navbar-nav">
-            
-            <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-warning"></i>
-                    <span class="label label-success">8</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header">8 yeni bildirim</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li>
-                                <a href="#">
-                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-warning danger"></i>1 yeni ürün eklendi
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="ion ion-ios7-person success"></i> Kullanıcı adını değiştirdiniz
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="#"></a></li>
-                </ul>
-            </li>
+           <%if(session.currentPage == '/index'){%> 
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-warning"></i>
+                        <span class="label label-success">1</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">8 yeni bildirim</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#"></a></li>
+                    </ul>
+                </li>
+            <%}%>
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i>

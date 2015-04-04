@@ -7,13 +7,13 @@ function formHandlers(){
 function otherScripts(){
     $(function() {
         wsPost('/wsoffer/search', {search : {
-            'activities.activityType' : 'remember'
+            'activities.activityType' : 'Hatırlatma'
         }}, function(error, response){
             var newEvents = [];
             if(response.response.length > 0){
                 for(var i = 0; i < response.response.length; i++){
                     for(var j = 0; j < response.response[i].activities.length; j++){
-                        if(response.response[i].activities[j].activityType == 'remember'){
+                        if(response.response[i].activities[j].activityType == 'Hatırlatma'){
                             var event = {
                                 title: '',
                                 start: new Date(),
