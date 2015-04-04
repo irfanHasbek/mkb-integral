@@ -58,11 +58,11 @@ function clickHandlers(){
         
     });
     
-    $('#btnSubmitPrice').on('click', function(){
-         if($('#inpProductId').val() != ""){
-            $('#formPrice').submit();
-         }else{
-            alert('Urun seciniz.');   
+    $('#btnSubmitPrice').on('click', function(e){
+         if($('#inpProductId').val() == ""){
+            //$('#formPrice').submit();
+            e.preventDefault();
+            alert('Urun seciniz.');
          }
     });
     
@@ -120,6 +120,9 @@ function formHandlers(){
          if(data.state==true){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             addPriceToTable(); 
+            $('[type=number]').each(function(index, item){
+                $(item).val('');                 
+            });
         }else{
             alertify.error("İşlem başarısız.");
         }

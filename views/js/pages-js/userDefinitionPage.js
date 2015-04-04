@@ -121,9 +121,12 @@ function checkRequiredField(){
         //console.log(index + ' : ' + $(item).val());
          if($(item).val() == ''){
             requiredField = false; 
+            $(item).css('border-color','red');
             return;
+         }else{
+             requiredField = true; 
+             $(item).css('border-color','#cccccc');
          }
-        requiredField = true;   
     });
 }
 
