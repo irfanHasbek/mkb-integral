@@ -64,6 +64,7 @@ function clickHandlers(){
         alertify.confirm("Silmek istediğinizden emin misiniz?",
             function(){
                 removeUser(id, tr);
+                orderTable("#userTable");
                 alertify.success('Başarı ile silindi.');
                 $.unblockUI();
             },

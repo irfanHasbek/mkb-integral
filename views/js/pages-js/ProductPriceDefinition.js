@@ -78,6 +78,7 @@ function clickHandlers(){
             }
             alertify.success('Başarı ile silindi.');
             tr.remove();
+            orderTable("#priceTable");
             //console.log(response);
             }); 
           },

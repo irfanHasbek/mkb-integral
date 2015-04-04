@@ -119,6 +119,7 @@ function removeFromTable(tableClass,url,callback){
                     }
                     alertify.success('Başarı ile silindi.');
                     tr.remove();
+                    orderTable("."+tableClass);
                     callback(id);
                 }); 
                 },
@@ -127,7 +128,12 @@ function removeFromTable(tableClass,url,callback){
         });       
     });
 }
-
+function orderTable(table){
+   var trs=$(table+" tbody tr");
+    $.each(trs,function(index,item){
+       $(table+" tbody tr").eq(index+1).find("td").eq(0).html((index+1)+".");
+    }); 
+}
 function regexMultiKriterOlustur(string) {
     string = string.trim();
     var words = string.split(" ");

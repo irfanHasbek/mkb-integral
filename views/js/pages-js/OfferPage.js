@@ -100,6 +100,7 @@ function clickHandlers() {
             alertify.confirm("Silmek istediğinizden emin misiniz?",
                 function() {
                     tr.remove();
+                    orderTable("#tableBasket");
                     removeFromBasketAndTable(id);
                     calculatePriceAfterOperation();
                     alertify.success('Başarı ile silindi.');
@@ -125,6 +126,7 @@ function clickHandlers() {
                     }
                     alertify.success('Başarı ile silindi.');
                     tr.remove();
+                    orderTable("#tblActivity");
                 });
 
             },

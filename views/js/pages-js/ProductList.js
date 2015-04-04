@@ -12,6 +12,7 @@ function clickHandlers(){
                         }
                         //console.log(response);
                         tr.remove();
+                        orderTable("#tableProducts");
                         wsPost('/wsproductprice/removeproduct' , {productId : id}, function(errorRemove ,responseRemove){
                             if(errorRemove){
                                 console.log('silinemedi');

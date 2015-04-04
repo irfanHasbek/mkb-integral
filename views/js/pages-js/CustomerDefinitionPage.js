@@ -66,6 +66,7 @@ function clickHandlers(){
             function(){
                 if(count){
                     tr.remove();
+                    orderTable("#tableCompetentInfo");
                     removeFromCompetentAndTable(count);
                 }
                 var tableSize=$('#tableCompetentInfo tr').size();
@@ -115,6 +116,7 @@ function clickHandlers(){
             function(){
                 if(count){
                     tr.remove();
+                    orderTable("#tableForwardingInfo");
                     removeFromForwardingAndTable(count);
                 }
                 var tableSize=$('#tableForwardingInfo tr').size();

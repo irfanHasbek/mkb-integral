@@ -115,6 +115,7 @@ function clickHandlers() {
         }
         console.log(JSON.stringify(status));
         if (offerId) {
+            alertify.confirm("Bu işlem sonucunda teklif onaylanacak ve müşteriye onay bilgi maili gönderilecektir.Devam etmek istiyor musunuz?",function(){
             wsPost('/wsoffer/updateoffercase', {
                 _id: offerId,
                 status: status,
@@ -143,10 +144,15 @@ function clickHandlers() {
                             console.log(errorMail);
                             return;
                         }
+                        alertify.success('Teklif başarı ile onaylandı ve müşteriye onay bilgi maili gönderildi.');
                         console.log(responseMail);
                     });
                 });
+              });
+            },function(){
+                alertify.error('Teklif onayı iptal edildi.');
             });
+            
         }
     });
 

@@ -42,6 +42,10 @@ function removeTown() {
                         return;
                     }
                     tr.remove();
+                    var trs=$("."+tableClass+" tbody tr");
+                    $.each(trs,function(index,item){
+                    $(".towns tbody tr").eq(index+1).find("td").eq(0).html((index+1)+".");
+                    });
                 });
                 alertify.success('Başarı ile silindi.');
                 },
