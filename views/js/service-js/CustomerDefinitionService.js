@@ -101,6 +101,16 @@ CustomerDefinitionService.prototype.getCustomerDefinition = function(customerId,
     });
 }
 
+CustomerDefinitionService.prototype.getCustomerWithEmail = function(email,pass,firmCode, callback){
+    CustomerDefinitionModel.findOne({firmCode:firmCode,userName : email,password:pass, webAccess: true }, function(error, custDef){
+        if(error || !custDef){
+            callback(false, error);
+            return;
+        }
+        callback(true, custDef);
+    });
+}
+
 CustomerDefinitionService.prototype.search = function(criteria, callback){
     CustomerDefinitionModel.find(criteria,function(error, custDefs){
         if(error){

@@ -9,13 +9,13 @@
                 <div class="col-md-6">
                     <div id='side-1' class="form-box flip">
                         <div class="header">Musteri kayit</div>
-                        <form action="#" method="post">
+                        <form action="/wscustomerdefinition/register" method="post">
                             <div class="body bg-gray">
                                 <div class="form-group">
                                     <input type="text" name="firmCode" class="form-control" placeholder="Şirket Kodu" value="<%=firm%>" style="display:none;"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="firmTitle" class="form-control" placeholder="Firma Unvani"/>
+                                    <input type="text" name="customerTitle" class="form-control" placeholder="Firma Unvani"/>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="customerName" class="form-control" placeholder="Musteri Adi"/>
@@ -57,7 +57,7 @@
                 <div class="col-md-6">
                     <div id='side-2' class="form-box flip">
                         <div class="header">Musteri Giris</div>
-                        <form action="#" method="post">
+                        <form action="/customerlogin" method="post">
                             <div class="body bg-gray">
                                 <div class="form-group">
                                     <input type="text" name="firmCode" class="form-control" placeholder="Şirket Kodu" value="<%=firm%>" style="display:none;"/>

@@ -884,14 +884,22 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     //musteri kayit 
     app.get("/musteri_kayit" ,function(req, res){
+        req.session.currentPage = "/musteri_kayit";
         res.render("pages/musteri_kayit",{layout : false, firm : req.param('id')});
     });
     //end
-    
+    //musteri_anasayfa
+    app.get("/musteri_anasayfa" ,AccountController.sessionCheckCustomer,function(req, res){
+        req.session.currentPage = "/musteri_anasayfa";
+        req.session.pageLabel = "musteriAnasayfa";
+        res.render("pages/musteri",{layout : false, session:req.session,customer:req.session.customer});
+    });
+    //end
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
     app.get('/installation/addRole', InstallationController.addRole);
     app.post('/login', AccountController.login);
+    app.post('/customerlogin', AccountController.customerLogin);
     app.get('/logout', AccountController.logout);
     app.post('/wsuser/addnew', UserController.addNew);
     app.post('/wsuser/update', UserController.update);
@@ -1033,6 +1041,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     //müsteri tanımları "abuzer" 03.03 start
     app.post("/wscustomerdefinition/addnew", CustomerDefinitionController.addNew);
+    app.post("/wscustomerdefinition/register", CustomerDefinitionController.addNew);
     app.post("/wscustomerdefinition/search", CustomerDefinitionController.searchCustomerDefinition);
     app.post("/wscustomerdefinition/update", CustomerDefinitionController.update);
     app.post("/wscustomerdefinition/remove", CustomerDefinitionController.remove);
