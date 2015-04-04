@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="bg-black">
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="bg-black">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div id='side-1' class="form-box flip">
+                        <div class="header">Musteri kayit</div>
+                        <form action="#" method="post">
+                            <div class="body bg-gray">
+                                <div class="form-group">
+                                    <input type="text" name="firmCode" class="form-control" placeholder="Şirket Kodu" value="<%=firm%>" style="display:none;"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="firmTitle" class="form-control" placeholder="Firma Unvani"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="customerName" class="form-control" placeholder="Musteri Adi"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="competentName" class="form-control" placeholder="Yetkili Adi"/>
+                                </div>  
+                                <div class="form-group">
+                                    <input type="text" name="competentTask" class="form-control" placeholder="Yetkili Gorevi"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="competentGsm" class="form-control" placeholder="Yetkili GSM"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="competentEmail" class="form-control" placeholder="Yetkili Email"/>
+                                </div>
+                                <div class="form-group">
+                                    <textarea type="text" name="contactAddress" class="form-control" placeholder="Iletisim Adresi"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="contactPhone" class="form-control" placeholder="Iletisim Telefonu"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-flat btn-primary">Istek Gonder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="margin text-center">
+                            <span>&copy;2014 Mavikent BİLİŞİM</span>
+                            <p>
+                                İp Adresiniz : <span>192.168.1.1</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id='side-2' class="form-box flip">
+                        <div class="header">Musteri Giris</div>
+                        <form action="#" method="post">
+                            <div class="body bg-gray">
+                                <div class="form-group">
+                                    <input type="text" name="firmCode" class="form-control" placeholder="Şirket Kodu" value="<%=firm%>" style="display:none;"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="username" class="form-control" placeholder="Kullanici adi"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" name="password" class="form-control pwd" placeholder="Şifre" >
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default reveal" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                        </span>          
+                                    </div> 
+                                </div>  
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-flat btn-primary">Giris Yap</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="margin text-center">
+                            <span>&copy;2014 Mavikent BİLİŞİM</span>
+                            <p>
+                                İp Adresiniz : <span>192.168.1.1</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../js/utility-js/bootstrap.min.js" type="text/javascript"></script> 
+        <script src="../js/pages-js/CustomerRegisterPage.js"></script>
+        <script>
+            $(".reveal").mousedown(function() {
+                $(".pwd").replaceWith($('.pwd').clone().attr('type', 'text'));
+            })
+            .mouseup(function() {
+                $(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
+            })
+            .mouseout(function() {
+                $(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
+            });
+        </script>       
+
+    </body>
+</html>

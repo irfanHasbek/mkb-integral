@@ -881,7 +881,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     });
     
     //B2B Yönetim End
+    
+    //musteri kayit 
+    app.get("/musteri_kayit" ,function(req, res){
+        res.render("pages/musteri_kayit",{layout : false, firm : req.param('id')});
+    });
     //end
+    
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
     app.get('/installation/addRole', InstallationController.addRole);
