@@ -1107,6 +1107,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     //end
     //user permission
     var UserPermissions = require('./views/js/service-js/UserPermissionService');
+    app.get("/wspermission/listall", UserPermissions.listAll);
     app.post("/wspermission/update", UserPermissions.update);
     //end
     

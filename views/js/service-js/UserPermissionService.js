@@ -70,10 +70,88 @@ function createUserPermissionsModel(userId, userPermissions){
         userPermissionObj.permission.push('/musteri_grup_tanimlari');   
     }
     if(userPermissions.r72 == 'on'){
-        userPermissionObj.permission.push('/wsfirm/update1');   
+        userPermissionObj.permission.push('/wscustomergroup/addnew');   
     }
     if(userPermissions.r73 == 'on'){
-        userPermissionObj.permission.push('/wsfirm/update2');   
+        userPermissionObj.permission.push('/wscustomergroup/remove');   
+    }
+    
+    //Vade tanimlari
+    if(userPermissions.r81 == 'on'){
+        userPermissionObj.permission.push('/vade_tanimlari');   
+    }
+    if(userPermissions.r82 == 'on'){
+        userPermissionObj.permission.push('/wscredit/addnew');   
+    }
+    if(userPermissions.r83 == 'on'){
+        userPermissionObj.permission.push('/wscredit/remove');   
+    }
+    
+    //musteri tanimlari
+    if(userPermissions.r91 == 'on'){
+        userPermissionObj.permission.push('/musteri_tanimi?id=0');   
+    }
+    if(userPermissions.r92 == 'on'){
+        userPermissionObj.permission.push('/wscustomerdefinition/addnew');   
+    }
+    if(userPermissions.r93 == 'on'){
+        userPermissionObj.permission.push('/wscustomerdefinition/remove');   
+    }
+    
+    //musteri listeleme
+    if(userPermissions.r101 == 'on'){
+        userPermissionObj.permission.push('/musteri_listesi');   
+    }
+    if(userPermissions.r102 == 'on'){
+        userPermissionObj.permission.push('/wscustomerdefinition/listall');   
+    }
+    
+    //Teklif olusturna
+    if(userPermissions.r111 == 'on'){
+        userPermissionObj.permission.push('/teklif_olusturma?id=0');   
+    }
+    if(userPermissions.r112 == 'on'){
+        userPermissionObj.permission.push('/wsoffer/addnew');   
+    }
+    if(userPermissions.r113 == 'on'){
+        userPermissionObj.permission.push('/wsoffer/remove');   
+    }
+    
+    //Acik teklifler
+    if(userPermissions.r121 == 'on'){
+        userPermissionObj.permission.push('/acik_teklifler');   
+    }
+    
+    //Kapali teklifler
+    if(userPermissions.r131 == 'on'){
+        userPermissionObj.permission.push('/kazanilmis');   
+    }
+    
+    //Urun Grup tanimi
+    if(userPermissions.r141 == 'on'){
+        userPermissionObj.permission.push('/urun_grup_tanimi');   
+    }
+    if(userPermissions.r142 == 'on'){
+        userPermissionObj.permission.push('/wsproductgroupdefinition/addnew');   
+    }
+    if(userPermissions.r143 == 'on'){
+        userPermissionObj.permission.push('/wsproductgroupdefinition/remove');   
+    }
+    
+    //Urun tanimi
+    if(userPermissions.r151 == 'on'){
+        userPermissionObj.permission.push('/urun_tanimlari?id=0');   
+    }
+    
+    //urun listeleme
+    if(userPermissions.r171 == 'on'){
+        userPermissionObj.permission.push('/urun_listeleme');   
+    }
+    if(userPermissions.r172 == 'on'){
+        userPermissionObj.permission.push('/wsproductgroupdefinition/addnew');   
+    }
+    if(userPermissions.r173 == 'on'){
+        userPermissionObj.permission.push('/wsproductgroupdefinition/remove');   
     }
     return userPermissionObj;
 }
@@ -81,6 +159,21 @@ function createUserPermissionsModel(userId, userPermissions){
 module.exports = {
     update : function(req, res){
         var userPermissionsObj = createUserPermissionsModel(req.body.roleId, req.body);
-        res.send(userPermissionsObj);
+        UserPermissionModel.update({ roleId : req.body.roleId }, function(error, affectedRow){
+            if(error){
+                res.send({state : false, response : error});
+                return;
+            }
+            res.send({state : true, response : affectedRow});
+        });
+    },
+    listAll : function(req, res){
+        UserPermissionModel.find({ firmCode : req.session.user.firmCode }, function(error, permissions){
+            if(error){
+                res.send({state : false, response : error});
+                return;
+            }
+            res.send({state : true, response : permissions});
+        });   
     }
 };

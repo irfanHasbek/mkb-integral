@@ -1,4 +1,5 @@
 var ActDefinitionModel=require('../Model-js/ActDefinitionModel');
+var UserPermissionModel=require('../Model-js/UserPermissionModel');
 
 function ActDefinitionService()
 {
@@ -11,7 +12,18 @@ ActDefinitionService.prototype.addNew = function(ActDefinition, callback){
             callback(false,error);
             return;
         }
-        callback(true,addedAct);
+        var permission = new UserPermissionModel({
+            firmCode : ActDefinition.firmCode,                                      
+            roleId : addedAct._id,
+            permission : []
+        });
+        permission.save(function(errorPermission, addedPermission){
+            if(errorPermission){
+                callback(true, 'Rol eklendi fakat izinlerde hata olustu. Hata : ' + errorPermission);
+                return;
+            }
+            callback(true,addedAct);
+        });
     });
 }
 ActDefinitionService.prototype.removeAll = function(callback){
