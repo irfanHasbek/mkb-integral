@@ -1105,6 +1105,10 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsoffer/addactivity", CreateOfferController.addActivity);
     app.post("/wsoffer/removeactivity", CreateOfferController.removeActivity);
     //end
+    //user permission
+    var UserPermissions = require('./views/js/service-js/UserPermissionService');
+    app.post("/wspermission/update", UserPermissions.update);
+    //end
     
     app.post("/wspricecalculate/calculate", function(req, res){
         offerPriceCalculatorService.calculatePrice(req.body.info, function(state, response){
