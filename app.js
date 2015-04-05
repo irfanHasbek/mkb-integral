@@ -919,6 +919,19 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         res.render("pages/musteri",{layout : false, session:req.session,customer:req.session.customer});
     });
     //end
+    //müsteri tanımı
+    app.get("/b2b_musteri_tanimi" ,AccountController.sessionCheckCustomer,function(req, res){
+        req.session.currentPage = "/b2b_musteri_tanimi";
+        req.session.pageLabel = "b2b_musteri_tanimi";
+        cityservice.listAll(function(stateCity,responseCity){
+           if(!stateCity){
+                    console.error(responseCity);
+                    res.redirect("musteri_anasayfa");
+                }
+            res.render("pages/b2b_musteri_tanimi",{layout : false, session:req.session,customer:req.session.customer,respCity:responseCity});
+        });
+    });
+    //end
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
     app.get('/installation/addRole', InstallationController.addRole);
