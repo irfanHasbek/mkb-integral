@@ -19,7 +19,7 @@
                         <li class="active">Kullanıcı Hakları</li>
                     </ol>
                 </section>
-
+                <%=roleList%>
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -27,7 +27,7 @@
                             <div class="col-md-12">
                                 <div class="box box-info">
                                     <!-- form start -->
-                                    <form role="form">
+                                    <form action="/wsuserpermission/save">
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-10 col-md-offset-1">
@@ -55,27 +55,27 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Rol Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control" > Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="11" class="form-control" > Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="12" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="13" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Görev Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="21" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="22" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="23" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kullanıcı Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="31" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="32" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="33" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kullanıcı İzinleri </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="41" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="42" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="43" class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                                 
@@ -85,27 +85,27 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> İl İlçe Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="51" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="52" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="53" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Firma Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="61" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="62" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="63" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Grup Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="71" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="72" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="73" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Vade Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="81" class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="82" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="83" class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                                 <table class="table ">
@@ -114,15 +114,15 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Tanımı </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='91' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='92' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='93' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Listesi </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='101' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='102' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='103' class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                                 
@@ -132,21 +132,21 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Teklif Oluşturma </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='111' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='112' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='113' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Açık Teklifler </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='121' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='122' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='123' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kapalı Teklifler </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='131' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='132' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='133' class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                                 
@@ -156,27 +156,27 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Grupları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='141' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='142' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='143' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='151' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='152' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='153' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Resimleri </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='161' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='162' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='163' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Listeleme </td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='171' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='172' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='173' class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                             </div><!-- /.box-body -->
@@ -201,5 +201,6 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
        <%include ../partial-pages/script.ejs%>
+       <script src="../js/pages-js/UserPermissionPage.js"></script>
     </body>
 </html>

@@ -284,7 +284,14 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/kullanici_izinleri" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/kullanici_izinleri";
         req.session.pageLabel = "kullanicilar";
-        res.render('pages/kullanici_izinleri', {layout : false, session : req.session});   
+        ads.listAll(req.session.user.firmCode, function(stateRole, resposeRole){
+             if(!stateRole){
+                 res.render("/pages/index",{layout : false, session : req.session});
+                 return;
+             }
+            res.render('pages/kullanici_izinleri', {layout : false, session : req.session, roleList : resposeRole});
+        });
+           
     });
     //Tanimlamalar
     app.get("/vade_tanimlari" ,AccountController.sessionCheck ,function(req, res){
