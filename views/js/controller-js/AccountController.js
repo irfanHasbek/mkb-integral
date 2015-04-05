@@ -2,6 +2,10 @@ var UserService = require("../service-js/UserService");
 var CustomerService=require("../service-js/CustomerDefinitionService");
 var us = new UserService();
 var custService=new CustomerService();
+
+var UserPermissionModel=require('../Model-js/UserPermissionModel');
+var ActDefinitionModel=require('../Model-js/ActDefinitionModel');
+
 module.exports = {
     login : function(req, res, next){
         us.getUser(req.body, function(state, response){
@@ -74,7 +78,34 @@ module.exports = {
             }
         }
     },
-    permissionCheck : function(req ,res , next){
-           
+    permissionCheck : function(req, res, next){
+        console.log('kullanicinin rolu : ' + JSON.stringify(req.session.user.role));
+        if(req.session.user.role == 'Administrator'){
+            next();
+        }else{
+            ActDefinitionModel.findOne({ act : req.session.user.role }, function(errorRole, foundedRole){
+                if(errorRole){
+                    res.send("Bu servisi kullanmaya izniniz yoktur.");
+                    return;
+                }
+                UserPermissionModel.findOne({ roleId : foundedRole._id }, function(errorPermission, foundedPermission){
+                    if(errorPermission){
+                        res.send("Bu servisi kullanmaya izniniz yoktur.");
+                        return;
+                    } 
+                    var permissionStatus = false;
+                    for(var i = 0; i < foundedPermission.permission.length; i++){
+                        if(req.originalUrl == foundedPermission.permission[i]){
+                            permissionStatus = true;   
+                        }
+                    }
+                    if(permissionStatus){
+                        next();   
+                    }else{
+                        res.send("Bu servisi kullanmaya izniniz yoktur.");
+                    }
+                });
+            });    
+        }
     }
 }

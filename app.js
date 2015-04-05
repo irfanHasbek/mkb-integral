@@ -220,7 +220,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         res.render('pages/test_sayfasi', {layout : false, session : req.session});   
     });
     //Kullanicilar
-    app.get("/kullanici_tanimi" ,AccountController.permissionCheck ,AccountController.sessionCheck ,function(req, res){
+    app.get("/kullanici_tanimi" ,AccountController.sessionCheck ,AccountController.permissionCheck ,function(req, res){
         req.session.currentPage = "/kullanici_tanimi";
         req.session.pageLabel = "kullanicilar";
         ads.listAll(req.session.user.firmCode,function(stateRoles, responseRoles){
@@ -982,7 +982,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post('/login', AccountController.login);
     app.post('/customerlogin', AccountController.customerLogin);
     app.get('/logout', AccountController.logout);
-    app.post('/wsuser/addnew', UserController.addNew);
+    app.post('/wsuser/addnew' ,AccountController.permissionCheck ,UserController.addNew);
     app.post('/wsuser/update', UserController.update);
     app.post('/wsuser/remove', UserController.remove);
     app.post('/wsuser/getwithid', UserController.getWithId);
@@ -1156,6 +1156,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wspermission/reset", UserPermissions.reset);
     app.get("/wspermission/removeall", UserPermissions.removeAll);
     app.post("/wspermission/update", UserPermissions.update);
+    app.post("/wspermission/getpermissionrole", UserPermissions.getPermissionForRole);
     //end
     
     app.post("/wspricecalculate/calculate", function(req, res){

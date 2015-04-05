@@ -33,7 +33,7 @@
                                                     <div>
                                                         <div class="form-group">
                                                             <label>Rol</label>
-                                                            <select name="roleId" required class="icon-menu btn-block btn-default" style="height:35px;">
+                                                            <select id="slctRole" name="roleId" required class="icon-menu btn-block btn-default" style="height:35px;">
                                                                 <option value="" selected disabled style="padding-left:0px;" >Rol Seçiniz</option>
                                                                 <%for(var i = 0; i < roleList.length; i++){%>
                                                                     <option value="<%=roleList[i]._id%>"><%=roleList[i].act%></option>
@@ -55,8 +55,8 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Rol Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r11" class="form-control" > Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r12" class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input id="rol_tanimi" type="checkbox" name="r11" class="form-control" > Giriş</td>
+                                                                        <td class="text-center"><input id="/wsuser/addnew" type="checkbox" name="r12" class="form-control"> Ekleme</td>
                                                                         <td class="text-center"><input type="checkbox" name="r13" class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>

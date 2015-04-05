@@ -1,4 +1,5 @@
 var UserPermissionModel=require('../Model-js/UserPermissionModel');
+var ActDefinitionModel=require('../Model-js/ActDefinitionModel');
 
 function createUserPermissionsModel(userPermissions){
     var userPermissionObj = {
@@ -210,5 +211,20 @@ module.exports = {
             }
             res.send({state : true, response : 'Tum Izinler silindi.'});   
         });    
+    },
+    getPermissionForRole : function(req, res){
+        ActDefinitionModel.findOne({ act : req.body.role }, function(errorRole, foundedRole){
+            if(errorRole){
+                res.send({state : false, response : errorRole});
+                return;
+            }
+            UserPermissionModel.findOne({ roleId : foundedRole._id }, function(errorPermission, foundedPermission){
+                if(errorPermission){
+                    res.send({state : false, response : errorPermission});
+                    return;
+                } 
+                res.send({state : true, response : foundedPermission});
+            });
+        });       
     }
 };

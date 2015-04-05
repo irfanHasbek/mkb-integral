@@ -40,7 +40,7 @@ function clickHandlers(){
             //console.log('user : ' + JSON.stringify(createUserObject()));
             wsPost('/wsuser/addnew', createUserObject(), function(error, response){
                 if(error){
-                    console.log('error var');
+                    alert(error.responseText);
                     return;
                 }
                 //console.log('response : ' + JSON.stringify(response));
