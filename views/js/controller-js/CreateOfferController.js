@@ -68,17 +68,113 @@ function createOffer(type,req){
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;
 }
+function createB2bOffer(req){
+    
+   var offerObj = {
+       firmCode:req.session.customer.firmCode,
+        offerNo: "",
+        offerDate:req.body.offerDate,
+        offerStatus:"",
+        offerTopic:"",
+        customerInfo:{
+            customerId :req.body.customerId,
+            customerName : req.body.customerName
+        },
+        competentInfo:{
+            competentId : req.body.competentId
+        },
+        personPrepareOfferInfo :{
+            personId : "",
+            personName : ""
+        },
+        personAcceptOfferInfo :{
+            personId : '',
+            personName : ''
+        },
+       personPrepareJobInfo :{
+            personId : "",
+            personName : ""
+        },
+        personAcceptJobInfo :{
+            personId : '',
+            personName : ''
+        },
+       basket : [],
+       cost : {
+            generalDiscount : req.body.generalDiscount,
+            roundingDiscount:"",
+            sum :req.body.sum,
+            kdv : req.body.productKDV,
+            total :req.body.total
+       },
+        payMethod :{
+            payMethod :req.body.payMethod,
+            note :req.body.note
+        },
+       status : {
+           job : '',
+           offerCase : "acik_teklifler",
+           losingReason :"",
+           winFirm:""
+        },
+        activities : [],
+        forwardingInfo : {
+            forwardId : '',
+            forwardLabel : ''
+        },
+        dates : {
+            deliveryDate : '',
+            startJobDate : '',
+            acceptOfferDate : ''
+        }
+    };
+    offerObj.basket = JSON.parse(req.body.basket);
+    return offerObj;
+}
+function firmCheckerAndPush(firmCode,temOffer,req, res){
+     FirmModel.findOne({
+                firmCode: firmCode
+            }, function(error, firm) {
+                if (error) {
+                    res.send({
+                        state: false,
+                        response: error
+                    });
+                    return;
+                }
+                if (firm) {
+                    cos.addNew(temOffer, function(state, response) {
+                        if (!state) {
+                            res.send({
+                                state: state,
+                                response: response
+                            });
+                            return;
+                        }
+                        res.send({
+                            state: state,
+                            response: response
+                        });
+                    });
+                }else{
+                     res.send({
+                            state: false,
+                            response: "firma hatası"
+                        });
+                }
+            });
+}
 module.exports = {
     addNew : function(req, res){
-        
-        var tempOffer=createOffer("add",req);
-        cos.addNew(tempOffer, function(state, response){
-            if(!state){
-                res.send({state : state, response : response});   
-                return;
-            }
-            res.send({state : state, response : response});   
-        });   
+        var tempOffer;
+        if(req.originalUrl=="/wsoffer/b2baddnew"){
+            tempOffer=createB2bOffer(req);
+            firmCheckerAndPush(req.session.customer.firmCode,temOffer,req, res);
+        }
+        else{
+            tempOffer=createOffer("add",req);
+            firmCheckerAndPush(req.session.user.firmCode,temOffer,req, res);
+        }   
     },
     update : function(req, res){
         var tempOffer=createOffer("update",req);

@@ -47,10 +47,6 @@ function updateB2bCustomer(req) {
         customerName: req.body.customerName,
         customerGroup: req.body.customerGroup,
         customerAgent: req.body.customerAgent,
-        userName: "",
-        password: "",
-        webAccess: false,
-        webOrder: false,
         competentInfo: [],
         contactInfo: {
             address: req.body.custDefContactAddress,
@@ -171,6 +167,7 @@ module.exports = {
                 });
                 return;
             }
+            req.session.customer=tempCustDef;
             res.send({
                 state: state,
                 response: response

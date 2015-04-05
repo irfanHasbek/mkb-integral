@@ -932,6 +932,50 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         });
     });
     //end
+    //offer tanımı
+    app.get("/b2b_teklif" ,AccountController.sessionCheckCustomer,function(req, res){
+        req.session.currentPage = "/b2b_teklif";
+        req.session.pageLabel = "b2b_teklif";
+        pds.listAll(req.session.customer.firmCode,function(statePds,responsePds){
+           if(!statePds){
+                    console.error(responsePds);
+                    res.redirect("musteri_anasayfa");
+                }
+       mts.listAll(req.session.customer.firmCode,function(stateMontageType,responseMontageType){
+             if(!stateMontageType){
+                 console.error(responseMontageType);
+                 res.render("/pages/index",{layout : false, session : req.session});
+                 }
+       cts.listAll(req.session.customer.firmCode,function(stateCoverType,responseCoverType){
+              if(!stateCoverType){
+                 console.error(responseCoverType);
+                 res.render("/pages/index",{layout : false, session : req.session});
+                 }
+       sms.listAll(req.session.customer.firmCode,function(stateSetMec,responseSetMec){
+              if(!stateSetMec){
+                 console.error(responseSetMec);
+                 res.render("/pages/index",{layout : false, session : req.session});
+                 }
+       as.listAll(req.session.customer.firmCode,function(stateAccessory,responseAccessory){
+              if(!stateAccessory){
+                 console.error(responseAccessory);
+                 res.render("/pages/index",{layout : false, session : req.session});
+                 }
+        bts.listAll(req.session.customer.firmCode,function(stateBodyType,responseBodyType){
+              if(!stateBodyType){
+                 console.error(responseBodyType);
+                 res.render("/pages/index",{layout : false, session : req.session});
+                         }
+            res.render("pages/b2b_teklif",{layout : false, session:req.session,customer:req.session.customer,productGroups:responsePds,montageTypes:responseMontageType,coverTypes:responseCoverType,setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType});
+            });
+          });
+         });
+        });
+       });
+      });
+     });
+    //end
+    
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
     app.get('/installation/addRole', InstallationController.addRole);

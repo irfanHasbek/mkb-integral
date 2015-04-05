@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/customer_master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/customer_master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+             <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Teklif Oluşturma Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="/musteri_anasayfa"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Teklif Oluşturma</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <input id="inpFirmCode" type="text" style="display:none;" value="<%=customer.firmCode%>">
+                <section class="content">
+                 <div id="divOffer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="formOffer" role="form" method="post" action="/wsoffer/b2badd">
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif No</label>
+                                                        <input disabled type="text" class="form-control " name="offerNo"  placeholder="Teklif No otomatik doldurulacaktir">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group ">
+                                                        <label>Teklif Tarihi</label>
+                                                        <input id="inpOfferDate" type="date" class="form-control " name="offerDate"  placeholder="Teklif Tarihi Giriniz">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group ">
+                                                                <label>Müşteri Adı</label>
+                                                                <input id="inpCustomerId" name="customerId" style="display:none;" value="<%=customer._id%>"/>
+                                                                <input name="customerName" class="form-control" type="text" placeholder="Musteri adi giriniz" value="<%=customer.customerName%>"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="">
+                                    <!-- Custom Tabs -->
+                                    <div class="nav-tabs-custom">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
+                                            <li><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
+                                            <li><a href="#tab_3" data-toggle="tab">Ürün Seçimi</a></li>
+                                            <li><a href="#tab_4" data-toggle="tab">Ürün Sepeti</a></li>
+                                            <li><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
+                                        </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_1">
+                                                    <div id="divCompetent" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label>Yetkili</label>
+                                                                        <select id="slctCompetent" name="competentId" type="text"  class="form-control">
+                                                                            <option value="Seçiniz" selected disabled>Yetkili Seçiniz</option>
+                                                                               <%for(var i=0;i<customer.competentInfo.length;i++){%>
+                                                                                  <option value="<%=customer.competentInfo[i]._id%>"><%=customer.competentInfo[i].name%></option>
+                                                                            <%}%>
+                                                                        </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Yetkili Adı</label>
+                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Görev</label>
+                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>GSM</label>
+                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >E-mail</label>
+                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz">
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_2">
+                                                    <div id="divContact" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label >Adres</label>
+                                                                    <textarea id="inpContactInfoAddress" type="text" class="form-control contAddress" disabled rows="2" style="resize:vertical;" value="<%=customer.contactInfo.address%>"><%=customer.contactInfo.address%></textarea>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label >İl</label>
+                                                                            <input id="inpContactInfoCity" type="text" disabled class="form-control" value="<%=customer.contactInfo.city%>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label >İlçe</label>                                                                                                                                                                                                 <input id="inpContactInfoState" type="text" disabled class="form-control" value="<%=customer.contactInfo.state%>">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >İş Tel</label>
+                                                                    <input id="inpContactInfoBusinessPhone" type="text" class="form-control contTel" name="contactInfoBusinessPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled value="<%=customer.contactInfo.businessPhone%>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Fax</label>
+                                                                    <input id="inpContactInfoFax" type="text" class="form-control contFax" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled value="<%=customer.contactInfo.fax%>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Web Adresi</label>
+                                                                    <input id="inpContactInfoWeb" type="text" class="form-control contWeb" disabled value="<%=customer.contactInfo.webAddress%>">
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_3">
+                                                    <div  id="divProduct" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label for="">Ürün Grubu</label>
+                                                                    <select name="productGroup" id="productGroup" class="form-control">
+                                                                        <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                                           <%for(var i = 0; i < productGroups.length; i++){%>
+                                                                            <option value="<%=productGroups[i].productGroupName%>"><%=productGroups[i].productGroupName%></option>
+                                                                          <%}%>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="">Ürün Adı</label>    
+                                                                    <select name="" id="selectProduct" class="form-control">
+                                                                        <option value="Seçiniz" disabled selected>Ürün Seçiniz</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <label for="" style="margin-bottom:15px;">Girmek İstediğiniz Değeri Seçiniz</label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 no-padding">
+                                                                                    <div class="col-md-6">
+                                                                                        <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                   <input id="inpSizeType" style="display:none;">
+                                                                   <input id="inpBasket" name="basket" style="display:none;"> 
+                                                                 <div id="divRec" class="row" style="display:none;">
+                                                                    <div class="col-md-9 no-padding">
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpEn" type="number" class="form-control" placeholder="En Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpYukseklik" type="number" class="form-control" placeholder="Yükselik Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input id="inpBoy" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="divCir" class="row" style="display:none;">
+                                                                        <div class="col-md-6 no-padding">
+                                                                            <div class="col-md-6">
+                                                                                <input id="inpCap" type="number" class="form-control" placeholder="Çap Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <input id="inpUzunluk" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Montaj Şekli</label>
+                                                                            <select id="montageType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < montageTypes.length; i++){%>
+                                                                                    <option data="<%=montageTypes[i].cost%>" value="<%=montageTypes[i].montageType%>"><%=montageTypes[i].montageType%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Kaplama Şekli</label>
+                                                                            <select id="coverType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < coverTypes.length; i++){%>
+                                                                                    <option data="<%=coverTypes[i].cost%>" value="<%=coverTypes[i].coverType%>"><%=coverTypes[i].coverType%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Ayar Mekanizması</label>
+                                                                            <select  id="setMechanism" class="form-control">
+                                                                                 <option style="padding-left:0px;" data='0' selected disabled value="" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < setMechanisms.length; i++){%>
+                                                                                    <option data="<%=setMechanisms[i].cost%>" value="<%=setMechanisms[i].setMechanism%>"><%=setMechanisms[i].setMechanism%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Aksesuar</label>
+                                                                            <select  id="accessory" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < accessories.length; i++){%>
+                                                                                    <option data="<%=accessories[i].cost%>" value="<%=accessories[i].accessory%>"><%=accessories[i].accessory%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Kasa Tipi</label>
+                                                                            <select  id="bodyType" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < bodyTypes.length; i++){%>
+                                                                                    <option  data="<%=bodyTypes[i].cost%>" value="<%=bodyTypes[i].bodyType%>"><%=bodyTypes[i].bodyType%></option>
+                                                                                  <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Miktar</label>
+                                                                    <input type="text" class="form-control" id="amount" placeholder="Miktar Giriniz">
+                                                                </div>                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <a id="btnAddBasket" class="btn btn-success btn-flat" id="btnAddChart">Sepete Ekle</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.tab-pane -->
+                                                <div class="tab-pane" id="tab_4">
+                                                    <div id="divProductChart" class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="box-body table-scroll">
+                                                                <table id="tblProduct" class="table table-bordered table-condensed table-responsive">
+                                                                    <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
+                                                                        <th style="width:40px">#</th>
+                                                                        <th style="width:40px">Miktar</th>
+                                                                        <th>Ürün </th>
+                                                                        <th>Tip </th>
+                                                                        <th>Ölçüler </th>
+                                                                        <th>Montaj Şekli</th>
+                                                                        <th>Kaplama Şekli</th>
+                                                                        <th>Ayar Mekanizması</th>
+                                                                        <th>Aksesuar</th>
+                                                                        <th>Kasa Tipi</th>
+                                                                        <th style="width:40px"> </th>
+                                                                    </tr>
+                                                                    <tbody id="tableBasket">
+                                                                    </tbody>
+
+
+                                                                </table>
+                                                                <table class="table table-condensed table-bordered table-responsive" style="width:100%;">
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Genel İskonto</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input id="generalDiscount" type="text" class="form-control" name="generalDiscount" readonly>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Tutar</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input  type="text" class=" form-control" name="sum" id="productSum">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">K.D.V</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input type="text"  class="form-control" name="productKDV" id="productKDV">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Toplam</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                             <input type="text" class="form-control" name="total" id="productTotal">
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_5">
+                                                    <div id="divPayMethod" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label >Ödeme Şekli</label>
+                                                                    <select name="payMethod" id="" class="form-control" >
+                                                                        <option value="Nakit">Nakit</option>
+                                                                        <option value="Çek">Çek</option>
+                                                                        <option value="Kredi Kartı">Kredi Kartı</option>
+                                                                        <option value="Senet">Senet</option>
+                                                                        <option value="Devir">Devir</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Not</label>
+                                                                    <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;"></textarea>
+                                                                </div>
+                                                            </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div style="text-align:center;">
+                                                        <button type="submit" class="btn btn-primary">Teklifi Ver</button>
+                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" disabled >PDF Yazdır</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- /.tab-content -->
+                                    </div><!-- nav-tabs-custom -->
+                                </div><!-- /.col -->
+                            </div><!-- /.box -->
+                        </div>
+                    </div>
+                </div>
+                    
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/B2b_OfferPage.js"></script>
+    </body>
+</html>

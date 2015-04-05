@@ -28,7 +28,7 @@
                             <div class="col-md-12">
                                 <div class="box box-info">
                                     <!-- form start -->
-                                    <form id="frmB2bCustomerDefinition" role="form" method="post" action="/wscustomerdefinition/b2bupdate">
+                                    <form id="frmCustomerDefinition" role="form" method="post" action="/wscustomerdefinition/b2bupdate">
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-10 col-md-offset-1">
@@ -37,7 +37,6 @@
                                                         <input type="text" class="form-control " name="customerTitle"  placeholder="Firma Ünvanı Giriniz" value="<%=customer.customerTitle%>" required>
                                                         <input id="inpCustDefId" style="display:none;" name="_id" value="<%=customer._id%>">
                                                         <input  style="display:none;" name="firmCode" value="<%=customer.firmCode%>">
-                                                        <input  style="display:none;" name="discountInfo" value="<%=customer.discountInfo%>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +210,7 @@
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label >Fatura Adresi</label>
-                                                                    <textarea type="text" class="form-control" name="custDefBillAddress"  placeholder="Adres Giriniz" rows="2" style="resize:vertical;" value="<%=customer.billInfo.adress%>">><%=customer.billInfo.address%></textarea>
+                                                                    <textarea type="text" class="form-control" name="custDefBillAddress"  placeholder="Adres Giriniz" rows="2" style="resize:vertical;" value="<%=customer.billInfo.adress%>"><%=customer.billInfo.address%></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >İl</label>
