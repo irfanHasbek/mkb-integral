@@ -1,8 +1,7 @@
 var UserPermissionModel=require('../Model-js/UserPermissionModel');
 
-function createUserPermissionsModel(userId, userPermissions){
+function createUserPermissionsModel(userPermissions){
     var userPermissionObj = {
-        roleId : userId,
         permission : []
     }
     //rol tanimi
@@ -158,14 +157,28 @@ function createUserPermissionsModel(userId, userPermissions){
 
 module.exports = {
     update : function(req, res){
-        var userPermissionsObj = createUserPermissionsModel(req.body.roleId, req.body);
-        UserPermissionModel.update({ roleId : req.body.roleId }, function(error, affectedRow){
+        var userPermissionsObj = createUserPermissionsModel(req.body);
+        /*UserPermissionModel.findOne({ roleId : req.body.roleId } ,function(errorFind, foundPermission){
+            if(errorFind){
+                res.send({state : false, response : errorFind});
+                return;
+            }
+            foundPermission.permission = userPermissionsObj.permission;
+            foundPermission.save(function(errorSave, savedPermission){
+                if(errorSave){
+                    res.send({state : false, response : errorSave});
+                    return;
+                }
+                res.send({state : true, response : savedPermission});
+            });
+        });*/
+        UserPermissionModel.update({ roleId : req.body.roleId }, {permission : userPermissionsObj.permission}, function(error, affectedRow){
             if(error){
                 res.send({state : false, response : error});
                 return;
             }
             res.send({state : true, response : affectedRow});
-        });
+        }); 
     },
     listAll : function(req, res){
         UserPermissionModel.find({ firmCode : req.session.user.firmCode }, function(error, permissions){
@@ -175,5 +188,27 @@ module.exports = {
             }
             res.send({state : true, response : permissions});
         });   
+    },
+    reset : function(req, res){
+        UserPermissionModel.update({}, {permission : []} ,function(error, affectedRow){
+            if(error){
+                res.send({state : false, response : error});
+                return;
+            }
+            if(affectedRow > 0){
+                res.send({state : true, response : 'Tum Izinler Sifirlandi.'});   
+            }else{
+                res.send({state : true, response : 'Hata olustu. Izinler sifirlanamadi.'});   
+            }
+        });    
+    },
+    removeAll : function(req, res){
+        UserPermissionModel.remove({} ,function(error){
+            if(error){
+                res.send({state : false, response : error});
+                return;
+            }
+            res.send({state : true, response : 'Tum Izinler silindi.'});   
+        });    
     }
 };

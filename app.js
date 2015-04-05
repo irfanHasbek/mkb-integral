@@ -220,7 +220,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         res.render('pages/test_sayfasi', {layout : false, session : req.session});   
     });
     //Kullanicilar
-    app.get("/kullanici_tanimi" ,AccountController.sessionCheck ,function(req, res){
+    app.get("/kullanici_tanimi" ,AccountController.permissionCheck ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/kullanici_tanimi";
         req.session.pageLabel = "kullanicilar";
         ads.listAll(req.session.user.firmCode,function(stateRoles, responseRoles){
@@ -1152,6 +1152,8 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     //user permission
     var UserPermissions = require('./views/js/service-js/UserPermissionService');
     app.get("/wspermission/listall", UserPermissions.listAll);
+    app.get("/wspermission/reset", UserPermissions.reset);
+    app.get("/wspermission/removeall", UserPermissions.removeAll);
     app.post("/wspermission/update", UserPermissions.update);
     //end
     

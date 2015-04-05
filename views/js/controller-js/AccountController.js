@@ -73,5 +73,8 @@ module.exports = {
                 res.send('Lutfen firmaniza vermis oldugumuz baglanti linkini kullaniniz !');  
             }
         }
+    },
+    permissionCheck : function(req ,res , next){
+           
     }
 }
