@@ -22,12 +22,12 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.use(express.cookieParser('Integral'));
     app.use(express.static(path.join(__dirname, 'views')));
     app.use(express.session({
-        secret: 'integralmkblocalvericommanapp',
+        secret: 'integralmkblocalvericommanapp'/*,
         store: new MongoStore({
             db: 'integral',
             host: 'localhost',
             port: 27017 
-        })
+        })*/
     }));
     
     var InstallationController = require('./views/js/controller-js/InstallationController');
@@ -153,12 +153,25 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     var OfferPriceCalculatorService = require('./views/js/service-js/OfferPriceCalculatorService');
     var offerPriceCalculatorService = new OfferPriceCalculatorService();
     app.get("/", function(req, res){
-        if(!req.session.login){
+        if(req.session.user){
+            if(!req.session.login){
+                req.session.currentPage = "/";
+                res.render('pages/login', {layout : false, session : req.session});
+            }else{
+                res.redirect('/index');
+            }
+        }else if(req.session.customer){
+            if(!req.session.loginCustomer){
+                res.send('Lutfen firmaniza vermis oldugumuz baglanti linkini kullaniniz !'); 
+            }else{
+                res.redirect('/musteri_anasayfa');
+            }
+        }
+        else{
             req.session.currentPage = "/";
             res.render('pages/login', {layout : false, session : req.session});
-        }else{
-            res.redirect('/index');
         }
+        
     });
     app.get("/index" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/index";
@@ -884,8 +897,12 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     //musteri kayit 
     app.get("/musteri_kayit" ,function(req, res){
-        req.session.currentPage = "/musteri_kayit";
-        res.render("pages/musteri_kayit",{layout : false, firm : req.param('id')});
+        if(req.session.loginCustomer){
+            res.redirect('/musteri_anasayfa');
+        }else{
+            req.session.currentPage = "/musteri_kayit";
+            res.render("pages/musteri_kayit",{layout : false, firm : req.param('id')});   
+        }
     });
     //end
     //musteri_anasayfa

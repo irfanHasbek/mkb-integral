@@ -35,14 +35,14 @@ module.exports = {
         custService.getCustomerWithEmail(req.body.username,req.body.password,firmCode,function(state,response){
             if(!state){
                 console.error("error : " + response);
-                req.session.login = false;
+                req.session.loginCustomer = false;
                 req.session.message = "Hatalı giriş yaptınız lütfen bilgilerinizi kontrol ediniz.";
                 res.redirect("back"); 
             }else{
                 console.log("success : " + response);
                 req.session.onLogoutPage = '/musteri_kayit?id=' + firmCode;
                 req.session.accountType = "customer";
-                req.session.login = true;
+                req.session.loginCustomer = true;
                 req.session.customer  = response;
                 res.redirect("/musteri_anasayfa");
             }
@@ -59,7 +59,7 @@ module.exports = {
         }
     },
     sessionCheckCustomer : function(req, res, next){
-        if(req.session && req.session.customer && req.session.login == true){
+        if(req.session && req.session.customer && req.session.loginCustomer == true){
             console.log("SessionCheck is true for customer");
             next();
         }
