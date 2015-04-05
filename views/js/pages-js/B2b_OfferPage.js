@@ -157,7 +157,7 @@ function calculatePriceAfterOperation() {
 
     var kdv = sum * (18 / 100);
     $('#productKDV').val(kdv);
-    $('#productTotal').val(sum + kdv - parseFloat($('#RoundingDiscount').val()));
+    $('#productTotal').val(sum + kdv);
 }
 
 function calculateBasketTotalPrice() {
@@ -185,6 +185,7 @@ function removeFromBasketAndTable(id) {
 
 function formHandlers() {
     $('#formOffer').ajaxForm(function(data) {
+        console.log(JSON.stringify(data));
         if (data.state == true) {
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             $("#btnPdfYazdir").removeAttr("disabled");
@@ -236,7 +237,7 @@ function otherScripts() {
             console.log($("#slctCompetent option:selected").val());
             getCompetentInfo($("#slctCompetent option:selected").val(), $("#inpCustomerId").val());
         });
-
+}
         function listProductsByGroupName(group) {
             var searchCriteria = {
                 search: {

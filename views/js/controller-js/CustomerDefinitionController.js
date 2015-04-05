@@ -268,7 +268,11 @@ module.exports = {
     },
     searchCustomerDefinition: function(req, res) {
         var criteria = req.body.search;
-        criteria.firmCode = req.session.user.firmCode;
+        if(req.session.accountType=="customer"){
+            criteria.firmCode = req.session.customer.firmCode;
+        }else{
+            criteria.firmCode = req.session.user.firmCode;
+        }
         cds.search(criteria, function(state, response) {
             if (!state) {
                 res.send({

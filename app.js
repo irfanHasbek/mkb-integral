@@ -1135,6 +1135,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     //teklif oluşturma "abuzer" 10.03 start
     app.post("/wsoffer/addnew", CreateOfferController.addNew);
+    app.post("/wsoffer/b2badd", CreateOfferController.addNew);
     app.post("/wsoffer/search", CreateOfferController.searchOffer);
     app.post("/wsoffer/update", CreateOfferController.update);
     app.post("/wsoffer/remove", CreateOfferController.remove);
