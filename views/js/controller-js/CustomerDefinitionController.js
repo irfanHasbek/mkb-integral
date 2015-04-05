@@ -39,6 +39,40 @@ function createCustomerDefinition(type, req) {
     custDefObj.forwardingInfo = JSON.parse(req.body.forwarding);
     return custDefObj;
 }
+function updateB2bCustomer(req) {
+    var custDefObj = {
+        _id : req.body._id,
+        firmCode: req.body.firmCode,
+        customerTitle: req.body.customerTitle,
+        customerName: req.body.customerName,
+        customerGroup: req.body.customerGroup,
+        customerAgent: req.body.customerAgent,
+        userName: "",
+        password: "",
+        webAccess: false,
+        webOrder: false,
+        competentInfo: [],
+        contactInfo: {
+            address: req.body.custDefContactAddress,
+            city: req.body.custDefContactCity,
+            state: req.body.custDefContactState,
+            businessPhone: req.body.custDefContactBusinessPhone,
+            fax: req.body.custDefContactFax,
+            webAddress: req.body.custDefContactWebAdress
+        },
+        billInfo: {
+            address: req.body.custDefBillAddress,
+            city: req.body.custDefBillCity,
+            state: req.body.custDefBillState,
+            taxOffice: req.body.custDefBillTaxOffice,
+            taxNum: req.body.custDefBillTaxNum
+        },
+        forwardingInfo: []
+    }
+    custDefObj.competentInfo = JSON.parse(req.body.competent);
+    custDefObj.forwardingInfo = JSON.parse(req.body.forwarding);
+    return custDefObj;
+}
 
 function createCustomerRegister(type, req) {
     var custDefObj = {
@@ -124,7 +158,11 @@ module.exports = {
         }
     },
     update: function(req, res) {
-        var tempCustDef = createCustomerDefinition("update", req);
+         if (req.originalUrl == "/wscustomerdefinition/b2bupdate") {
+            tempCustDef = updateB2bCustomer(req);
+        } else {
+            tempCustDef = createCustomerDefinition("update", req);
+        }
         cds.update(tempCustDef, function(state, response) {
             if (!state) {
                 res.send({

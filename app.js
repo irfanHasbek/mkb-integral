@@ -1081,6 +1081,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wscustomerdefinition/register", CustomerDefinitionController.addNew);
     app.post("/wscustomerdefinition/search", CustomerDefinitionController.searchCustomerDefinition);
     app.post("/wscustomerdefinition/update", CustomerDefinitionController.update);
+    app.post("/wscustomerdefinition/b2bupdate", CustomerDefinitionController.update);
     app.post("/wscustomerdefinition/remove", CustomerDefinitionController.remove);
     app.get("/wscustomerdefinition/listall", CustomerDefinitionController.listAll);
     app.get("/wscustomerdefinition/removeall", CustomerDefinitionController.removeAll);
