@@ -12,6 +12,7 @@ module.exports = {
                 res.redirect("/"); 
             }else{
                 console.log("success : " + response);
+                req.session.onLogoutPage = '/';
                 req.session.accountType = "user";
                 req.session.login = true;
                 req.session.user  = response;
@@ -21,14 +22,15 @@ module.exports = {
     },
     
     logout : function(req, res, next){
+        var onLogoutPage = req.session.onLogoutPage;
         // session store based destroy
-            req.session.destroy();
-            // cookie based session destroy
-            req.session = null;
-            res.redirect("/");
+        req.session.destroy();
+        // cookie based session destroy
+        req.session = null;
+        res.redirect(onLogoutPage);
     },
     customerLogin : function(req,res,next){
-        var firmCode = req.body.firmCode;
+        var firmCode = req.param('id');
         console.log("firmCode : " + firmCode);
         custService.getCustomerWithEmail(req.body.username,req.body.password,firmCode,function(state,response){
             if(!state){
@@ -38,6 +40,7 @@ module.exports = {
                 res.redirect("back"); 
             }else{
                 console.log("success : " + response);
+                req.session.onLogoutPage = '/musteri_kayit?id=' + firmCode;
                 req.session.accountType = "customer";
                 req.session.login = true;
                 req.session.customer  = response;
@@ -52,7 +55,7 @@ module.exports = {
         }
         else{
             console.log("SessionCheck is false for user");
-            res.send("hata 500 kullanıcı");   
+            res.redirect('/');   
         }
     },
     sessionCheckCustomer : function(req, res, next){
@@ -61,8 +64,14 @@ module.exports = {
             next();
         }
         else{
-            console.log("SessionCheck is false for customer");
-            res.send("hata 500 müşteri");   
+            if(req.session.onLogoutPage){
+                console.log("SessionCheck is false for customer");
+                res.redirect(req.session.onLogoutPage);  
+            }
+            else{
+                console.log("SessionCheck is false for customer");
+                res.send('Lutfen firmaniza vermis oldugumuz baglanti linkini kullaniniz !');  
+            }
         }
     }
 }
