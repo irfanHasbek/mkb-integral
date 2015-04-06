@@ -6,6 +6,11 @@ function clickHandlers(){
 function formHandlers(){
      $('#formAccountB2b').ajaxForm(function(data){
         console.log(data); 
+         if(data.state==true){
+            alertify.success("İşleminiz başarı ile gerçekleştirilmiştir.");
+         }else{
+            alertify.error("Hata!! işlem başarısız");
+         }
      });
 }
 function otherScripts(){

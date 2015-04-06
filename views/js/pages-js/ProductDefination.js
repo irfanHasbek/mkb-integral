@@ -10,7 +10,8 @@ function clickHandlers(){
 
 function formHandlers(){
     $('#formPicture').ajaxForm(function(response){
-        if(data.state==true){
+        var data =JSON.parse(response);
+        if(data.code==200){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             var data = JSON.parse(response);
             $('#imgProduct').attr('src', '/' + data.url);

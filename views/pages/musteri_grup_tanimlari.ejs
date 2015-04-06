@@ -40,7 +40,7 @@
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <label >Vade</label>
-                                                        <select name="groupCredit" id="" class="form-control" required>
+                                                        <select name="groupCredit" id="slctCredit" class="form-control" required>
                                                             <option disabled selected value="">Vade Seçiniz</option>
                                                             <%for(var i = 0; i < credits.length; i++){%>
                                                                 <option value="<%=credits[i].credit%> gün -% <%=credits[i].percent%>"><%=credits[i].credit%>-% <%=credits[i].percent%></option>
@@ -53,7 +53,7 @@
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <label>İskonto</label>
-                                                        <input type="number" class="form-control" name="groupDiscount"  placeholder="İskonto Giriniz" required>
+                                                        <input type="number" min="0" step="1" class="form-control" name="groupDiscount"  placeholder="İskonto Giriniz" required>
                                                     </div>
                                                 </div>
                                             </div>

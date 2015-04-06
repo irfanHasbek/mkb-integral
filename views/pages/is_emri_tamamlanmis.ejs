@@ -88,6 +88,7 @@
                                                         <th ><span data-toggle="tooltip" data-placement="top" title="Teslim Tarihi">T.Tarihi</span></th>
                                                         <th>Açıklama</th>
                                                         <th><span data-toggle="tooltip" data-placement="top" title="İmalata Veriliş Tarihi">İ.V Tarihi</span></th>
+                                                        <th class="text-center" style="width: 40px"></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>                                                        
@@ -112,6 +113,7 @@
                                                             <td><%=offers[i].dates.deliveryDate%></td>
                                                             <td><%=offers[i].basket[j].note%></td>
                                                             <td><%=offers[i].dates.startJobDate%></td>
+                                                            <td><a href="/is_emri_yazdir?id=<%=offers[i]._id%>" target="_blank" class="btn btn-warning btn-sm btn flat" data-toggle="tooltip" data-placement="top" title="Yazdır"><i class="fa fa-print"></i></a></td>
                                                         </tr>  
                                                       <%}%>
                                                     <%}%>

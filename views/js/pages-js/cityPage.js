@@ -97,6 +97,7 @@ function otherScripts() {
 function clickHandlers() {
      removeFromTable("citys", "/wscity/remove", function(data) {
          $("#slctCity option[id='" + data + "']").remove();
+         $(".towns tbody").empty();
      });
      removeTown();
      addTown();

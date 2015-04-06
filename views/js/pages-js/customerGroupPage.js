@@ -21,6 +21,7 @@ function formHandlers(){
             $(".customers tbody").last().append(tr);
             $("input[type='text']").val("");
             $("input[type='number']").val("");
+            $("#slctCredit").find('option:contains("Vade Seçiniz")').attr('selected', true);
         }else{
             alertify.error("İşlem başarısız.");
         }

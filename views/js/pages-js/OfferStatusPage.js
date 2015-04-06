@@ -19,6 +19,7 @@ function formHandlers(){
             tr.append(td1);tr.append(td2);tr.append(td5);tr.append(td3);tr.append(td4);
             $(".offerStatuses tbody").last().append(tr);
             $("input[type='text']").val("");
+            $("input[type='number']").val("");
         }else{
             alertify.error("İşlem başarısız.");
         }
