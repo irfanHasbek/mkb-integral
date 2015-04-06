@@ -85,10 +85,10 @@ function saveChangesOnPendingJobs(){
         console.log(obj);
         wsPost("/wsoffer/updatedates",obj,function(err,resp){
             if(err){
-                console.log(err);
+                alertify.error("Hata!! kaydetme başarısız");
                 return;
             }
-            console.log("resp: "+resp);
+            alertify.success("İşleminiz başarı ile kaydedildi.");
         });
     });
 }
@@ -102,14 +102,19 @@ function startJobs(){
            status:{
                 job :"devam_eden"
             }
-        };        
-        wsPost("/wsoffer/updatejobstatus",obj,function(err,resp){
+        };
+        alertify.confirm("İşleminiz gerçekleşecektir.Emin misiniz?",
+        function(){
+            wsPost("/wsoffer/updatejobstatus",obj,function(err,resp){
             if(err){
                 console.log(err);
                 return;
             }
-            console.log(resp);
+            alertify.success("İşleminiz başarı ile gerçekleşmiştir.");
             tr.remove();
+        });
+        },function(){
+            alertify.error("İşlem iptal edildi.");
         });
     });
 }

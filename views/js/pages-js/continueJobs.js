@@ -76,14 +76,19 @@ function finishJob(){
            status:{
                 job :"tamamlanmis"
             }
-        };        
-        wsPost("/wsoffer/updatejobstatus",obj,function(err,resp){
+        };
+        alertify.confirm("İşleminiz gerçekleşecektir.Emin misiniz?",
+        function(){
+            wsPost("/wsoffer/updatejobstatus",obj,function(err,resp){
             if(err){
                 console.log(err);
                 return;
             }
-            console.log(resp);
+            alertify.success("İşleminiz başarı ile gerçekleşmiştir.");
             tr.remove();
+        });
+        },function(){
+            alertify.error("İşlem iptal edildi.");
         });
     });
 }
@@ -91,7 +96,6 @@ function saveChangesOnContinueJobs(){
     $(".kaydet").click(function(){
         var offerId=$(this).closest("td").attr("id");
         var productId=$(this).closest("tr").attr("id");
-        console.log($(".note"+productId).val());
         var obj={
             _id : offerId,
             dates:{
@@ -102,13 +106,12 @@ function saveChangesOnContinueJobs(){
                 note:$(".note"+productId).val()
             }
         };    
-        console.log(obj);
         wsPost("/wsoffer/updatenote",obj,function(err,resp){
             if(err){
                 console.log(err);
                 return;
             }
-            console.log(resp);
+            alertify.success("İşleminiz başarı ile gerçekleşmiştir.");
         });
     });
 }
