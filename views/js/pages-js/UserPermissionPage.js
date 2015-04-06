@@ -3,18 +3,43 @@ function clickHandlers(){
 }
 function formHandlers(){
     $('#formPermissions').ajaxForm(function(data){
-         console.log(data);
+         if(!data.state){
+             alertify.error('Islem gerceklestirilemedi.');
+         }else{
+             alertify.success('Islem basariyla gerceklestirildi.');
+         }
     });
 }
 function otherScripts(){
     $('#slctRole').change(function(){
-        var per = "/rol_tanimi";
-        var id = per.slice(1);
-        checkToCheckBox(id);
-        
+        wsPost('/wspermission/getpermissionrole', {roleId : $('#slctRole').val()}, function(error, data){
+            if(error){
+                alertify.error('Islem gerceklestirilemedi.');   
+                return;
+            }
+            var resp = data.response;
+            for(var i = 0; i < resp.permission.length; i++){
+                checkToCheckBox(resp.permission[i].slice(1));
+            }
+            alertify.success("Izinler listelendi.");
+        });
     });
 }
 function checkToCheckBox(id){
-    $('#' + id).closest('div').prop('aria-checked', true);
-    $('#' + id).closest('div').prop('class', 'icheckbox_minimal checked');
+    if(id.indexOf('/') > 0){
+        var idList = id.split('/');
+        $('#' + idList[0]).find('.' + idList[1]).prop('checked', true);
+        $('#' + idList[0]).find('.' + idList[1]).prop('aria-checked', true);
+        $('#' + idList[0]).find('.' + idList[1]).closest('div').prop('class', 'icheckbox_minimal checked'); 
+    }else if(id.indexOf('?') > 0){
+        var idList = id.split('?');
+        $('.' + idList[0]).prop('checked', true);
+        $('.' + idList[0]).closest('div').prop('aria-checked', true);
+        $('.' + idList[0]).closest('div').prop('class', 'icheckbox_minimal checked');  
+    }
+    else{
+        $('.' + id).prop('checked', true);
+        $('.' + id).closest('div').prop('aria-checked', true);
+        $('.' + id).closest('div').prop('class', 'icheckbox_minimal checked');   
+    }
 }

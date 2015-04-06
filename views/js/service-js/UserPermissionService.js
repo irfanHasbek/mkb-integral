@@ -102,9 +102,6 @@ function createUserPermissionsModel(userPermissions){
     if(userPermissions.r101 == 'on'){
         userPermissionObj.permission.push('/musteri_listesi');   
     }
-    if(userPermissions.r102 == 'on'){
-        userPermissionObj.permission.push('/wscustomerdefinition/listall');   
-    }
     
     //Teklif olusturna
     if(userPermissions.r111 == 'on'){
@@ -122,11 +119,6 @@ function createUserPermissionsModel(userPermissions){
         userPermissionObj.permission.push('/acik_teklifler');   
     }
     
-    //Kapali teklifler
-    if(userPermissions.r131 == 'on'){
-        userPermissionObj.permission.push('/kazanilmis');   
-    }
-    
     //Urun Grup tanimi
     if(userPermissions.r141 == 'on'){
         userPermissionObj.permission.push('/urun_grup_tanimi');   
@@ -142,16 +134,16 @@ function createUserPermissionsModel(userPermissions){
     if(userPermissions.r151 == 'on'){
         userPermissionObj.permission.push('/urun_tanimlari?id=0');   
     }
+    if(userPermissions.r152 == 'on'){
+        userPermissionObj.permission.push('/wsproduct/add');   
+    }
+    if(userPermissions.r153 == 'on'){
+        userPermissionObj.permission.push('/wsproduct/remove');   
+    }
     
     //urun listeleme
     if(userPermissions.r171 == 'on'){
         userPermissionObj.permission.push('/urun_listeleme');   
-    }
-    if(userPermissions.r172 == 'on'){
-        userPermissionObj.permission.push('/wsproductgroupdefinition/addnew');   
-    }
-    if(userPermissions.r173 == 'on'){
-        userPermissionObj.permission.push('/wsproductgroupdefinition/remove');   
     }
     return userPermissionObj;
 }
@@ -213,18 +205,13 @@ module.exports = {
         });    
     },
     getPermissionForRole : function(req, res){
-        ActDefinitionModel.findOne({ act : req.body.role }, function(errorRole, foundedRole){
-            if(errorRole){
-                res.send({state : false, response : errorRole});
+        console.log('roleid : ' + req.body.roleId);
+        UserPermissionModel.findOne({ roleId : req.body.roleId }, function(errorPermission, foundedPermission){
+            if(errorPermission){
+                res.send({state : false, response : foundedPermission});
                 return;
-            }
-            UserPermissionModel.findOne({ roleId : foundedRole._id }, function(errorPermission, foundedPermission){
-                if(errorPermission){
-                    res.send({state : false, response : errorPermission});
-                    return;
-                } 
-                res.send({state : true, response : foundedPermission});
-            });
-        });       
+            } 
+            res.send({state : true, response : foundedPermission});
+        });      
     }
 };
