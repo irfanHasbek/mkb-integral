@@ -975,6 +975,19 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
       });
      });
     //end
+    //müsteri tanımı
+    app.get("/b2b_teklif_listesi" ,AccountController.sessionCheckCustomer,function(req, res){
+        req.session.currentPage = "/b2b_teklif_listesi";
+        req.session.pageLabel = "b2b_teklif_listesi";
+        offerService.search({"firmCode":req.session.customer.firmCode,"customerInfo.customerName" : req.session.customer.customerName},function(stateOffers,responseOffers){
+           if(!stateOffers){
+                    console.error(responseOffers);
+                    res.redirect("musteri_anasayfa");
+                }
+            res.render("pages/b2b_teklif_listesi",{layout : false, session:req.session,customer:req.session.customer,offers:responseOffers});
+        });
+    });
+    //end
     
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);

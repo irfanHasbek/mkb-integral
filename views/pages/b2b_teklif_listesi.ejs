@@ -4,9 +4,9 @@
         <%include ../partial-pages/css.ejs%>
     </head>
     <body class="skin-blue">
-       <%include ../partial-pages/master_head.ejs%>
+       <%include ../partial-pages/customer_master_head.ejs%>
         <div class="wrapper row-offcanvas row-offcanvas-left">
-           <%include ../partial-pages/master_left.ejs%>
+           <%include ../partial-pages/customer_master_left.ejs%>
             <!-- Right side column. Contains the navbar and content of the page -->
              <aside class="right-side">                
                 <!-- Content Header (Page header) -->
@@ -20,66 +20,17 @@
                     </ol>
                 </section>
                 <!-- Main content -->
-                <input id="inpFirmCode" type="text" style="display:none;" value="<%=session.user.firmCode%>">
+                <input id="inpFirmCode" type="text" style="display:none;" value="<%=session.customer.firmCode%>">
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="box box-info">
                                         <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                   <div id="custom-search-input">
-                                                        <div class="input-group">
-                                                            <input id="inpOfferTopic" type="text"  class=" form-control" placeholder="Teklif Konusu" />
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
-                                                                    <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                   <div id="custom-search-input">
-                                                        <div class="input-group">
-                                                            <input id="inpCustomerName" type="text"  class=" form-control" placeholder="Müşteri Adı" />
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
-                                                                    <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                   <div id="custom-search-input">
-                                                        <div class="input-group">
-                                                            <input id="inpOfferDate" type="date"  class=" form-control" placeholder="Tarih" />
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
-                                                                    <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="">1</option>
-                                                        <option value="">2</option>
-                                                        <option value="">3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <table class="table table-bordered tblOpenOffer">
+                                                    <table class="table table-bordered tblOffersList">
                                                         <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
                                                             <th class="text-center" style="width: 40px">#</th>
                                                             <th>Teklif Konusu</th>
@@ -97,10 +48,10 @@
                                                             <td id="<%=offers[i].customerId%>"><%=offers[i].customerInfo.customerName%></td>
                                                              <td><%=offers[i].offerStatus%></td>
                                                             <td><%=offers[i].offerDate%></td>
-                                                            <td id="<%=offers[i].personPrepareOfferInfo.personName%>"><%=offers[i].personPrepareOfferInfo.personName%></td>
+                                                            <td><%=offers[i].personPrepareOfferInfo.personName%></td>
                                                             <td class="text-center" id="<%=offers[i]._id%>">
-                                                                    <button type="button" class="btn btn-success btn-flat pay">Ödeme Yap <i class="fa fa-check"></i></button>
-                                                                    <button type="button" class="btn btn-danger btn-flat sil">Sil <i class="fa fa-trash"></i></button>
+                                                                    <button type="button" class="btn btn-success btn-flat pay" title="Ödeme Yap"><i class="fa fa-check"></i></button>
+                                                                    <button type="button" class="btn btn-danger btn-flat sil" title="Sil"> <i class="fa fa-trash-o"></i></button>
                                                                
                                                             </td>
                                                         </tr>
@@ -121,6 +72,6 @@
 
        <%include ../partial-pages/script.ejs%>
        <script src="../js/helper-js/Helper.js"></script>
-       <script src="../js/pages-js/OpenOffers.js"></script>
+       <script src="../js/pages-js/b2bOffersList.js"></script>
     </body>
 </html>

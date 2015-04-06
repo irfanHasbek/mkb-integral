@@ -381,7 +381,11 @@ module.exports = {
     },
     searchOffer: function (req, res) {
         var criteria = req.body.search;
-        criteria.firmCode = req.session.user.firmCode;
+        if(req.session.accountType=="customer"){
+            criteria.firmCode=session.customer.firmCode;
+        }else{
+            criteria.firmCode = req.session.user.firmCode;
+        }
         cos.search(criteria, function (state, response) {
             if(!state) {
                 res.send({
