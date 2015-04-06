@@ -317,6 +317,7 @@ function otherScripts() {
                 var custName = $("#selectCustomer option:selected").val();
                 clearInputs("divCompetent");
                 clearInputs("divContact");
+                clearInputs("divProduct");
                 clearTextareas("divContact");
                 getCustomer(custName);
                 $("#inpCustName").val($("#selectCustomer option:selected").text());

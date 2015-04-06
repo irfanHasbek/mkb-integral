@@ -17,17 +17,18 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             for(var i = 0; i < length; i++){
                 if(data[i].W >= parseFloat(info.W) && data[i].H >= parseFloat(info.H) && data[i].L >= parseFloat(info.L)){
                     priceArr.push(data[i]);
+                    //console.log('data['+i+']=' + data[i]);
                 }
             }
             
             var sorto = {
               W:"asc",H:"asc", L:"asc"
             };
-            console.log('priceArr 1 : ' + priceArr.length);
             if(priceArr.length > 0 ){
                 priceArr.keySort(sorto);
                 //console.log('priceArr : ' + priceArr);
                 var choosenPrice = parseFloat(priceArr[0].price);
+                //console.log('price : ' + priceArr[0].price);
                 choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
 
                 choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.productCredit) / 100));
@@ -39,9 +40,6 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.bodyType) / 100));
                 
                 choosenPrice = choosenPrice * parseFloat(info.amount);
-                
-                console.log(info);
-                console.log("price : "+choosenPrice);
                 callback(true, choosenPrice);        
             }
             else{
@@ -67,7 +65,7 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             var sorto = {
               W:"asc", L:"asc"
             };
-            console.log('priceArr 2 : ' + priceArr.length);
+            //console.log('priceArr 2 : ' + priceArr.length);
             if(priceArr.length > 0){
                 priceArr.keySort(sorto);
                 var choosenPrice = parseFloat(priceArr[0].price);

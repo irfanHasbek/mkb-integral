@@ -157,7 +157,7 @@ function regexMultiKriterOlustur(string) {
 function clearInputs(divId){
     $("#"+divId+" input[type='text']").val("");
     $("#"+divId+" input[type='password']").val("");
-    $("#"+divId+" input[type='number']").val("");
+    $("#"+divId+" input[type='number']").val(0);
     $("#"+divId+" input[type='email']").val("");
     $("#"+divId+" input[type='url']").val("");
     $("#"+divId+" input[type='checkbox']").prop('checked', false);
