@@ -3,7 +3,7 @@ function clickHandlers(){
         if($("#inpPictureUpload").val()==""){
             e.preventDefault();
         }else{
-        $.blockUI({ css: { backgroundColor: '#f00', color: '#fff'}, message: '<h1>Yükleniyor...</h1>' }); 
+        $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>Yükleniyor...</h1>' }); 
         }
     });
 }

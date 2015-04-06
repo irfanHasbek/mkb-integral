@@ -12,6 +12,9 @@ function formHandlers(){
 }
 function otherScripts(){
     $('#slctRole').change(function(){
+        $('input[type=checkbox]').prop('checked', false);
+        $('input[type=checkbox]').prop('aria-checked', false);
+        $('input[type=checkbox]').closest('div').prop('class', 'icheckbox_minimal');
         wsPost('/wspermission/getpermissionrole', {roleId : $('#slctRole').val()}, function(error, data){
             if(error){
                 alertify.error('Islem gerceklestirilemedi.');   

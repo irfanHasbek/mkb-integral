@@ -223,7 +223,7 @@
           </div>
         </div>
         
-        <div class="modal fade" id="modal_close" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="modalAcceptOffer" class="modal fade" id="modal_close" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -278,12 +278,13 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Kapat</button>
-                <button id="btnUpdateOfferCase" type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Kaydet</button>
+                <button id="btnUpdateOfferCase" type="button" class="btn btn-primary btn-flat">Kaydet</button>
               </div>
             </div>
           </div>
         </div>
        <%include ../partial-pages/script.ejs%>
+       <script src="../js/utility-js/jquery.blockUI.js"></script>
        <script src="../js/helper-js/Helper.js"></script>
        <script src="../js/pages-js/OpenOffers.js"></script>
     </body>
