@@ -53,10 +53,13 @@ function clickHandlers() {
                 console.log(response.response[0]);
                 $('#inpCustomerMail').val(mailAddress);
                 var slct = $('#slctForwardingAddress');
+                var optionDefault = $('<option value="">Seciniz</option>');
+                slct.append(optionDefault);
                 for (var i = 0; i < forward.length; i++) {
                     var option = $('<option value="' + forward[i]._id + '">' + forward[i].label + '</option>');
                     slct.append(option);
                 }
+                $('#modalAcceptOffer').modal('show');
             });
         }
     });
@@ -116,39 +119,47 @@ function clickHandlers() {
         console.log(JSON.stringify(status));
         if (offerId) {
             alertify.confirm("Bu işlem sonucunda teklif onaylanacak ve müşteriye onay bilgi maili gönderilecektir.Devam etmek istiyor musunuz?",function(){
-            wsPost('/wsoffer/updateoffercase', {
-                _id: offerId,
-                status: status,
-                acceptPerson: acceptPerson,
-                forwardingInfo: forwardingInfo,
-                acceptOfferDate: acceptOfferDate
-            }, function(error, response) {
-                if (error) {
-                    console.log(error);
-                    return;
-                }
-                var optionPdf = {
-                    pageUrl: 'http://localhost:3000/teklif_yazdir?id=' + offerId + '&code=' + $('#inpFirmCode').val(),
-                    pageName: 'offer_' + offerId + '.pdf'
-                };
-                wsPost('wscreatepdf', optionPdf, function(errorPdf, responsePdf) {
-                    if (errorPdf) {
-                        console.log(errorPdf);
+            if($('#inpCustomerMail').val() != ''){
+                wsPost('/wsoffer/updateoffercase', {
+                    _id: offerId,
+                    status: status,
+                    acceptPerson: acceptPerson,
+                    forwardingInfo: forwardingInfo,
+                    acceptOfferDate: acceptOfferDate
+                }, function(error, response) {
+                    if (error) {
+                        console.log(error);
                         return;
                     }
-                    wsPost('wssendmail', {
-                        attachs: responsePdf,
-                        mailTo: $('#inpCustomerMail').val()
-                    }, function(errorMail, responseMail) {
+                    $('#modalAcceptOffer').modal('hide');
+                    $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>Onaylaniyor...</h1>' }); 
+                    var optionPdf = {
+                        pageUrl: 'http://localhost:3000/teklif_yazdir?id=' + offerId + '&code=' + $('#inpFirmCode').val(),
+                        pageName: 'offer_' + offerId + '.pdf'
+                    };
+                    wsPost('wscreatepdf', optionPdf, function(errorPdf, responsePdf) {
                         if (errorPdf) {
-                            console.log(errorMail);
+                            alertify.error(errorPdf);
+                            $.unblockUI();
                             return;
                         }
-                        alertify.success('Teklif başarı ile onaylandı ve müşteriye onay bilgi maili gönderildi.');
-                        console.log(responseMail);
+                        wsPost('wssendmail', {
+                            attachs: responsePdf,
+                            mailTo: $('#inpCustomerMail').val()
+                        }, function(errorMail, responseMail) {
+                            if (errorPdf) {
+                                alertify.error(errorMail);
+                                $.unblockUI();
+                                return;
+                            }
+                            $.unblockUI();
+                            alertify.success('Teklif başarı ile onaylandı ve müşteriye onay bilgi maili gönderildi.');
+                        });
                     });
-                });
-              });
+                  });
+            }else{
+                alertify.error('Lutfen gecerli bir mail adresi giriniz.');
+            }
             },function(){
                 alertify.error('Teklif onayı iptal edildi.');
             });
