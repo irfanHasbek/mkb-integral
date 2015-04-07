@@ -89,20 +89,6 @@
                                                     </div>                                                
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-10 col-md-offset-1">
-                                                    <label>Vade (Gün)</label> 
-                                                    <div class="input-group">
-                                                        <select id="slTime" name="time" class="form-control">
-                                                            <option style="padding-left:0px;" >Seçiniz</option>
-                                                            <%for(var i = 0; i < credits.length; i++){%>
-                                                                <option <%if(operation == 'update' && product.time == credits[i].percent){%>selected<%}%> value="<%=credits[i].percent%>"><%=credits[i].credit%></option>
-                                                            <%}%>
-                                                        </select>
-                                                        <span class="input-group-addon">Gün</span>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">

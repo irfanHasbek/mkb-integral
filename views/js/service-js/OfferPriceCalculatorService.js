@@ -5,7 +5,7 @@ function OfferPriceCalculatorService(){
 }
 
 OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
-    if(info.productType == 'dikdörtgen'){
+    if(info.productType == 'Dikdörtgen'){
         productPriceModel.findOne({ productId : info.productId ,dimensionType : info.productType }, function(error, response){
             if(error){
                 callback(false, response);
@@ -30,8 +30,6 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 var choosenPrice = parseFloat(priceArr[0].price);
                 //console.log('price : ' + priceArr[0].price);
                 choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
-
-                choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.productCredit) / 100));
 
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.montageCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));
@@ -70,8 +68,6 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 priceArr.keySort(sorto);
                 var choosenPrice = parseFloat(priceArr[0].price);
                 choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
-
-                choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.productCredit) / 100));
 
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.montageCost) / 100));
                 choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));

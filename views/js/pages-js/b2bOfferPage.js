@@ -6,7 +6,7 @@ function clickHandlers() {
         $('#inpCap').attr('disabled', 'disabled');
         $('#inpEn').removeAttr('disabled');
         $('#inpBoy').removeAttr('disabled');
-        $('#inpSizeType').val('dikdörtgen');
+        $('#inpSizeType').val('Dikdörtgen');
     });
 
     $('#btnCir').click(function(e) {
@@ -16,7 +16,7 @@ function clickHandlers() {
         $('#inpCap').removeAttr('disabled');
         $('#inpEn').attr('disabled', 'disabled');
         $('#inpBoy').attr('disabled', 'disabled');
-        $('#inpSizeType').val('daire');
+        $('#inpSizeType').val('Dairesel');
     });
 
     $('#btnAddBasket').on('click', function() {
@@ -37,13 +37,13 @@ function clickHandlers() {
             lineDiscount: 0,
             productPrice: ''
         }
-        if ($('#inpSizeType').val() == 'dikdörtgen') {
-            basketItem.productSizeType = 'dikdörtgen';
+        if ($('#inpSizeType').val() == 'Dikdörtgen') {
+            basketItem.productSizeType = 'Dikdörtgen';
             basketItem.productSizeWidthOrDiameter = $('#inpEn').val();
             basketItem.productSizeLength = $('#inpBoy').val();
             basketItem.productSizeHeight = $('#inpYukseklik').val();
         } else {
-            basketItem.productSizeType = 'daire';
+            basketItem.productSizeType = 'Dairesel';
             basketItem.productSizeWidthOrDiameter = $('#inpCap').val();
             basketItem.productSizeLength = $('#inpUzunluk').val();
         }
@@ -62,7 +62,7 @@ function clickHandlers() {
             H: 0,
             L: 0
         };
-        if (info.productType == 'dikdörtgen') {
+        if (info.productType == 'Dikdörtgen') {
             info.W = basketItem.productSizeWidthOrDiameter;
             info.H = basketItem.productSizeHeight;
             info.L = basketItem.productSizeLength;
@@ -122,7 +122,7 @@ function fillItemToBasket(item) {
     var tdProduct = $('<td>' + item.productGroup + ' - ' + item.productName + '</td>');
     var tdType = $('<td>' + item.productSizeType + '</td>');
     var tdSize = '';
-    if (item.productSizeType == 'dikdörtgen') {
+    if (item.productSizeType == 'Dikdörtgen') {
         tdSize = $('<td>' + item.productSizeWidthOrDiameter + ' x ' + item.productSizeHeight + ' x ' + item.productSizeLength + '<font size="1" color="blue"> (genişlik*yükseklik*uzunluk)</font></td>');
     } else {
         tdSize = $('<td>' + item.productSizeWidthOrDiameter + ' x ' + item.productSizeLength + '<font size="1" color="blue"> (çap*uzunluk)</font></td>');

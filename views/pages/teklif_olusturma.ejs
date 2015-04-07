@@ -83,7 +83,7 @@
                                                                 <select name="customerId" id="selectCustomer" class="form-control">
                                                                     <option value="Ad Seçiniz" selected disabled>Ad Seçiniz</option>
                                                                     <%for(var i=0;i<customers.length;i++){%>
-                                                                    <option value="<%=customers[i]._id%>" discount='<%=customers[i].discountInfo%>' <%if(operation=='update' && customers[i]._id==offer.customerInfo.customerId){%>selected<%}%>><%=customers[i].customerName%></option>
+                                                                    <option value="<%=customers[i]._id%>" <%if(operation=='update' && customers[i]._id==offer.customerInfo.customerId){%>selected<%}%>><%=customers[i].customerName%></option>
                                                                     <%}%>
                                                                 </select>
                                                                 <input name="customerName" id="inpCustName" style="display:none;" <%if(operation=="update"){%> value="<%=offer.customerInfo.customerName%>"<%}%>>
@@ -392,7 +392,7 @@
                                                                             <td><%=offer.basket[i].amount%></td>
                                                                             <td><%=offer.basket[i].productGroup%> - <%=offer.basket[i].productName%></td>
                                                                             <td><%=offer.basket[i].productSizeType%></td>
-                                                                            <%if(offer.basket[i].productSizeType=='dikdörtgen'){%>
+                                                                            <%if(offer.basket[i].productSizeType=='Dikdörtgen'){%>
                                                                             <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeHeight%> x <%=offer.basket[i].productSizeLength%><font size="1" color="blue">  (genişlik*yükseklik*uzunluk)</font></td>
                                                                             <%}else{%>
                                                                             <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeLength%> <font size="1" color="blue">  (çap*uzunluk)</font></td>

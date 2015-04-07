@@ -14,8 +14,8 @@ function clickHandlers(){
        $('#inpEn').removeAttr('disabled');
        $('#inpBoy').removeAttr('disabled');
        $('#inpUzunluk').removeAttr('disabled');
-       $('#inpSizeType').val('dikdörtgen');
-       $('#inpSizeTypeForPrice').val('dikdörtgen');
+       $('#inpSizeType').val('Dikdörtgen');
+       $('#inpSizeTypeForPrice').val('Dikdörtgen');
    });
     
    $('#btnCir').click(function(e){
@@ -27,8 +27,8 @@ function clickHandlers(){
         $('#inpEn').attr('disabled','disabled');
         $('#inpBoy').attr('disabled','disabled');
         $('#inpUzunluk').attr('disabled','disabled');
-        $('#inpSizeType').val('daire');
-        $('#inpSizeTypeForPrice').val('daire');
+        $('#inpSizeType').val('Dairesel');
+        $('#inpSizeTypeForPrice').val('Dairesel');
    });
     
     
@@ -96,7 +96,7 @@ function fillPriceTable(product, dimension, count){
     var tdCount = '<td class="text-center">' + count + '</td>';
     var tdType = '<td class="text-center">' + product.dimensionType + '</td>';
     var tdDimension;
-    if(product.dimensionType == 'dikdörtgen'){
+    if(product.dimensionType == 'Dikdörtgen'){
         tdDimension = '<td class="text-center">' + dimension.W + 'X' + dimension.H + 'X' + dimension.L + '</td>';
     }
     else{
@@ -151,12 +151,12 @@ function addPriceToTable(){
     }
     var type = $('#inpSizeType').val();
     product._id = $('#inpProductId').val();
-    if(type == 'dikdörtgen'){
-        product.dimensionType = 'dikdörtgen';   
+    if(type == 'Dikdörtgen'){
+        product.dimensionType = 'Dikdörtgen';   
     }else{
-        product.dimensionType = 'daire';
+        product.dimensionType = 'Dairesel';
     }
-    if(product.dimensionType == 'dikdörtgen'){
+    if(product.dimensionType == 'Dikdörtgen'){
         dimension.W = $('#inpEn').val();
         dimension.H = $('#inpBoy').val();
         dimension.L = $('#inpUzunluk').val();

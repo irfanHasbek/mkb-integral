@@ -5,7 +5,6 @@ var ProductSchema = new mongoose.Schema({
     group : String,
     code : String,
     name : String,
-    time : String,
     pictureUrl : String,
     description : String
 });

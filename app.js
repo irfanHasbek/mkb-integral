@@ -336,15 +336,9 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     console.log(err);
                     res.render("/pages/index",{layout : false, session : req.session});
                 }
-                crs.listAll(req.session.user.firmCode, function(stateCredit, responseCredit){
-                    if(!stateCredit){
-                       res.render('pages/index', {layout : false, session : req.session});   
-                       return; 
-                    }
-                    res.render('pages/musteri_grup_tanimlari', {layout : false, session : req.session, customerGroups : response, credits : responseCredit});  
-                });    
+                    res.render('pages/musteri_grup_tanimlari', {layout : false, session : req.session, customerGroups : response});      
             });
-     });
+        });
     //teklif konusu "abuzer" 03.03 start
     app.get("/teklif_konu_tanimlari" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/teklif_konu_tanimlari";
@@ -391,19 +385,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     console.log(err);
                     res.render("/pages/index",{layout : false, session : req.session});
                 }
-                crs.listAll(req.session.user.firmCode, function(stateCredit, responseCredit){
-                    if(!statePGroup){
-                        console.log(err);
-                        res.render("/pages/index",{layout : false, session : req.session});
-                    }
-                    //get product
+                //get product
                     productService.getProduct(req.param('id'), function(stateProduct, responseProduct){
                         if(!statePGroup){
                             console.log(err);
                             res.render("/pages/index",{layout : false, session : req.session});
                         }
-                        res.render('pages/urun_tanimlari', {layout : false, session : req.session, operation : 'update', groups : responsePGroup, credits : responseCredit, product : responseProduct});   
-                    });
+                        res.render('pages/urun_tanimlari', {layout : false, session : req.session, operation : 'update', groups : responsePGroup, product : responseProduct});
                 });
             }); 
         }else{
@@ -412,14 +400,8 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     console.log(err);
                     res.render("/pages/index",{layout : false, session : req.session});
                 }
-                crs.listAll(req.session.user.firmCode, function(stateCredit, responseCredit){
-                    if(!statePGroup){
-                        console.log(err);
-                        res.render("/pages/index",{layout : false, session : req.session});
-                    }
-                    //get product
-                    res.render('pages/urun_tanimlari', {layout : false, session : req.session, operation : 'add', groups : responsePGroup, credits : responseCredit});   
-                });
+                //get product
+                    res.render('pages/urun_tanimlari', {layout : false, session : req.session, operation : 'add', groups : responsePGroup});
             });   
         }
     });

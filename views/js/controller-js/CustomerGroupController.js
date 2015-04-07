@@ -14,8 +14,6 @@ module.exports = {
     addCustomerGroup : function(req,res,next){
         var custGroupObj={
                 groupName:req.body.groupName,
-                credit : req.body.groupCredit,
-                discount : req.body.groupDiscount,
                 setBy:req.session.user.name+" "+req.session.user.surname,
                 firmCode:req.session.user.firmCode
          };

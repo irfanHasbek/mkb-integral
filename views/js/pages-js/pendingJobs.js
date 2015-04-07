@@ -45,7 +45,7 @@ function fillTable(response){
             var tdCustName = $('<td>' + response[i].customerInfo.customerName + '</td>');
             var tdPrductName = $('<td>' + response[i].basket[j].productName + '</td>');
             var tdSize="";
-               if(response[i].basket[j].productSizeType=="dikdörtgen"){
+               if(response[i].basket[j].productSizeType=="Dikdörtgen"){
                  tdSize = $('<td>' + response[i].basket[j].productSizeWidthOrDiameter +" x " +response[i].basket[j].productSizeLength + " x " +response[i].basket[j].productSizeHeight + '</td>');
            }else{
                  tdSize = $('<td>' + response[i].basket[j].productSizeWidthOrDiameter +" x " + response[i].basket[j].productSizeLength+'</td>');

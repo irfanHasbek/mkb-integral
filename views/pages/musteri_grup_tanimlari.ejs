@@ -36,27 +36,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
-                                                        <label >Vade</label>
-                                                        <select name="groupCredit" id="slctCredit" class="form-control" required>
-                                                            <option disabled selected value="">Vade Seçiniz</option>
-                                                            <%for(var i = 0; i < credits.length; i++){%>
-                                                                <option value="<%=credits[i].credit%> gün -% <%=credits[i].percent%>"><%=credits[i].credit%>-% <%=credits[i].percent%></option>
-                                                            <%}%>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
-                                                        <label>İskonto</label>
-                                                        <input type="number" min="0" step="1" class="form-control" name="groupDiscount"  placeholder="İskonto Giriniz" required>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer">
                                             <div class="text-center">
@@ -81,8 +60,6 @@
                                             <tr style="border-bottom:3px solid #3c8dbc;">
                                                 <th class="text-center" style="width: 40px">#</th>
                                                 <th>Adı</th>
-                                                <th>Vade</th>
-                                                <th>İskonto</th>
                                                 <th>İşlemi Yapan</th>
                                                 <th class="text-center" style="width: 100px"></th>
                                             </tr>
@@ -91,8 +68,6 @@
                                             <tr id="<%=customerGroups[i]._id%>">
                                                 <td class="text-center"><%=i+1%>.</td>
                                                 <td><%=customerGroups[i].groupName%></td>
-                                                <td><%=customerGroups[i].credit%></td>
-                                                <td>% <%=customerGroups[i].discount%></td>
                                                 <td><%=customerGroups[i].setBy%></td>
                                                 <td st id="<%=customerGroups[i]._id%>">
                                                     <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>

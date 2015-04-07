@@ -8,7 +8,6 @@ function createProduct(type, req){
         group : req.body.group,
         code : req.body.code,
         name : req.body.name,
-        time : req.body.time,
         pictureUrl : req.body.pictureUrl,
         description : req.body.description
      };

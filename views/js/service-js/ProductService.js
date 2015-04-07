@@ -16,7 +16,7 @@ ProductService.prototype.addNew = function(product, callback){
         }
         var price={
             productId : addedProduct._id,
-            dimensionType : '',
+            dimensionType : 'Dikdörtgen',
             dimension : []
          };
         ps.addNew(price, function(state,response){
