@@ -177,7 +177,8 @@ function clickHandlers() {
                 ownerId: $('#slctActivityOwnerNote option:selected').val(),
                 ownerName: $('#slctActivityOwnerNote option:selected').text()
             },
-            activityStatus: 'unread'
+            activityStatus: false,
+            note : ''
         }
         if (offerId) {
             wsPost('/wsoffer/addactivity', {
@@ -203,7 +204,8 @@ function clickHandlers() {
                 ownerId: $('#slctActivityOwnerRemember option:selected').val(),
                 ownerName: $('#slctActivityOwnerRemember option:selected').text()
             },
-            activityStatus: 'unread'
+            activityStatus: false,
+            note : ''
         }
         if (offerId) {
             wsPost('/wsoffer/addactivity', {

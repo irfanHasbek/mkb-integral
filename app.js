@@ -1162,6 +1162,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsoffer/updateoffercase", CreateOfferController.updateOfferCase);
     app.post("/wsoffer/addactivity", CreateOfferController.addActivity);
     app.post("/wsoffer/removeactivity", CreateOfferController.removeActivity);
+    app.post("/wsoffer/updateActivity", CreateOfferController.updateActivity);
     //end
     //user permission
     var UserPermissions = require('./views/js/service-js/UserPermissionService');

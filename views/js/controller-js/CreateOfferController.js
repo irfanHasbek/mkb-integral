@@ -416,5 +416,20 @@ module.exports = {
                 response: response
             });
         });
+    },
+    updateActivity : function(req, res){
+        cos.updateActivity(req.body.activityId, req.body.status, req.body.note, function(state, response){
+             if(!state){
+                res.send({
+                    state: state,
+                    response: Error
+                });
+                return;
+            }
+            res.send({
+                state: state,
+                response: response
+            });
+        });
     }
 }

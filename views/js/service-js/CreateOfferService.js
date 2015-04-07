@@ -242,4 +242,17 @@ CreateOfferService.prototype.searchandGetCount = function(criteria, callback){
     });
 }
 
+CreateOfferService.prototype.updateActivity = function(activityId, status, note, callback){
+    console.log('id :' + activityId);
+    console.log('status : ' + status);
+    console.log('note : ' + note);
+    CreateOfferModel.update({ 'activities._id' : activityId }, {$set : { 'activities.$.activityStatus' : status, 'activities.$.note' : note}},        function(error, affectedRow){
+         if(error){
+            callback(false, error);
+            return;
+         }
+         callback(true, affectedRow);
+    });
+}
+
 module.exports = CreateOfferService;

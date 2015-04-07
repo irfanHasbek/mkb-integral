@@ -72,7 +72,8 @@ var OfferScheme = new mongoose.Schema({
             ownerId : String,
             ownerName : String
         },
-        activityStatus : String
+        activityStatus : Boolean,
+        note : String
     }],
     forwardingInfo : {
         forwardId : String,
