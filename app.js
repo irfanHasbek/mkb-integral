@@ -992,6 +992,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
     app.get('/installation/addRole', InstallationController.addRole);
+    app.get('/installation/addcityandstate', InstallationController.addCityAndState);
     app.post('/login', AccountController.login);
     app.post('/customerlogin', AccountController.customerLogin);
     app.get('/logout', AccountController.logout);

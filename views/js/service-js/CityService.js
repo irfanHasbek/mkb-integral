@@ -12,6 +12,16 @@ CityService.prototype.addNew = function(City, callback){
         callback(true,addedCity);
     });
 }
+CityService.prototype.bulkInsert = function(City, callback){
+    var newCity=new CityModel(City);
+    newCity.save(function(err, addedCity){
+        if(err){
+            callback(false,error);
+            return;
+        }
+        callback(true,addedCity);
+    });
+}
 CityService.prototype.removeAll = function(callback){
     CityModel.remove(function(error){
         if(error){

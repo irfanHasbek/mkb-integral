@@ -1,7 +1,8 @@
 var UserService = require("../service-js/UserService");
 var FirmService = require("../service-js/FirmService");
 var RoleService = require("../service-js/ActDefinitionService");
-
+var ConvertService = require("../service-js/ConvertService");
+var FileSystem = require('fs');
 
 var us = new UserService();
 var fs = new FirmService();
@@ -88,5 +89,14 @@ module.exports = {
             });     
         }
         res.send({ state : 'success'});
+    },addCityAndState : function(req, res){
+        var fileName = "IL_ILCE_LISTESI.csv";
+        ConvertService.C2JCityState(fileName, function(state, response){
+            if(!state){
+                res.send({ state : 'false'});
+                return;
+            }
+            res.send({resp : response});
+        });
     }
 }
