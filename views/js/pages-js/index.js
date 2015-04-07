@@ -7,7 +7,7 @@ function formHandlers(){
 function otherScripts(){
     $(function() {
         wsPost('/wsoffer/search', {search : {
-            'activities.owner.ownerName' : $('#inpUsername').val()
+            'activities.owner.ownerName' : $('#inpUsernameForIndex').val()
         }}, function(error, response){
             var newEvents = [];
             if(response.response.length > 0){

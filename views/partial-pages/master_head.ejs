@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
     </a>
     <input id='inpUserRole' value='<%=session.user.role%>' style="display:none">
-    <input id='inpUsername' value='<%=session.user.name%> <%=session.user.surname%>' style="display:none">
+    <input id='inpUsernameForIndex' value='<%=session.user.name%> <%=session.user.surname%>' style="display:none">
     <div class="navbar-right">
         <ul class="nav navbar-nav">
            <%if(session.currentPage == '/index'){%> 
@@ -69,19 +69,19 @@
                             <%=session.user.name%> <%=session.user.surname%>
                             <small>
                                 <%if(session.user.firmCode == 'administrator'){%>
-                                    Administrator / Yönetici
+                                    Administrator / <%=session.user.role%>
                                 <%}%>
                                 <%if(session.user.firmCode == 'mkbAlize'){%>
-                                    ALIZE / Yönetici
+                                    ALIZE / <%=session.user.role%>
                                 <%}%>
                                 <%if(session.user.firmCode == 'mkbEntalpi'){%>
-                                    ENTALPI / Yönetici
+                                    ENTALPI / <%=session.user.role%>
                                 <%}%>
                                 <%if(session.user.firmCode == 'mkbIntegral'){%>
-                                    INTEGRAL / Yönetici
+                                    INTEGRAL / <%=session.user.role%>
                                 <%}%>
                                 <%if(session.user.firmCode == 'mkbDamla'){%>
-                                    DAMLA / Yönetici
+                                    DAMLA / <%=session.user.role%>
                                 <%}%>
                             </small>
                         </p>

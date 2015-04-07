@@ -250,9 +250,8 @@ module.exports = {
         });
     },
     getCustomerDefinition: function(req, res) {
-        cds.getCustomerDefinition({
-            _id: req.body
-        }, function(state, response) {
+        cds.getCustomerDefinition(req.body._id,
+        function(state, response) {
             if (!state) {
                 res.send({
                     state: state,

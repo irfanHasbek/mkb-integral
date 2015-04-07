@@ -42,8 +42,8 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <label for="">Müşteri Seçiniz</label>
-                                                                    <select class="select form-control" name="_id">
-                                                                       <option value="Ürün Seçiniz" selected disabled>Müşteri Seçiniz</option>
+                                                                    <select id="slctCustomerId" class="select form-control" name="_id">
+                                                                       <option value="" selected disabled>Müşteri Seçiniz</option>
                                                                        <%for(var i = 0; i < customers.length; i++){%>
                                                                            <option value="<%=customers[i]._id%>"><%=customers[i].customerName%></option>
                                                                        <%}%>
@@ -54,14 +54,14 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <label for="">Kullanıcı Adı</label>
-                                                                    <input name="userName" type="text" class="form-control" placeholder="Kullanıcı Adı Giriniz">
+                                                                    <input id="inpCustUsername" name="userName" type="email" class="form-control" placeholder="Kullanıcı Adı Giriniz">
                                                                 </div>
                                                             </div>
                                                             <br>
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label for="">Şifre</label>
-                                                                    <input name="password" type="password" class="form-control" placeholder="Şifre Giriniz">
+                                                                    <input id="inpCustPassword" name="password" type="password" class="form-control" placeholder="Şifre Giriniz">
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -69,7 +69,7 @@
                                                                 <div class="col-md-4">
                                                                     <label for="">Web Erişim</label>
                                                                     <p>
-                                                                        <input name="webAccess" type="checkbox" class="form-control" checked>
+                                                                        <input id="cbWebAccess" name="webAccess" type="checkbox" class="form-control">
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -78,7 +78,7 @@
                                                                 <div class="col-md-4">
                                                                     <label for="">Webden Sipariş</label>
                                                                     <p>
-                                                                        <input name="webOrder" type="checkbox" class="form-control" checked>
+                                                                        <input id="cbWebOrder" name="webOrder" type="checkbox" class="form-control">
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -101,6 +101,7 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
        <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
        <script src="../js/pages-js/AccountInfo.js"></script>
     </body>
 </html>
