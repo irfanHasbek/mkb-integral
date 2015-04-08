@@ -20,7 +20,6 @@
                         <li class="active">Müşteri Tanımı</li>
                     </ol>
                 </section>
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -116,11 +115,31 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>GSM</label>
-                                                                    <input id="inpCompetentGsm" type="text" name="custDefCompetentGsm" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz" value="">
+                                                                    <input id="inpCompetentGsm" type="text" name="custDefCompetentGsm" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="GSM Giriniz" value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tel-1</label>
+                                                                    <input id="inpCompetentTel1" type="text" name="custDefCompetentTel1" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon 1 Giriniz" value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tel-2</label>
+                                                                    <input id="inpCompetentTel2" type="text" name="custDefCompetentTel2" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon 2 Giriniz" value="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >E-mail</label>
                                                                     <input id="inpCompetentEmail" type="email" name="custDefCompetentEmail" class="form-control"  placeholder="E-mail Giriniz" value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >E-mail - 2</label>
+                                                                    <input id="inpCompetentEmail2" type="email" name="custDefCompetentEmail2" class="form-control"  placeholder="E-mail 2 Giriniz" value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >E-mail - 3</label>
+                                                                    <input id="inpCompetentEmail3" type="email" name="custDefCompetentEmail3" class="form-control"  placeholder="E-mail 3 Giriniz" value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Aciklama / Not</label>
+                                                                    <textarea id="txtNot" name="not" class="form-control"  placeholder="Not veya aciklama giriniz"></textarea>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
@@ -147,7 +166,12 @@
                                                                             <th>Yetkili Adı</th>
                                                                             <th>Görev</th>
                                                                             <th>GSM</th>
+                                                                            <th>Tel-1</th>
+                                                                            <th>Tel-2</th>
                                                                             <th>E-mail</th>
+                                                                            <th>E-mail-2</th>
+                                                                            <th>E-mail-3</th>
+                                                                            <th>Not</th>
                                                                             <th style="width:100px"></th>
                                                                         </tr>
                                                                     </thead>
@@ -159,7 +183,12 @@
                                                                                     <td><%=respCustDef.competentInfo[i].name%></td>
                                                                                     <td><%=respCustDef.competentInfo[i].task%></td>
                                                                                     <td><%=respCustDef.competentInfo[i].gsm%></td>
+                                                                                    <td><%=respCustDef.competentInfo[i].tel1%></td>
+                                                                                    <td><%=respCustDef.competentInfo[i].tel2%></td>
                                                                                     <td><%=respCustDef.competentInfo[i].email%></td>
+                                                                                    <td><%=respCustDef.competentInfo[i].email2%></td>
+                                                                                    <td><%=respCustDef.competentInfo[i].email3%></td>
+                                                                                    <td><%=respCustDef.competentInfo[i].note%></td>
                                                                                     <td><a class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></a><span> </span><a class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></a></td>
                                                                                 </tr>    
                                                                           <%}%>
@@ -268,10 +297,24 @@
                                                     <div class="row">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <div class="box-body">
-                                                                <div class="form-group">
-                                                                    <label for="">Iskonto Bilgisi</label>
-                                                                    <input type="text" class="form-control" name="discountInfo" placeholder="Yuzde giriniz..." <%if(operation=='update'){%>value='<%=respCustDef.discountInfo%>'<%}%>>
-                                                                </div>
+                                                                <table class="table table-bordered setMechanisms">
+                                                                    <tr style="border-bottom:3px solid #3c8dbc;">
+                                                                        <th class="text-center" style="width: 40px">#</th>
+                                                                        <th>Ürün Grubu</th>
+                                                                        <th>Yuzde</th>
+                                                                        <th>İşlemi Yapan</th>
+                                                                    </tr>
+                                                                    <tbody>
+                                                                    <%for(var i=0;i<discounts.length;i++){%>
+                                                                        <tr>
+                                                                            <td class="text-center"><%=i+1%>.</td>
+                                                                            <td><%=discounts[i].productGroupName%></td>
+                                                                            <td><span>% </span><%=discounts[i].percent%></td>
+                                                                            <td><%=discounts[i].owner%></td>
+                                                                        </tr>
+                                                                    <%}%>
+                                                                    </tbody>
+                                                                </table>
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>

@@ -574,26 +574,32 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         if(req.param('id')!=0){
             cgs.listAll(req.session.user.firmCode,function(stateCustGrp,responseCustGrp){
                 if(!stateCustGrp){
-                 console.error(err);
+                 console.error(responseCustGrp);
                  res.render("/pages/index",{layout : false, session : req.session});
                 }
               userService.listCustomerAgent(req.session.user.firmCode,function(stateCustAgnt,responseCustAgnt){
                 if(!stateCustGrp){
-                     console.error(err);
+                     console.error(responseCustAgnt);
                      res.render("/pages/index",{layout : false, session : req.session});
                 }
                cityservice.listAll(function(stateCity,responseCity){
                 if(!stateCity){
-                    console.error(err);
+                    console.error(responseCity);
                     res.render("/pages/index",{layout : false, session : req.session});
                 }
                 custservice.getCustomerDefinition(req.param('id'),function(stateCustDef,responseCusetDef){
                      if(!stateCustDef){
-                         console.error(err);
+                         console.error(responseCusetDef);
                          res.render("/pages/index",{layout : false, session : req.session});
                       }  
-                    console.log("update girdi");
-                     res.render('pages/musteri_tanimi', {layout : false, session : req.session, respCustDef : responseCusetDef, respCustGrps : responseCustGrp, respCustAgnts : responseCustAgnt,respCity : responseCity,operation :"update"}); 
+                      console.log("update girdi");
+                      discountService.getDiscountOnlyCustomerId(req.param('id'), function(stateDiscount, responseDiscount){
+                         if(!stateDiscount){
+                            console.error(responseDiscount);
+                            res.render("/pages/index",{layout : false, session : req.session}); 
+                         }
+                         res.render('pages/musteri_tanimi', {layout : false, session : req.session, respCustDef : responseCusetDef, respCustGrps : responseCustGrp, respCustAgnts : responseCustAgnt,respCity : responseCity,operation :"update", discounts : responseDiscount}); 
+                      });
                    });
                });   
            });
@@ -1240,6 +1246,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post('/wsdiscount/remove', DiscountController.remove);
     app.get('/wsdiscount/removeall', DiscountController.removeAll);
     app.post('/wsdiscount/getdiscount', DiscountController.getDiscount);
+    app.post('/wsdiscount/getdiscountonlycustomerid', DiscountController.getDiscountOnlyCustomerId);
     app.get('/wsdiscount/listall', DiscountController.listAll);
     //end
     app.post("/wspricecalculate/calculate", function(req, res){

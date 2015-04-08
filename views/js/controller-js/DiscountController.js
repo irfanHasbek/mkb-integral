@@ -59,5 +59,14 @@ module.exports = {
             }
             res.send({state : state, response : response});
         })   
+    },
+    getDiscountOnlyCustomerId : function(req, res){
+        ds.getDiscount(req.body.customerId, function(state, response){
+            if(!state){
+                res.send({state : state, response : response});
+                return;
+            }
+            res.send({state : state, response : response});
+        })   
     }
 }

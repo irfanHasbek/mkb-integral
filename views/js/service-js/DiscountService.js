@@ -69,5 +69,17 @@ DiscountService.prototype.getDiscount = function(customerId, productGroupId, cal
         });   
     }   
 }
+DiscountService.prototype.getDiscountOnlyCustomerId = function(customerId, callback){
+    if(customerId && customerId != null){
+        DiscountModel.find({customerId : customerId}, function(error, foundedDiscount){
+            if(error){
+                console.log(error);
+                callback(false, error);
+                return;  
+            }
+            callback(true, foundedDiscount);
+        });   
+    }   
+}
 
 module.exports = DiscountService;

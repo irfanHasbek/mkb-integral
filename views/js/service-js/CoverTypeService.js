@@ -33,7 +33,7 @@ CoverTypeService.prototype.removeAll = function(callback){
     });
 }
 CoverTypeService.prototype.listAll = function(firmCode,callback){
-    CoverTypeModel.find({firmCode:firmCode}).sort({ orderCover : -1 }).exec(function(error, CoverTypes){
+    CoverTypeModel.find({firmCode:firmCode}).sort({ orderCover : -1, coverType : 1 }).exec(function(error, CoverTypes){
         if(error){
             callback(false, error);
             return;

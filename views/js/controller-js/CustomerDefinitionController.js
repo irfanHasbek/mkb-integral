@@ -13,7 +13,6 @@ function createCustomerDefinition(type, req) {
         password: "",
         webAccess: false,
         webOrder: false,
-        discountInfo: req.body.discountInfo,
         competentInfo: [],
         contactInfo: {
             address: req.body.custDefContactAddress,

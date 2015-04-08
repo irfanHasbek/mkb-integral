@@ -10,12 +10,16 @@ var CustomerDefinitionSchema = new mongoose.Schema({
     password :String,
     webAccess :Boolean,
     webOrder :Boolean,
-    discountInfo:String,
     competentInfo:[{
         name:String, 
         task : String, 
         gsm : String,
-        email : String
+        tel1 : String,
+        tel2 : String,
+        email : String,
+        email2 : String,
+        email3 : String,
+        note : String
       }],
     contactInfo:{
         address : String, 

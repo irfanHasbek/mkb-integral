@@ -4,20 +4,27 @@ function clickHandlers(){
             name : $('#inpCompetentName').val(),
             task : $('#inpCompetentTask').val(),
             gsm : $('#inpCompetentGsm').val(),
-            email : $('#inpCompetentEmail').val()
+            tel1 : $('#inpCompetentTel1').val(),
+            tel2 : $('#inpCompetentTel2').val(),
+            email : $('#inpCompetentEmail').val(),
+            email2 : $('#inpCompetentEmail2').val(),
+            email3 : $('#inpCompetentEmail3').val(),
+            note : $('#txtNot').val()
         }
         fillItemToCompetentInfo(CompetentInfoItem);
         var competentInfo;
         competentInfo= JSON.parse($('#inpCompetentInfo').val());
-        console.log("com : "+JSON.stringify(competentInfo));
         competentInfo.push(CompetentInfoItem);
-        console.log("2 "+JSON.stringify(competentInfo));
         $('#inpCompetentInfo').val(JSON.stringify(competentInfo));
-        console.log("3 "+$("#inpCompetentInfo").val());
         $('#inpCompetentName').val("");
         $('#inpCompetentTask').val("");
         $('#inpCompetentGsm').val("");
+        $('#inpCompetentTel1').val("");
+        $('#inpCompetentTel2').val("");
         $('#inpCompetentEmail').val("");
+        $('#inpCompetentEmail2').val("");
+        $('#inpCompetentEmail3').val("");
+        $('#txtNot').val("");$('#txtNot').text();
     });
     
     $('#tableCompetentInfo').on('click','.edit', function(){
@@ -30,7 +37,12 @@ function clickHandlers(){
         $('#inpCompetentName').val(arrCompetent[0]);
         $('#inpCompetentTask').val(arrCompetent[1]);
         $('#inpCompetentGsm').val(arrCompetent[2]);
-        $('#inpCompetentEmail').val(arrCompetent[3]);
+        $('#inpCompetentTel1').val(arrCompetent[3]);
+        $('#inpCompetentTel2').val(arrCompetent[4]);
+        $('#inpCompetentEmail').val(arrCompetent[5]);
+        $('#inpCompetentEmail2').val(arrCompetent[6]);
+        $('#inpCompetentEmail3').val(arrCompetent[7]);
+        $('#txtNot').val(arrCompetent[8]);$('#txtNot').text(arrCompetent[8]);
         $('#divAddCompetent').slideDown(800);
     });
     $("#btnEditCompetentInfo").click(function(){
@@ -39,7 +51,12 @@ function clickHandlers(){
             name : $('#inpCompetentName').val(),
             task : $('#inpCompetentTask').val(),
             gsm : $('#inpCompetentGsm').val(),
-            email : $('#inpCompetentEmail').val()
+            tel1 : $('#inpCompetentTel1').val(),
+            tel2 : $('#inpCompetentTel2').val(),
+            email : $('#inpCompetentEmail').val(),
+            email2 : $('#inpCompetentEmail2').val(),
+            email3 : $('#inpCompetentEmail3').val(),
+            note : $('#txtNot').val()
         };
         var competentInfo = JSON.parse($('#inpCompetentInfo').val());
         competentInfo[id-1]=CompetentInfoItem;
@@ -48,11 +65,22 @@ function clickHandlers(){
         tds.eq(1).text($('#inpCompetentName').val());
         tds.eq(2).text($('#inpCompetentTask').val());
         tds.eq(3).text($('#inpCompetentGsm').val());
-        tds.eq(4).text($('#inpCompetentEmail').val());
+        tds.eq(4).text($('#inpCompetentTel1').val());
+        tds.eq(5).text($('#inpCompetentTel2').val());
+        tds.eq(6).text($('#inpCompetentEmail').val());
+        tds.eq(7).text($('#inpCompetentEmail2').val());
+        tds.eq(8).text($('#inpCompetentEmail3').val());
+        tds.eq(9).text($('#txtNot').val());
         $('#inpCompetentName').val("");
         $('#inpCompetentTask').val("");
         $('#inpCompetentGsm').val("");
         $('#inpCompetentEmail').val("");
+        $('#inpCompetentTel1').val("");
+        $('#inpCompetentTel2').val("");
+        $('#inpCompetentEmail').val("");
+        $('#inpCompetentEmail2').val("");
+        $('#inpCompetentEmail3').val("");
+        $('#txtNot').val("");$('#txtNot').text();
         $("#btnAddCompetentInfo").attr("style","display:inline;");
         $("#divEditCompetentInfo").attr("style","display:none;");
     });
@@ -187,10 +215,15 @@ function fillItemToCompetentInfo(item){
     var tdName = $('<td>' + item.name + '</td>');
     var tdTask = $('<td>' +item.task+ '</td>');
     var tdGsm = $('<td>' + item.gsm + '</td>');
-    var tdEmail= $('<td>' + item.email+ '</td>');
+    var tdTel1 = $('<td>' + item.tel1 + '</td>');
+    var tdTel2 = $('<td>' + item.tel2 + '</td>');
+    var tdEmail = $('<td>' + item.email + '</td>');
+    var tdEmail2 = $('<td>' + item.email2 + '</td>');
+    var tdEmail3 = $('<td>' + item.email3 + '</td>');
+    var tdNote = $('<td>' + item.note + '</td>');
     var tdButton = $('<td><a class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></a><span> </span><a class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></a></td>');
     
-    tr.append(tdCount);tr.append(tdName);tr.append(tdTask);tr.append(tdGsm);tr.append(tdEmail);tr.append(tdButton);
+    tr.append(tdCount);tr.append(tdName);tr.append(tdTask);tr.append(tdGsm);tr.append(tdTel1);tr.append(tdTel2);tr.append(tdEmail);tr.append(tdEmail2);tr.append(tdEmail3);tr.append(tdNote);tr.append(tdButton);
     table.append(tr);
 }
 
