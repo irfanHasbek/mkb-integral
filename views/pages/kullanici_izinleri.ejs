@@ -49,80 +49,193 @@
                                                     <div>
                                                         <div>
                                                             <div class="box-body">
+                                                                                                                            
+                                                                <table class="table ">
+                                                                    <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
+                                                                        <th colspan="5"><h4> <i class="fa fa-folder-open"></i> TANIMLAMALAR</h4></th>
+                                                                    </tr>
+                                                                    <tr id='wscity'>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> İl İlçe Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r11" class="form-control il_ilce_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r12" class="form-control addnew"> İl Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r13" class="form-control addtown"> İlçe Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r14" class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr id="wsfirm">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Firma Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r21" class="form-control firma_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r22" class="form-control update1"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r23" class="form-control update2"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wscustomergroup">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Grup Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r31" class="form-control musteri_grup_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r32" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r33" class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wscredit">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Vade Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r41" class="form-control vade_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r42" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r43" class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wsoffertopic">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Teklif Konu Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r51" class="form-control vade_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r52" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r53" class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wsofferstatus">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Teklif Durum Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r61" class="form-control vade_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r62" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r63" class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wslosingreason">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kaybetme Nedenleri </td>
+                                                                        <td class="text-center"><input type="checkbox" name="r71" class="form-control vade_tanimlari"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r72" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r73" class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </table>
+                                                                
                                                                 <table class="table table-hover ">
                                                                     <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
-                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> KULLANICILAR</h4></th>
+                                                                        <th colspan="5"><h4> <i class="fa fa-folder-open"></i> KULLANICILAR</h4></th>
                                                                     </tr>
                                                                     <tr id="wsactdefinition">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Rol Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r11" class="form-control rol_tanimi" > Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r12" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r13" class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r81" class="form-control rol_tanimi" > Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r82" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r83" class="form-control remove"> Silme</td>
+                                                                        <td></td>
                                                                     </tr>
                                                                     <tr id="wstaskdefinition">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Görev Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r21" class="form-control gorev_tanimi"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r22" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r23" class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r91" class="form-control gorev_tanimi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r92" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r93" class="form-control remove"> Silme</td>
+                                                                        <td></td>
                                                                     </tr>
                                                                     <tr id="wsuser">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kullanıcı Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r31" class="form-control kullanici_tanimi"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r32" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r33" class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r101" class="form-control kullanici_tanimi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r102" class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r103" class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r104" class="form-control getwithid"> Düzenleme</td>
+                                                                        
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="wspermission">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kullanıcı İzinleri </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r41" class="form-control kullanici_izinleri"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r42" class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r43" class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r111" class="form-control kullanici_izinleri"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name="r112" class="form-control update"> Düzenleme</td>
+                                                                        <td></td>
+                                                                        <td></td>
                                                                     </tr>
                                                                 </table>
                                                                 
                                                                 <table class="table ">
                                                                     <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
-                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> TANIMLAMALAR</h4></th>
+                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> ÜRÜNLER</h4></th>
                                                                     </tr>
-                                                                    <tr id='wscity'>
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> İl İlçe Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r51" class="form-control il_ilce_tanimlari"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r52" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r53" class="form-control remove"> Silme</td>
+                                                                    <tr id="wsproductgroupdefinition">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Gruplar Tanımı </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r121' class="form-control urun_grup_tanimi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r122' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r123' class="form-control remove"> Silme</td>
                                                                     </tr>
-                                                                    <tr id="wsfirm">
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Firma Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r61" class="form-control firma_tanimlari"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r62" class="form-control update1"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r63" class="form-control update2"> Silme</td>
+                                                                    <tr id="wsmontagetype">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Montaj Şekli </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r131' class="form-control montaj_sekli"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r132' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r133' class="form-control remove"> Silme</td>
                                                                     </tr>
-                                                                    <tr id="wscustomergroup">
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Grup Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r71" class="form-control musteri_grup_tanimlari"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r72" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r73" class="form-control remove"> Silme</td>
+                                                                    <tr id="wscovertype">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kaplama Şekli </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r141' class="form-control kaplama_sekli"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r142' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r143' class="form-control remove"> Silme</td>
                                                                     </tr>
-                                                                    <tr id="wscredit">
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Vade Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name="r81" class="form-control vade_tanimlari"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r82" class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name="r83" class="form-control remove"> Silme</td>
+                                                                    6tr id="wssetmechanism">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ayar Mekanizması </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r151' class="form-control ayar_mekanizmasi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r152' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r153' class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr id="wsaccessory">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Aksesuar </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r161' class="form-control aksesuar"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r162' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r163' class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr id="wsbodytype">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kasa Tipi </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r171' class="form-control kasa_tipi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r172' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r173' class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr id="wsproduct">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Tanımları </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r181' class="form-control urun_tanimlari?id=0"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r182' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"></td>
+                                                                    </tr>
+                                                                    <tr id="wsproductprice">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Fiyat Tanımı </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r191' class="form-control urun_fiyat_tanimi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r192' class="form-control add"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r193' class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr id="wsproduct">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Listeleme </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r201' class="form-control urun_listeleme"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r203' class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"></td>
                                                                     </tr>
                                                                 </table>
+                                                                
                                                                 <table class="table ">
                                                                     <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
-                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> MÜŞTERİ YÖNETİMİ</h4></th>
+                                                                        <th colspan="5"><h4> <i class="fa fa-folder-open"></i> MÜŞTERİ YÖNETİMİ</h4></th>
                                                                     </tr>
                                                                     <tr id="wscustomerdefinition">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Tanımı </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r91' class="form-control musteri_tanimi"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r92' class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r93' class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r211' class="form-control musteri_tanimi?id=0"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r212' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r213' class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r213' class="form-control update"> Düzenle</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Listesi </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r101' class="form-control musteri_listesi"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r102' class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r103' class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r221' class="form-control musteri_listesi"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r222' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r223' class="form-control"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr id="wsdiscount">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri İskonto </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r231' class="form-control musteri_iskonto"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r232' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r233' class="form-control remove"> Silme</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </table>
+                                                                
+                                                                <table class="table ">
+                                                                    <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
+                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> B2B YÖNETİM</h4></th>
+                                                                    </tr>
+                                                                    <tr id="wscustomerdefinition">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Hesap Bilgileri</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r241' class="form-control hesap_bilgileri"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r242' class="form-control getcustomerdefinition"> Görme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r243' class="form-control updateb2binformation"> Düzenleme</td>
                                                                     </tr>
                                                                 </table>
                                                                 
@@ -132,53 +245,73 @@
                                                                     </tr>
                                                                     <tr id="wsoffer">
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Teklif Oluşturma </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r111' class="form-control teklif_olusturma"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r112' class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r113' class="form-control remove"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r251' class="form-control teklif_olusturma?id=0"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r252' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Açık Teklifler </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r121' class="form-control acik_teklifler"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r122' class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r123' class="form-control"> Silme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r261' class="form-control acik_teklifler"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r262' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r263' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kapalı Teklifler </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r131' class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r132' class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r133' class="form-control"> Silme</td>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kapalı Teklifler > Kazanılmış </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r271' class="form-control kazanilmis"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r272' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r273' class="form-control"> Silme</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Kapalı Teklifler > Kaybedilmiş </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r281' class="form-control kaybedilmis"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r282' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r283' class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
                                                                 
                                                                 <table class="table ">
                                                                     <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
-                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> ÜRÜNLER</h4></th>
+                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> İŞ EMİRLERİ</h4></th>
                                                                     </tr>
-                                                                    <tr id="wsproductgroupdefinition">
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Grupları </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r141' class="form-control urun_grup_tanimi"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r142' class="form-control addnew"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r143' class="form-control remove"> Silme</td>
-                                                                    </tr>
-                                                                    <tr id="wsproduct">
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Tanımları </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r151' class="form-control urun_tanimlari"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r152' class="form-control add"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r153' class="form-control remove"> Silme</td>
+                                                                    <tr id="">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Onay Bekleyen </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r291' class="form-control teklif_olusturma"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r292' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r293' class="form-control remove"> Silme</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Resimleri </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r161' class="form-control"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r162' class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r163' class="form-control"> Silme</td>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Devam Eden </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r301' class="form-control acik_teklifler"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r302' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r303' class="form-control"> Silme</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Listeleme </td>
-                                                                        <td class="text-center"><input type="checkbox" name='r171' class="form-control urun_listeleme"> Giriş</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r172' class="form-control"> Ekleme</td>
-                                                                        <td class="text-center"><input type="checkbox" name='r173' class="form-control"> Silme</td>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Tamamlanmış </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r311' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r312' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r313' class="form-control"> Silme</td>
                                                                     </tr>
                                                                 </table>
+                                                                
+                                                                <table class="table ">
+                                                                    <tr style="background-color:#f3f2f2; border-bottom:3px solid #ddd">
+                                                                        <th colspan="4"><h4> <i class="fa fa-folder-open"></i> RAPORLAR</h4></th>
+                                                                    </tr>
+                                                                    <tr id="">
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Müşteri Raporu </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r321' class="form-control teklif_olusturma"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r322' class="form-control addnew"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r323' class="form-control remove"> Silme</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="max-width:100px"> <i class="fa fa-file" style="padding:0 20px 0 20px;"></i> Ürün Raporu </td>
+                                                                        <td class="text-center"><input type="checkbox" name='r331' class="form-control"> Giriş</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r332' class="form-control"> Ekleme</td>
+                                                                        <td class="text-center"><input type="checkbox" name='r333' class="form-control"> Silme</td>
+                                                                    </tr>
+                                                                </table>
+                                                                
+                                                                
                                                             </div><!-- /.box-body -->
                                                         </div><!-- /.box -->
                                                     </div>
