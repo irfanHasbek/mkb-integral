@@ -133,6 +133,52 @@
                 </section><!-- /.content -->
             </aside>
         </div><!-- ./wrapper -->
+        <!---Modal window--->
+        
+        <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-warning">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4> Aktivite İşlem</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Sayın<strong> Sinan BORA ;</strong></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p> Aktiviteyi tamamladiniz mi?</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select name="" id="" class="form-control">
+                                    <option value="" disabled selected>Seçiniz</option>
+                                    <option value="">Tamamladım </option>
+                                    <option value="">Tamamlamadım</option>
+                                    <option value="">Üzerinde çalışıyorum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                 <textarea class="form-control" id="" rows="3" placeholder="Açıklama Giriniz" style="resize:vertical;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-flat " >Kaydet</button>
+                        <button type="button" class="btn btn-default btn-flat " data-dismiss="modal">Kapat</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+        
        <%include ../partial-pages/script.ejs%>       
        <script src="../js/utility-js/jquery-ui-1.10.3.min.js"></script>
        <script src="../js/utility-js/jquery.blockUI.js"></script>

@@ -57,30 +57,7 @@ function otherScripts(){
                 defaultView: 'month',
                 lang:'tr',
                 eventClick : function(event){
-                    var activityNote = '';
-                    alertify.prompt("Sayin " + event.content + ";<br /> Aktiviteyi tamamladiniz mi?", "Not",
-                      function(evt, value){
-                        wsPost('/wsoffer/updateActivity', {activityId : event.activityId, status : true, note : value}, function(errorOk, respOk){
-                            if(errorOk){
-                                alertify.error('Aktivite guncellenemedi. Hata : ' + respOk);
-                                return;
-                            }
-                            alertify.success('Gorev tamamlandi olarak notunuzla birlikte kaydedildi.'); 
-                            event.backgroundColor = '#0f0';
-                            $('#calendar').fullCalendar('rerenderEvents');
-                        });
-                      },
-                      function(){
-                        wsPost('/wsoffer/updateActivity', {activityId : event.activityId, status : false, note : event.note}, function(errorCancel, respCancel){
-                            if(errorCancel){
-                                alertify.error('Aktivite guncellenemedi. Hata : ' + respCancel);
-                                return;
-                            }
-                            alertify.error('Gorev tamamlanmadi olarak notunuzla birlikte kaydedildi.'); 
-                            event.backgroundColor = '#f00';
-                            $('#calendar').fullCalendar('rerenderEvents');
-                        });                    
-                      });
+                    $("#alertModal").modal("show");   
                 }
             });
             $('#calendar').fullCalendar('addEventSource', newEvents);

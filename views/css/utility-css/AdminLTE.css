@@ -3563,3 +3563,18 @@ ul.color_a > li > a{
     padding: 10px;
 
 }
+
+/***Modal Window Alert***/
+
+.modal-header-warning {
+	color:#fff;
+    padding:4px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #f0ad4e;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
