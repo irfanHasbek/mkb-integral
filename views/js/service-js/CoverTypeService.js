@@ -32,8 +32,8 @@ CoverTypeService.prototype.removeAll = function(callback){
         callback(true,"montaj türü silindi.");
     });
 }
-CoverTypeService.prototype.listAll = function(criteria,callback){
-    CoverTypeModel.find({firmCode:criteria}, function(error, CoverTypes){
+CoverTypeService.prototype.listAll = function(firmCode,callback){
+    CoverTypeModel.find({firmCode:firmCode}).sort({ orderCover : -1 }).exec(function(error, CoverTypes){
         if(error){
             callback(false, error);
             return;

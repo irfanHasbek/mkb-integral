@@ -41,4 +41,13 @@ AccessoryService.prototype.listAll = function(criteria,callback){
         callback(true, Accessorys);
     });
 }
+AccessoryService.prototype.getByGroupName = function(firmCode, productGroupName,callback){
+    AccessoryModel.find({firmCode : firmCode, productGroupName : productGroupName}, function(error, Accessorys){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, Accessorys);
+    });
+}
 module.exports = AccessoryService;

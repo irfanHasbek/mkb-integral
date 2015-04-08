@@ -41,4 +41,13 @@ MontageTypeService.prototype.listAll = function(criteria,callback){
         callback(true, MontageTypes);
     });
 }
+MontageTypeService.prototype.getByGroupName = function(firmCode, productGroupName, callback){
+    MontageTypeModel.find({firmCode :firmCode, productGroupName : productGroupName}, function(error, MontageTypes){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, MontageTypes);
+    });
+}
 module.exports = MontageTypeService;

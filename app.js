@@ -155,7 +155,12 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     var DiscountService = require('./views/js/service-js/DiscountService');
     var DiscountController = require('./views/js/controller-js/DiscountController');
-    var discountService = new DiscountService()
+    var discountService = new DiscountService();
+    
+    var UnitService = require('./views/js/service-js/UnitService');
+    var UnitController = require('./views/js/controller-js/UnitController');
+    var unitService = new UnitService();
+    
     app.get("/", function(req, res){
         if(req.session.user){
             if(!req.session.login){
@@ -343,6 +348,20 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     res.render('pages/musteri_grup_tanimlari', {layout : false, session : req.session, customerGroups : response});      
             });
         });
+    //birim tanimlari
+    app.get("/birim_tanimlari" ,AccountController.sessionCheck ,function(req, res){
+        req.session.currentPage = "/birim_tanimlari";
+        req.session.pageLabel = "tanimlamalar";
+        var d = 5;
+         unitService.listAll(req.session.user.firmCode,function(state,response){
+                if(!state){
+                    console.log(err);
+                    res.render("/pages/index",{layout : false, session : req.session});
+                }
+                res.render('pages/birim_tanimlari', {layout : false, session : req.session, units : response});      
+            });
+        });
+    //end
     //teklif konusu "abuzer" 03.03 start
     app.get("/teklif_konu_tanimlari" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/teklif_konu_tanimlari";
@@ -466,7 +485,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
               console.log(err);
               res.render("/pages/index",{layout : false, session : req.session});
             }
-            res.render('pages/montaj_sekli', {layout : false, session : req.session, montageTypes : response});
+            pds.listAll(req.session.user.firmCode ,function(stateProductGroup, responseProductGroup){
+                if(!stateProductGroup){
+                  console.log(responseProductGroup);
+                  res.render("/pages/index",{layout : false, session : req.session});
+                }
+                res.render('pages/montaj_sekli', {layout : false, session : req.session, montageTypes : response, productGroups : responseProductGroup});
+            });
         });   
     });
     //end
@@ -493,7 +518,14 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
               console.log(err);
               res.render("/pages/index",{layout : false, session : req.session});
             }
-            res.render('pages/ayar_mekanizmasi', {layout : false, session : req.session,setMechanisms:response}); 
+            pds.listAll(req.session.user.firmCode ,function(stateProductGroup, responseProductGroup){
+                if(!stateProductGroup){
+                  console.log(responseProductGroup);
+                  res.render("/pages/index",{layout : false, session : req.session});
+                }
+                res.render('pages/ayar_mekanizmasi', {layout : false, session : req.session,setMechanisms:response, productGroups : responseProductGroup}); 
+            });
+            
         });     
     });
     //end
@@ -503,10 +535,17 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         req.session.pageLabel = "urunler/ozellikler";
         as.listAll(req.session.user.firmCode,function(state,response){
             if(!state){
-              console.log(err);
+              console.log(response);
               res.render("/pages/index",{layout : false, session : req.session});
             }
-            res.render('pages/aksesuar', {layout : false, session : req.session,accessories : response}); 
+            pds.listAll(req.session.user
+                        .firmCode ,function(stateProductGroup, responseProductGroup){
+                if(!stateProductGroup){
+                  console.log(responseProductGroup);
+                  res.render("/pages/index",{layout : false, session : req.session});
+                }
+                res.render('pages/aksesuar', {layout : false, session : req.session,accessories : response, productGroups : responseProductGroup});  
+            });
         });      
     });
     //end
@@ -516,11 +555,14 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         req.session.currentPage = "/kasa_tipi";
         req.session.pageLabel = "urunler/ozellikler";
         bts.listAll(req.session.user.firmCode,function(state,response){
-            if(!state){
-              console.log(err);
-              res.render("/pages/index",{layout : false, session : req.session});
-            }
-            res.render('pages/kasa_tipi', {layout : false, session : req.session,bodyTypes : response}); 
+            pds.listAll(req.session.user
+                        .firmCode ,function(stateProductGroup, responseProductGroup){
+                if(!stateProductGroup){
+                  console.log(responseProductGroup);
+                  res.render("/pages/index",{layout : false, session : req.session});
+                }
+                res.render('pages/kasa_tipi', {layout : false, session : req.session,bodyTypes : response, productGroups : responseProductGroup}); 
+            });
         });      
     });
     //end
@@ -1031,6 +1073,11 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wscustomergroup/listall", CustomerGroupController.listAll);
     app.get("/wscustomergroup/removeall", CustomerGroupController.removeAll);
     app.post("/wscustomergroup/remove", CustomerGroupController.remove);
+    
+    app.post("/wsunit/addnew", UnitController.addNew);
+    app.get("/wsunit/listall", UnitController.listAll);
+    app.get("/wsunit/removeall", UnitController.removeAll);
+    app.post("/wsunit/remove", UnitController.remove);
     
     app.post("/wspicture/upload", UploadService.uploadImage);
     

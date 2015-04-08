@@ -1,6 +1,6 @@
-var CoverTypeService = require("../service-js/CoverTypeService");
+var UnitService = require("../service-js/UnitService");
 
-var cts = new CoverTypeService();
+var unitService = new UnitService();
 
 function createResponse(state, data, message){
     return response = {
@@ -11,20 +11,13 @@ function createResponse(state, data, message){
 }
 
 module.exports = {
-    addCoverType : function(req,res,next){
-        var coverTypeObj={
-                coverType:req.body.coverType,
+    addNew : function(req,res){
+        var unitObj={
+                unit:req.body.unit,
                 setBy:req.session.user.name+" "+req.session.user.surname,
-                cost : req.body.cost,
-                firmCode:req.session.user.firmCode,
-                orderCover : 1
-        };
-        console.log(JSON.stringify(req.body));
-        if(req.body.orderCover == 'on'){
-            coverTypeObj.orderCover = 2;
-        }
-        
-        cts.addNew(coverTypeObj,function(state,response){
+                firmCode:req.session.user.firmCode
+         };
+        unitService.addNew(unitObj, function(state,response){
             if(!state){
                 res.send(createResponse(state,"",response));
                 return;
@@ -32,8 +25,8 @@ module.exports = {
             res.send(createResponse(state,response,""));
         });
     },
-    removeAll : function(req, res, next){
-        cts.removeAll(function(state, response){
+    removeAll : function(req, res){
+        unitService.removeAll(function(state, response){
             if(!state){
                 res.send(createResponse(state,response, "hata oluştu "));   
                 return;
@@ -41,8 +34,8 @@ module.exports = {
             res.send(createResponse(state,response, "başarı ile silindi"));
         });
     },
-    remove : function(req, res, next){
-        cts.remove(req.body,function(state, response){
+    remove : function(req, res){
+        unitService.remove(req.body._id, function(state, response){
             if(!state){
                 res.send(createResponse(state,response, "hata oluştu "));   
                 return;
@@ -51,12 +44,12 @@ module.exports = {
         });
     },
     listAll : function(req, res, next){
-        cts.listAll(req.session.user.firmCode,function(state, response){
+        unitService.listAll(req.session.user.firmCode, function(state, response){
             if(!state){
-                res.send(createResponse(false, null, "kaplama türleri listelenemedi."));
+                res.send(createResponse(false, null, "Müşteri Grupları listelenemedi."));
                 return;
             }
-            res.send(createResponse(true, response, "kaplama türleri başarıyla listelendi"));
+            res.send(createResponse(true, response, "Müşteri Grupları başarıyla listelendi"));
         });   
     }
 };

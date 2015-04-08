@@ -12,14 +12,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1 style="font-size:22px;">
-                       Kaplama Şekli Ekranı
+                       Kaplama Rengi Ekranı
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
-                        <li class="active">Kaplama Şekli</li>
+                        <li class="active">Kaplama Rengi</li>
                     </ol>
                 </section>
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -29,22 +28,23 @@
                                     <!-- form start -->
                                     <form id="frmCoverType" role="form" method="post" action="/wscovertype/addnew"  >
                                         <div class="box-body">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
-                                                        <label >Kaplama Şekli</label>
+                                           <div class="row">
+                                               <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-4">
+                                                        <label >Kaplama Rengi</label>
                                                         <input type="text" class="form-control" name="coverType"  placeholder="Kaplama Şekli Giriniz" required>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-4">
                                                         <label >Yüzde</label>
                                                         <input type="number" min="0" step="1" class="form-control" name="cost"  placeholder="% yüzde" required>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <div class="col-md-4">
+                                                        <br>
+                                                        <input type="checkbox" class="form-control" name="orderCover">
+                                                        <label >Sik kullanilanlara ekle</label>
+                                                    </div>
+                                               </div>
+                                           </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer">
                                             <div class="text-center">
@@ -62,13 +62,13 @@
                             <div class="col-md-12">
                                 <div class="box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Kaplama Şekli Listeleme</h3>
+                                        <h3 class="box-title">Kaplama Rengi Listeleme</h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body">
                                         <table class="table table-bordered coverTypes">
                                             <tr style="border-bottom:3px solid #3c8dbc;">
                                                 <th class="text-center" style="width: 40px">#</th>
-                                                <th>Kaplama Şekli</th>
+                                                <th>Kaplama Rengi</th>
                                                 <th>Fiyat</th>
                                                 <th>İşlemi Yapan</th>
                                                 <th class="text-center" style="width: 40px"></th>

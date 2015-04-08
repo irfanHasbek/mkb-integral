@@ -41,4 +41,13 @@ BodyTypeService.prototype.listAll = function(criteria,callback){
         callback(true, BodyTypes);
     });
 }
+BodyTypeService.prototype.getByGroupName = function(firmCode, productGroupName, callback){
+    BodyTypeModel.find({firmCode : firmCode, productGroupName : productGroupName}, function(error, BodyTypes){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, BodyTypes);
+    });
+}
 module.exports = BodyTypeService;

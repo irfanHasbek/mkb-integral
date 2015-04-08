@@ -14,6 +14,7 @@ module.exports = {
     addSetMechanism : function(req,res,next){
         var setMechanismObj={
                 setMechanism:req.body.setMechanism,
+                productGroupName : req.body.productGroupName,
                 setBy:req.session.user.name+" "+req.session.user.surname,
                 cost : req.body.cost,
                 firmCode:req.session.user.firmCode
@@ -46,6 +47,15 @@ module.exports = {
     },
     listAll : function(req, res, next){
         sts.listAll(req.session.user.firmCode,function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "ayar mekanizması listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "ayar mekanizması başarıyla listelendi"));
+        });   
+    },
+    getByGroupName : function(req, res, next){
+        sts.getByGroupName(req.session.user.firmCode, req.body.productGroupName,function(state, response){
             if(!state){
                 res.send(createResponse(false, null, "ayar mekanizması listelenemedi."));
                 return;

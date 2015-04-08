@@ -41,4 +41,13 @@ SetMechanismService.prototype.listAll = function(criteria,callback){
         callback(true, SetMechanisms);
     });
 }
+SetMechanismService.prototype.getByGroupName = function(firmCode, productGroupName, callback){
+    SetMechanismModel.find({firmCode : firmCode, productGroupName : productGroupName}, function(error, SetMechanisms){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, SetMechanisms);
+    });
+}
 module.exports = SetMechanismService;

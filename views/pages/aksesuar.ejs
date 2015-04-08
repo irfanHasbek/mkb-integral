@@ -19,7 +19,6 @@
                         <li class="active">Aksesuar</li>
                     </ol>
                 </section>
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -29,17 +28,22 @@
                                     <!-- form start -->
                                     <form id="frmAccessory" role="form" method="post" action="/wsaccessory/addnew" >
                                         <div class="box-body">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-4">
+                                                        <label >Ürün Grubu</label>
+                                                        <select id="slctProductGroup" name="productGroupName" required class="form-control">
+                                                            <option value="" selected disabled>Ürün Grubu Seciniz</option>
+                                                            <%for(var i = 0; i < productGroups.length; i++){%>
+                                                                <option value="<%=productGroups[i].productGroupName%>"><%=productGroups[i].productGroupName%></option>
+                                                            <%}%>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
                                                         <label >Aksesuar</label>
                                                         <input type="text" class="form-control" name="accessory"  placeholder="Aksesuar Giriniz" required>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-4">
                                                         <label >Yüzde</label>
                                                         <input type="number" min="0" step="1" class="form-control" name="cost"  placeholder="% yüzde" required>
                                                     </div>
@@ -68,6 +72,7 @@
                                         <table class="table table-bordered accessoryList">
                                             <tr style="border-bottom:3px solid #3c8dbc;">
                                                 <th class="text-center" style="width: 40px">#</th>
+                                                <th>Ürün Grubu</th>
                                                 <th>Aksesuar</th>
                                                 <th>Fiyat</th>
                                                 <th>İşlemi Yapan</th>
@@ -77,6 +82,7 @@
                                             <%for(var i=0;i<accessories.length;i++){%>
                                                 <tr id="<%=accessories[i]._id%>">
                                                 <td class="text-center"><%=i+1%>.</td>
+                                                 <td><%=accessories[i].productGroupName%></td>
                                                 <td><%=accessories[i].accessory%></td>
                                                 <td><span>% </span><%=accessories[i].cost%></td>
                                                 <td><%=accessories[i].setBy%></td>
