@@ -19,7 +19,6 @@
                         <li class="active">Müsteri-Ürün Grubu Iskonto Tanımları</li>
                     </ol>
                 </section>
-                <%=discounts%>
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -79,16 +78,26 @@
                                         <h3 class="box-title">Vade Listesi</h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body">
-                                        <table class=" table table-bordered credits">
+                                        <table class=" table table-bordered discountTable">
                                             <tr style="border-bottom:3px solid #3c8dbc;">
                                                 <th class="text-center" style="width: 40px">#</th>
-                                                <th>Vade Süresi</th>
-                                                <th>Yüzde</th>
+                                                <th>Müşteri Adı</th>
+                                                <th>Ürün Grubu</th>
+                                                <th>İskonto Yüzdesi</th>
                                                 <th>Ekleyen</th>
                                                 <th style="width: 40px">Operasyon</th>
                                             </tr>
                                             <tbody id="discountTable">
-                                                
+                                                <%for(var i=0;i<discounts.length;i++){%>
+                                                    <tr id="<%=discounts[i]._id%>">
+                                                        <td class="text-center"><%=(i+1)%></td>
+                                                        <td><%=discounts[i].customerName%></td>
+                                                        <td><%=discounts[i].productGroupName%></td>
+                                                        <td>% <%=discounts[i].percent%></td>
+                                                        <td><%=discounts[i].owner%></td>
+                                                        <td id="<%=discounts[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button></td>
+                                                    </tr>
+                                                <%}%>
                                             </tbody>
                                         </table>
                                     </div><!-- /.box-body -->
