@@ -5,7 +5,6 @@ function clickHandlers(){
 }
 function formHandlers(){
     $("#frmDiscount").ajaxForm(function(resp){
-          console.log(JSON.stringify(resp));
         if(resp.state==true){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             var count= $(".discountTable tbody tr").size();

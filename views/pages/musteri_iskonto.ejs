@@ -27,13 +27,13 @@
                                 <div class="box box-info">
                                     <!-- form start -->
                                     <form id="frmDiscount" role="form" method="post" action="/wsdiscount/addnew">
-                                        <input name="owner"  type="text" style="display:none;" value="<%=session.user.name%> <%=session.user.surname%>">
+                                        <input name="owner" style="display:none;" value="<%=session.user.name%> <%=session.user.surname%>">
                                         <div class="box-body">
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-10 col-md-offset-1">
                                                     <div class="col-md-4">
-                                                        <input id="inpCustomerName" name="customerName"  type="text" style="display:none;">
+                                                        <input id="inpCustomerName" name="customerName"  style="display:none;">
                                                         <select id="slctCustomer" class="form-control vade" name="customerId" required placeholder="Müsteri seciniz" required>
                                                             <option value="" disabled selected>Musteri seciniz</option>
                                                             <%for(var i = 0; i < customers.length; i++){%>
@@ -42,7 +42,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">
-                                                       <input id="inpproductGroupName" name="productGroupName"  type="text" style="display:none;">
+                                                       <input id="inpproductGroupName" name="productGroupName"  style="display:none;">
                                                         <select id="slctProductGroup" class="form-control vade" name="productGroupId" required placeholder="Urun Grubu seciniz">
                                                             <option value="" disabled selected>Urun Grubu seciniz</option>
                                                             <%for(var i = 0; i < productGroup.length; i++){%>
