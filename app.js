@@ -152,6 +152,10 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     var UploadService = require('./views/js/service-js/UploadService');
     var OfferPriceCalculatorService = require('./views/js/service-js/OfferPriceCalculatorService');
     var offerPriceCalculatorService = new OfferPriceCalculatorService();
+    
+    var DiscountService = require('./views/js/service-js/DiscountService');
+    var DiscountController = require('./views/js/controller-js/DiscountController');
+    var discountService = new DiscountService()
     app.get("/", function(req, res){
         if(req.session.user){
             if(!req.session.login){
@@ -603,7 +607,36 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
             });
         });   
     });
+    
+    //müsteri iskonto
+    app.get("/musteri_iskonto" ,AccountController.sessionCheck,function(req, res){
+        req.session.currentPage = "/musteri_iskonto";
+        req.session.pageLabel = "musteri";
+        custservice.listAll(req.session.user.firmCode, function(stateCustomer, responseCustomer){
+            if(!stateCustomer){
+                console.error(responseCustomer);
+                res.render("/pages/index",{layout : false, session : req.session});
+                return;
+            }
+            pds.listAll(req.session.user.firmCode, function(stateProductGroup, responseProductGroup){
+                if(!stateProductGroup){
+                    console.error(responseProductGroup);
+                    res.render("/pages/index",{layout : false, session : req.session});
+                    return;
+                }
+                discountService.listAll(req.session.user.firmCode, function(stateDiscount, responseDiscounts){
+                   if(!stateDiscount){
+                        console.error(responseDiscounts);
+                        res.render("/pages/index",{layout : false, session : req.session});
+                        return;
+                    } 
+                    res.render('pages/musteri_iskonto', {layout : false, session : req.session, customers : responseCustomer,productGroup : responseProductGroup, discounts : responseDiscounts});
+                })
+            }); 
+        });
+    });
     //end
+    
     //Teklif
     app.get("/teklif_olusturma" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/teklif_olusturma?id=0";
@@ -1155,7 +1188,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wspermission/update", UserPermissions.update);
     app.post("/wspermission/getpermissionrole", UserPermissions.getPermissionForRole);
     //end
-    
+    //discount
+    app.post('/wsdiscount/addnew', DiscountController.addNew);
+    app.post('/wsdiscount/remove', DiscountController.remove);
+    app.get('/wsdiscount/removeall', DiscountController.removeAll);
+    app.post('/wsdiscount/getdiscount', DiscountController.getDiscount);
+    app.get('/wsdiscount/listall', DiscountController.listAll);
+    //end
     app.post("/wspricecalculate/calculate", function(req, res){
         offerPriceCalculatorService.calculatePrice(req.body.info, function(state, response){
             if(!state){

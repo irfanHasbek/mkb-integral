@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Müsteri-Ürün Grubu Iskonto Tanımları Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Müsteri-Ürün Grubu Iskonto Tanımları</li>
+                    </ol>
+                </section>
+                <%=discounts%>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="frmDiscount" role="form" method="post" action="/wsdiscount/addnew">
+                                        <input name="owner"  type="text" style="display:none;" value="<%=session.user.name%> <%=session.user.surname%>">
+                                        <div class="box-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="col-md-4">
+                                                        <input id="inpCustomerName" name="customerName"  type="text" style="display:none;">
+                                                        <select id="slctCustomer" class="form-control vade" name="customerId" required placeholder="Müsteri seciniz" required>
+                                                            <option value="" disabled selected>Musteri seciniz</option>
+                                                            <%for(var i = 0; i < customers.length; i++){%>
+                                                                <option value="<%=customers[i]._id%>"><%=customers[i].customerName%></option>
+                                                            <%}%> 
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                       <input id="inpproductGroupName" name="productGroupName"  type="text" style="display:none;">
+                                                        <select id="slctProductGroup" class="form-control vade" name="productGroupId" required placeholder="Urun Grubu seciniz">
+                                                            <option value="" disabled selected>Urun Grubu seciniz</option>
+                                                            <%for(var i = 0; i < productGroup.length; i++){%>
+                                                                <option value="<%=productGroup[i]._id%>"><%=productGroup[i].productGroupName %></option>
+                                                            <%}%> 
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                           <span class="input-group-addon">%</span>
+                                                            <input id="inpDiscount" type="number" min="0" step="1" class="form-control vade" name="percent" required placeholder="yüzde giriniz">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <div style="text-align:center">
+                                                <button id="btnSubmitDiscount" type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Vade Listesi</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class=" table table-bordered credits">
+                                            <tr style="border-bottom:3px solid #3c8dbc;">
+                                                <th class="text-center" style="width: 40px">#</th>
+                                                <th>Vade Süresi</th>
+                                                <th>Yüzde</th>
+                                                <th>Ekleyen</th>
+                                                <th style="width: 40px">Operasyon</th>
+                                            </tr>
+                                            <tbody id="discountTable">
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+       <script src="../js/helper-js/Helper.js"></script>
+       <script src="../js/pages-js/CustomerDiscountPage.js"></script>
+    </body>
+</html>
