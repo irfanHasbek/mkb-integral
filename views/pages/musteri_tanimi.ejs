@@ -92,7 +92,9 @@
                                             <li class="active"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
                                             <li><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
                                             <li><a href="#tab_3" data-toggle="tab">Fatura Bilgileri</a></li>
-                                            <li><a href="#tab_4" data-toggle="tab">Iskonto Bilgisi</a></li>
+                                            <%if(operation == 'update'){%>
+                                                <li><a href="#tab_4" data-toggle="tab">Iskonto Bilgisi</a></li>
+                                            <%}%>
                                             <li><a href="#tab_5" data-toggle="tab">Sevkiyat Bilgileri</a></li>
                                         </ul>
                                             <div class="tab-content">

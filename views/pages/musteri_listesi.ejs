@@ -98,7 +98,7 @@
                                                     <th>Kullanıcı Adı</th>
                                                     <th>Web Erişim</th>
                                                     <th>Web Sipariş</th>
-                                                    <th class="text-center" style="width: 100px">Operasyon</th>
+                                                    <th class="text-center" style="width: 120px">Operasyon</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -114,6 +114,7 @@
                                                       <td class="text-center"><%if(customers[i].webOrder==true){%><i class="fa fa-check" style="color:green;"></i><%}else{%><i class="fa fa-times" style="color:red;"><%}%></td>
                                                       <td id="<%=customers[i]._id%>">
                                                         <button class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-info btn-sm preview"><i class="fa fa-search-plus"></i></button>
                                                         <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
                                                     </td>
                                                   </tr>

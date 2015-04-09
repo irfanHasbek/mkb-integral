@@ -11,6 +11,10 @@ function clickHandlers(){
     $('.search').on('click', function(){
         searchAndFillTable();
     });
+    
+    $('.preview').on('click', function(){
+        $('#previewModal').modal('show');   
+    });
 }
 
 function formHandlers(){
@@ -78,7 +82,7 @@ function fillTable(response){
              var tdCustWebOrder = $('<td class="text-center"><i class="fa fa-times" style="color:red;"></td>');
         }
         var tdButtons = $('<td><button class="btn btn-info btn-sm btn-flat edit"><i class="fa fa-pencil"></i></button>' + '<span> </span>' +
-        '<button class="btn btn-danger btn-sm btn-flat sil"><i class="fa fa-trash-o"></i></button></td>');
+         '<button class="btn btn-info btn-sm preview"><i class="fa fa-search-plus"></i></button>&nbsp' + '<button class="btn btn-danger btn-sm btn-flat sil"><i class="fa fa-trash-o"></i></button></td>');
         
         tr.append(tdCount);tr.append(tdCustGroup);tr.append(tdCustTitle);tr.append(tdCustAgent);tr.append(tdCustName);tr.append(tdUserName);tr.append(tdCustWebAccess);tr.append(tdCustWebOrder);tr.append(tdButtons);
         $('.tblCustDef tbody').append(tr);
