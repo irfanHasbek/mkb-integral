@@ -72,7 +72,7 @@ var OfferScheme = new mongoose.Schema({
             ownerId : String,
             ownerName : String
         },
-        activityStatus : Boolean,
+        activityStatus : String,
         note : String
     }],
     forwardingInfo : {

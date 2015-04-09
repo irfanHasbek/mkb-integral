@@ -142,38 +142,41 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4> Aktivite İşlem</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>Sayın<strong> Sinan BORA ;</strong></p>
+                    <form id="formUpdateActivity" action="/wsoffer/updateActivity" method="post">
+                        <div class="modal-body">
+                            <input name="activityId" id="inpActivityId" type="text" style="display:none;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Sayın <strong id="activityOwner"> </strong>; </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p> Aktiviteyi tamamladiniz mi?</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <select id="slctModalActivityOperation" name="status" class="form-control" required>
+                                        <option value="" disabled selected>Seçiniz</option>
+                                        <option value="done">Tamamladım </option>
+                                        <option value="undone">Tamamlamadım</option>
+                                        <option value="progress">Üzerinde çalışıyorum</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                     <textarea required id="txtModalNote" name="note" class="form-control" rows="3" placeholder="Açıklama Giriniz" style="resize:vertical;"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p> Aktiviteyi tamamladiniz mi?</p>
-                            </div>
+                        <div class="modal-footer">
+                            <button id="btnModalActivitySave" type="submit" class="btn btn-primary btn-flat"> Kaydet</button>
+                            <button type="button" class="btn btn-default btn-flat " data-dismiss="modal">Kapat</button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <select name="" id="" class="form-control">
-                                    <option value="" disabled selected>Seçiniz</option>
-                                    <option value="">Tamamladım </option>
-                                    <option value="">Tamamlamadım</option>
-                                    <option value="">Üzerinde çalışıyorum</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                 <textarea class="form-control" id="" rows="3" placeholder="Açıklama Giriniz" style="resize:vertical;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-flat " > Kaydet</button>
-                        <button type="button" class="btn btn-default btn-flat " data-dismiss="modal">Kapat</button>
-                    </div>
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->

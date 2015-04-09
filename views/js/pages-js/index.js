@@ -1,8 +1,27 @@
+var selectedEvent;
 function clickHandlers(){
 
 }
 function formHandlers(){
-
+    $('#formUpdateActivity').ajaxForm(function(data){
+        if(data.state){
+            /*if($('#slctModalActivityOperation').val == 'done'){
+                selectedEvent.backgroundColor = "#0f0";
+                selectedEvent.borderColor = "#fff";
+            }else if($('#slctModalActivityOperation').val == 'undone'){
+                selectedEvent.backgroundColor = "#f00";
+                selectedEvent.borderColor = "#fff";
+            }else if($('#slctModalActivityOperation').val == 'progress'){
+                selectedEvent.backgroundColor = "#00f";
+                selectedEvent.borderColor = "#fff";
+            }
+            $('#calendar').fullCalendar('rerenderEvents');*/
+            alertify.success('Aktivite basari ile guncellendi.');
+            $('#alertModal').modal('hide');
+            return;
+        }
+        alertify.error('Aktivite guncellenemedi.Lutfen saglayici ile iletisime gecin.!');
+    });
 }
 function otherScripts(){
     $(function() {
@@ -26,11 +45,14 @@ function otherScripts(){
                         event.start = new Date(response.response[i].activities[j].activityDate);
                         event.end = new Date(response.response[i].activities[j].activityDate);
                         event.activityStatus = response.response[i].activities[j].activityStatus;
-                        if(event.activityStatus){
+                        if(event.activityStatus == 'done'){
                             event.backgroundColor = "#0f0";
                             event.borderColor = "#fff";
-                        }else{
+                        }else if(event.activityStatus == 'undone'){
                             event.backgroundColor = "#f00";
+                            event.borderColor = "#fff";
+                        }else{
+                            event.backgroundColor = "#00f";
                             event.borderColor = "#fff";
                         }
                         newEvents.push(event);
@@ -57,6 +79,9 @@ function otherScripts(){
                 defaultView: 'month',
                 lang:'tr',
                 eventClick : function(event){
+                    //selectedEvent = event;
+                    $('#activityOwner').html(event.content);
+                    $('#inpActivityId').val(event.activityId);
                     $("#alertModal").modal("show");   
                 }
             });
