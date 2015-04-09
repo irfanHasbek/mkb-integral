@@ -101,7 +101,7 @@
                                                     <th class="text-center" style="width: 120px">Operasyon</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="customerTable">
                                                 <%for(var i=0;i<customers.length;i++){%>
                                                   <tr id="<%=customers[i]._id%>">
                                                       <td class="text-center"><%=i+1%>.</td>
@@ -141,37 +141,36 @@
                     </div>
                     <form id="formUpdateActivity" action="/wsoffer/updateActivity" method="post">
                         <div class="modal-body">
-                            <input name="activityId" id="inpActivityId" type="text" style="display:none;">
                             <div class="row">
                                 <div class="col-md-6">
                                     <p><h4><strong>Müşteri Tanımı</strong></h4></p>
                                     <hr>
-                                    <p>-Firma Ünvanı : <span>Mavikent Bilişim</span></p>
-                                    <p>-Müşteri Adı : <span>Sinan BORA</span></p>
-                                    <p>-Müşteri Grubu : <span>Grup1</span></p>
-                                    <p>-Müşteri Temsilcisi : <span>Sinan BORA</span></p>
+                                    <p>-Firma Ünvanı : <span id="spnFirma"></span></p>
+                                    <p>-Müşteri Adı : <span id="spnMusteriAdi"></span></p>
+                                    <p>-Müşteri Grubu : <span id="spnMusteriGrup"></span></p>
+                                    <p>-Müşteri Temsilcisi : <span id="spnMusteriTemsilcisi"></span></p>
                                 </div>
                                 <div class="col-md-6">
                                     <p><h4><strong>İletişim Bilgileri</strong></h4></p>
                                     <hr>
-                                    <p>-Adres : <span> Metin Göktepe cad. Kuruçeşme Mah. No:32 </span></p>
-                                    <p>-İl : <span> Ağrı</span></p>
-                                    <p>-İlçe : <span> Diyadin </span></p>
-                                    <p>-İş Tel : <span> 0544 444 44 44 </span></p>
-                                    <p>-Fax : <span> 0544 444 44 44 </span></p>
-                                    <p>-Web Adresi : <span> www.mavikentbilisim.com </span></p>
+                                    <p>-Adres : <span id="spnIletisimAdres"></span></p>
+                                    <p>-İl : <span id="spnSehir"></span></p>
+                                    <p>-İlçe : <span id="spnIlce"></span></p>
+                                    <p>-İş Tel : <span id="spnTel"></span></p>
+                                    <p>-Fax : <span id="spnFax"></span></p>
+                                    <p>-Web Adresi : <span id="spnWeb"></span></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p><h4><strong>Yetkili Bilgileri</strong></h4></p>
                                     <hr>
-                                    <p>-Yetkili Adı : <span>Sinan BORA</span></p>
+                                    <p>-Yetkili Adı : <span id="spnYetkiliAdi"></span></p>
                                 </div>
                                 <div class="col-md-6">
                                     <p><h4><strong>Sevkiyat Bilgileri</strong></h4></p>
                                     <hr>
-                                    <p>-Adres Tanımı : <span>Tanım1</span></p>
+                                    <p>-Adres Tanımı : <span id="spnSevkiyatAdresi"></span></p>
                                 </div>
                             </div>
                         </div>

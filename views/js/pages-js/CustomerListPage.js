@@ -13,6 +13,30 @@ function clickHandlers(){
     });
     
     $('.preview').on('click', function(){
+        var id = $(this).closest('tr').attr('id');
+        wsPost('/wscustomerdefinition/getcustomerdefinition', {_id : id}, function(error, data){
+            if(error || data.state == false){
+                alertify.error("Hata olustu : " + data.response);
+                return;
+            }
+            var customer = data.response;
+            $('#spnFirma').html(customer.customerTitle);
+            $('#spnMusteriAdi').html(customer.customerName);
+            $('#spnMusteriGrup').html(customer.customerGroup);
+            $('#spnMusteriTemsilcisi').html(customer.customerAgent);
+            $('#spnIletisimAdres').html(customer.contactInfo.address);
+            $('#spnSehir').html(customer.contactInfo.city);
+            $('#spnIlce').html(customer.contactInfo.state);
+            $('#spnTel').html(customer.contactInfo.businessPhone);
+            $('#spnFax').html(customer.contactInfo.fax);
+            $('#spnWeb').html(customer.contactInfo.webAddress);
+            if(customer.competentInfo.length > 0){
+                $('#spnYetkiliAdi').html(customer.competentInfo[0].name);
+            }
+            if(customer.forwardingInfo.length > 0){
+                $('#spnSevkiyatAdresi').html(customer.forwardingInfo[0].label);
+            }
+        });
         $('#previewModal').modal('show');   
     });
 }
