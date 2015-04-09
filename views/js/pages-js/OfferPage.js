@@ -1,4 +1,8 @@
 function clickHandlers() {
+    $('.next').on('click', function(){
+        $('.wizard').removeClass('active');
+        $('a[href=' + $(this).attr('href') + ']').closest('li').addClass('active');
+    });
     $('#btnRect').click(function(e) {
         e.preventDefault();
         $('#divCir').slideUp('800');

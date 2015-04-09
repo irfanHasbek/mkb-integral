@@ -623,9 +623,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     console.error(err);
                     res.render("/pages/index",{layout : false, session : req.session});
                 }
-                    console.log(responseCustAgnt);
-                     res.render('pages/musteri_tanimi', {layout : false, session : req.session, respCustGrps : responseCustGrp, respCustAgnts : responseCustAgnt,respCity : responseCity,operation :"add"}); 
-                  
+                   discountService.getDiscountOnlyCustomerId(req.param('id'), function(stateDiscount, responseDiscount){
+                         if(!stateDiscount){
+                            console.error(responseDiscount);
+                            res.render("/pages/index",{layout : false, session : req.session}); 
+                         }
+                         res.render('pages/musteri_tanimi', {layout : false, session : req.session, respCustGrps : responseCustGrp, respCustAgnts : responseCustAgnt,respCity : responseCity,operation :"add", discounts : responseDiscount});  
+                      });
                });   
            });
         }); 
