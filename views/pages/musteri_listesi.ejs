@@ -131,6 +131,59 @@
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
+        
+        <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-warning">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4> Müşteri İnceleme Ekranı</h4>
+                    </div>
+                    <form id="formUpdateActivity" action="/wsoffer/updateActivity" method="post">
+                        <div class="modal-body">
+                            <input name="activityId" id="inpActivityId" type="text" style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><h4><strong>Müşteri Tanımı</strong></h4></p>
+                                    <hr>
+                                    <p>-Firma Ünvanı : <span>Mavikent Bilişim</span></p>
+                                    <p>-Müşteri Adı : <span>Sinan BORA</span></p>
+                                    <p>-Müşteri Grubu : <span>Grup1</span></p>
+                                    <p>-Müşteri Temsilcisi : <span>Sinan BORA</span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><h4><strong>İletişim Bilgileri</strong></h4></p>
+                                    <hr>
+                                    <p>-Adres : <span> Metin Göktepe cad. Kuruçeşme Mah. No:32 </span></p>
+                                    <p>-İl : <span> Ağrı</span></p>
+                                    <p>-İlçe : <span> Diyadin </span></p>
+                                    <p>-İş Tel : <span> 0544 444 44 44 </span></p>
+                                    <p>-Fax : <span> 0544 444 44 44 </span></p>
+                                    <p>-Web Adresi : <span> www.mavikentbilisim.com </span></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><h4><strong>Yetkili Bilgileri</strong></h4></p>
+                                    <hr>
+                                    <p>-Yetkili Adı : <span>Sinan BORA</span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><h4><strong>Sevkiyat Bilgileri</strong></h4></p>
+                                    <hr>
+                                    <p>-Adres Tanımı : <span>Tanım1</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnModalActivitySave" type="submit" class="btn btn-primary btn-flat"> Kaydet</button>
+                            <button type="button" class="btn btn-default btn-flat " data-dismiss="modal">Kapat</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
        <%include ../partial-pages/script.ejs%>
        <script src="../js/helper-js/Helper.js"></script>
        <script src="../js/pages-js/CustomerListPage.js"></script>
