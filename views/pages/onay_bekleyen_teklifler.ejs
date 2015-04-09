@@ -12,11 +12,11 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1 style="font-size:22px;">
-                        Açık Teklifler Ekranı
+                        Onay Bekleyen Teklifler Ekranı
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
-                        <li class="active">Açık Teklifler</li>
+                        <li class="active">Onay Bekleyen Teklifler</li>
                     </ol>
                 </section>
                 <!-- Main content -->
@@ -105,34 +105,10 @@
                                                             <td><%=offers[i].offerDate%></td>
                                                             <td id="<%=offers[i].personPrepareOfferInfo.personName%>"><%=offers[i].personPrepareOfferInfo.personName%></td>
                                                             <td class="text-center" id="<%=offers[i]._id%>">
-                                                                <div class="btn-group">
-                                                                    <button type="button" class="btn btn-primary btn-flat">Operasyon</button>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                        <span class="caret"></span>
-                                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu color_a" role="menu">
-                                                                        <li>
-                                                                            <a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="" class="btn btn-flat btn-primary note"  data-toggle="modal" data-target="#modal_note">Aktivite Ekle <i class="fa fa-pencil"></i></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="" class="btn btn-danger btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a>
-                                                                        </li>
-                                                                        <li>
-                                                                             <a class="btn btn-success btn-flat save">Kaydet <i class="fa fa-save"></i></a>
-                                                                        </li>
-                                                                        <li>
-                                                                             <a class="btn btn-primary btn-flat sendMail">Mail Gönder <i class="fa fa-mail-reply"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                               
+                                                               <a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>
+                                                               <a class="btn btn-warning  btn-flat btn-sm confirmOffer"><i class="fa fa-check"></i></a>
+                                                               <a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>
+                                                               <a class="btn btn-primary btn-flat btn-sm sendMail"><i class="fa fa-mail-reply"></i></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>
@@ -149,139 +125,6 @@
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-        <!--Modal-->
-        <div class="modal fade" id="modal_note" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Aktivite Ekle</h4>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input id="inpOfferIdNoteModal" type="text" class="form-control" style="display:none;">
-                        <div class="form-group">
-                            <label for=""> Aktivite Tarihi </label>
-                            <input id="inpNoteDate" type="date" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Aktivite Sahibi </label>
-                            <select id="slctActivityOwnerNote" class="form-control" data='<%=session.user._id%>'>
-                                <%for(var i = 0; i < users.length; i++){%>
-                                    <option value="<%=users[i]._id%>"><%=users[i].name%> <%=users[i].surname%></option>
-                                <%}%>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Aktivite </label>
-                            <textarea id="txtOfferNote" rows="2" class="form-control" style="resize:vertical;"></textarea>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Kapat</button>
-                <button id="btnAddNote" type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Kaydet</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="modal fade" id="modal_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Hatırlatma Ekle</h4>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input id="inpOfferIdRememberModal" type="text" class="form-control" style="display:none;">
-                        <div class="form-group">
-                            <label for=""> Aktivite Sahibi </label>
-                            <select id="slctActivityOwnerRemember" class="form-control" data='<%=session.user._id%>'>
-                                <%for(var i = 0; i < users.length; i++){%>
-                                    <option value="<%=users[i]._id%>"><%=users[i].name%> <%=users[i].surname%></option>
-                                <%}%>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Hatırlatma Nedeni</label>
-                            <input id="inpRecallReason" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Hatırlatma Tarihi </label>
-                            <input id="inpRecallDate" type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal" id="btnHatirlatma">Kaydet</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div id="modalAcceptOffer" class="modal fade" id="modal_close" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Teklifi Bitirme Nedeni</h4>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                    <input type="text" id='inpOfferIdModal' style='display:none;'>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for=""> Teklifi Onaylayan </label>
-                            <select id="slctAcceptPerson" class="form-control" data='<%=session.user._id%>'>
-                                <option value="<%=session.user.name%> <%=session.user.surname%>"><%=session.user.name%> <%=session.user.surname%></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Sevkiyat Adresi </label>
-                            <select id="slctForwardingAddress" class="form-control">
-                                
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for=""> Sonuç </label>
-                            <select id="slctOfferCase" class="form-control">
-                                <option value="" selected disabled>Seçiniz</option>
-                                <option value="kazanilmis">Kazanılmış</option>
-                                <option value="kaybedilmis">Kaybedilmiş</option>
-                            </select>
-                        </div>
-                        <div id="divKaybeden" style="display:none;">
-                            <div class="form-group">
-                                <label for=""> Kazanan Firma </label>
-                                <input type="text" id="inpWinFirm" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for=""> Kaybetme Nedeni </label>
-                                <select id="slctLosingReason" class="form-control">
-                                    <option value="" selected disabled>Seçiniz</option>
-                                    <%for(var i = 0; i < losingReasons.length; i++){%>
-                                        <option value="<%=losingReasons[i].losingReason%>"><%=losingReasons[i].losingReason%></option>
-                                    <%}%>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Kapat</button>
-                <button id="btnUpdateOfferCase" type="button" class="btn btn-primary btn-flat">Kaydet</button>
-              </div>
-            </div>
-          </div>
-        </div>
         
        <div class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -332,6 +175,6 @@
        <%include ../partial-pages/script.ejs%>
        <script src="../js/utility-js/jquery.blockUI.js"></script>
        <script src="../js/helper-js/Helper.js"></script>
-       <script src="../js/pages-js/OpenOffers.js"></script>
+       <script src="../js/pages-js/WaitConfirmOffers.js"></script>
     </body>
 </html>

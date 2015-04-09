@@ -47,7 +47,7 @@ function createOffer(type, req) {
         },
         status: {
             job: '',
-            offerCase: "acik_teklifler",
+            offerCase: "onay_bekleyen_teklifler",
             losingReason: "",
             winFirm: ""
         },
@@ -271,6 +271,28 @@ module.exports = {
         var acceptOfferDate = req.body.acceptOfferDate;
 
         cos.updateOfferCase(offerId, status, acceptPerson, forwardingInfo, acceptOfferDate, function (state, response) {
+            if(!state) {
+                res.send({
+                    state: state,
+                    response: response
+                });
+                return;
+            }
+            res.send({
+                state: state,
+                response: response
+            });
+        });
+    },
+    updateOfferCaseForConfirm: function (req, res) {
+        //console.log(JSON.stringify(tempOffer));
+        var offerId = req.body._id;
+        var status = req.body.status;
+        var acceptPerson = req.body.acceptPerson;
+        var forwardingInfo = req.body.forwardingInfo;
+        var acceptOfferDate = req.body.acceptOfferDate;
+
+        cos.updateOfferCaseForConfirm(req.body.offerId, req.body.status, function (state, response) {
             if(!state) {
                 res.send({
                     state: state,

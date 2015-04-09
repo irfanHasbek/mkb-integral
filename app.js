@@ -14,6 +14,10 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         mongoose : mongoose,
     };
     
+    var Config = {
+        url : 'http://localhost:3000'     
+    };
+    
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
     app.use(express.favicon());
@@ -850,6 +854,37 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
       });
      });
    });
+    app.get("/onay_bekleyen_teklifler" ,AccountController.sessionCheck ,function(req, res){
+        req.session.currentPage = "/onay_bekleyen_teklifler";
+        req.session.pageLabel = "/teklifYonetim";
+        offerService.search({'status.offerCase' : 'onay_bekleyen_teklifler', 'firmCode' : req.session.user.firmCode},function(stateOffers,responseOffers){
+             if(!stateOffers){
+                console.log(responseOffers);
+                res.render("/pages/index",{layout : false, session : req.session});
+               }
+        lrs.listAll(req.session.user.firmCode,function(stateLosingReason,responseLosingReason){
+             if(!stateLosingReason){
+                console.log(responseLosingReason);
+                res.render("/pages/index",{layout : false, session : req.session});
+               }
+        oss.listAll(req.session.user.firmCode,function(stateOfferStatus,responseOfferStatus){
+             if(!stateOfferStatus){
+                console.log(responseOfferStatus);
+                res.render("/pages/index",{layout : false, session : req.session});
+                 return;
+               }
+        userService.listFirmUser(req.session.user.firmCode, function(stateUser, responseUsers){
+            if(!stateUser){
+                console.log(stateUser);
+                res.render("/pages/index",{layout : false, session : req.session});
+                return;
+            }
+            res.render('pages/onay_bekleyen_teklifler', {layout : false, session : req.session,offers : responseOffers,orderStatuses : responseOfferStatus,losingReasons : responseLosingReason, users : responseUsers});
+        });
+        });
+      });
+     });
+   });
     app.get("/kazanilmis" ,AccountController.sessionCheck ,function(req, res){
         req.session.currentPage = "/kazanilmis";
         req.session.pageLabel = "/teklifYonetim/kapali";
@@ -1233,6 +1268,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsoffer/updatedates", CreateOfferController.updateDates);
     app.post("/wsoffer/updatenote", CreateOfferController.updateProductNote);
     app.post("/wsoffer/updateoffercase", CreateOfferController.updateOfferCase);
+    app.post("/wsoffer/updateoffercaseforconfirm", CreateOfferController.updateOfferCaseForConfirm);
     app.post("/wsoffer/addactivity", CreateOfferController.addActivity);
     app.post("/wsoffer/removeactivity", CreateOfferController.removeActivity);
     app.post("/wsoffer/updateActivity", CreateOfferController.updateActivity);
@@ -1265,12 +1301,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     
     var wkhtmltopdf = require('wkhtmltopdf');
     app.post("/wscreatepdf", function(req, res){
-        wkhtmltopdf(req.body.pageUrl, { output: './views/pdfs/' + req.body.pageName }, function(error, createdPdf){
+        var pageURl = Config.url + req.body.pageUrl;
+        wkhtmltopdf(pageURl, { output: './views/pdfs/' + req.body.pageName }, function(error, createdPdf){
             if(error){
                 res.send({state : false, response : error});
                 return;
             }
-            res.send({fileName : req.body.pageName, contents : '/pdfs/' + req.body.pageName});
+            res.send({state : true, fileName : req.body.pageName, contents : '/pdfs/' + req.body.pageName});
         });
         
     });
@@ -1303,21 +1340,21 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                 html: "",
                 attachments : [{
                     fileName : attachs.fileName,
-                    filePath: 'http://localhost:3000' + attachs.contents
+                    filePath: Config.url + attachs.contents
                 }]
             };
             //sleepFor(12000);
             smtpTransport.sendMail(mail, function(errorMail, response){
                 if(errorMail){
                     console.log(errorMail);
-                    res.send({message : 'Mail Gonderme hatasi'});
+                    res.send({state : false, message : 'Mail Gonderme hatasi'});
                     return;
                 }
                 else{
                     console.log("Message sent: " + response.message);
                 }
                 smtpTransport.close();
-                res.send({response : response.message});
+                res.send({state : false, response : response.message});
 
             });
         });

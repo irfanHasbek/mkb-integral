@@ -183,6 +183,23 @@ CreateOfferService.prototype.updateOfferCase = function(id, offerStatus, acceptP
         });
     });
 }
+CreateOfferService.prototype.updateOfferCaseForConfirm = function(id, offerCase, callback){
+    CreateOfferModel.findOne({ _id : id }, function(error,respOffer){
+     if(error){
+            callback(false, error);
+            return;
+        }
+        respOffer.status['offerCase'] = offerCase;
+        
+        respOffer.save(function(errorSave, responseSave){
+            if(errorSave){
+                callback(false, error);
+                return; 
+            }
+            callback(true, 'success');
+        });
+    });
+}
 CreateOfferService.prototype.remove = function(offerId,callback){
     CreateOfferModel.remove({_id:offerId._id},function(error){
         if(error){
