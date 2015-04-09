@@ -33,6 +33,11 @@ function clickHandlers() {
             });
         }
     });
+    
+     $('#tableOpenOffers').on('click', '.sendMail', function() {
+        var offerId = $(this).closest('tr').attr('id');
+        $('#sendMailModal').modal("show");
+    });
 
     $('#tableOpenOffers').on('click', '.accept', function() {
         var offerId = $(this).closest('tr').attr('id');
