@@ -166,6 +166,13 @@
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_2" data-toggle="tab" class="btn btn-primary"> İleri</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div><!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_2">
                                                     <div id="divContact" class="row">
@@ -204,6 +211,13 @@
                                                                 </div>
                                                             </div><!-- /.box-body -->
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="text-align:center;">
+                                                                    <a href="#tab_3" data-toggle="tab" class="btn btn-primary"> İleri</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_3">
@@ -223,6 +237,13 @@
                                                                     <input value="<%=session.user.name%> <%=session.user.surname%>" name="personName" style="display:none;">
                                                                 </div>
                                                             </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_4" data-toggle="tab" class="btn btn-primary"> İleri</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
@@ -364,6 +385,13 @@
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_7" data-toggle="tab" class="btn btn-primary"> İleri</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div><!-- /.tab-pane -->
                                                 <div class="tab-pane" id="tab_7">
                                                     <div id="divProductChart" class="row">
@@ -457,6 +485,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_5" data-toggle="tab" class="btn btn-primary"> İleri</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane" id="tab_5">
                                                     <div id="divPayMethod" class="row">
@@ -473,10 +508,28 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
+                                                                    <label >Vade</label>
+                                                                    <select name="" id="" class="form-control" >
+                                                                        <option value="" disabled selected>Seçiniz</option>
+                                                                        <option value="">30</option>
+                                                                        <option value="">60</option>
+                                                                        <option value="">90</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
                                                                     <label >Not</label>
                                                                     <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;" <%if(operation == "update"){%> value="<%=offer.note%>"<%}%>><%if(operation == "update"){%><%=offer.payMethod.note%><%}%></textarea>
                                                                 </div>
                                                             </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                                <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.user.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -512,10 +565,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    <div style="text-align:center;">
-                                                        <button type="submit" class="btn btn-primary">Kaydet</button>
-                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.user.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
