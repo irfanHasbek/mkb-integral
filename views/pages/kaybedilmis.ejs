@@ -87,9 +87,9 @@
                                                             <th>Kaybetme Nedeni</th>
                                                             <th>Kazanan Firma</th>
                                                             <th>İşlemi Yapan</th>
-                                                            <th class="text-center" style="width: 40px"></th>
+                                                            <th class="text-center" style="width: 100px"></th>
                                                         </tr>
-                                                        <tbody>
+                                                        <tbody id="tblLosingOffer">
                                                            <%for(var i=0;i<offers.length;i++){%>
                                                                 <tr id="<%=offers[i]._id%>">
                                                                     <td class="text-center"><%=i+1%>.</td>
@@ -100,7 +100,8 @@
                                                                     <td><%=offers[i].status.winFirm%></td>
                                                                     <td><%=offers[i].personAcceptOfferInfo.personName%></td>
                                                                     <td id="<%=offers[i]._id%>">
-                                                                        <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                                        <button class="btn btn-primary btn-sm edit"><i class="fa fa-search"></i></button>
+                                                                        <button class="btn btn-danger btn-sm cancel"><i class="fa fa-trash-o"></i></button>
                                                                     </td>
                                                                 </tr>
                                                                 <%}%>

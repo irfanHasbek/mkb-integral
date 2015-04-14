@@ -128,6 +128,28 @@ function removeFromTable(tableClass,url,callback){
         });       
     });
 }
+function updateFromTable(tableClass, url, data, callback){
+    $("."+tableClass).on("click",".cancel",function(){
+        var id=$(this).closest("td").attr("id");
+        var tr=$("."+tableClass).find("tbody").find("tr[id="+id+"]");
+        alertify.confirm("Iptal etmek istediğinizden emin misiniz?",
+            function(){
+                wsPost(url,{ offerId : id, status : data },function(err,data){
+                    if(err){
+                        console.error(err);
+                        return;
+                    }
+                    alertify.success('Başarı ile guncellendi.');
+                    tr.remove();
+                    orderTable("."+tableClass);
+                    callback(id);
+                }); 
+                },
+            function() {
+               alertify.error('İşlem iptal edildi.');
+        });       
+    });
+}
 function orderTable(table){
    var trs=$(table+" tbody tr");
     $.each(trs,function(index,item){

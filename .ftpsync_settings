@@ -1,0 +1,1 @@
+{"connect":"SFTP","host":"95.85.29.168","port":"22","user":"root","pwd":"2008510030Irfan","savepwd":"checked","remoteRoot":"/opt/integral","privateKeyFile":"/Users/irfanhasbek/.ssh/id_rsa"}

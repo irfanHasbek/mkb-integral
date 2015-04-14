@@ -1269,9 +1269,11 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.post("/wsoffer/updatenote", CreateOfferController.updateProductNote);
     app.post("/wsoffer/updateoffercase", CreateOfferController.updateOfferCase);
     app.post("/wsoffer/updateoffercaseforconfirm", CreateOfferController.updateOfferCaseForConfirm);
+    app.post("/wsoffer/updateoffercaseforcancel", CreateOfferController.updateOfferCaseForCancel);
     app.post("/wsoffer/addactivity", CreateOfferController.addActivity);
     app.post("/wsoffer/removeactivity", CreateOfferController.removeActivity);
     app.post("/wsoffer/updateActivity", CreateOfferController.updateActivity);
+    app.post("/wsoffer/updatepdfinfo", CreateOfferController.updatePdfInfo);
     //end
     //user permission
     var UserPermissions = require('./views/js/service-js/UserPermissionService');
@@ -1307,7 +1309,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                 res.send({state : false, response : error});
                 return;
             }
-            res.send({state : true, fileName : req.body.pageName, contents : '/pdfs/' + req.body.pageName});
+            res.send({state : true, fileName : req.body.pageName, url : '/pdfs/' + req.body.pageName});
         });
         
     });
@@ -1318,7 +1320,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     }
     var nodemailer = require('nodemailer');
     app.post("/wssendmail", function(req, res){
-        var attachs = req.body.attachs;
+        var attachs = req.body.attachment;
         firmService.getInformationFirmCode(req.session.user.firmCode, function(stateFirm, responseFirm){
             if(!stateFirm){
                 console.log(stateFirm);
@@ -1334,13 +1336,12 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
             });
             var mail = {
                 from : req.session.user.name + ' ' + req.session.user.surname + '<' + responseFirm.email + '>',
-                to: req.body.mailTo,
+                to: req.body.email,
                 subject: responseFirm.name + " Bilgilendirme maili",
-                text: "Bu mail bilgilendirmek icindir,Lutfen Cevaplamayiniz.",
+                text: req.body.emailDesc,
                 html: "",
                 attachments : [{
-                    fileName : attachs.fileName,
-                    filePath: Config.url + attachs.contents
+                    filePath: Config.url + attachs
                 }]
             };
             //sleepFor(12000);
@@ -1354,7 +1355,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                     console.log("Message sent: " + response.message);
                 }
                 smtpTransport.close();
-                res.send({state : false, response : response.message});
+                res.send({state : true, response : response.message});
 
             });
         });

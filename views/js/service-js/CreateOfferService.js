@@ -200,6 +200,33 @@ CreateOfferService.prototype.updateOfferCaseForConfirm = function(id, offerCase,
         });
     });
 }
+CreateOfferService.prototype.updateOfferCaseForCancel = function(id, offerCase, callback){
+    CreateOfferModel.findOne({ _id : id }, function(error,respOffer){
+     if(error){
+            callback(false, error);
+            return;
+        }
+        respOffer.status['offerCase'] = offerCase;
+        respOffer.status['job'] = '';
+        respOffer.status['losingReason'] = '';
+        respOffer.status['winFirm'] = '';
+        respOffer.forwardingInfo['forwardId'] = '';
+        respOffer.forwardingInfo['forwardLabel'] = '';
+        
+        respOffer.personAcceptOfferInfo['personId'] = '';
+        respOffer.personAcceptOfferInfo['personName'] = '';
+        
+        respOffer.dates['acceptOfferDate'] = '';
+        
+        respOffer.save(function(errorSave, responseSave){
+            if(errorSave){
+                callback(false, error);
+                return; 
+            }
+            callback(true, 'success');
+        });
+    });
+}
 CreateOfferService.prototype.remove = function(offerId,callback){
     CreateOfferModel.remove({_id:offerId._id},function(error){
         if(error){
@@ -260,10 +287,17 @@ CreateOfferService.prototype.searchandGetCount = function(criteria, callback){
 }
 
 CreateOfferService.prototype.updateActivity = function(activityId, status, note, callback){
-    console.log('id :' + activityId);
-    console.log('status : ' + status);
-    console.log('note : ' + note);
     CreateOfferModel.update({ 'activities._id' : activityId }, {$set : { 'activities.$.activityStatus' : status, 'activities.$.note' : note}},        function(error, affectedRow){
+         if(error){
+            callback(false, error);
+            return;
+         }
+         callback(true, affectedRow);
+    });
+}
+
+CreateOfferService.prototype.updatePdfInfo = function(offerId, _pdfInfo, callback){
+    CreateOfferModel.update({ '_id' : offerId }, { 'pdfInfo.pdfStatus' : _pdfInfo.pdfStatus, 'pdfInfo.pdfUrl' : _pdfInfo.pdfUrl }, function(error, affectedRow){
          if(error){
             callback(false, error);
             return;

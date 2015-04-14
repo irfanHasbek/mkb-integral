@@ -34,8 +34,34 @@ function clickHandlers() {
         }
     });
     
+    $('#tableOpenOffers').on('click', '.createPdf', function() {
+        var offerId = $(this).closest('tr').attr('id');
+        if(offerId){
+            $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>PDF Olusturuluyor...</h1>' }); 
+            wsPost("/wscreatepdf",{pageUrl : "/teklif_yazdir?id=" + offerId + '&code=' + $('#inpFirmCode').val(), pageName : offerId + '_YOB.pdf'},function(err, data){
+                if(err || !data.state){
+                    alertify.error("Pdf olusturulamadi.");
+                    $.unblockUI();
+                    return;
+                }
+                wsPost("/wsoffer/updatepdfinfo",{_id : offerId ,info : { pdfStatus : 'true' , pdfUrl : data.url}},function(errUpdatePdf, dataUpdatePdf){
+                    if(errUpdatePdf || !dataUpdatePdf.state){
+                        alertify.error("Pdf bilgisi guncellenemedi.");
+                        return;
+                    }
+                    $.unblockUI();
+                    $('tr[id=' + offerId + ']').find('.sendMail').removeAttr('disabled');
+                    $('tr[id=' + offerId + ']').find('.sendMail').attr('data', data.url);
+                    window.open(data.url, '_blank');
+                });
+            });
+        }
+    });
+    
      $('#tableOpenOffers').on('click', '.sendMail', function() {
         var offerId = $(this).closest('tr').attr('id');
+        var attachment = $(this).attr('data');
+        $('#mailModalAttachs').val(attachment);
         $('#sendMailModal').modal("show");
     });
 
@@ -85,6 +111,7 @@ function clickHandlers() {
     });
     
     $('#btnMailModalSubmit').on('click', function(){
+        $('#sendMailModal').modal("hide");
         $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>Mail Gönderiliyor...</h1>' }); 
     }); 
 
@@ -139,21 +166,8 @@ function clickHandlers() {
                     return;
                 }
                 $('#modalAcceptOffer').modal('hide');
-                $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>PDF olusturuluyor...</h1>' }); 
-                var optionPdf = {
-                    pageUrl: '/teklif_yazdir?id=' + offerId + '&code=' + $('#inpFirmCode').val(),
-                    pageName: 'offer_' + offerId + '.pdf'
-                };
-                wsPost('wscreatepdf', optionPdf, function(errorPdf, responsePdf) {
-                    if (errorPdf || !responsePdf.state) {
-                        alertify.error(errorPdf);
-                        $.unblockUI();
-                        return;
-                    }
-                    alertify.success('Teklif onaylandi ve pdf olusturuldu.');
-                    $('#mailModalAttachs').val(responsePdf.content);
-                    $.unblockUI();
-                });
+                $('tr[id='+ offerId +']').remove();
+                orderTable('.tblOpenOffer');
               });
             },function(){
                 alertify.error('Teklif onayı iptal edildi.');
@@ -275,7 +289,13 @@ function fillTable(response, respOfferStatus) {
         tdOfferStatus.append(select);
         var tdOfferDate = $('<td>' + response[i].offerDate + '</td>');
         var tdPerson = $('<td>' + response[i].personPrepareOfferInfo.personName + '</td>');
-        var tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li></ul></div></td>');
+        var tdButtons = '';
+        
+        if(response[i].pdfInfo.pdfStatus == "false"){
+            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li><li><a class="btn btn-warning btn-flat btn-sm createPdf">PDF Olustur  <i class="fa fa-download"></i></a></li><li><a class="btn btn-primary btn-flat btn-sm sendMail" disabled>Mail Gönder <i class="fa fa-envelope-o"></i></a></li></ul></div></td>');   
+        }else{
+            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li><li><a class="btn btn-warning btn-flat btn-sm createPdf">PDF Olustur  <i class="fa fa-download"></i></a></li><li><a class="btn btn-primary btn-flat btn-sm sendMail" data="' + response[i].pdfInfo.pdfUrl + '">Mail Gönder <i class="fa fa-envelope-o"></i></a></li></ul></div></td>');   
+        }
 
         tr.append(tdCount);
         tr.append(tdOfferTopic);

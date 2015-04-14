@@ -60,6 +60,10 @@ function createOffer(type, req) {
             deliveryDate: '',
             startJobDate: '',
             acceptOfferDate: ''
+        },
+        pdfInfo : {
+            pdfStatus : 'false',
+            pdfUrl : ''
         }
     };
     if(type == 'update') {
@@ -114,7 +118,7 @@ function createB2bOffer(req) {
         },
         status: {
             job: '',
-            offerCase: "acik_teklifler",
+            offerCase: "onay_bekleyen_teklifler",
             losingReason: "",
             winFirm: ""
         },
@@ -127,6 +131,10 @@ function createB2bOffer(req) {
             deliveryDate: '',
             startJobDate: '',
             acceptOfferDate: ''
+        },
+        pdfInfo : {
+            pdfStatus : 'false',
+            pdfUrl : ''
         }
     };
     offerObj.basket = JSON.parse(req.body.basket);
@@ -285,14 +293,22 @@ module.exports = {
         });
     },
     updateOfferCaseForConfirm: function (req, res) {
-        //console.log(JSON.stringify(tempOffer));
-        var offerId = req.body._id;
-        var status = req.body.status;
-        var acceptPerson = req.body.acceptPerson;
-        var forwardingInfo = req.body.forwardingInfo;
-        var acceptOfferDate = req.body.acceptOfferDate;
-
         cos.updateOfferCaseForConfirm(req.body.offerId, req.body.status, function (state, response) {
+            if(!state) {
+                res.send({
+                    state: state,
+                    response: response
+                });
+                return;
+            }
+            res.send({
+                state: state,
+                response: response
+            });
+        });
+    },
+    updateOfferCaseForCancel: function (req, res) {
+        cos.updateOfferCaseForCancel(req.body.offerId, req.body.status, function (state, response) {
             if(!state) {
                 res.send({
                     state: state,
@@ -441,6 +457,21 @@ module.exports = {
     },
     updateActivity : function(req, res){
         cos.updateActivity(req.body.activityId, req.body.status, req.body.note, function(state, response){
+             if(!state){
+                res.send({
+                    state: state,
+                    response: Error
+                });
+                return;
+            }
+            res.send({
+                state: state,
+                response: response
+            });
+        });
+    },
+    updatePdfInfo : function(req, res){
+        cos.updatePdfInfo(req.body._id, req.body.info, function(state, response){
              if(!state){
                 res.send({
                     state: state,

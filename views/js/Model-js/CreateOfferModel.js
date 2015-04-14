@@ -83,6 +83,10 @@ var OfferScheme = new mongoose.Schema({
         deliveryDate : String,
         startJobDate : String,
         acceptOfferDate :String
+    },
+    pdfInfo : {
+        pdfStatus : String,
+        pdfUrl : String
     }
 });
 

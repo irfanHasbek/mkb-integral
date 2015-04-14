@@ -87,7 +87,7 @@
                                                             <th>Teklif Durumu</th>
                                                             <th>Tarih</th>
                                                             <th>İşlemi Yapan</th>
-                                                            <th class="text-center" style="width:170px;"></th>
+                                                            <th class="text-center" style="width:220px;"></th>
                                                         </tr>
                                                         <tbody id="tableOpenOffers">
                                                            <%for(var i=0;i<offers.length;i++){%>
@@ -108,7 +108,8 @@
                                                                <a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>
                                                                <a class="btn btn-warning  btn-flat btn-sm confirmOffer"><i class="fa fa-check"></i></a>
                                                                <a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>
-                                                               <a class="btn btn-primary btn-flat btn-sm sendMail"><i class="fa fa-mail-reply"></i></a>
+                                                               <a class="btn btn-success btn-flat btn-sm createPdf"><i class="fa fa-download"></i></a>
+                                                               <a class="btn btn-primary btn-flat btn-sm sendMail" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>

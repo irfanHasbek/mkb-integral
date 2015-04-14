@@ -34,15 +34,40 @@ function clickHandlers() {
         }
     });
     
-     $('#tableOpenOffers').on('click', '.sendMail', function() {
+    $('#tableOpenOffers').on('click', '.sendMail', function() {
         var offerId = $(this).closest('tr').attr('id');
+        var attachment = $(this).attr('data');
+        $('#mailModalAttachs').val(attachment);
         $('#sendMailModal').modal("show");
     });
     
-    
+    $('#tableOpenOffers').on('click', '.createPdf', function() {
+        var offerId = $(this).closest('tr').attr('id');
+        if(offerId){
+            $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>PDF Olusturuluyor...</h1>' }); 
+            wsPost("/wscreatepdf",{pageUrl : "/teklif_yazdir?id=" + offerId + '&code=' + $('#inpFirmCode').val(), pageName : offerId + '_YOB.pdf'},function(err, data){
+                if(err || !data.state){
+                    alertify.error("Pdf olusturulamadi.");
+                    $.unblockUI();
+                    return;
+                }
+                wsPost("/wsoffer/updatepdfinfo",{_id : offerId ,info : { pdfStatus : 'true' , pdfUrl : data.url}},function(errUpdatePdf, dataUpdatePdf){
+                    if(errUpdatePdf || !dataUpdatePdf.state){
+                        alertify.error("Pdf bilgisi guncellenemedi.");
+                        return;
+                    }
+                    $.unblockUI();
+                    $('tr[id=' + offerId + ']').find('.sendMail').removeAttr('disabled');
+                    $('tr[id=' + offerId + ']').find('.sendMail').attr('data', data.url);
+                    window.open(data.url, '_blank');
+                });
+            });
+        }
+    });
 
     $('#tableOpenOffers').on('click', '.confirmOffer', function() {
-        var offerId = $(this).closest('tr').attr('id');
+        var tr = $(this).closest('tr');
+        var offerId = tr.attr('id');
         alertify.confirm('Teklifi onayliyor musunuz?',
         function(){
             if (offerId) {
@@ -52,6 +77,8 @@ function clickHandlers() {
                     return;
                 }
                 alertify.success('Teklif onaylandi.');
+                tr.remove();
+                orderTable('.tableOpenOffers');
             });
         }
         },function(){
@@ -61,6 +88,7 @@ function clickHandlers() {
     
     $('#btnMailModalSubmit').on('click', function(){
         $.blockUI({ css: { backgroundColor: '#2c94c0', color: '#fff'}, message: '<h1>Mail Gönderiliyor...</h1>' }); 
+        $('#sendMailModal').modal('hide');
     }); 
     
     $('.search').on('click', function() {
@@ -73,6 +101,7 @@ function formHandlers() {
         if(!data.state){
             $.unblockUI();
             alertify.error('Mail gonderimi sirasinda hata olustu.');
+            return;
         }
         $.unblockUI();
         alertify.success('Mail basariyla gonderildi.');
@@ -122,7 +151,12 @@ function fillTable(response, respOfferStatus) {
         tdOfferStatus.append(select);
         var tdOfferDate = $('<td>' + response[i].offerDate + '</td>');
         var tdPerson = $('<td>' + response[i].personPrepareOfferInfo.personName + '</td>');
-        var tdButtons = $('<td id="' + response[i]._id + '">&nbsp&nbsp<a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>&nbsp<a href="" class="btn btn-warning  btn-flat btn-sm confirm"><i class="fa fa-check"></i></a>&nbsp<a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>&nbsp<a class="btn btn-primary btn-flat btn-sm sendMail"><i class="fa fa-mail-reply"></i></a></td>');
+        var tdButtons = '';
+        if(response[i].pdfInfo.pdfStatus == 'false'){
+            tdButtons = $('<td id="' + response[i]._id + '">&nbsp&nbsp<a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>&nbsp<a href="" class="btn btn-warning  btn-flat btn-sm confirm"><i class="fa fa-check"></i></a>&nbsp<a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>&nbsp<a class="btn btn-success btn-flat btn-sm createPdf"><i class="fa fa-download"></i></a>&nbsp<a disabled class="btn btn-primary btn-flat btn-sm sendMail"><i class="fa fa-envelope-o"></i></a></td>"></i></a></td>');   
+        }else{
+            tdButtons = $('<td id="' + response[i]._id + '">&nbsp&nbsp<a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>&nbsp<a href="" class="btn btn-warning  btn-flat btn-sm confirm"><i class="fa fa-check"></i></a>&nbsp<a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>&nbsp<a class="btn btn-success btn-flat btn-sm createPdf"><i class="fa fa-download"></i></a>&nbsp<a class="btn btn-primary btn-flat btn-sm sendMail" data="' + response[i].pdfInfo.pdfUrl + '"><i class="fa fa-envelope-o"></i></a></td>"></i></a></td>');   
+        }
 
         tr.append(tdCount);
         tr.append(tdOfferTopic);
