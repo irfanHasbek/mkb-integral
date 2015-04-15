@@ -271,6 +271,7 @@ function searchAndFillTable() {
 
 function fillTable(response, respOfferStatus) {
     $('#tableOpenOffers').empty();
+    //console.log(response)
     for (var i = 0; i < response.length; i++) {
         var tr = $('<tr id="' + response[i]._id + '"></tr>');
         var tdCount = $('<td class="text-center">' + (i + 1) + '</td>');
@@ -292,9 +293,9 @@ function fillTable(response, respOfferStatus) {
         var tdButtons = '';
         
         if(response[i].pdfInfo.pdfStatus == "false"){
-            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li><li><a class="btn btn-warning btn-flat btn-sm createPdf">PDF Olustur  <i class="fa fa-download"></i></a></li><li><a class="btn btn-primary btn-flat btn-sm sendMail" disabled>Mail Gönder <i class="fa fa-envelope-o"></i></a></li></ul></div></td>');   
+            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">İşlem</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu " role="menu"><li><a class=" edit"> <i class="fa fa-search"></i> İncele</a></li><li><a href="" class="note"  data-toggle="modal" data-target="#modal_note"> <i class="fa fa-pencil"></i> Aktivite Ekle</a></li><li><a href="" class="remember" data-toggle="modal" data-target="#modal_remind"> <i class="fa fa-bell-o"></i> Hatırlatma Ekle</a></li><li><a href="" class="accept" data-toggle="modal" data-target="#modal_close"> <i class="fa fa-check"></i> Bitir</a></li><li><a class="save"> <i class="fa fa-save"></i> Kaydet</a></li><li><a class="createPdf">  <i class="fa fa-download"></i> PDF Olustur</a></li><li class="disabled"><a class="sendMail" disabled><i class="fa fa-envelope-o"></i> Mail Gönder </a></li></ul></div></td>');   
         }else{
-            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">Operasyon</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu color_a" role="menu"><li><a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a></li><li><a href="" class="btn btn-flat btn-success note"  data-toggle="modal" data-target="#modal_note">Not Ekle <i class="fa fa-pencil"></i></a></li><li><a href="" class="btn btn-primary btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a></li><li><a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a></li><li><a class="btn btn-info btn-flat save">Kaydet <i class="fa fa-save"></i></a></li><li><a class="btn btn-warning btn-flat btn-sm createPdf">PDF Olustur  <i class="fa fa-download"></i></a></li><li><a class="btn btn-primary btn-flat btn-sm sendMail" data="' + response[i].pdfInfo.pdfUrl + '">Mail Gönder <i class="fa fa-envelope-o"></i></a></li></ul></div></td>');   
+            tdButtons = $('<td id="' + response[i]._id + '"><div class="btn-group"><button type="button" class="btn btn-primary btn-flat">İşlem</button><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu " role="menu"><li><a class=" edit"> <i class="fa fa-search"></i> İncele</a></li><li><a href="" class="note"  data-toggle="modal" data-target="#modal_note"> <i class="fa fa-pencil"></i> Aktivite Ekle</a></li><li><a href="" class="remember" data-toggle="modal" data-target="#modal_remind"> <i class="fa fa-bell-o"></i> Hatırlatma Ekle</a></li><li><a href="" class="accept" data-toggle="modal" data-target="#modal_close"> <i class="fa fa-check"></i> Bitir</a></li><li><a class="save"> <i class="fa fa-save"></i> Kaydet</a></li><li><a class="createPdf">  <i class="fa fa-download"></i> PDF Olustur</a></li><li><a data="' + response[i].pdfInfo.pdfUrl + '" class="sendMail"><i class="fa fa-envelope-o"></i> Mail Gönder </a></li></ul></div></td>');    
         }
 
         tr.append(tdCount);
@@ -325,7 +326,7 @@ function listOfferStatus(response) {
             "status.offerCase": "acik_teklifler"
         };
         searchCriteria['firmCode'] = '';
-        console.log(searchCriteria);
+        //console.log(searchCriteria);
         wsPost('/wsoffer/search', {
             search: searchCriteria
         }, function(error, data) {

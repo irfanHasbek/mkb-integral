@@ -131,7 +131,7 @@
                                                                         <li>
                                                                              <a class="createPdf">  <i class="fa fa-download"></i> PDF Olustur</a>
                                                                         </li>
-                                                                        <li>
+                                                                        <li <%if(offers[i].pdfInfo.pdfStatus == "false"){%> class="disabled"<%}%>>
                                                                              <a class="sendMail" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i> Mail Gönder </a>
                                                                         </li>
                                                                     </ul>

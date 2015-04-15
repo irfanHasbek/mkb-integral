@@ -136,7 +136,7 @@
                                                                 <div class="form-group">
                                                                     <label>Yetkili</label>
                                                                        <%if(operation=='update'){
-                                                                           var competentInfoIndex=0;
+                                                                           var competentInfoIndex=-1;
                                                                         }%>
                                                                         <select id="slctCompetent" name="competentId" type="text"  class="form-control">
                                                                             <option value="Seçiniz" selected disabled>Yetkili Seçiniz</option>
@@ -149,19 +149,19 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Yetkili Adı</label>
-                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].name%>"<%}%>>
+                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=custDef.competentInfo[competentInfoIndex].name%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Görev</label>
-                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].task%>"<%}%>>
+                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=custDef.competentInfo[competentInfoIndex].task%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>GSM</label>
-                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].gsm%>"<%}%>>
+                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=custDef.competentInfo[competentInfoIndex].gsm%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >E-mail</label>
-                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz" <%if(operation=='update'){%>value="<%=custDef.competentInfo[competentInfoIndex].email%>"<%}%>>
+                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=custDef.competentInfo[competentInfoIndex].email%>"<%}%>>
                                                                 </div>
                                                             </div><!-- /.box-body -->
                                                         </div>
