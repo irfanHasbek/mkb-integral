@@ -33,9 +33,9 @@
                                                         <div class="input-group">
                                                             <input id="inpOfferTopic" type="text"  class=" form-control" placeholder="Teklif Konusu" />
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
+                                                                <a class="btn btn-danger search" type="button">
                                                                     <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
+                                                                </a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -45,9 +45,9 @@
                                                         <div class="input-group">
                                                             <input id="inpCustomerName" type="text"  class=" form-control" placeholder="Müşteri Adı" />
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
+                                                                <a class="btn btn-danger search" type="button">
                                                                     <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
+                                                                </a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -57,9 +57,9 @@
                                                         <div class="input-group">
                                                             <input id="inpOfferDate" type="date"  class=" form-control" placeholder="Tarih" />
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-danger search" type="button">
+                                                                <a class="btn btn-danger search" type="button">
                                                                     <span class=" glyphicon glyphicon-search"></span>
-                                                                </button>
+                                                                </a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -104,34 +104,35 @@
                                                             </td>
                                                             <td><%=offers[i].offerDate%></td>
                                                             <td id="<%=offers[i].personPrepareOfferInfo.personName%>"><%=offers[i].personPrepareOfferInfo.personName%></td>
-                                                            <td class="text-center" id="<%=offers[i]._id%>">
+                                                            <td  id="<%=offers[i]._id%>">
+                                                               
                                                                 <div class="btn-group">
-                                                                    <button type="button" class="btn btn-primary btn-flat">Operasyon</button>
+                                                                    <button type="button" class="btn btn-primary btn-flat">İşlem</button>
                                                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                                         <span class="caret"></span>
                                                                         <span class="sr-only">Toggle Dropdown</span>
                                                                     </button>
-                                                                    <ul class="dropdown-menu color_a" role="menu">
+                                                                    <ul class="dropdown-menu " role="menu">
                                                                         <li>
-                                                                            <a class="btn btn-info btn-flat edit">İncele <i class="fa fa-search"></i></a>
+                                                                            <a class=" edit"> <i class="fa fa-search"></i> İncele</a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="" class="btn btn-flat btn-primary note"  data-toggle="modal" data-target="#modal_note">Aktivite Ekle <i class="fa fa-pencil"></i></a>
+                                                                            <a href="" class="note"  data-toggle="modal" data-target="#modal_note"> <i class="fa fa-pencil"></i> Aktivite Ekle</a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="" class="btn btn-danger btn-flat remember" data-toggle="modal" data-target="#modal_remind">Hatırlatma Ekle <i class="fa fa-bell-o"></i></a>
+                                                                            <a href="" class="remember" data-toggle="modal" data-target="#modal_remind"> <i class="fa fa-bell-o"></i> Hatırlatma Ekle</a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="" class="btn btn-warning  btn-flat accept" data-toggle="modal" data-target="#modal_close">Bitir <i class="fa fa-check"></i></a>
+                                                                            <a href="" class="accept" data-toggle="modal" data-target="#modal_close"> <i class="fa fa-check"></i> Bitir</a>
                                                                         </li>
                                                                         <li>
-                                                                             <a class="btn btn-success btn-flat save">Kaydet <i class="fa fa-save"></i></a>
+                                                                             <a class="save"> <i class="fa fa-save"></i> Kaydet</a>
                                                                         </li>
                                                                         <li>
-                                                                             <a class="btn btn-warning btn-flat btn-sm createPdf">PDF Olustur  <i class="fa fa-download"></i></a>
+                                                                             <a class="createPdf">  <i class="fa fa-download"></i> PDF Olustur</a>
                                                                         </li>
                                                                         <li>
-                                                                             <a class="btn btn-primary btn-flat btn-sm sendMail" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>>Mail Gönder <i class="fa fa-envelope-o"></i></a>
+                                                                             <a class="sendMail" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i> Mail Gönder </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
