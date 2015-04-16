@@ -1709,6 +1709,25 @@ th {
   border-bottom-width: 2px;
 }
 
+.table-bordered-print {
+  border: 1px solid #000;
+}
+
+.table-bordered-print > thead > tr > th,
+.table-bordered-print > tbody > tr > th,
+.table-bordered-print > tfoot > tr > th,
+.table-bordered-print > thead > tr > td,
+.table-bordered-print > tbody > tr > td,
+.table-bordered-print > tfoot > tr > td {
+  border: 1px solid #000;
+}
+
+.table-bordered-print > thead > tr > th,
+.table-bordered-print > thead > tr > td {
+  border-bottom-width: 2px;
+}
+
+
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: #f9f9f9;
