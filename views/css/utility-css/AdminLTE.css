@@ -3578,3 +3578,7 @@ ul.color_a > li > a{
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
 }
+
+.borderless td, .borderless th {
+    border: none;
+}
