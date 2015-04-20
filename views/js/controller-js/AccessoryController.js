@@ -55,7 +55,7 @@ module.exports = {
         });   
     },
     getByGroupName : function(req, res, next){
-        as.listAll(req.session.user.firmCode, req.body.productGroupName,function(state, response){
+        as.getByGroupName(req.session.user.firmCode, req.body.productGroupName,function(state, response){
             if(!state){
                 res.send(createResponse(false, null, "aksesuarlar listelenemedi."));
                 return;

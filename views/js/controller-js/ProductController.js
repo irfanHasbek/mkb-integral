@@ -89,5 +89,14 @@ module.exports = {
             }
             res.send({state : state, response : response});
         });   
+    },
+    textSearch : function(req, res){
+        ps.textSearch(req.criteria, function(state, response){
+            if(!state){
+                res.send({state : state, response : response});
+                return;
+            }
+            res.send({state : state, response : response});
+        });   
     }
 };

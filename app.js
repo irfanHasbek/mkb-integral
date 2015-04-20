@@ -708,29 +708,9 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                             console.error(resposeOffer);
                             res.render("/pages/index",{layout : false, session : req.session});
                         }
-               mts.listAll(req.session.user.firmCode,function(stateMontageType,responseMontageType){
-                     if(!stateMontageType){
-                             console.error(responseMontageType);
-                             res.render("/pages/index",{layout : false, session : req.session});
-                         }
                cts.listAll(req.session.user.firmCode,function(stateCoverType,responseCoverType){
                       if(!stateCoverType){
                              console.error(responseCoverType);
-                             res.render("/pages/index",{layout : false, session : req.session});
-                         }
-               sms.listAll(req.session.user.firmCode,function(stateSetMec,responseSetMec){
-                      if(!stateSetMec){
-                             console.error(responseSetMec);
-                             res.render("/pages/index",{layout : false, session : req.session});
-                         }
-               as.listAll(req.session.user.firmCode,function(stateAccessory,responseAccessory){
-                      if(!stateAccessory){
-                             console.error(responseAccessory);
-                             res.render("/pages/index",{layout : false, session : req.session});
-                         }
-               bts.listAll(req.session.user.firmCode,function(stateBodyType,responseBodyType){
-                      if(!stateBodyType){
-                             console.error(responseBodyType);
                              res.render("/pages/index",{layout : false, session : req.session});
                          }
                custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId,function(stateCustId,responseCustId){
@@ -753,11 +733,13 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                             console.log(responseCust);
                             res.render("/pages/index",{layout : false, session : req.session});
                         }
-                     res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,offer : resposeOffer,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust,setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType, custDef:responseCustId, productGroups:responseProductGroup,offerStatus :responseOfferStatus,operation : "update"}); 
-                     });
-                    });
-                   });
-                  });
+                unitService.listAll(req.session.user.firmCode, function(stateUnit, responseUnit){
+                        if(!stateUnit){
+                            console.log(responseUnit);
+                            res.render("/pages/index",{layout : false, session : req.session});
+                        }
+                        res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,offer : resposeOffer,coverTypes:responseCoverType,customers :responseCust,custDef:responseCustId, productGroups:responseProductGroup,offerStatus :responseOfferStatus,operation : "update", units : responseUnit});
+                    }); 
                 });
               });
             });
@@ -806,12 +788,18 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                             console.log(responseOfferStatus);
                             res.render("/pages/index",{layout : false, session : req.session});
                             }
-                    custservice.listAll(req.session.user.firmCode, function(stateCust,responseCust){
-                        if(!stateCust){
-                            console.log(responseCust);
-                            res.render("/pages/index",{layout : false, session : req.session});
-                        }
-                         res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust, setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType,productGroups:responseProductGroup, offerStatus :responseOfferStatus, operation : "add"}); 
+                custservice.listAll(req.session.user.firmCode, function(stateCust,responseCust){
+                    if(!stateCust){
+                        console.log(responseCust);
+                        res.render("/pages/index",{layout : false, session : req.session});
+                    }
+                unitService.listAll(req.session.user.firmCode, function(stateUnit, responseUnit){
+                    if(!stateUnit){
+                        console.log(responseUnit);
+                        res.render("/pages/index",{layout : false, session : req.session});
+                    }
+                    res.render('pages/teklif_olusturma', {layout : false, session : req.session,offerTopics: responseOfferTopic,montageTypes:responseMontageType,coverTypes:responseCoverType,customers :responseCust, setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType,productGroups:responseProductGroup, offerStatus :responseOfferStatus, operation : "add", units : responseUnit}); 
+                 });
                 });
                });
              });
@@ -1169,6 +1157,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wsmontageype/listall", MontageTypeController.listAll);
     app.get("/wsmontagetype/removeall", MontageTypeController.removeAll);
     app.post("/wsmontagetype/remove", MontageTypeController.remove);
+    app.post("/wsmontagetype/getbygroupname", MontageTypeController.getByGroupName);
     //end
     
     //kaplama şekli ops "abuzer" 28.02 start
@@ -1183,6 +1172,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wssetmechanism/listall", SetMechanismController.listAll);
     app.get("/wssetmechanism/removeall", SetMechanismController.removeAll);
     app.post("/wssetmechanism/remove", SetMechanismController.remove);
+    app.post("/wssetmechanism/getbygroupname", SetMechanismController.getByGroupName);
     //end
     
     //aksesuar ops "abuzer" 28.02 start
@@ -1190,6 +1180,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wsaccessory/listall", AccessoryController.listAll);
     app.get("/wsaccessory/removeall", AccessoryController.removeAll);
     app.post("/wsaccessory/remove", AccessoryController.remove);
+    app.post("/wsaccessory/getbygroupname", AccessoryController.getByGroupName);
     //end
     
     //kasa tipi ops "abuzer" start
@@ -1197,6 +1188,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wsbodytype/listall", BodyTypeController.listAll);
     app.get("/wsbodytype/removeall", BodyTypeController.removeAll);
     app.post("/wsbodytype/remove", BodyTypeController.remove);
+    app.post("/wsbodytype/getbygroupname", BodyTypeController.getByGroupName);
     //end
     
     //teklif konusu ops "abuzer" 03.03 start
@@ -1227,6 +1219,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get("/wsproduct/listall", ProductController.listAll);
     app.get("/wsproduct/removeall", ProductController.removeAll);
     app.post("/wsproduct/getproduct", ProductController.getProduct);
+    app.post("/wsproduct/textsearchproduct", ProductController.textSearch);
     app.post("/wsproduct/search", ProductController.searchProduct);
     
     //end
@@ -1304,7 +1297,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     var wkhtmltopdf = require('wkhtmltopdf');
     app.post("/wscreatepdf", function(req, res){
         var pageURl = Config.url + req.body.pageUrl;
-        wkhtmltopdf(pageURl, { output: './views/pdfs/' + req.body.pageName }, function(error, createdPdf){
+        wkhtmltopdf(pageURl, { output: './views/pdfs/' + req.body.pageName, orientation : 'Landscape' }, function(error, createdPdf){
             if(error){
                 res.send({state : false, response : error});
                 return;

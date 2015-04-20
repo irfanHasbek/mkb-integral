@@ -254,9 +254,9 @@
                                                                 <div class="form-group">
                                                                     <label for="">Ürün Grubu</label>
                                                                     <select name="productGroup" id="productGroup" class="form-control">
-                                                                        <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                                        <option style="padding-left:0px;" value="empty" >Seçiniz</option>
                                                                            <%for(var i = 0; i < productGroups.length; i++){%>
-                                                                            <option <%if(operation == 'update' && productGroups[i].productGroupName== offer.basket.productGroup){%>selected<%}%> value="<%=productGroups[i].productGroupName%>"><%=productGroups[i].productGroupName%></option>
+                                                                            <option value="<%=productGroups[i]._id%>"><%=productGroups[i].productGroupName%></option>
                                                                           <%}%>
                                                                     </select>
                                                                 </div>
@@ -285,26 +285,42 @@
                                                                     <br>
                                                                    <input id="inpSizeType" style="display:none;">
                                                                    <input id="inpBasket" name="basket" style="display:none;" <%if(operation=="update"){%>value="<%=JSON.stringify(offer.basket)%>"<%}%>> 
-                                                                 <div id="divRec" class="row" style="display:none;">
-                                                                    <div class="col-md-9 no-padding">
-                                                                            <div class="col-md-4">
+                                                                    <div id="divRec" class="row" style="display:none;">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-3">
                                                                                 <input id="inpEn" type="number" value="0" class="form-control" placeholder="En Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-3">
                                                                                 <input id="inpYukseklik" type="number" value="0" class="form-control" placeholder="Yükselik Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-3">
                                                                                 <input id="inpBoy" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <select id="slctRectUnit" class="form-control">
+                                                                                    <option selected disabled value="">Birim Seciniz</option>
+                                                                                    <%for(var i = 0; i < units.length; i++){%>
+                                                                                       <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
+                                                                                    <%}%>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div id="divCir" class="row" style="display:none;">
-                                                                        <div class="col-md-6 no-padding">
-                                                                            <div class="col-md-6">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-4">
                                                                                 <input id="inpCap" type="number" value="0" class="form-control" placeholder="Çap Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <input id="inpUzunluk" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <select id="slctCirUnit" class="form-control">
+                                                                                    <option selected disabled value="">Birim Seciniz</option>
+                                                                                    <%for(var i = 0; i < units.length; i++){%>
+                                                                                       <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
+                                                                                    <%}%>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -314,10 +330,7 @@
                                                                         <div class="form-group">
                                                                             <label for="">Montaj Şekli</label>
                                                                             <select id="montageType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                                   <%for(var i = 0; i < montageTypes.length; i++){%>
-                                                                                    <option data="<%=montageTypes[i].cost%>" value="<%=montageTypes[i].montageType%>"><%=montageTypes[i].montageType%></option>
-                                                                                  <%}%>
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -325,7 +338,7 @@
                                                                         <div class="form-group">
                                                                             <label for="">Kaplama Şekli</label>
                                                                             <select id="coverType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                                    <%for(var i = 0; i < coverTypes.length; i++){%>
                                                                                     <option data="<%=coverTypes[i].cost%>" value="<%=coverTypes[i].coverType%>"><%=coverTypes[i].coverType%></option>
                                                                                   <%}%>
@@ -335,22 +348,16 @@
                                                                     <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Ayar Mekanizması</label>
-                                                                            <select  id="setMechanism" class="form-control">
-                                                                                 <option style="padding-left:0px;" data='0' selected disabled value="" >Seçiniz</option>
-                                                                                   <%for(var i = 0; i < setMechanisms.length; i++){%>
-                                                                                    <option data="<%=setMechanisms[i].cost%>" value="<%=setMechanisms[i].setMechanism%>"><%=setMechanisms[i].setMechanism%></option>
-                                                                                  <%}%>
+                                                                            <select id="setMechanism" class="form-control">
+                                                                                 <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Aksesuar</label>
-                                                                            <select  id="accessory" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                                   <%for(var i = 0; i < accessories.length; i++){%>
-                                                                                    <option data="<%=accessories[i].cost%>" value="<%=accessories[i].accessory%>"><%=accessories[i].accessory%></option>
-                                                                                  <%}%>
+                                                                            <select id="accessory" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -358,10 +365,7 @@
                                                                         <div class="form-group">
                                                                             <label for="">Kasa Tipi</label>
                                                                             <select  id="bodyType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                                   <%for(var i = 0; i < bodyTypes.length; i++){%>
-                                                                                    <option data="<%=bodyTypes[i].cost%>" value="<%=bodyTypes[i].bodyType%>"><%=bodyTypes[i].bodyType%></option>
-                                                                                  <%}%>
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -370,18 +374,12 @@
                                                                     <label >Miktar</label>
                                                                     <input type="text" class="form-control" id="amount" placeholder="Miktar Giriniz" value='0'>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label >Satır İskonto</label>
-                                                                    <input type="text" class="form-control" id="lineDiscount" placeholder="Satır İskonto Giriniz" value="0">
-                                                                </div>
-                                                                
+                                                                <input id="inpDiscount" type="text" style="display:none;">
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <a id="btnAddBasket" class="btn btn-success btn-flat" id="btnAddChart">Sepete Ekle</a>
                                                                     </div>
                                                                 </div>
-                                                                
-                                                                
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>

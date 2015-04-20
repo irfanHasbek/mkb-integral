@@ -91,4 +91,14 @@ ProductService.prototype.search = function(criteria, callback){
     });
 }
 
+ProductService.prototype.textSearch = function(criteria, callback){
+    ProductModel.find(criteria, function(error, products){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, products);
+    });
+}
+
 module.exports = ProductService;

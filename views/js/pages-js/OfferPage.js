@@ -38,7 +38,7 @@ function clickHandlers() {
             accessory: $('#accessory').val(),
             bodyType: $('#bodyType').val(),
             amount: $('#amount').val(),
-            lineDiscount: $('#lineDiscount').val(),
+            lineDiscount: $("#inpDiscount").val(),
             productPrice: ''
         }
         if ($('#inpSizeType').val() == 'Dikdörtgen') {
@@ -73,8 +73,8 @@ function clickHandlers() {
             info.W = basketItem.productSizeWidthOrDiameter;
             info.L = basketItem.productSizeLength;
         }
-
-        wsPost('/wspricecalculate/calculate', {
+        console.log(info);
+        /*wsPost('/wspricecalculate/calculate', {
             info: info
         }, function(error, response) {
             if (error) {
@@ -93,7 +93,7 @@ function clickHandlers() {
             } else {
                 alert('Uygun ürün bulunamadi.');
             }
-        });
+        });*/
     });
 
     $('#tableBasket').on('click', '.remove', function() {
@@ -273,8 +273,18 @@ function otherScripts() {
         $("#inpCustName").val($("#selectCustomer option:selected").text());
     });
     $("#productGroup").change(function() {
-        var group = $(this).val();
+        var group = $("#productGroup option:selected").text();
         listProductsByGroupName(group);
+        listMontageTypeByGroupName(group);
+        listAccesorryByGroupName(group);
+        listBodyTypeByGroupName(group);
+        listSetMechanismByGroupName(group);
+        if($('#selectCustomer').val() == null){
+            alertify.error('Lutfen musteri seciniz.');
+            $("#productGroup").val('empty');
+            return;
+        }
+        getProductsDiscountByGroupName($('#selectCustomer').val(), $('#productGroup').val());
     });
     $("#slctCompetent").change(function() {
         clearInputs("divCompetent");
@@ -331,6 +341,20 @@ function otherScripts() {
     });
 }
 
+function getProductsDiscountByGroupName(customerId, groupId) {
+    var searchCriteria = {
+        customerId : customerId,
+        productGroupId : groupId
+    };
+    wsPost("/wsdiscount/getdiscount", searchCriteria, function(err, resp) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        $("#inpDiscount").val(resp.response.percent);
+    });
+}
+
 function listProductsByGroupName(group) {
     var searchCriteria = {
         search: {
@@ -348,6 +372,82 @@ function listProductsByGroupName(group) {
         for (var i = 0; i < resp.response.length; i++) {
             var opt = $("<option id='" + resp.response[i]._id + "' value=" + resp.response[i].name + ">" + resp.response[i].name + "</option>");
             $("#selectProduct").append(opt);
+        }
+    });
+}
+
+function listMontageTypeByGroupName(group) {
+    var searchCriteria = {
+        productGroupName: group
+    };
+    wsPost("/wsmontagetype/getbygroupname", searchCriteria, function(err, resp) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        $("#montageType").empty();
+        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        $("#montageType").append(optInitial);
+        for (var i = 0; i < resp.data.length; i++) {
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].montageType + "</option>");
+            $("#montageType").append(opt);
+        }
+    });
+}
+
+function listBodyTypeByGroupName(group) {
+    var searchCriteria = {
+        productGroupName: group
+    };
+    wsPost("/wsbodytype/getbygroupname", searchCriteria, function(err, resp) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        $("#bodyType").empty();
+        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        $("#bodyType").append(optInitial);
+        for (var i = 0; i < resp.data.length; i++) {
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" +  resp.data[i].bodyType + "</option>");
+            $("#bodyType").append(opt);
+        }
+    });
+}
+
+function listAccesorryByGroupName(group) {
+    var searchCriteria = {
+        productGroupName: group
+    };
+    wsPost("/wsaccessory/getbygroupname", searchCriteria, function(err, resp) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        $("#accessory").empty();
+        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        $("#accessory").append(optInitial);
+        for (var i = 0; i < resp.data.length; i++) {
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].accessory + "</option>");
+            $("#accessory").append(opt);
+        }
+    });
+}
+
+function listSetMechanismByGroupName(group) {
+    var searchCriteria = {
+        productGroupName: group
+    };
+    wsPost("/wssetmechanism/getbygroupname", searchCriteria, function(err, resp) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        $("#setMechanism").empty();
+        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        $("#setMechanism").append(optInitial);
+        for (var i = 0; i < resp.data.length; i++) {
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].setMechanism + "</option>");
+            $("#setMechanism").append(opt);
         }
     });
 }
