@@ -88,7 +88,7 @@
                                                         <th ><span data-toggle="tooltip" data-placement="top" title="Teslim Tarihi">T.Tarihi</span></th>
                                                         <th>Açıklama</th>
                                                         <th><span data-toggle="tooltip" data-placement="top" title="İmalata Veriliş Tarihi">İ.V Tarihi</span></th>
-                                                        <th class="text-center" style="width: 40px"></th>
+                                                        <th><div style="width:40px;"></div></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>                                                        
@@ -96,7 +96,7 @@
                                                          <%for(var j=0;j<offers[i].basket.length;j++){%>
                                                         <tr id="<%=offers[i]._id%>">
                                                             <td class="text-center"><%=(j+1)%></td>
-                                                            <td class="text-center"><%=offers[i].offerNo%></td>
+                                                            <td class="text-center">IE<%=offers[i].offerNo%>-<%=(j+1)%></td>
                                                             <td><%=offers[i].customerInfo.customerName%></td>
                                                             <td><%=offers[i].basket[j].productName%></td>
                                                             <%if(offers[i].basket[j].productSizeType=="Dikdörtgen"){%>

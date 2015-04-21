@@ -220,9 +220,10 @@ function fillItemToBasket(item) {
 
 function calculatePriceAfterOperation() {
     var sum = parseFloat(calculateBasketTotalPrice());
-    sum = sum - (sum * (parseFloat($('#generalDiscount').val()) / 100));
     $('#productSum').val(sum);
-
+    var discount = parseFloat(calculateBasketTotalDiscount());
+    $('#generalDiscount').val(discount);
+    
     var kdv = sum * (18 / 100);
     $('#productKDV').val(kdv);
     $('#productTotal').val(sum + kdv - parseFloat($('#RoundingDiscount').val()));
@@ -234,6 +235,17 @@ function calculateBasketTotalPrice() {
     if (basket != [] || basket != '') {
         for (var i = 0; i < basket.length; i++) {
             total += parseFloat(basket[i].productPrice);
+        }
+    }
+    return total;
+}
+
+function calculateBasketTotalDiscount() {
+    var basket = JSON.parse($('#inpBasket').val());
+    var total = 0;
+    if (basket != [] || basket != '') {
+        for (var i = 0; i < basket.length; i++) {
+            total += parseFloat(basket[i].amount * parseFloat(basket[i].productListPrice - basket[i].productPriceWithDiscount));
         }
     }
     return total;
@@ -427,7 +439,7 @@ function listMontageTypeByGroupName(group) {
         var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#montageType").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
-            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].montageType + "</option>");
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].montageType + " data='" + resp.data[i].cost +"'>" + resp.data[i].montageType + "</option>");
             $("#montageType").append(opt);
         }
     });
@@ -446,7 +458,7 @@ function listBodyTypeByGroupName(group) {
         var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#bodyType").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
-            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" +  resp.data[i].bodyType + "</option>");
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].bodyType + " data='" + resp.data[i].cost +"'>" +  resp.data[i].bodyType + "</option>");
             $("#bodyType").append(opt);
         }
     });
@@ -465,7 +477,7 @@ function listAccesorryByGroupName(group) {
         var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#accessory").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
-            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].accessory + "</option>");
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].accessory + " data='" + resp.data[i].cost +"'>" + resp.data[i].accessory + "</option>");
             $("#accessory").append(opt);
         }
     });
@@ -484,7 +496,7 @@ function listSetMechanismByGroupName(group) {
         var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#setMechanism").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
-            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].setMechanism + "</option>");
+            var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].setMechanism + " data='" + resp.data[i].cost +"'>" + resp.data[i].setMechanism + "</option>");
             $("#setMechanism").append(opt);
         }
     });

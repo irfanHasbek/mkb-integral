@@ -254,7 +254,7 @@
                                 <%if(j == 0 && i == 15){trIndex = i;break;}%>
                                 <tr>
                                     <td class="text-center" style="font-size:6px"><%=i%></td>
-                                    <td class="text-center" style="font-size:6px">Urun-<%=i+1%></td>
+                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].productCodes%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productName%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productSizeWidthOrDiameter%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productSizeHeight%></td>
@@ -262,11 +262,11 @@
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].coverType%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].setMechanism%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].accessory%></td>
-                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].amount%></td>
+                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].amount%> <%=offer.basket[i].unit%></td>
+                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].productListPrice%> TL</td>
+                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].lineDiscount%> %</td>
+                                    <td class="text-center" style="font-size:6px"><%=offer.basket[i].productPriceWithDiscount%> TL</td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productPrice%> TL</td>
-                                    <td class="text-center" style="font-size:6px">0 %</td>
-                                    <td class="text-center" style="font-size:6px">0,00 TL</td>
-                                    <td class="text-center" style="font-size:6px">0,00 TL</td>
                                 </tr>
                             <%}%>
                         </table>

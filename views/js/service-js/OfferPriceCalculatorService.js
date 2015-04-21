@@ -49,7 +49,7 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 var accessoryCost = choosenPrice * (parseFloat(info.accessory) / 100);
                 var bodyTypeCost = choosenPrice * (parseFloat(info.bodyType) / 100);
                 
-                choosenPrice = choosenPrice - (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
+                choosenPrice = choosenPrice + (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
                 choosenPrice = choosenPrice * parseFloat(info.amount);
                 callback(true, {listPrice : productListPrice , discountPrice : productPriceWithDiscount, total : choosenPrice}, 'Basarili');        
             }
@@ -100,7 +100,7 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
                 var accessoryCost = choosenPrice * (parseFloat(info.accessory) / 100);
                 var bodyTypeCost = choosenPrice * (parseFloat(info.bodyType) / 100);
                 
-                choosenPrice = choosenPrice - (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
+                choosenPrice = choosenPrice + (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
                 choosenPrice = choosenPrice * parseFloat(info.amount);
                 callback(true, {listPrice : productListPrice , discountPrice : productPriceWithDiscount, total : choosenPrice}, 'Basarili');   
             }

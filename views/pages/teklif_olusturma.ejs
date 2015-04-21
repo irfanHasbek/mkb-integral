@@ -3,7 +3,7 @@
     <head>
         <%include ../partial-pages/css.ejs%>
     </head>
-    <body class="skin-blue">
+    <body class="skin-blue fixed">
        <%include ../partial-pages/master_head.ejs%>
         <div class="wrapper row-offcanvas row-offcanvas-left">
            <%include ../partial-pages/master_left.ejs%>
@@ -514,12 +514,11 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Vade</label>
-                                                                    <select name="" id="" class="form-control" >
-                                                                        <option value="" disabled selected>Seçiniz</option>
-                                                                        <option value="">30</option>
-                                                                        <option value="">60</option>
-                                                                        <option value="">90</option>
-                                                                        
+                                                                    <select name="vade" id="" class="form-control" >
+                                                                        <option value="0" disabled selected>Seçiniz</option>
+                                                                        <%for(var i = 0; i < 6; i++){%>
+                                                                            <option value="<%=(i+1)*30%>" <%if(operation == "update" && offer.payMethod.vade == ((i+1)*30).toString() ){%>selected<%}%>><%=(i+1)*30%></option>
+                                                                        <%}%>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -549,6 +548,8 @@
                                                                         <th>İçerik </th>
                                                                         <th style="width:200px">Tarih </th>
                                                                         <th style="width:200px">İşlemi Yapan</th>
+                                                                        <th style="width:200px">Durum</th>
+                                                                        <th style="width:200px">Not</th>
                                                                         <th style="width:40px"> </th>
                                                                     </tr>
                                                                     <tbody>
@@ -560,6 +561,14 @@
                                                                             <td><%=offer.activities[i].content%></td>
                                                                             <td><%=offer.activities[i].activityDate%></td>
                                                                             <td><%=offer.activities[i].owner.ownerName%></td>
+                                                                            <%if(offer.activities[i].activityStatus == 'undone'){%>
+                                                                                <td>Beklemede</td>
+                                                                            <%}else if(offer.activities[i].activityStatus == 'done'){%>
+                                                                                <td>Tamamlandi</td>
+                                                                            <%}else{%>
+                                                                                <td>Devam ediyor</td>
+                                                                            <%}%>
+                                                                            <td><%=offer.activities[i].note%></td>
                                                                             <td id="<%=offer._id%>"><a class="btn btn-danger btn-flat btn-sm silact"><i class="fa fa-trash-o"></i></a></td>
                                                                         </tr>
                                                                         <%}%>

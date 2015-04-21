@@ -60,7 +60,8 @@ var OfferScheme = new mongoose.Schema({
     },
     payMethod :{
         payMethod :String,
-        note : String
+        note : String,
+        vade : String
     },
     status : {
        job : String,

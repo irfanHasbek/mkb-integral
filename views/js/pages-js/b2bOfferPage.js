@@ -152,8 +152,6 @@ function fillItemToBasket(item) {
 
 function calculatePriceAfterOperation() {
     var sum = parseFloat(calculateBasketTotalPrice());
-    sum = sum - (sum * (parseFloat($('#generalDiscount').val()) / 100));
-    $('#productSum').val(sum);
 
     var kdv = sum * (18 / 100);
     $('#productKDV').val(kdv);

@@ -43,7 +43,8 @@ function createOffer(type, req) {
         },
         payMethod: {
             payMethod: req.body.payMethod,
-            note: req.body.note
+            note: req.body.note,
+            vade : req.body.vade
         },
         status: {
             job: '',
@@ -114,7 +115,8 @@ function createB2bOffer(req) {
         },
         payMethod: {
             payMethod: req.body.payMethod,
-            note: req.body.note
+            note: req.body.note,
+            vade : req.body.vade
         },
         status: {
             job: '',

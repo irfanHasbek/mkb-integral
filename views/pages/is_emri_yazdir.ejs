@@ -54,7 +54,7 @@
                                 <%for(var i=0;i<offer.basket.length;i++){%>
                                 <tr>
                                     <td class="text-center"><%=(i+1)%></td>
-                                    <td class="text-center"><%=(i+1)%></td>
+                                    <td class="text-center">IE<%=offer.offerNo%>-<%=(i+1)%></td>
                                     <td><%=offer.customerInfo.customerName%></td>
                                     <td><%=offer.basket[i].productName%></td>
                                     <%if(offer.basket[i].productSizeType=="Dikdörtgen"){%>
