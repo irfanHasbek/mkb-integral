@@ -30,7 +30,8 @@ var OfferScheme = new mongoose.Schema({
         personName : String
     },
     basket : [{
-        productId :String,
+        productId : String,
+        productCodes : String,
         productGroup : String,
         productName :String,
         productSizeType:String,
@@ -45,7 +46,10 @@ var OfferScheme = new mongoose.Schema({
         amount :String,
         note :String,
         lineDiscount :String,
-        productPrice : String
+        productPrice : String,
+        productListPrice: String,
+        productPriceWithDiscount: String,
+        unit : String,
     }],
     cost :{
         generalDiscount :String,

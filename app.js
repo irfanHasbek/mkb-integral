@@ -1285,12 +1285,12 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
     app.get('/wsdiscount/listall', DiscountController.listAll);
     //end
     app.post("/wspricecalculate/calculate", function(req, res){
-        offerPriceCalculatorService.calculatePrice(req.body.info, function(state, response){
+        offerPriceCalculatorService.calculatePrice(req.body.info, function(state, response, message){
             if(!state){
-                res.send({state : state, response : response});
+                res.send({state : state, response : response, message : message});
                 return;
             }
-            res.send({state : state, response : response});
+            res.send({state : state, response : response, message : message});
         });
     });
     

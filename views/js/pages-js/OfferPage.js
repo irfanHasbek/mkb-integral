@@ -6,28 +6,50 @@ function clickHandlers() {
     $('#btnRect').click(function(e) {
         e.preventDefault();
         $('#divCir').slideUp('800');
+        $('#divOther').slideUp('800');
         $('#divRec').slideToggle('800');
         $('#inpCap').attr('disabled', 'disabled');
+        $('#inpUzunluk').attr('disabled', 'disabled');
+        $('#inpAdet').attr('disabled', 'disabled');
         $('#inpEn').removeAttr('disabled');
         $('#inpBoy').removeAttr('disabled');
+        $('#inpYukseklik').removeAttr('disabled');
         $('#inpSizeType').val('Dikdörtgen');
     });
 
     $('#btnCir').click(function(e) {
         e.preventDefault();
         $('#divRec').slideUp('800');
+        $('#divOther').slideUp('800');
         $('#divCir').slideToggle('800');
         $('#inpCap').removeAttr('disabled');
+        $('#inpUzunluk').removeAttr('disabled');
         $('#inpEn').attr('disabled', 'disabled');
         $('#inpBoy').attr('disabled', 'disabled');
+        $('#inpYukseklik').attr('disabled', 'disabled');
         $('#inpSizeType').val('Dairesel');
+    });
+    
+    $('#btnOther').click(function(e) {
+        e.preventDefault();
+        $('#divRec').slideUp('800');
+        $('#divCir').slideUp('800');
+        $('#divOther').slideToggle('800');
+        $('#inpAdet').removeAttr('disabled');
+        $('#inpEn').attr('disabled', 'disabled');
+        $('#inpBoy').attr('disabled', 'disabled');
+        $('#inpYukseklik').attr('disabled', 'disabled');
+        $('#inpCap').attr('disabled', 'disabled');
+        $('#inpUzunluk').attr('disabled', 'disabled');
+        $('#inpSizeType').val('Diger');
     });
 
     $('#btnAddBasket').on('click', function() {
         var basketItem = {
             productId: $('#selectProduct option:selected').attr("id"),
-            productGroup: $('#productGroup').val(),
-            productName: $('#selectProduct').val(),
+            productCodes: $('#selectProduct option:selected').attr("data"),
+            productGroup: $("#productGroup option:selected").text(),
+            productName: $('#selectProduct option:selected').text(),
             productSizeType: '',
             productSizeWidthOrDiameter: '',
             productSizeLength: '',
@@ -39,17 +61,23 @@ function clickHandlers() {
             bodyType: $('#bodyType').val(),
             amount: $('#amount').val(),
             lineDiscount: $("#inpDiscount").val(),
-            productPrice: ''
+            productPrice: '',
+            productListPrice: '',
+            productPriceWithDiscount: '',
+            unit : $('#slctUnit').val()
         }
         if ($('#inpSizeType').val() == 'Dikdörtgen') {
             basketItem.productSizeType = 'Dikdörtgen';
             basketItem.productSizeWidthOrDiameter = $('#inpEn').val();
             basketItem.productSizeLength = $('#inpBoy').val();
             basketItem.productSizeHeight = $('#inpYukseklik').val();
-        } else {
+        } else if($('#inpSizeType').val() == 'Dairesel') {
             basketItem.productSizeType = 'Dairesel';
             basketItem.productSizeWidthOrDiameter = $('#inpCap').val();
             basketItem.productSizeLength = $('#inpUzunluk').val();
+        }else if($('#inpSizeType').val() == 'Diger'){
+            basketItem.productSizeType = 'Diger';
+            basketItem.productSizeWidthOrDiameter = $('#inpAdet').val();
         }
         var info = {
             productId: basketItem.productId,
@@ -74,26 +102,30 @@ function clickHandlers() {
             info.L = basketItem.productSizeLength;
         }
         console.log(info);
-        /*wsPost('/wspricecalculate/calculate', {
+        wsPost('/wspricecalculate/calculate', {
             info: info
         }, function(error, response) {
-            if (error) {
-                console.error(response);
+            if (error || !response.state) {
+                console.error(error);
+                alertify.error(response.message);
                 return;
             }
+            console.log(response);
             if (response.state) {
-                basketItem.productPrice = response.response;
+                basketItem.productPrice = response.response.total;
+                basketItem.productListPrice = response.response.listPrice;
+                basketItem.productPriceWithDiscount = response.response.discountPrice;
                 var basket = JSON.parse($('#inpBasket').val());
                 basket.push(basketItem);
                 $('#inpBasket').val(JSON.stringify(basket));
+                console.log($('#inpBasket').val());
                 fillItemToBasket(basketItem);
+                alertify.success('Ürün basariyla sepete eklendi.');
                 $("#divProduct input[type='text']").val("");
                 $("#divProduct input[type='number']").val("");
                 $('#divProduct select').find('option:contains("Seçiniz")').attr('selected', true);
-            } else {
-                alert('Uygun ürün bulunamadi.');
             }
-        });*/
+        });
     });
 
     $('#tableBasket').on('click', '.remove', function() {
@@ -146,9 +178,8 @@ function fillItemToBasket(item) {
 
     var tr = $('<tr id="' + item.productId + '"></tr>');
     var tdCount = $('<td>' + (++count) + '</td>');
-    var tdAmount = $('<td>' + item.amount + '</td>');
+    var tdProductCode = $('<td>' + item.productCodes + '</td>');
     var tdProduct = $('<td>' + item.productGroup + ' - ' + item.productName + '</td>');
-    var tdType = $('<td>' + item.productSizeType + '</td>');
     var tdSize = '';
     if (item.productSizeType == 'Dikdörtgen') {
         tdSize = $('<td>' + item.productSizeWidthOrDiameter + ' x ' + item.productSizeHeight + ' x ' + item.productSizeLength + '<font size="1" color="blue"> (genişlik*yükseklik*uzunluk)</font></td>');
@@ -160,20 +191,27 @@ function fillItemToBasket(item) {
     var tdsetMech = $('<td>' + item.setMechanism + '</td>');
     var tdAccessory = $('<td>' + item.accessory + '</td>');
     var tdBodyType = $('<td>' + item.bodyType + '</td>');
-    var tdLineDiscount = $('<td>' + item.lineDiscount + '</td>');
+    var tdAmount = $('<td>' + item.amount + ' ' + item.unit +'</td>');
+    var tdListPrice = $('<td>' + item.productListPrice + '</td>');
+    var tdLineDiscount = $('<td> %' + item.lineDiscount + '</td>');
+    var tdDiscountPrice = $('<td>' + item.productPriceWithDiscount + '</td>');
+    var tdPrice = $('<td>' + item.productPrice + '</td>');
     var tdButton = $('<td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>');
 
     tr.append(tdCount);
-    tr.append(tdAmount);
+    tr.append(tdProductCode);
     tr.append(tdProduct);
-    tr.append(tdType);
     tr.append(tdSize);
     tr.append(tdMontageType);
     tr.append(tdCoverType);
     tr.append(tdsetMech);
     tr.append(tdAccessory);
     tr.append(tdBodyType);
+    tr.append(tdAmount);
+    tr.append(tdListPrice);
     tr.append(tdLineDiscount);
+    tr.append(tdDiscountPrice);
+    tr.append(tdPrice);
     tr.append(tdButton);
     table.append(tr);
 
@@ -367,10 +405,10 @@ function listProductsByGroupName(group) {
             return;
         }
         $("#selectProduct").empty();
-        var optInitial = $("<option value='Seçiniz'>Ürün Seçiniz</option>");
+        var optInitial = $("<option value='Seçiniz' data='0'>Ürün Seçiniz</option>");
         $("#selectProduct").append(optInitial);
         for (var i = 0; i < resp.response.length; i++) {
-            var opt = $("<option id='" + resp.response[i]._id + "' value=" + resp.response[i].name + ">" + resp.response[i].name + "</option>");
+            var opt = $("<option id='" + resp.response[i]._id + "' value='" + resp.response[i].name + "' data='" + resp.response[i].code +"'>" + resp.response[i].name + "</option>");
             $("#selectProduct").append(opt);
         }
     });
@@ -386,7 +424,7 @@ function listMontageTypeByGroupName(group) {
             return;
         }
         $("#montageType").empty();
-        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#montageType").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
             var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].montageType + "</option>");
@@ -405,7 +443,7 @@ function listBodyTypeByGroupName(group) {
             return;
         }
         $("#bodyType").empty();
-        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#bodyType").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
             var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" +  resp.data[i].bodyType + "</option>");
@@ -424,7 +462,7 @@ function listAccesorryByGroupName(group) {
             return;
         }
         $("#accessory").empty();
-        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#accessory").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
             var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].accessory + "</option>");
@@ -443,7 +481,7 @@ function listSetMechanismByGroupName(group) {
             return;
         }
         $("#setMechanism").empty();
-        var optInitial = $("<option value='Seçiniz'>Seçiniz</option>");
+        var optInitial = $("<option value='Seçiniz' data='0'>Seçiniz</option>");
         $("#setMechanism").append(optInitial);
         for (var i = 0; i < resp.data.length; i++) {
             var opt = $("<option id='" + resp.data[i]._id + "' value=" + resp.data[i].cost + " data='" + resp.data[i].cost +"'>" + resp.data[i].setMechanism + "</option>");

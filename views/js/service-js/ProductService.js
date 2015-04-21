@@ -81,7 +81,7 @@ ProductService.prototype.getProduct = function(id, callback){
 }
 
 ProductService.prototype.search = function(criteria, callback){
-    console.log('criteria : ' + JSON.stringify(criteria));
+    //console.log('criteria : ' + JSON.stringify(criteria));
     ProductModel.find().or([criteria]).exec(function(error, products){
         if(error){
             callback(false, error);

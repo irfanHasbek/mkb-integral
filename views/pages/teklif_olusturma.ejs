@@ -271,12 +271,23 @@
                                                                         <div class="col-md-12">
                                                                             <label for="" style="margin-bottom:15px;">Girmek İstediğiniz Değeri Seçiniz</label>
                                                                             <div class="row">
-                                                                                <div class="col-md-6 no-padding">
-                                                                                    <div class="col-md-6">
+                                                                                <div class="col-md-12 no-padding">
+                                                                                    <div class="col-md-3">
                                                                                         <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
                                                                                     </div>
-                                                                                    <div class="col-md-6">
+                                                                                    <div class="col-md-3">
                                                                                         <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <a id="btnOther" class="btn-block btn btn-default btn-flat" >Diger</a>
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <select id="slctUnit" class="form-control">
+                                                                                            <option selected disabled value="">Birim Seciniz</option>
+                                                                                            <%for(var i = 0; i < units.length; i++){%>
+                                                                                               <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
+                                                                                            <%}%>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -296,31 +307,22 @@
                                                                             <div class="col-md-3">
                                                                                 <input id="inpBoy" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-3">
-                                                                                <select id="slctRectUnit" class="form-control">
-                                                                                    <option selected disabled value="">Birim Seciniz</option>
-                                                                                    <%for(var i = 0; i < units.length; i++){%>
-                                                                                       <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
-                                                                                    <%}%>
-                                                                                </select>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div id="divCir" class="row" style="display:none;">
                                                                         <div class="col-md-12 no-padding">
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-3">
                                                                                 <input id="inpCap" type="number" value="0" class="form-control" placeholder="Çap Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-3">
                                                                                 <input id="inpUzunluk" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <select id="slctCirUnit" class="form-control">
-                                                                                    <option selected disabled value="">Birim Seciniz</option>
-                                                                                    <%for(var i = 0; i < units.length; i++){%>
-                                                                                       <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
-                                                                                    <%}%>
-                                                                                </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="divOther" class="row" style="display:none;">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpAdet" type="number" value="0" class="form-control" placeholder="Adet Giriniz">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -398,16 +400,18 @@
                                                                 <table id="tblProduct" class="table table-bordered table-condensed table-responsive">
                                                                     <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
                                                                         <th style="width:40px">#</th>
-                                                                        <th style="width:40px">Miktar</th>
-                                                                        <th>Ürün </th>
-                                                                        <th>Tip </th>
+                                                                        <th>Ürün Kodu</th>
+                                                                        <th>Ürün Adi</th>
                                                                         <th>Ölçüler </th>
                                                                         <th>Montaj Şekli</th>
                                                                         <th>Kaplama Şekli</th>
                                                                         <th>Ayar Mekanizması</th>
                                                                         <th>Aksesuar</th>
                                                                         <th>Kasa Tipi</th>
-                                                                        <th style="width:140px">Satır İskontosu</th>
+                                                                        <th style="width:40px">Miktar</th>
+                                                                        <th>Liste Fiyati</th>
+                                                                        <th colspan="2">Iskontolu Birim Fiyati</th>
+                                                                        <th style="width:40px">Tutar</th>
                                                                         <th style="width:40px"> </th>
                                                                     </tr>
                                                                     <tbody id="tableBasket">
@@ -415,9 +419,8 @@
                                                                         <%for(var i=0;i<offer.basket.length;i++){%>
                                                                             <tr id="<%=offer.basket[i]._id%>">
                                                                             <td><%=(i+1)%></td>
-                                                                            <td><%=offer.basket[i].amount%></td>
+                                                                            <td><%=offer.basket[i].productCodes%></td>
                                                                             <td><%=offer.basket[i].productGroup%> - <%=offer.basket[i].productName%></td>
-                                                                            <td><%=offer.basket[i].productSizeType%></td>
                                                                             <%if(offer.basket[i].productSizeType=='Dikdörtgen'){%>
                                                                             <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeHeight%> x <%=offer.basket[i].productSizeLength%><font size="1" color="blue">  (genişlik*yükseklik*uzunluk)</font></td>
                                                                             <%}else{%>
@@ -428,7 +431,11 @@
                                                                             <td><%=offer.basket[i].setMechanism%></td>
                                                                             <td><%=offer.basket[i].accessory%></td>
                                                                             <td><%=offer.basket[i].bodyType%></td>
-                                                                            <td><%=offer.basket[i].lineDiscount%></td>
+                                                                            <td><%=offer.basket[i].amount%> <%=offer.basket[i].unit%></td>
+                                                                            <td><%=offer.basket[i].productListPrice%></td>
+                                                                            <td style="width:40px">% <%=offer.basket[i].lineDiscount%></td>
+                                                                            <td style="width:80px"><%=offer.basket[i].productPriceWithDiscount%></td>
+                                                                            <td><%=offer.basket[i].productPrice%></td>
                                                                             <td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>
                                                                         </tr>
                                                                         <%}%>

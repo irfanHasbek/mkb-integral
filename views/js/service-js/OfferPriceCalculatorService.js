@@ -6,11 +6,20 @@ function OfferPriceCalculatorService(){
 
 OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
     if(info.productType == 'Dikdörtgen'){
+        if(!isNumber(parseFloat(info.W)) || !isNumber(parseFloat(info.H)) || !isNumber(parseFloat(info.L)) || !isNumber(parseFloat(info.amount))){
+            callback(false, -1, "Olculer rakam olmalidir.");
+            return;
+        }
         productPriceModel.findOne({ productId : info.productId ,dimensionType : info.productType }, function(error, response){
             if(error){
-                callback(false, response);
+                callback(false, response, 'Veritabani hatasi.');
                 return;
             }
+            if(response == null){
+                callback(false, -1, 'Lutfen urun tipini dogru seciniz.');
+                return;   
+            }
+            //console.log('data : ' + JSON.stringify(response));
             var priceArr = [];
             var data = response.dimension;
             var length = data.length;
@@ -24,33 +33,46 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             var sorto = {
               W:"asc",H:"asc", L:"asc"
             };
+            //console.log('priceArr : ' + JSON.stringify(priceArr));
             if(priceArr.length > 0 ){
                 priceArr.keySort(sorto);
                 //console.log('priceArr : ' + priceArr);
                 var choosenPrice = parseFloat(priceArr[0].price);
+                var productListPrice = choosenPrice;
+                var productPriceWithDiscount = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
                 //console.log('price : ' + priceArr[0].price);
-                choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
+                choosenPrice = productPriceWithDiscount;
 
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.montageCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.setMechCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.accessory) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.bodyType) / 100));
+                var montageCost = choosenPrice * (parseFloat(info.montageCost) / 100);
+                var coverCost = choosenPrice * (parseFloat(info.coverCost) / 100);
+                var setMechCost = choosenPrice * (parseFloat(info.setMechCost) / 100);
+                var accessoryCost = choosenPrice * (parseFloat(info.accessory) / 100);
+                var bodyTypeCost = choosenPrice * (parseFloat(info.bodyType) / 100);
                 
+                choosenPrice = choosenPrice - (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
                 choosenPrice = choosenPrice * parseFloat(info.amount);
-                callback(true, choosenPrice);        
+                callback(true, {listPrice : productListPrice , discountPrice : productPriceWithDiscount, total : choosenPrice}, 'Basarili');        
             }
             else{
-                callback(false, -1);
+                callback(false, -1, 'Kriterlere uygun urun bulunamadi.');
             }
         });
     }
-    else{
+    else if(info.productType == 'Dairesel'){
+        if(!isNumber(parseFloat(info.W)) || !isNumber(parseFloat(info.L)) || !isNumber(parseFloat(info.amount))){
+            callback(false, -1, "Olculer rakam olmalidir.");
+            return;
+        }
         productPriceModel.findOne({ productId : info.productId ,dimensionType : info.productType }, function(error, response){
             if(error){
-                callback(false, response);
+                callback(false, response, 'Veritabani hatasi.');
                 return;
             }
+            if(response == null){
+                callback(false, -1, 'Lutfen urun tipini dogru seciniz.');
+                return;   
+            }
+            //console.log('data : ' + JSON.stringify(response));
             var priceArr = [];
             var data = response.dimension;
             var length = data.length;
@@ -67,22 +89,39 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             if(priceArr.length > 0){
                 priceArr.keySort(sorto);
                 var choosenPrice = parseFloat(priceArr[0].price);
-                choosenPrice = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
+                var productListPrice = choosenPrice;
+                var productPriceWithDiscount = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
+                //console.log('price : ' + priceArr[0].price);
+                choosenPrice = productPriceWithDiscount;
 
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.montageCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.coverCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.setMechCost) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.accessory) / 100));
-                choosenPrice = choosenPrice + (choosenPrice * (parseFloat(info.bodyType) / 100));
+                var montageCost = choosenPrice * (parseFloat(info.montageCost) / 100);
+                var coverCost = choosenPrice * (parseFloat(info.coverCost) / 100);
+                var setMechCost = choosenPrice * (parseFloat(info.setMechCost) / 100);
+                var accessoryCost = choosenPrice * (parseFloat(info.accessory) / 100);
+                var bodyTypeCost = choosenPrice * (parseFloat(info.bodyType) / 100);
                 
-                choosenPrice = choosenPrice * parseFloat(info.amount); 
-                callback(true, choosenPrice);
+                choosenPrice = choosenPrice - (montageCost + coverCost + setMechCost + accessoryCost + bodyTypeCost);
+                choosenPrice = choosenPrice * parseFloat(info.amount);
+                callback(true, {listPrice : productListPrice , discountPrice : productPriceWithDiscount, total : choosenPrice}, 'Basarili');   
             }
             else{
-                callback(false, -1);   
+                callback(false, -1, 'Kriterlere uygun urun bulunamadi.');   
             }  
         });
     }
+    else if(info.productType == 'Diger'){
+        if(!isNumber(parseFloat(info.W)) || !isNumber(parseFloat(info.amount))){
+            callback(false, -1, "Olculer rakam olmalidir.");
+            return;
+        }
+    }
+    else{
+        callback(false, -1, 'Lutfen bir kategori seciniz.')   
+    }
+}
+
+function isNumber(o) {
+  return ! isNaN (o-0) && o !== null && o !== "" && o !== false;
 }
 
 Array.prototype.keySort = function(keys) {
