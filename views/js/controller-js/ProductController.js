@@ -91,7 +91,7 @@ module.exports = {
         });   
     },
     textSearch : function(req, res){
-        ps.textSearch(req.criteria, function(state, response){
+        ps.textSearch(req.body, function(state, response){
             if(!state){
                 res.send({state : state, response : response});
                 return;

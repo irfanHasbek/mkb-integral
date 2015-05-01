@@ -76,12 +76,15 @@
                                                                 <div class="col-md-12">
                                                                     <label for="" style="margin-bottom:15px;">Tip Seçiniz</label>
                                                                     <div class="row">
-                                                                        <div class="col-md-6 no-padding">
-                                                                            <div class="col-md-6">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-4">
                                                                                 <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <a id="btnDiger" class="btn-block btn btn-default btn-flat" >Diger</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -90,7 +93,7 @@
                                                             <br>
                                                             <input type="text" id="inpSizeType" style="display:none;" name="dimensionType">
                                                             <div id="divRec" class="row" style="display:none;">
-                                                                <div class="col-md-9 no-padding">
+                                                                <div class="col-md-12 no-padding">
                                                                     <div class="col-md-4">
                                                                         <input id="inpEn" name="W" type="number" class="form-control" placeholder="En Giriniz" required>
                                                                     </div>
@@ -103,12 +106,19 @@
                                                                 </div>
                                                             </div>
                                                             <div id="divCir" class="row" style="display:none;">
-                                                                <div class="col-md-6 no-padding">
-                                                                    <div class="col-md-6">
+                                                                <div class="col-md-12 no-padding">
+                                                                    <div class="col-md-4">
                                                                         <input id="inpCap" name="W" type="number" class="form-control" placeholder="Çap Giriniz" required>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
                                                                         <input id="inpDaireUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="divDiger" class="row" style="display:none;">
+                                                                <div class="col-md-12 no-padding">
+                                                                    <div class="col-md-4">
+                                                                        <input id="inpDiger" name="W" type="number" class="form-control" placeholder="Olcu Giriniz" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -164,6 +174,7 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
        <%include ../partial-pages/script.ejs%>
+       <script src="../js/utility-js/jquery.blockUI.js"></script>
        <script src="../js/helper-js/Helper.js"></script>
        <script src="../js/pages-js/ProductPriceDefinition.js"></script>
     </body>

@@ -36,9 +36,10 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             //console.log('priceArr : ' + JSON.stringify(priceArr));
             if(priceArr.length > 0 ){
                 priceArr.keySort(sorto);
-                //console.log('priceArr : ' + priceArr);
+                //console.log('priceArr0 : ' + priceArr[0].price);
                 var choosenPrice = parseFloat(priceArr[0].price);
                 var productListPrice = choosenPrice;
+                //console.log('choosen Price : ' + productListPrice);
                 var productPriceWithDiscount = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
                 //console.log('price : ' + priceArr[0].price);
                 choosenPrice = productPriceWithDiscount;
@@ -88,8 +89,11 @@ OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
             //console.log('priceArr 2 : ' + priceArr.length);
             if(priceArr.length > 0){
                 priceArr.keySort(sorto);
+                //console.log('priceArr0 : ' + priceArr[0].price);
                 var choosenPrice = parseFloat(priceArr[0].price);
+                //console.log('choosen Price : ' + choosenPrice);
                 var productListPrice = choosenPrice;
+                //console.log('productPriceList Price : ' + productListPrice);
                 var productPriceWithDiscount = choosenPrice - (choosenPrice * (parseFloat(info.lineDiscount) / 100));
                 //console.log('price : ' + priceArr[0].price);
                 choosenPrice = productPriceWithDiscount;

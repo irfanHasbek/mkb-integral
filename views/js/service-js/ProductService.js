@@ -92,6 +92,7 @@ ProductService.prototype.search = function(criteria, callback){
 }
 
 ProductService.prototype.textSearch = function(criteria, callback){
+    //console.log("criteria : " + JSON.stringify(criteria));
     ProductModel.find(criteria, function(error, products){
         if(error){
             callback(false, error);

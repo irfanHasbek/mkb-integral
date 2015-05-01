@@ -27,6 +27,7 @@ function clickHandlers() {
         $('#inpEn').attr('disabled', 'disabled');
         $('#inpBoy').attr('disabled', 'disabled');
         $('#inpYukseklik').attr('disabled', 'disabled');
+        $('#inpAdet').attr('disabled', 'disabled');
         $('#inpSizeType').val('Dairesel');
     });
     
@@ -101,7 +102,7 @@ function clickHandlers() {
             info.W = basketItem.productSizeWidthOrDiameter;
             info.L = basketItem.productSizeLength;
         }
-        console.log(info);
+        //console.log(info);
         wsPost('/wspricecalculate/calculate', {
             info: info
         }, function(error, response) {
@@ -110,7 +111,7 @@ function clickHandlers() {
                 alertify.error(response.message);
                 return;
             }
-            console.log(response);
+            //console.log(response);
             if (response.state) {
                 basketItem.productPrice = response.response.total;
                 basketItem.productListPrice = response.response.listPrice;
@@ -118,7 +119,7 @@ function clickHandlers() {
                 var basket = JSON.parse($('#inpBasket').val());
                 basket.push(basketItem);
                 $('#inpBasket').val(JSON.stringify(basket));
-                console.log($('#inpBasket').val());
+                //console.log($('#inpBasket').val());
                 fillItemToBasket(basketItem);
                 alertify.success('Ürün basariyla sepete eklendi.');
                 $("#divProduct input[type='text']").val("");

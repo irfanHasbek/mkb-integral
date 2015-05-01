@@ -65,7 +65,8 @@ function createOffer(type, req) {
         pdfInfo : {
             pdfStatus : 'false',
             pdfUrl : ''
-        }
+        },
+        coverDescription : req.body.coverDescription
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
@@ -137,7 +138,8 @@ function createB2bOffer(req) {
         pdfInfo : {
             pdfStatus : 'false',
             pdfUrl : ''
-        }
+        },
+        coverDescription : ''
     };
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;

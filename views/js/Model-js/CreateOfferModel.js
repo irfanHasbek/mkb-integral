@@ -92,7 +92,8 @@ var OfferScheme = new mongoose.Schema({
     pdfInfo : {
         pdfStatus : String,
         pdfUrl : String
-    }
+    },
+    coverDescription : String
 });
 
 module.exports = mongoose.model('offers', OfferScheme);

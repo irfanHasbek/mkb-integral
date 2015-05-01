@@ -4,13 +4,16 @@ function clickHandlers(){
             e.preventDefault();
             alert('urun veya urun tipi seciniz!');
         }
+        $.blockUI({ css: { backgroundColor: '#2980b9', color: '#fff' , padding:'30px', fontSize : '28px'} ,message : $('#inpCsvFile').val() + " dosyasi Yükleniyor..."});
     });
     $('#btnRect').click(function(e){
        e.preventDefault();
        $('#divCir').slideUp('800');
+       $('#divDiger').slideUp('800');
        $('#divRec').slideToggle('800');
        $('#inpCap').attr('disabled','disabled');
        $('#inpDaireUzunluk').attr('disabled','disabled');
+       $('#inpDiger').attr('disabled','disabled');
        $('#inpEn').removeAttr('disabled');
        $('#inpBoy').removeAttr('disabled');
        $('#inpUzunluk').removeAttr('disabled');
@@ -21,14 +24,31 @@ function clickHandlers(){
    $('#btnCir').click(function(e){
         e.preventDefault();
         $('#divRec').slideUp('800');
+        $('#divDiger').slideUp('800');
         $('#divCir').slideToggle('800');
         $('#inpCap').removeAttr('disabled');
         $('#inpDaireUzunluk').removeAttr('disabled');
         $('#inpEn').attr('disabled','disabled');
         $('#inpBoy').attr('disabled','disabled');
         $('#inpUzunluk').attr('disabled','disabled');
+        $('#inpDiger').attr('disabled','disabled');
         $('#inpSizeType').val('Dairesel');
         $('#inpSizeTypeForPrice').val('Dairesel');
+   });
+    
+    $('#btnDiger').click(function(e){
+        e.preventDefault();
+        $('#divRec').slideUp('800');
+        $('#divCir').slideUp('800');
+        $('#divDiger').slideToggle('800');
+        $('#inpCap').attr('disabled','disabled');
+        $('#inpDaireUzunluk').attr('disabled','disabled');
+        $('#inpEn').attr('disabled','disabled');
+        $('#inpBoy').attr('disabled','disabled');
+        $('#inpUzunluk').attr('disabled','disabled');
+        $('#inpDiger').removeAttr('disabled');
+        $('#inpSizeType').val('Diger');
+        $('#inpSizeTypeForPrice').val('Diger');
    });
     
     
@@ -131,8 +151,11 @@ function formHandlers(){
     $('#formUploadCsv').ajaxForm(function(data){
         console.log(data.response);
         if(data.response == null){
+            $.unblockUI();
             alert('Dosya hatali...');   
         }
+        $.unblockUI();
+        alertify.success("İşlem Basarili.");
     });
 }
 

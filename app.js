@@ -1299,6 +1299,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         var pageURl = Config.url + req.body.pageUrl;
         wkhtmltopdf(pageURl, { output: './views/pdfs/' + req.body.pageName, orientation : 'Landscape' }, function(error, createdPdf){
             if(error){
+                console.log(error);
                 res.send({state : false, response : error});
                 return;
             }

@@ -88,77 +88,34 @@
             <div class="row" style="margin-left:800px; margin-top:-50px;">
                 <div class="col-md-12">
                     <div class="col-md-4">
-                        <p style="font-size:14px; font-weight:bold">Tarih : 16.4.2015</p>
-                        <p style="font-size:14px; margin-top:-7px; font-weight:bold">Ref. No: VRF - 2015/000524</p>
+                        <p style="font-size:14px; font-weight:bold">Tarih : <%=offer.offerDate%></p>
+                        <p style="font-size:14px; margin-top:-7px; font-weight:bold">Teklif No: <%=offer._id%></p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <p style="font-size:14px; font-weight:bold;">Sayın Zekeriya Bey - integral Fabrika,</p>
-                        <p style="font-size:12px; ">Talebiniz üzerine hazırlanan <span style="color:#f00">“deneme deneme” </span>fiyat teklifimiz ve diğer bilgiler aşağıda dikkatinize sunulmuştur.Teklifimizin olumlu olarak karşılanması dileğiyle, çalışmalarınızda başarılar dileriz.</p>
+                        <p style="font-size:14px; font-weight:bold;">Sayın <%=offer.customerInfo.customerName%> Bey - integral Fabrika,</p>
+                        <p style="font-size:12px; ">Talebiniz üzerine hazırlanan <span style="color:#f00"> "<%=offer.offerTopic%>" </span>fiyat teklifimiz ve diğer bilgiler aşağıda dikkatinize sunulmuştur.Teklifimizin olumlu olarak karşılanması dileğiyle, çalışmalarınızda başarılar dileriz.</p>
                     </div>
-                    
-                    
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="col-md-12" style="border:3px solid #000;">
-                            <p style="text-align:center; margin-top:6px;">(EK-1: Haier VRF) / Fiyat Teklifi Tutarı: 25.687,00 USD + KDV (18%)</p>
+                            <p style="text-align:center; margin-top:6px;"> Fiyat Teklifi Tutarı: <%=offer.cost.sum%> (TL) + KDV (18%)</p>
                         </div>    
                     </div>
-                    
-                </div>
-            </div>
-            <div class="row" style="margin-top:6px;">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <p style="font-size:14px; font-weight:bold; text-decoration:underline;">Teklif İçeriği ve Genel Şartları</p>
-                    </div>
-                    
-                    
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="">
-                        <ol>
-                            <li><label for="">Proje Yeri / Adı : </label> Yukarıda yazılı fiyat teklifi “deneme” için talebiniz üzerine verilmiştir.</li>
-                            <li><label for="">KDV: </label> Fiyat teklifimize KDV dâhil değildir, ayrıca belirtilmiştir.</li>
-                            <li><label for="">Ödeme Şartları: </label>Siparişe istinaden 35%’i nakden, kalan 65%’i ürün tesliminde nakden tahsil edilir.Ödemeler teklif formunda yazılı döviz kuru cinsinden ya da yazılı kurun ödeme günündeki TCMB efektif döviz satış kuru karşılığı TL olarak yapılacaktır.</li>
-                            <li><label for="">Teslimat Süresi & Şekli: </label>Stoklarda bulunan ürünler hemen teslim edilir. Stoklarda bulunmayan ürünler için teslimat 85 gündür. Tüm sistemlerin nakliyesi dilediğiniz adrese tarafımızca yapılacaktır. Nakliye ücreti yukarıda yazılı fiyat teklifimize dâhildir. Ürünler şantiye sahasında araç üzerinde teslim edilir.</li>
-                            <li><label for="">Garanti Süresi & Şartları: </label>Klima sistemlerimizdeki tüm parçalar üretim hatalarına karşı 2 (iki) yıl garanti kapsamındadır. Elektrik ve ani voltaj değişikliği, fiziksel darbe ve bakım hataları sebepli arızalarda, cihazlar garanti kapsamı dışında kalacaktır.</li>
-                            <li><label for="">Montaj & İşçilik: </label>Yukarıdaki fiyat teklifinde verilen Haier VRF tipi ürünler için montaj, işçilik ve borulama bedelleri teklifimize dahildir.</li>
-                            <li><label for="">İşletmeye Alma: </label>Kurulan klima sisteminin işletmeye alınması fiyat teklifimize dâhildir. Tarafımızca ya da yetkili Haier teknik servislerince devreye alınmayan sistemler garanti kapsamı dışında kalacaktır.</li>
-                            <li><label for="">Opsiyon: </label>Fiyat teklifimiz 5 gün süreyle geçerlidir.</li>
-                        </ol>
-                    </div>
-                    
-                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
+               <div class="col-md-12">
                     <div class="col-md-12">
-                        <p style="font-size:14px;"><label for="">EK DOSYALAR: </label>Teklif edilen sistemin parça kodları, ürün başına kapasiteleri ve parça adetleri ekteki listede bilginize sunulmuştur.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <p style="font-size:14px;">Saygılarımızla,</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <p style="font-size:14px;"><label for="">Zekeriya Müjde / Firma Sahibi</label></p>
-                        <p style="font-size:14px; margin-top:-15px"><label for="">iNTEGRAL</label></p>
+                        <div class="col-md-12">
+                            <label for=""><%-offer.coverDescription%></label>
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -198,10 +155,10 @@
                     </div>
                     <div class="col-md-4" style="margin-left:450px; margin-top:-70px">
                         <p style="font-size:8px;">Tarih : <span>12.3.2015</span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Firma : <span>Mavikent Bilişim</span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span>Onaylandıktan sonra 2 hafta</span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span>Siparişte Peşin</span></p>
-                        <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span>0a.1502.3434.0023</span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Firma : <span><%=offer.customerInfo.customerName%></span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span><%=offer.dates.deliveryDate%></span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span><%=offer.payMethod.payMethod%></span></p>
+                        <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span><%=offer._id%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Tel : <span>0544 444 44 44</span></p>
                     </div>
                 </div>
@@ -253,7 +210,7 @@
                             <%for(var i = trIndex; i < offer.basket.length; i++){%>
                                 <%if(j == 0 && i == 15){trIndex = i;break;}%>
                                 <tr>
-                                    <td class="text-center" style="font-size:6px"><%=i%></td>
+                                    <td class="text-center" style="font-size:6px"><%=(i+1)%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productCodes%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productName%></td>
                                     <td class="text-center" style="font-size:6px"><%=offer.basket[i].productSizeWidthOrDiameter%></td>
@@ -280,11 +237,11 @@
                             <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
                             <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
                             <p style="font-size:8px; margin-top:-7px;">HAZIRLAYAN</p>
-                            <p style="font-size:8px; margin-top:-7px;">Özlem ALTINTAŞ</p>
+                            <p style="font-size:8px; margin-top:-7px;"><%=offer.personPrepareOfferInfo.personName%></p>
 
                         </div>
                         <div class="col-md-4" style="margin-left:350px;">
-                            <p style="font-size:8px;">NOT: <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus praesentium beatae quasi magnam illum, !</span></p>
+                            <p style="font-size:8px;">NOT: <span><%=offer.payMethod.vade%> <%=offer.payMethod.note%> !</span></p>
 
                         </div>
                         <div class="col-md-4"></div>

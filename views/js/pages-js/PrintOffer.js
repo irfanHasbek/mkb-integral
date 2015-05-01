@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log($('body').height());
+    //console.log($('body').height());
     var basket = JSON.parse($('#tempBasket').val());
     b = {};
     for (var i = 0; i < basket.length; i++) {
@@ -9,11 +9,13 @@ $(document).ready(function(){
     for(var key in b){
         productList.push(key);
     }
+    
     wsPost("/wsproduct/textsearchproduct", { _id : productList }, function(error, data){
         if(error || data.state == false){
             console.log('Hata Olustu');
             return;
         }
+        //console.log(data);
         var div = $('#productSummary');
         for(var i = 0; i < data.response.length; i++){ 
             var table = $('<table class="table table-bordered-print"></table>');
