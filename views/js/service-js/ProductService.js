@@ -93,8 +93,10 @@ ProductService.prototype.search = function(criteria, callback){
 
 ProductService.prototype.textSearch = function(criteria, callback){
     //console.log("criteria : " + JSON.stringify(criteria));
-    ProductModel.find(criteria, function(error, products){
+    ProductModel.find({_id : { $in : criteria._id } }, function(error, products){
         if(error){
+            //console.log("error : " + JSON.stringify(error));
+            //console.log("product : " + JSON.stringify(products));
             callback(false, error);
             return;
         }

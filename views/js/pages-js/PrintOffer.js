@@ -12,7 +12,7 @@ $(document).ready(function(){
     
     wsPost("/wsproduct/textsearchproduct", { _id : productList }, function(error, data){
         if(error || data.state == false){
-            console.log('Hata Olustu');
+            console.log('Hata Olustu : ' + JSON.stringify(data));
             return;
         }
         //console.log(data);

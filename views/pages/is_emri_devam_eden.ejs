@@ -29,7 +29,7 @@
                                         <div class="box-body">
                                             <div class="row">
                                                  <div class="col-md-3">
-                                                   <div id="custom-search-input">
+                                                   <div>
                                                         <div class="input-group">
                                                             <label for="">Firma</label>
                                                             <input type="text" id="inpCustomerName" class="form-control"/>
@@ -43,7 +43,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                   <div id="custom-search-input">
+                                                   <div>
                                                         <div class="input-group">
                                                             <label for="">Teslim Tarihi</label>
                                                             <input type="date" id="inpDeliveryDate" class="form-control"/>
@@ -56,7 +56,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                   <div id="custom-search-input">
+                                                   <div>
                                                         <div class="input-group">
                                                             <label for="">İmalata Veriliş Tarihi</label>
                                                             <input type="date" id="inpStartJobDate" class="form-control"/>
@@ -109,7 +109,7 @@
                                                             <td><%=offers[i].basket[j].coverType%></td>
                                                             <td><%=offers[i].basket[j].setMechanism%></td>
                                                             <td><%=offers[i].basket[j].accessory%></td>
-                                                            <td>...</td>
+                                                            <td><%=offers[i].basket[j].bodyType%></td>
                                                             <td><%=offers[i].basket[j].amount%></td>
                                                             <td style="width:100px"><input type="date" class="delDate<%=offers[i]._id%>" value="<%=offers[i].dates.deliveryDate%>" ></td>
                                                             <td><input id="" type="text" class="note<%=offers[i].basket[j]._id%>" value="<%=offers[i].basket[j].note%>"></td>
@@ -117,7 +117,7 @@
                                                             <td id="<%=offers[i]._id%>">
                                                               <button class="btn btn-success btn-sm btn flat tamamla" data-toggle="tooltip" data-placement="top" title="Bitir"><i class="fa fa-check"></i></button>
                                                               <button class="btn btn-info btn-sm btn flat kaydet" data-toggle="tooltip" data-placement="top" title="Kaydet"><i class="fa fa-save"></i></button>
-                                                                <a href="/is_emri_yazdir?id=<%=offers[i]._id%>" target="_blank" class="btn btn-warning btn-sm btn flat" data-toggle="tooltip" data-placement="top" title="Yazdır"><i class="fa fa-print"></i></a>
+                                                                <a href="/is_emri_yazdir?id=<%=offers[i]._id%>&code=<%=session.user.firmCode%>" target="_blank" class="btn btn-warning btn-sm btn flat" data-toggle="tooltip" data-placement="top" title="Yazdır"><i class="fa fa-print"></i></a>
                                                           </td>
                                                         </tr>  
                                                       <%}%>

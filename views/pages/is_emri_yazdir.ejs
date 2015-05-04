@@ -28,7 +28,7 @@
                    </div>
                    <div class="col-xs-6"></div>
                    <div class="col-xs-3">
-                       <img src="<%=session.user.pictureUrl%>"  class="img-responsive pull-right" style="max-width:80px;">
+                       <img src="<%=firm.logoUrl%>"  class="img-responsive pull-right" style="max-width:80px;">
                    </div>
                     <div >
                         <table class="table table-bordered ">
@@ -66,7 +66,7 @@
                                     <td><%=offer.basket[i].coverType%></td>
                                     <td><%=offer.basket[i].setMechanism%></td>
                                     <td><%=offer.basket[i].accessory%></td>
-                                    <td>...</td>
+                                    <td><%=offer.basket[i].bodyType%></td>
                                     <td><%=offer.basket[i].amount%></td>
                                     <td><%=offer.dates.deliveryDate%></td>
                                     <td><%=offer.basket[i].note%></td>

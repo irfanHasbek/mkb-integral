@@ -194,7 +194,7 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
                 res.render('pages/index', {layout : false, session : req.session});
                 return;
             }
-        offerService.searchandGetCount({"status.offerCase": "acik_teklifler"},function(statePending,responsePending){
+        offerService.searchandGetCount({"status.offerCase": "onay_bekleyen_teklifler"},function(statePending,responsePending){
             if(!statePending){
                 res.render('pages/index', {layout : false, session : req.session});
                 return;
@@ -952,7 +952,15 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
               console.error(resposeOffer);
               res.render("/pages/index",{layout : false, session : req.session});
             }
-        res.render('pages/is_emri_yazdir', {layout : false, session : req.session,offer : resposeOffer});   
+            var code = req.param('code');
+            firmService.getInformationFirmCode(code, function(stateFirm, responseFirm){
+                if(!stateFirm){
+                    console.error(responseFirm);
+                    res.render("/pages/index",{layout : false});
+                }
+                res.render('pages/is_emri_yazdir', {layout : false, session : req.session,offer : resposeOffer, firm : responseFirm}); 
+            }); 
+           
      });
     });
     //Teklif Yazdır
