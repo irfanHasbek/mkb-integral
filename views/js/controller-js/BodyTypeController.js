@@ -54,6 +54,15 @@ module.exports = {
             res.send(createResponse(true, response, "kasa tipleri başarıyla listelendi"));
         });   
     },
+    search : function(req, res, next){
+        bts.search(req.body,function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "kasa tipleri listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "kasa tipleri başarıyla listelendi"));
+        });   
+    },
     getByGroupName : function(req, res, next){
         bts.getByGroupName(req.session.user.firmCode, req.body.productGroupName,function(state, response){
             if(!state){

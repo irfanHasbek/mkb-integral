@@ -19,22 +19,24 @@
                         <li class="active">Teklif Oluşturma</li>
                     </ol>
                 </section>
-
                 <!-- Main content -->
-                <input id="inpFirmCode" type="text" style="display:none;" value="<%=customer.firmCode%>">
-                <section class="content">
+             
+               <input id="inpFirmCode" type="text" style="display:none;" value="<%=session.customer.firmCode%>">
+                 <section class="content">
+                 <div id="divOffer">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="box box-info">
                                     <!-- form start -->
-                                    <form id="formOffer" role="form" method="post" action="/wsoffer/b2badd">
+                                    <form id="formOffer" role="form" method="post" action="<%if(operation == 'update'){%>/wsoffer/update<%}else{%>/wsoffer/addnew<%}%>">
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-3 col-md-offset-1">
                                                     <div class="form-group ">
                                                         <label>Teklif No</label>
-                                                        <input disabled type="text" class="form-control " name="offerNo"  placeholder="Teklif No otomatik doldurulacaktir">
+                                                        <input name="_id" type="text" style="display:none;" value='<%if(operation == "update"){%><%=offer._id%><%}%>'>
+                                                        <input disabled type="text" class="form-control " name="offerNo"  placeholder="Teklif No otomatik doldurulacaktir" <%if(operation == "update"){%> value="<%=offer.offerNo%>"<%}%>>
                                                     </div>
                                                 </div>
                                             </div>
@@ -42,7 +44,7 @@
                                                 <div class="col-md-3 col-md-offset-1">
                                                     <div class="form-group ">
                                                         <label>Teklif Tarihi</label>
-                                                        <input id="inpOfferDate" type="date" class="form-control " name="offerDate"  placeholder="Teklif Tarihi Giriniz">
+                                                        <input id="inpOfferDate" type="date" class="form-control " name="offerDate"  placeholder="Teklif Tarihi Giriniz" <%if(operation == "update"){%> value="<%=offer.offerDate%>"<%}%>>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,9 +55,9 @@
                                                             <div class="form-group ">
                                                                 <label>Müşteri Adı</label>
                                                                 <select name="customerId" id="selectCustomer" class="form-control">
-                                                                    <option value="<%=customer._id%>"><%=customer.customerName%></option>
+                                                                    <option value="<%=session.customer._id%>" ><%=session.customer.customerName%></option>
                                                                 </select>
-                                                                <input name="customerName" id="inpCustName" style="display:none;" value="<%=customer.customerName%>">
+                                                                <input name="customerName" id="inpCustName" style="display:none;" value="<%session.customer.customerName%>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -66,7 +68,6 @@
                             </div>
                         </div>
                     </div>
-                    <div id="divOffer">
                     <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
@@ -75,11 +76,11 @@
                                     <!-- Custom Tabs -->
                                     <div class="nav-tabs-custom">
                                         <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
-                                            <li><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
-                                            <li><a href="#tab_3" data-toggle="tab">Ürün Seçimi</a></li>
-                                            <li><a href="#tab_4" data-toggle="tab">Ürün Sepeti</a></li>
-                                            <li><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
+                                            <li class="active wizard"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
+                                            <li class="wizard"><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
+                                            <li class="wizard"><a href="#tab_4" data-toggle="tab">Ürün Seçimi</a></li>
+                                            <li class="wizard"><a href="#tab_7" data-toggle="tab">Ürün Sepeti</a></li>
+                                            <li class="wizard"><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
                                         </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_1">
@@ -88,30 +89,42 @@
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label>Yetkili</label>
+                                                                       <%if(operation=='update'){
+                                                                           var competentInfoIndex=-1;
+                                                                        }%>
                                                                         <select id="slctCompetent" name="competentId" type="text"  class="form-control">
                                                                             <option value="Seçiniz" selected disabled>Yetkili Seçiniz</option>
-                                                                               <%for(var i=0;i<customer.competentInfo.length;i++){%>
-                                                                                  <option value="<%=customer.competentInfo[i]._id%>"><%=customer.competentInfo[i].name%></option>
+                                                                             <%if(operation=='update'){%>
+                                                                               <%for(var i=0;i<session.customer.competentInfo.length;i++){%>
+                                                                                  <option <%if(session.customer.competentInfo[i]._id==offer.competentInfo.competentId){ competentInfoIndex=i;%> selected <%}%>value="<%=session.customer.competentInfo[i]._id%>" ><%=session.customer.competentInfo[i].name%></option>
+                                                                               <%}%>
                                                                             <%}%>
                                                                         </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Yetkili Adı</label>
-                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz">
+                                                                    <input id="inpCompetentInfoName" type="text"disabled class="form-control compName" placeholder="Yetkili Adı Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=session.customer.competentInfo[competentInfoIndex].name%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Görev</label>
-                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz">
+                                                                    <input id="inpCompetentInfoTask" type="text" disabled class="form-control compTask"   placeholder="Görevi Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=session.customer.competentInfo[competentInfoIndex].task%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>GSM</label>
-                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz">
+                                                                    <input id="inpCompetentInfoGsm"  type="text" disabled class="form-control compGsm" data-inputmask='"mask": "(999) 999-9999"' data-mask  placeholder="Telefon Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=session.customer.competentInfo[competentInfoIndex].gsm%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >E-mail</label>
-                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz">
+                                                                    <input id="inpCompetentInfoEmail" type="email" disabled class="form-control compEmail"  placeholder="E-mail Giriniz" <%if(operation=='update' && competentInfoIndex != -1){%>value="<%=session.customer.competentInfo[competentInfoIndex].email%>"<%}%>>
                                                                 </div>
                                                             </div><!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_2" data-toggle="tab" class="btn btn-primary next"> İleri</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
@@ -121,45 +134,54 @@
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label >Adres</label>
-                                                                    <textarea id="inpContactInfoAddress" type="text" class="form-control contAddress" disabled rows="2" style="resize:vertical;" value="<%=customer.contactInfo.address%>"><%=customer.contactInfo.address%></textarea>
+                                                                    <textarea id="inpContactInfoAddress" type="text" class="form-control contAddress" disabled rows="2" style="resize:vertical;" <%if(operation=='update'){%>value="<%=session.customer.contactInfo.address%>"<%}%>><%if(operation=='update'){%><%=session.customer.contactInfo.address%><%}%></textarea>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label >İl</label>
-                                                                            <input id="inpContactInfoCity" type="text" disabled class="form-control" value="<%=customer.contactInfo.city%>">
+                                                                            <input id="inpContactInfoCity" type="text" disabled class="form-control" <%if(operation=='update'){%>value="<%=session.customer.contactInfo.city%>"<%}%>>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label >İlçe</label>                                                                                                                                                                                                 <input id="inpContactInfoState" type="text" disabled class="form-control" value="<%=customer.contactInfo.state%>">
+                                                                            <label >İlçe</label>                                                                                                                                                                                                 <input id="inpContactInfoState" type="text" disabled class="form-control" <%if(operation=='update'){%>value="<%=session.customer.contactInfo.state%>"<%}%>>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                
+                                                                
                                                                 <div class="form-group">
                                                                     <label >İş Tel</label>
-                                                                    <input id="inpContactInfoBusinessPhone" type="text" class="form-control contTel" name="contactInfoBusinessPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled value="<%=customer.contactInfo.businessPhone%>">
+                                                                    <input id="inpContactInfoBusinessPhone" type="text" class="form-control contTel" name="contactInfoBusinessPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled <%if(operation=='update'){%>value="<%=session.customer.contactInfo.businessPhone%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Fax</label>
-                                                                    <input id="inpContactInfoFax" type="text" class="form-control contFax" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled value="<%=customer.contactInfo.fax%>">
+                                                                    <input id="inpContactInfoFax" type="text" class="form-control contFax" data-inputmask='"mask": "(999) 999-9999"' data-mask disabled <%if(operation=='update'){%>value="<%=session.customer.contactInfo.fax%>"<%}%>>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Web Adresi</label>
-                                                                    <input id="inpContactInfoWeb" type="text" class="form-control contWeb" disabled value="<%=customer.contactInfo.webAddress%>">
+                                                                    <input id="inpContactInfoWeb" type="text" class="form-control contWeb" disabled <%if(operation=='update'){%>value="<%=session.customer.contactInfo.webAddress%>"<%}%>>
                                                                 </div>
                                                             </div><!-- /.box-body -->
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="text-align:center;">
+                                                                    <a href="#tab_3" data-toggle="tab" class="btn btn-primary next"> İleri</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
-                                                <div class="tab-pane" id="tab_3">
-                                                    <div  id="divProduct" class="row">
+                                                <div class="tab-pane" id="tab_4">
+                                                    <div id="divProduct" class="row">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label for="">Ürün Grubu</label>
                                                                     <select name="productGroup" id="productGroup" class="form-control">
-                                                                        <option style="padding-left:0px;" selected disabled value="" >Seçiniz</option>
+                                                                        <option style="padding-left:0px;" value="empty" >Seçiniz</option>
                                                                            <%for(var i = 0; i < productGroups.length; i++){%>
                                                                             <option value="<%=productGroups[i]._id%>"><%=productGroups[i].productGroupName%></option>
                                                                           <%}%>
@@ -200,27 +222,34 @@
                                                                     </div>
                                                                     <br>
                                                                    <input id="inpSizeType" style="display:none;">
-                                                                   <input id="inpBasket" name="basket" style="display:none;"> 
-                                                                 <div id="divRec" class="row" style="display:none;">
-                                                                    <div class="col-md-9 no-padding">
-                                                                            <div class="col-md-4">
-                                                                                <input id="inpEn" type="number" class="form-control" placeholder="En Giriniz">
+                                                                   <input id="inpBasket" name="basket" style="display:none;" <%if(operation=="update"){%>value="<%=JSON.stringify(offer.basket)%>"<%}%>> 
+                                                                    <div id="divRec" class="row" style="display:none;">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpEn" type="number" value="0" class="form-control" placeholder="En Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <input id="inpYukseklik" type="number" class="form-control" placeholder="Yükselik Giriniz">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpYukseklik" type="number" value="0" class="form-control" placeholder="Yükselik Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <input id="inpBoy" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpBoy" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div id="divCir" class="row" style="display:none;">
-                                                                        <div class="col-md-6 no-padding">
-                                                                            <div class="col-md-6">
-                                                                                <input id="inpCap" type="number" class="form-control" placeholder="Çap Giriniz">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpCap" type="number" value="0" class="form-control" placeholder="Çap Giriniz">
                                                                             </div>
-                                                                            <div class="col-md-6">
-                                                                                <input id="inpUzunluk" type="number" class="form-control" placeholder="Boy Giriniz">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpUzunluk" type="number" value="0" class="form-control" placeholder="Boy Giriniz">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="divOther" class="row" style="display:none;">
+                                                                        <div class="col-md-12 no-padding">
+                                                                            <div class="col-md-3">
+                                                                                <input id="inpAdet" type="number" value="0" class="form-control" placeholder="Adet Giriniz">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -230,8 +259,7 @@
                                                                         <div class="form-group">
                                                                             <label for="">Montaj Şekli</label>
                                                                             <select id="montageType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                            
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -239,26 +267,26 @@
                                                                         <div class="form-group">
                                                                             <label for="">Kaplama Şekli</label>
                                                                             <select id="coverType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                              
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
+                                                                                   <%for(var i = 0; i < coverTypes.length; i++){%>
+                                                                                    <option data="<%=coverTypes[i].cost%>" value="<%=coverTypes[i].coverType%>"><%=coverTypes[i].coverType%></option>
+                                                                                  <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Ayar Mekanizması</label>
-                                                                            <select  id="setMechanism" class="form-control">
-                                                                                 <option style="padding-left:0px;" data='0' selected disabled value="" >Seçiniz</option>
-                                                                              
+                                                                            <select id="setMechanism" class="form-control">
+                                                                                 <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <div class="form-group">
                                                                             <label for="">Aksesuar</label>
-                                                                            <select  id="accessory" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                               
+                                                                            <select id="accessory" class="form-control">
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -266,16 +294,16 @@
                                                                         <div class="form-group">
                                                                             <label for="">Kasa Tipi</label>
                                                                             <select  id="bodyType" class="form-control">
-                                                                                <option style="padding-left:0px;" data='0' selected disabled value="Seçiniz" >Seçiniz</option>
-                                                                                
+                                                                                <option style="padding-left:0px;" data='0' >Seçiniz</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Miktar</label>
-                                                                    <input type="text" class="form-control" id="amount" placeholder="Miktar Giriniz">
-                                                                </div>                                                                
+                                                                    <input type="text" class="form-control" id="amount" placeholder="Miktar Giriniz" value='0'>
+                                                                </div>
+                                                                <input id="inpDiscount" type="text" style="display:none;">
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <a id="btnAddBasket" class="btn btn-success btn-flat" id="btnAddChart">Sepete Ekle</a>
@@ -284,26 +312,61 @@
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_7" data-toggle="tab" class="btn btn-primary next"> İleri</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div><!-- /.tab-pane -->
-                                                <div class="tab-pane" id="tab_4">
+                                                <div class="tab-pane" id="tab_7">
                                                     <div id="divProductChart" class="row">
                                                         <div class="col-md-12">
                                                             <div class="box-body table-scroll">
                                                                 <table id="tblProduct" class="table table-bordered table-condensed table-responsive">
                                                                     <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
                                                                         <th style="width:40px">#</th>
-                                                                        <th style="width:40px">Miktar</th>
-                                                                        <th>Ürün </th>
-                                                                        <th>Tip </th>
+                                                                        <th>Ürün Kodu</th>
+                                                                        <th>Ürün Adi</th>
                                                                         <th>Ölçüler </th>
                                                                         <th>Montaj Şekli</th>
                                                                         <th>Kaplama Şekli</th>
                                                                         <th>Ayar Mekanizması</th>
                                                                         <th>Aksesuar</th>
                                                                         <th>Kasa Tipi</th>
+                                                                        <th style="width:40px">Miktar</th>
+                                                                        <th>Liste Fiyati</th>
+                                                                        <th colspan="2">Iskontolu Birim Fiyati</th>
+                                                                        <th style="width:40px">Tutar</th>
                                                                         <th style="width:40px"> </th>
                                                                     </tr>
                                                                     <tbody id="tableBasket">
+                                                                        <%if(operation=='update'){%>
+                                                                        <%for(var i=0;i<offer.basket.length;i++){%>
+                                                                            <tr id="<%=offer.basket[i]._id%>">
+                                                                            <td><%=(i+1)%></td>
+                                                                            <td><%=offer.basket[i].productCodes%></td>
+                                                                            <td><%=offer.basket[i].productGroup%> - <%=offer.basket[i].productName%></td>
+                                                                            <%if(offer.basket[i].productSizeType=='Dikdörtgen'){%>
+                                                                            <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeHeight%> x <%=offer.basket[i].productSizeLength%><font size="1" color="blue">  (genişlik*yükseklik*uzunluk)</font></td>
+                                                                            <%}else{%>
+                                                                            <td><%=offer.basket[i].productSizeWidthOrDiameter%> x <%=offer.basket[i].productSizeLength%> <font size="1" color="blue">  (çap*uzunluk)</font></td>
+                                                                            <%}%>
+                                                                            <td><%=offer.basket[i].montageType%></td>
+                                                                            <td><%=offer.basket[i].coverType%></td>
+                                                                            <td><%=offer.basket[i].setMechanism%></td>
+                                                                            <td><%=offer.basket[i].accessory%></td>
+                                                                            <td><%=offer.basket[i].bodyType%></td>
+                                                                            <td><%=offer.basket[i].amount%> <%=offer.basket[i].unit%></td>
+                                                                            <td><%=offer.basket[i].productListPrice%></td>
+                                                                            <td style="width:40px">% <%=offer.basket[i].lineDiscount%></td>
+                                                                            <td style="width:80px"><%=offer.basket[i].productPriceWithDiscount%></td>
+                                                                            <td><%=offer.basket[i].productPrice%></td>
+                                                                            <td><button class="btn btn-danger btn-flat btn-sm remove"><i class="fa fa-trash-o"></i></button></td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                        <%}%>
                                                                     </tbody>
 
 
@@ -314,7 +377,15 @@
                                                                             <span class="pull-right">Genel İskonto</span>
                                                                         </td>
                                                                         <td class="col-md-1">
-                                                                            <input id="generalDiscount" type="text" class="form-control" name="generalDiscount" readonly>
+                                                                            <input id="generalDiscount" type="text" class="form-control" name="generalDiscount"<%if(operation == "update"){%> value="<%=offer.cost.generalDiscount%>"<%}else{%><%}%>>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col-md-11">
+                                                                            <span class="pull-right">Yuvarlama İskontosu</span>
+                                                                        </td>
+                                                                        <td class="col-md-1">
+                                                                            <input type="text" class="form-control" name="productRoundingDiscount" id="RoundingDiscount" <%if(operation == "update"){%> value="<%=offer.cost.roundingDiscount%>"<%}%>>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -322,7 +393,7 @@
                                                                             <span class="pull-right">Tutar</span>
                                                                         </td>
                                                                         <td class="col-md-1">
-                                                                            <input  type="text" class=" form-control" name="sum" id="productSum">
+                                                                            <input  type="text" class=" form-control" name="sum" id="productSum" <%if(operation == "update"){%> value="<%=offer.cost.sum%>"<%}%>>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -330,7 +401,7 @@
                                                                             <span class="pull-right">K.D.V</span>
                                                                         </td>
                                                                         <td class="col-md-1">
-                                                                            <input type="text"  class="form-control" name="productKDV" id="productKDV">
+                                                                            <input type="text"  class="form-control" name="productKDV" id="productKDV" <%if(operation == "update"){%> value="<%=offer.cost.kdv%>"<%}%>>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -338,11 +409,18 @@
                                                                             <span class="pull-right">Toplam</span>
                                                                         </td>
                                                                         <td class="col-md-1">
-                                                                             <input type="text" class="form-control" name="total" id="productTotal">
+                                                                             <input type="text" class="form-control" name="total" id="productTotal" <%if(operation == "update"){%> value="<%=offer.cost.total%>"<%}%>>
                                                                         </td>
                                                                     </tr>
 
                                                                 </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_5" data-toggle="tab" class="btn btn-primary next"> İleri</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -354,24 +432,36 @@
                                                                 <div class="form-group">
                                                                     <label >Ödeme Şekli</label>
                                                                     <select name="payMethod" id="" class="form-control" >
-                                                                        <option value="Nakit">Nakit</option>
-                                                                        <option value="Çek">Çek</option>
-                                                                        <option value="Kredi Kartı">Kredi Kartı</option>
-                                                                        <option value="Senet">Senet</option>
-                                                                        <option value="Devir">Devir</option>
+                                                                        <option value="Nakit" <%if(operation == "update" && offer.payMethod.payMethod=="Nakit" ){%>selected<%}%>>Nakit</option>
+                                                                        <option value="Çek" <%if(operation == "update" && offer.payMethod.payMethod=="Çek" ){%>selected<%}%>>Çek</option>
+                                                                        <option value="Kredi Kartı" <%if(operation == "update" && offer.payMethod.payMethod=="Kredi Kartı" ){%>selected<%}%>>Kredi Kartı</option>
+                                                                        <option value="Senet" <%if(operation == "update" && offer.payMethod.payMethod=="Senet" ){%>selected<%}%>>Senet</option>
+                                                                        <option value="Devir" <%if(operation == "update" && offer.payMethod.payMethod=="Devir" ){%>selected<%}%>>Devir</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label >Vade</label>
+                                                                    <select name="vade" id="" class="form-control" >
+                                                                        <option value="0" disabled selected>Seçiniz</option>
+                                                                        <%for(var i = 0; i < 6; i++){%>
+                                                                            <option value="<%=(i+1)*30%>" <%if(operation == "update" && offer.payMethod.vade == ((i+1)*30).toString() ){%>selected<%}%>><%=(i+1)*30%></option>
+                                                                        <%}%>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label >Not</label>
-                                                                    <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;"></textarea>
+                                                                    <textarea class="form-control" type="text" name="note" rows="2" placeholder="Not Giriniz" style="resize:vertical;" <%if(operation == "update"){%> value="<%=offer.note%>"<%}%>><%if(operation == "update"){%><%=offer.payMethod.note%><%}%></textarea>
                                                                 </div>
                                                             </div><!-- /.box-body -->
                                                         </div>
                                                     </div>
-                                                </div>
-                                                    <div style="text-align:center;">
-                                                        <button type="submit" class="btn btn-primary">Teklifi Ver</button>
-                                                        <a id="btnPdfYazdir" target="_blank" class="btn btn-info" disabled >PDF Yazdır</a>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                                <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.customer.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -383,9 +473,7 @@
                         </div>
                     </div>
                 </div>
-                    
-
-                </section><!-- /.content -->
+             </section>
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
        <%include ../partial-pages/script.ejs%>

@@ -54,6 +54,15 @@ module.exports = {
             res.send(createResponse(true, response, "aksesuarlar başarıyla listelendi"));
         });   
     },
+    search : function(req, res, next){
+        as.search(req.body, function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "aksesuarlar listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "aksesuarlar başarıyla listelendi"));
+        });   
+    },
     getByGroupName : function(req, res, next){
         as.getByGroupName(req.session.user.firmCode, req.body.productGroupName,function(state, response){
             if(!state){

@@ -54,6 +54,15 @@ module.exports = {
             res.send(createResponse(true, response, "montaj türleri başarıyla listelendi"));
         });   
     },
+    search : function(req, res, next){
+        mts.search(req.body,function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "montaj türleri listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "montaj türleri başarıyla listelendi"));
+        });   
+    },
     getByGroupName : function(req, res, next){
         mts.getByGroupName(req.session.user.firmCode, req.body.productGroupName, function(state, response){
             if(!state){

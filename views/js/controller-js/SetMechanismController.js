@@ -54,6 +54,15 @@ module.exports = {
             res.send(createResponse(true, response, "ayar mekanizması başarıyla listelendi"));
         });   
     },
+    search : function(req, res, next){
+        sts.search(req.body,function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "ayar mekanizması listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "ayar mekanizması başarıyla listelendi"));
+        });   
+    },
     getByGroupName : function(req, res, next){
         sts.getByGroupName(req.session.user.firmCode, req.body.productGroupName,function(state, response){
             if(!state){
