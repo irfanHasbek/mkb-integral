@@ -1036,41 +1036,17 @@ mongoose.connect("mongodb://localhost:27017/integral",function(error){
         req.session.pageLabel = "b2b_teklif";
         pds.listAll(req.session.customer.firmCode,function(statePds,responsePds){
            if(!statePds){
-                    console.error(responsePds);
+                console.error(responsePds);
+                res.redirect("musteri_anasayfa");
+            }
+            unitService.listAll(req.session.customer.firmCode, function(stateUnit, responseUnit){
+                if(!stateUnit){
+                    console.error(responseUnit);
                     res.redirect("musteri_anasayfa");
                 }
-       mts.listAll(req.session.customer.firmCode,function(stateMontageType,responseMontageType){
-             if(!stateMontageType){
-                 console.error(responseMontageType);
-                 res.render("/pages/index",{layout : false, session : req.session});
-                 }
-       cts.listAll(req.session.customer.firmCode,function(stateCoverType,responseCoverType){
-              if(!stateCoverType){
-                 console.error(responseCoverType);
-                 res.render("/pages/index",{layout : false, session : req.session});
-                 }
-       sms.listAll(req.session.customer.firmCode,function(stateSetMec,responseSetMec){
-              if(!stateSetMec){
-                 console.error(responseSetMec);
-                 res.render("/pages/index",{layout : false, session : req.session});
-                 }
-       as.listAll(req.session.customer.firmCode,function(stateAccessory,responseAccessory){
-              if(!stateAccessory){
-                 console.error(responseAccessory);
-                 res.render("/pages/index",{layout : false, session : req.session});
-                 }
-        bts.listAll(req.session.customer.firmCode,function(stateBodyType,responseBodyType){
-              if(!stateBodyType){
-                 console.error(responseBodyType);
-                 res.render("/pages/index",{layout : false, session : req.session});
-                         }
-            res.render("pages/b2b_teklif",{layout : false, session:req.session,customer:req.session.customer,productGroups:responsePds,montageTypes:responseMontageType,coverTypes:responseCoverType,setMechanisms : responseSetMec,accessories : responseAccessory,bodyTypes:responseBodyType});
             });
-          });
-         });
+            res.render("pages/b2b_teklif",{layout : false, session:req.session,customer:req.session.customer,productGroups:responsePds, units : responsePds});
         });
-       });
-      });
      });
     //end
     //müsteri tanımı
