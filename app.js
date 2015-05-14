@@ -1585,7 +1585,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     //end
     //offer tanımı
     app.get("/b2b_teklif", AccountController.sessionCheckCustomer, function(req, res) {
-        req.session.currentPage = "/b2b_teklif";
+        req.session.currentPage = "/b2b_teklif?id=0";
         req.session.pageLabel = "b2b_teklif";
         if (req.param('id') != 0) {
             offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
@@ -1680,7 +1680,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "b2b_teklif_listesi";
         offerService.search({
             "firmCode": req.session.customer.firmCode,
-            "customerInfo.customerName": req.session.customer.customerName
+            "customerInfo.customerId": req.session.customer._id
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
@@ -1873,6 +1873,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.post("/wsoffer/b2badd", CreateOfferController.addNew);
     app.post("/wsoffer/search", CreateOfferController.searchOffer);
     app.post("/wsoffer/update", CreateOfferController.update);
+    app.post("/wsoffer/b2bupdate", CreateOfferController.update);
     app.post("/wsoffer/remove", CreateOfferController.remove);
     app.get("/wsoffer/listall", CreateOfferController.listAll);
     app.get("/wsoffer/removeall", CreateOfferController.removeAll);

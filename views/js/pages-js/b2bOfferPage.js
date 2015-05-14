@@ -227,7 +227,7 @@ function calculatePriceAfterOperation() {
     
     var kdv = sum * (18 / 100);
     $('#productKDV').val(kdv);
-    $('#productTotal').val(sum + kdv - parseFloat($('#RoundingDiscount').val()));
+    $('#productTotal').val(sum + kdv);
 }
 
 function calculateBasketTotalPrice() {
@@ -256,7 +256,7 @@ function removeFromBasketAndTable(id) {
     var basket = JSON.parse($('#inpBasket').val());
     var index = 0;
     for (var i = 0; i < basket.length; i++) {
-        if (basket[i]._id === id) {
+        if (basket[i].productId == id) {
             index = i;
         }
     }
@@ -269,7 +269,7 @@ function formHandlers() {
         if(data.state==true){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
             $("#btnPdfYazdir").removeAttr("disabled");
-            if ($('#formOffer').attr('action') == '/wsoffer/addnew') {
+            if ($('#formOffer').attr('action') == '/wsoffer/b2badd') {
                 $("#btnPdfYazdir").attr("href", "/teklif_yazdir?id=" + data.response._id + '&code=' + $('#inpFirmCode').val() + '');
                 clearInputs("divOffer");
                 clearTextareas("divOffer");
@@ -281,15 +281,9 @@ function formHandlers() {
     });
 }
 
-function otherScripts() {
-    
-    getCustomer($("#selectCustomer option:selected").val());
-    
+function otherScripts() {    
     if ($('#generalDiscount').val() == '') {
         $('#generalDiscount').val(0);
-    }
-    if ($('#RoundingDiscount').val() == '') {
-        $('#RoundingDiscount').val(0);
     }
     if ($('#productSum').val() == '') {
         $('#productSum').val(0);
@@ -303,16 +297,11 @@ function otherScripts() {
 
     $('#inpOfferDate').val(getTodayDate());
 
-    if ($("#formOffer").attr("action") == "/wsoffer/addnew") {
+    if ($("#formOffer").attr("action") == "/wsoffer/b2badd") {
+        getCustomer($("#selectCustomer option:selected").val());
         var basket = [];
         $("#inpBasket").val(JSON.stringify(basket));
     }
-
-    $('#RoundingDiscount').on('input', function() {
-        if (isNumber($(this).val())) {
-            calculatePriceAfterOperation();
-        }
-    });
 
     $('#generalDiscount').on('input', function() {
         if (isNumber($(this).val())) {
@@ -470,7 +459,7 @@ function getCustomer(custName) {
 
 function listComptents(data) {
     $("#slctCompetent").empty();
-    var optInitial = $("<option value='Seçiniz'>Yetkili Seçiniz</option>");
+    var optInitial = $("<option value='Seçiniz' selected disabled>Yetkili Seçiniz</option>");
     $("#slctCompetent").append(optInitial);
     for (var i = 0; i < data.length; i++) {
         var opt = $("<option value=" + data[i]._id + ">" + data[i].name + "</option>");

@@ -75,7 +75,7 @@ function createOffer(type, req) {
     return offerObj;
 }
 
-function createB2bOffer(req) {
+function createB2bOffer(type,req) {
 
     var offerObj = {
         firmCode: req.session.customer.firmCode,
@@ -141,6 +141,9 @@ function createB2bOffer(req) {
         },
         coverDescription : ''
     };
+    if(type == 'update') {
+        offerObj._id = req.body._id;
+    }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;
 }
@@ -182,7 +185,7 @@ module.exports = {
     addNew: function (req, res) {
         var tempOffer;
         if(req.originalUrl == "/wsoffer/b2badd") {
-            tempOffer = createB2bOffer(req);
+            tempOffer = createB2bOffer("add",req);
             firmCheckerAndPush(req.session.customer.firmCode, tempOffer, req, res);
         } else {
             tempOffer = createOffer("add", req);
@@ -190,7 +193,12 @@ module.exports = {
         }
     },
     update: function (req, res) {
-        var tempOffer = createOffer("update", req);
+        var tempOffer;
+        if(req.originalUrl == "/wsoffer/b2bupdate"){
+            tempOffer = createB2bOffer("update", req);
+        }else{
+            tempOffer = createOffer("update", req);
+        }
         //console.log(JSON.stringify(tempOffer));
         cos.update(tempOffer, function (state, response) {
             if(!state) {

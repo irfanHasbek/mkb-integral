@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <div class="box box-info">
                                     <!-- form start -->
-                                    <form id="formOffer" role="form" method="post" action="<%if(operation == 'update'){%>/wsoffer/update<%}else{%>/wsoffer/addnew<%}%>">
+                                    <form id="formOffer" role="form" method="post" action="<%if(operation == 'update'){%>/wsoffer/b2bupdate<%}else{%>/wsoffer/b2badd<%}%>">
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-3 col-md-offset-1">
@@ -57,7 +57,7 @@
                                                                 <select name="customerId" id="selectCustomer" class="form-control">
                                                                     <option value="<%=session.customer._id%>" ><%=session.customer.customerName%></option>
                                                                 </select>
-                                                                <input name="customerName" id="inpCustName" style="display:none;" value="<%session.customer.customerName%>">
+                                                                <input name="customerName" id="inpCustName" style="display:none;" value="<%=session.customer.customerName%>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -78,8 +78,8 @@
                                         <ul class="nav nav-tabs">
                                             <li class="active wizard"><a href="#tab_1" data-toggle="tab">Yetkili Bilgileri</a></li>
                                             <li class="wizard"><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
-                                            <li class="wizard"><a href="#tab_4" data-toggle="tab">Ürün Seçimi</a></li>
-                                            <li class="wizard"><a href="#tab_7" data-toggle="tab">Ürün Sepeti</a></li>
+                                            <li class="wizard"><a href="#tab_3" data-toggle="tab">Ürün Seçimi</a></li>
+                                            <li class="wizard"><a href="#tab_4" data-toggle="tab">Ürün Sepeti</a></li>
                                             <li class="wizard"><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
                                         </ul>
                                             <div class="tab-content">
@@ -96,7 +96,7 @@
                                                                             <option value="Seçiniz" selected disabled>Yetkili Seçiniz</option>
                                                                              <%if(operation=='update'){%>
                                                                                <%for(var i=0;i<session.customer.competentInfo.length;i++){%>
-                                                                                  <option <%if(session.customer.competentInfo[i]._id==offer.competentInfo.competentId){ competentInfoIndex=i;%> selected <%}%>value="<%=session.customer.competentInfo[i]._id%>" ><%=session.customer.competentInfo[i].name%></option>
+                                                                               <option <%if(session.customer.competentInfo[i]._id==offer.competentInfo.competentId){ competentInfoIndex=i;%> selected <%}%>value="<%=session.customer.competentInfo[i]._id%>" ><%=session.customer.competentInfo[i].name%></option>
                                                                                <%}%>
                                                                             <%}%>
                                                                         </select>
@@ -174,7 +174,7 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
-                                                <div class="tab-pane" id="tab_4">
+                                                <div class="tab-pane" id="tab_3">
                                                     <div id="divProduct" class="row">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <div class="box-body">
@@ -315,12 +315,12 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div style="text-align:center;">
-                                                                <a href="#tab_7" data-toggle="tab" class="btn btn-primary next"> İleri</a>
+                                                                <a href="#tab_4" data-toggle="tab" class="btn btn-primary next"> İleri</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.tab-pane -->
-                                                <div class="tab-pane" id="tab_7">
+                                                <div class="tab-pane" id="tab_4">
                                                     <div id="divProductChart" class="row">
                                                         <div class="col-md-12">
                                                             <div class="box-body table-scroll">
@@ -378,14 +378,6 @@
                                                                         </td>
                                                                         <td class="col-md-1">
                                                                             <input id="generalDiscount" type="text" class="form-control" name="generalDiscount"<%if(operation == "update"){%> value="<%=offer.cost.generalDiscount%>"<%}else{%><%}%>>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="col-md-11">
-                                                                            <span class="pull-right">Yuvarlama İskontosu</span>
-                                                                        </td>
-                                                                        <td class="col-md-1">
-                                                                            <input type="text" class="form-control" name="productRoundingDiscount" id="RoundingDiscount" <%if(operation == "update"){%> value="<%=offer.cost.roundingDiscount%>"<%}%>>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
