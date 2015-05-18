@@ -77,7 +77,7 @@ module.exports = {
         });
     },
     getChildCustomer: function(req, res) {
-        ccs.getCustomerDefinition(req.body._id,
+        ccs.getChildCustomer(req.body._id,
         function(state, response) {
             if (!state) {
                 res.send({

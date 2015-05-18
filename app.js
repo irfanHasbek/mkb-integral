@@ -1899,7 +1899,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.post("/wschildcustomer/remove", ChildCustomerController.remove);
     app.post("/wschildcustomer/listall", ChildCustomerController.listAll);
     app.get("/wschildcustomer/removeall", ChildCustomerController.removeAll);
-    app.post("/wschildcustomer/getchildcustomer", ChildCustomerController.getCustomerDefinition);
+    app.post("/wschildcustomer/getchildcustomer", ChildCustomerController.getChildCustomer);
     //end
 
     //teklif oluşturma "abuzer" 10.03 start

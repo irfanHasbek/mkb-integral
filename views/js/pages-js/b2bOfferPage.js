@@ -2,7 +2,24 @@ function clickHandlers() {
     $("#slctMusteriListesi").on("change",function(){
         $("#divYeniMusteri").removeAttr("style");
         $("#frmMusteri").attr("action","/wschildcustomer/update");
-        wsPost()
+       var id=$("#slctMusteriListesi option:selected").attr("id");
+        console.log(id);
+        var data={_id:id};
+        wsPost("/wschildcustomer/getchildcustomer",data,function(err,resp){
+            if(err){
+                console.log(err);
+                return;
+            }
+            $("input[name='firmaAdi']").val(resp.response.firmaAdi);
+            $("input[name='yetkiliAdi']").val(resp.response.yetkiliAdi);
+            $("input[name='tel']").val(resp.response.tel);
+            $("input[name='email']").val(resp.response.email);
+            $("textarea[name='firmaAdresi']").text(resp.response.firmaAdresi);
+            $("textarea[name='sevkiyat']").val(resp.response.sevkiyat);
+            $("textarea[name='not']").val(resp.response.not);
+            $("input[name='vergiDairesi']").val(resp.response.vergiDairesi);
+            $("input[name='vergiNo']").val(resp.response.vergiNo);
+        });
     });
     $("#btnYeniMusteri").click(function(){
         $("#divYeniMusteri").removeAttr("style");
@@ -289,11 +306,27 @@ function formHandlers() {
         }
     });
 }
-
+function listAllChildCustomer(){
+    console.log("resp");
+    var data={ekleyenFirma:$("#inpCustName").val()};
+    console.log("data : "+data.ekleyenFirma);
+    wsPost("/wschildcustomer/listall",data,function(err,resp){
+        if(err){
+            console.error(err);
+            return;
+        }
+         
+        for(var i=0;i<resp.response.length;i++){
+            var opt=$("<option id="+resp.response[i]._id+">"+resp.response[i].firmaAdi+"</option>");
+            $("#slctMusteriListesi").append(opt);
+        }
+    });
+}
 function otherScripts() {
     var id=window.location.search.split("id=");
     if(id[1]=="0"){
         $("#modalYeniMusteriEkle").modal('show');
+        listAllChildCustomer();
     } 
     if ($('#generalDiscount').val() == '') {
         $('#generalDiscount').val(0);
