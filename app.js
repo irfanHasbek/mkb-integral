@@ -1694,7 +1694,29 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             });
         });
     });
-    //end
+    
+    //404 sayfası
+    
+    app.get("/404", AccountController.sessionCheck, function(req, res) {
+        req.session.currentPage = "/404";
+        res.render("pages/404",{layout:"false"});
+    });
+    //503 sayfası
+    app.get("/503", AccountController.sessionCheck, function(req, res) {
+        req.session.currentPage = "/503";
+        res.render("pages/503",{layout:"false"});
+    });
+    //maintenance sayfası
+    app.get("/maintenance", AccountController.sessionCheck, function(req, res) {
+        req.session.currentPage = "/maintenance";
+        res.render("pages/maintenance",{layout:"false"});
+    });
+    //permission sayfası
+    app.get("/permission", AccountController.sessionCheck, function(req, res) {
+        req.session.currentPage = "/permission";
+        res.render("pages/permission",{layout:"false",session:req.session});
+    });
+    
 
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
