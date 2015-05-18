@@ -1,6 +1,12 @@
 var selectedEvent;
 function clickHandlers(){
-
+    $('#ulNotification').on('click', '.size', function(){
+        //console.log('asd');
+        $(this).remove();
+        var notifyCount = $('#ulNotification .size').children().length;
+        $('#ulNotification .header').html(notifyCount + ' yeni bildiriminiz var');
+        $('#sizeNotification').html(notifyCount);
+    });
 }
 function formHandlers(){
     $('#formUpdateActivity').ajaxForm(function(data){
@@ -44,7 +50,23 @@ function otherScripts(){
     });
     fillCalander();
 }
+/*
+<li>
+    <ul class="menu">
+        <li>
+            <a href="#">
+                <i class="ion ion-ios7-people info"></i> 5 yeni müşteri eklendi
+            </a>
+        </li>
+    </ul>
+</li>
+*/
 
+function fillNotification(notifyContent){
+    var notify = '<li class="size"><ul class="menu"><li><a href="#"><i class="ion ion-ios7-people info"></i> ' + notifyContent + '</a></li></ul></li>';
+    var ul = $('#ulNotification');
+    ul.append(notify);
+}
 function fillCalander(){
     wsPost('/wsoffer/search', {search : {
         'activities.owner.ownerName' : $('#inpUsernameForIndex').val()
@@ -72,13 +94,18 @@ function fillCalander(){
                     }else if(event.activityStatus == 'undone'){
                         event.backgroundColor = "#f00";
                         event.borderColor = "#fff";
+                        fillNotification(event.title);
                     }else{
                         event.backgroundColor = "#00f";
                         event.borderColor = "#fff";
+                        fillNotification(event.title);
                     }
                     newEvents.push(event);
                 }
             }
+            var notifyCount = $('#ulNotification .size').children().length;
+            $('#ulNotification .header').html(notifyCount + ' yeni bildiriminiz var');
+            $('#sizeNotification').html(notifyCount);
             $("#calendar").fullCalendar('removeEvents');
             $('#calendar').fullCalendar('addEventSource', newEvents);
             $('#calendar').fullCalendar('rerenderEvents');
