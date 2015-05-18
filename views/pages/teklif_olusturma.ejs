@@ -9,7 +9,7 @@
         <div class="wrapper row-offcanvas row-offcanvas-left">
            <%include ../partial-pages/master_left.ejs%>
             <!-- Right side column. Contains the navbar and content of the page -->
-             <aside class="right-side">                
+             <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1 style="font-size:22px;">
@@ -233,7 +233,7 @@
                                                                                   <option value="<%=offer.personPrepareOfferInfo.personId%>"><%=offer.personPrepareOfferInfo.personName%></option>
                                                                     
                                                                             <%}else{%>
-                                                                                <option value="<%=session.user._id%>"><%=session.user.name%> <%=session.user.surname%></option> 
+                                                                                <option value="<%=session.user._id%>"><%=session.user.name%> <%=session.user.surname%></option>
                                                                             <%}%>
                                                                     </select>
                                                                     <input value="<%=session.user.name%> <%=session.user.surname%>" name="personName" style="display:none;">
@@ -263,7 +263,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Ürün Adı</label>    
+                                                                    <label for="">Ürün Adı</label>
                                                                     <select name="" id="selectProduct" class="form-control">
                                                                         <option value="Seçiniz" disabled selected>Ürün Seçiniz</option>
                                                                     </select>
@@ -275,7 +275,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12 no-padding">
                                                                                     <div class="col-md-3">
-                                                                                        <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
+                                                                                        <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
@@ -287,7 +287,7 @@
                                                                                         <select id="slctUnit" class="form-control">
                                                                                             <option selected disabled value="">Birim Seciniz</option>
                                                                                             <%for(var i = 0; i < units.length; i++){%>
-                                                                                               <option value="<%=units[i].unit%>"><%=units[i].unit%></option> 
+                                                                                               <option value="<%=units[i].unit%>"><%=units[i].unit%></option>
                                                                                             <%}%>
                                                                                         </select>
                                                                                     </div>
@@ -297,7 +297,7 @@
                                                                     </div>
                                                                     <br>
                                                                    <input id="inpSizeType" style="display:none;">
-                                                                   <input id="inpBasket" name="basket" style="display:none;" <%if(operation=="update"){%>value="<%=JSON.stringify(offer.basket)%>"<%}%>> 
+                                                                   <input id="inpBasket" name="basket" style="display:none;" <%if(operation=="update"){%>value="<%=JSON.stringify(offer.basket)%>"<%}%>>
                                                                     <div id="divRec" class="row" style="display:none;">
                                                                         <div class="col-md-12 no-padding">
                                                                             <div class="col-md-3">
@@ -590,7 +590,7 @@
                                                                     <textarea id="inpDescription" name="coverDescription" class="textarea" placeholder="Aciklama giriniz" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><%if(operation == 'update'){%><%=offer.coverDescription%><%}%></textarea>
                                                                 </div>
                                                             </div>
-                                                        </div>    
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

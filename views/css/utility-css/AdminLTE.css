@@ -1,7 +1,7 @@
 @import url(../../fonts/font-1.css);
 
 @import url(../../fonts/font-2.css);
-/*! 
+/*!
  *   AdminLTE v1.2
  *   Author: AlmsaeedStudio.com
  *   License: Open source - MIT
@@ -620,7 +620,7 @@ body > .header .logo .icon {
     left: 0px;
   }
 }
-/* 
+/*
     Dropdown menus
 ----------------------------
 */
@@ -1001,7 +1001,7 @@ body > .header .logo .icon {
     left: auto;
   }
 }
-/* 
+/*
    All form elements including input, select, textarea etc.
 -----------------------------------------------------------------
 */
@@ -1051,7 +1051,7 @@ body > .header .logo .icon {
 .radio {
   padding-left: 0;
 }
-/* 
+/*
     Compenent: Progress bars
 --------------------------------
 */
@@ -1909,7 +1909,7 @@ Component: timeline
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
-/* 
+/*
     Component: callout
 ------------------------
 */
@@ -1949,7 +1949,7 @@ Component: timeline
 .callout.callout-info h4 {
   color: #3A87AD;
 }
-/* 
+/*
     Component: alert
 ------------------------
 */
@@ -2255,7 +2255,7 @@ Component: timeline
   margin-top: 30px;
   text-align: center;
 }
-/* 
+/*
     Page: register and login
 */
 .form-box {
@@ -2320,7 +2320,7 @@ Component: timeline
     width: 90%;
   }
 }
-/* 
+/*
     Page: 404 and 500 error pages
 ------------------------------------
 */
@@ -2370,7 +2370,7 @@ Component: timeline
 .error-page:after {
   clear: both;
 }
-/* 
+/*
     Page: Invoice
 */
 .invoice {
@@ -2403,12 +2403,12 @@ Component: timeline
     white-space: normal!important;
   }
 }
-/* 
+/*
     Skins
     -----
 */
-/* 
-    Skin Blue 
+/*
+    Skin Blue
     ---------
 */
 /* skin-blue navbar */
@@ -2508,7 +2508,7 @@ Component: timeline
 .skin-blue .treeview-menu > li.active > a,
 .skin-blue .treeview-menu > li > a:hover {
   color: #111;
-  border-left: 2px solid #f4543c; 
+  border-left: 2px solid #f4543c;
 }
 .skin-blue .sidebar-form {
   -webkit-border-radius: 2px;
@@ -3469,7 +3469,7 @@ div.show-image input.delete {
     }
  
     .search-query:focus + button {
-        z-index: 3;   
+        z-index: 3;
     }
 
 /****Lightbox*****
@@ -3477,7 +3477,7 @@ div.show-image input.delete {
 
 #lightbox .modal-content {
     display: inline-block;
-    text-align: center;   
+    text-align: center;
 }
 
 #lightbox .close {
@@ -3567,7 +3567,7 @@ ul.color_a > li > a{
 /***Modal Window Alert***/
 
 .modal-header-warning {
-	color:#fff;
+    color:#fff;
     padding:4px 15px;
     border-bottom:1px solid #eee;
     background-color: #2c94c0;

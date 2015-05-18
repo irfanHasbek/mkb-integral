@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     store: new MongoStore({
                         db: 'integral',
                         host: 'localhost',
-                        port: 27017 
+                        port: 27017
                     })*/
     }));
 
@@ -65,85 +65,85 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     var tds = new TaskDefinitonService();
     //end
 
-    //il ilce tanimlari 
+    //il ilce tanimlari
     var CityController = require("./views/js/controller-js/CityController");
     var CityService = require("./views/js/service-js/CityService");
     var cityservice = new CityService();
     //end
 
-    //ürün grup tanımları "abuzer" 28.02 start 
+    //ürün grup tanımları "abuzer" 28.02 start
     var ProductGroupDefinitionController = require("./views/js/controller-js/ProductGroupDefinitionController");
     var ProductGroupDefinitionService = require("./views/js/service-js/ProductGroupDefinitionService");
     var pds = new ProductGroupDefinitionService();
     //end
 
-    //ürün tanimlari 
+    //ürün tanimlari
     var ProductController = require("./views/js/controller-js/ProductController");
     var ProductService = require("./views/js/service-js/ProductService");
     var productService = new ProductService();
     //end
 
-    //ürün fiyat tanimlari 
+    //ürün fiyat tanimlari
     var ProductPriceController = require("./views/js/controller-js/ProductPriceController");
     var ProductPriceService = require("./views/js/service-js/ProductPriceService");
     var productPriceService = new ProductPriceService();
     //end
 
-    //montaj türleri "abuzer" 28.02 start 
+    //montaj türleri "abuzer" 28.02 start
     var MontageTypeController = require("./views/js/controller-js/MontageTypeController");
     var MontageTypeService = require("./views/js/service-js/MontageTypeService");
     var mts = new MontageTypeService();
     //end
 
-    //ayar mekanizması "abuzer" 28.02 start 
+    //ayar mekanizması "abuzer" 28.02 start
     var SetMechanismController = require("./views/js/controller-js/SetMechanismController");
     var SetMechanismService = require("./views/js/service-js/SetMechanismService");
     var sms = new SetMechanismService();
     //end
 
-    //aksesuar "abuzer" 28.02 start 
+    //aksesuar "abuzer" 28.02 start
     var AccessoryController = require("./views/js/controller-js/AccessoryController");
     var AccessoryService = require("./views/js/service-js/AccessoryService");
     var as = new AccessoryService();
     //end
 
-    //kasa tipi "abuzer" start 
+    //kasa tipi "abuzer" start
     var BodyTypeController = require("./views/js/controller-js/BodyTypeController");
     var BodyTypeService = require("./views/js/service-js/BodyTypeService");
     var bts = new BodyTypeService();
     //end
 
-    //kapalama türleri "abuzer" 28.02 start 
+    //kapalama türleri "abuzer" 28.02 start
     var CoverTypeController = require("./views/js/controller-js/CoverTypeController");
     var CoverTypeService = require("./views/js/service-js/CoverTypeService");
     var cts = new CoverTypeService();
     //end
 
-    //teklif konusu "abuzer" 03.03 start 
+    //teklif konusu "abuzer" 03.03 start
     var OfferTopicController = require("./views/js/controller-js/OfferTopicController");
     var OfferTopicService = require("./views/js/service-js/OfferTopicService");
     var ots = new OfferTopicService();
     //end
 
-    //teklif durumu "abuzer" 03.03 start 
+    //teklif durumu "abuzer" 03.03 start
     var OfferStatusController = require("./views/js/controller-js/OfferStatusController");
     var OfferStatusService = require("./views/js/service-js/OfferStatusService");
     var oss = new OfferStatusService();
     //end
 
-    //kaybetme"abuzer" 03.03 start 
+    //kaybetme"abuzer" 03.03 start
     var LosingReasonController = require("./views/js/controller-js/LosingReasonController");
     var LosingReasonService = require("./views/js/service-js/LosingReasonService");
     var lrs = new LosingReasonService();
     //end
 
-    //müşteri tanımı "abuzer" 03.03 start 
+    //müşteri tanımı "abuzer" 03.03 start
     var CustomerDefinitionController = require("./views/js/controller-js/CustomerDefinitionController");
     var CustomerDefinitionService = require("./views/js/service-js/CustomerDefinitionService");
     var custservice = new CustomerDefinitionService();
     //end
 
-    //teklif oluşturma "abuzer" 10.03 start 
+    //teklif oluşturma "abuzer" 10.03 start
     var CreateOfferController = require("./views/js/controller-js/CreateOfferController");
     var CreateOfferService = require("./views/js/service-js/CreateOfferService");
     var offerService = new CreateOfferService();
@@ -542,7 +542,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             });
         });
     });
-    //ürünler 
+    //ürünler
     app.get("/urun_tanimlari", AccountController.sessionCheck, function(req, res) {
         req.session.currentPage = "/urun_tanimlari?id=0";
         req.session.pageLabel = "urunler";
@@ -1541,7 +1541,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
 
     //B2B Yönetim End
 
-    //musteri kayit 
+    //musteri kayit
     app.get("/musteri_kayit", function(req, res) {
         if (req.session.loginCustomer) {
             res.redirect('/musteri_anasayfa');
@@ -1731,14 +1731,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
 
     app.post("/wspicture/upload", UploadService.uploadImage);
 
-    //credit ops "abuzer"  start  25.02 
+    //credit ops "abuzer"  start  25.02
     app.post("/wscredit/addnew", CreditController.addCredit);
     app.get("/wscredit/listall", CreditController.listAll);
     app.get("/wscredit/removeall", CreditController.removeAll);
     app.post("/wscredit/remove", CreditController.remove);
     //end
 
-    //city ops "abuzer"  start  26.02 
+    //city ops "abuzer"  start  26.02
     app.post("/wscity/addnew", CityController.addCity);
     app.get("/wscity/listall", CityController.listAll);
     app.get("/wscity/removeall", CityController.removeAll);
