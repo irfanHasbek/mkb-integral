@@ -1,29 +1,21 @@
 function clickHandlers() {
     $("#slctMusteriListesi").on("change",function(){
-        $("#divYeniMusteri").removeAttr("style");
-        $("#frmMusteri").attr("action","/wschildcustomer/update");
-       var id=$("#slctMusteriListesi option:selected").attr("id");
-        console.log(id);
-        var data={_id:id};
-        wsPost("/wschildcustomer/getchildcustomer",data,function(err,resp){
-            if(err){
-                console.log(err);
-                return;
-            }
-            $("input[name='firmaAdi']").val(resp.response.firmaAdi);
-            $("input[name='yetkiliAdi']").val(resp.response.yetkiliAdi);
-            $("input[name='tel']").val(resp.response.tel);
-            $("input[name='email']").val(resp.response.email);
-            $("textarea[name='firmaAdresi']").text(resp.response.firmaAdresi);
-            $("textarea[name='sevkiyat']").val(resp.response.sevkiyat);
-            $("textarea[name='not']").val(resp.response.not);
-            $("input[name='vergiDairesi']").val(resp.response.vergiDairesi);
-            $("input[name='vergiNo']").val(resp.response.vergiNo);
-        });
+        $("#divYeniMusteri").attr("style","display:none;");
+        $("#btnSubmitModal").text("Seç");
+        $("#frmMusteri").removeAttr("action");
+    });
+    $("#btnSubmitModal").click(function(){
+        var id=$("#slctMusteriListesi option:selected").attr("id");
+        var name=$("#slctMusteriListesi option:selected").val();
+        $("#optChilCustomerId").val(id);
+        $("#optChilCustomerId").text(name);
+        $("#inpChildCustomerName").val(name);
+        $("#modalYeniMusteriEkle").modal("hide");
     });
     $("#btnYeniMusteri").click(function(){
         $("#divYeniMusteri").removeAttr("style");
         $("#frmMusteri").attr("action","/wschildcustomer/addnew");
+        $("#btnSubmitModal").text("Ekle");
     });
     $('.next').on('click', function(){
         $('.wizard').removeClass('active');
@@ -305,11 +297,16 @@ function formHandlers() {
             alertify.error("İşlem başarısız.");
         }
     });
+    $("#frmMusteri").ajaxForm(function(data){
+        if(data.state==true){
+            $("#optChilCustomerId").val(data.response._id);
+            $("#optChilCustomerId").text(data.response.firmaAdi);
+            $("#inpChildCustomerName").val(data.response.firmaAdi);
+        }
+    });
 }
 function listAllChildCustomer(){
-    console.log("resp");
     var data={ekleyenFirma:$("#inpCustName").val()};
-    console.log("data : "+data.ekleyenFirma);
     wsPost("/wschildcustomer/listall",data,function(err,resp){
         if(err){
             console.error(err);

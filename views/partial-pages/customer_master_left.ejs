@@ -40,6 +40,15 @@
                     <li><a href="/b2b_teklif_listesi"><i class="fa fa-angle-double-right"></i> Teklif Listem</a></li>
                 </ul>
             </li>
+            <li class="treeview <%if(session.pageLabel == 'firmaYönetimi'){%>active<%}%>">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>Firma Yönetimi</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/alt_musterilerim"><i class="fa fa-angle-double-right"></i> Firma Tanımı</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

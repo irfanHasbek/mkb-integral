@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%include ../partial-pages/css.ejs%>
+    </head>
+    <body class="skin-blue">
+       <%include ../partial-pages/customer_master_head.ejs%>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           <%include ../partial-pages/customer_master_left.ejs%>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">                
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1 style="font-size:22px;">
+                        Firma Tanım Ekranı
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-home"></i> Anasayfa</a></li>
+                        <li class="active">Firma Tanımları</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <!-- form start -->
+                                    <form id="frmFirmaEkle" role="form" method="post" action="/wschildcustomer/addnew">
+                                <div class="box-body">
+                                    <input style="display:none;" id="inpFirma" name="ekleyenFirma" value="<%=session.customer.customerName%>">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label for="">Firma Adı :</label>
+                                    <input name="firmaAdi" type="text" class="form-control" placeholder="Firma Adı Giriniz">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="">Yetkili Adı :</label>
+                                    <input name="yetkiliAdi" type="text" class="form-control" placeholder="Yetkili Adı Giriniz" >
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label for=""> Telefon No: </label>
+                                    <input name="tel" type="text" class="form-control" placeholder="Müşteri Telefon numarası giriniz">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for=""> E-mail: </label>
+                                    <input name="email" type="text" class="form-control" placeholder="Müşteri e-mail adresini giriniz">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label for=""> Vergi Dairesi: </label>
+                                    <input name="vergiDairesi" type="text" class="form-control" placeholder="Firmanın bağlı olduğu vergi dairesi giriniz">
+                                </div>
+                                   <div class="col-xs-6">
+                                    <label for=""> Vergi No: </label>
+                                    <input name="vergiNo" type="text" class="form-control" placeholder="firma vergi numarasını giriniz">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="">Firma Adresi: </label>
+                                    <textarea name="firmaAdresi" rows="3" style="resize:vertical;"  class="form-control" placeholder="firma adresi giriniz"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="">Sevkiyat Bilgileri: </label>
+                                    <textarea name="sevkiyat" rows="3" style="resize:vertical;" class="form-control"  placeholder="Ürün sevkiyat bilgileri giriniz"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for=""> Not : </label>
+                                    <textarea name="not" rows="3" style="resize:vertical;" class="form-control" placeholder="Açıklama(opsiyonel)"></textarea>
+                                </div>
+                            </div>
+                         </div><!-- /.box-body -->
+
+                                <div class="box-footer">
+                                    <div style="text-align:center">
+                                        <button type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Firma Listeleme</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table table-bordered firmalar">
+                                            <tr style="border-bottom:3px solid #3c8dbc;">
+                                                <th class="text-center" style="width: 40px">#</th>
+                                                <th>Firma Adi</th>
+                                                <th>Yetkili Adi</th>
+                                                <th>Telefon No</th>
+                                                <th>E-mail</th>
+                                                <th>Vergi Dairesi</th>
+                                                <th>Vergi No</th>
+                                                <th>Firma Adresi</th>
+                                                <th>Sevkiyat Adresi</th>
+                                                <th>Not</th>
+                                                <th class="text-center" style="width: 40px"></th>
+                                            </tr>
+                                            <tbody>
+                                                 <%for(var i=0;i<childCustomers.length;i++){%>
+                                                     <tr id="<%=childCustomers[i]._id%>">
+                                                         <td><%=(i+1)%></td>
+                                                         <td><%=childCustomers[i].firmaAdi%></td>
+                                                         <td><%=childCustomers[i].yetkiliAdi%></td>
+                                                         <td><%=childCustomers[i].tel%></td>
+                                                         <td><%=childCustomers[i].email%></td>
+                                                         <td><%=childCustomers[i].vergiDairesi%></td>
+                                                         <td><%=childCustomers[i].vergiNo%></td>
+                                                         <td><%=childCustomers[i].firmaAdresi.substring(0,50)%>...</td>
+                                                         <td><%=childCustomers[i].sevkiyat.substring(0,50)%>...</td>
+                                                         <td><%=childCustomers[i].not.substring(0,50)%>...</td>
+                                                         <td id="<%=childCustomers[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>
+                                                         <button class="btn btn-info edit"><i class="fa fa-pencil"></i></button></td>
+                                                     </tr>
+                                                 <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+       <%include ../partial-pages/script.ejs%>
+        <script src="../js/helper-js/Helper.js"></script>
+        <script src="../js/pages-js/ChildCustomer.js"></script>
+    </body>
+</html>

@@ -1698,6 +1698,22 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             });
         });
     });
+    app.get("/alt_musterilerim", AccountController.sessionCheckCustomer, function(req, res) {
+        req.session.currentPage = "/alt_musterilerim";
+        req.session.pageLabel = "firmaYonetim";
+        childcustservice.listAll(req.session.customer.customerName,function(stateChild,responseChild){
+            if(!stateChild){
+                console.error(responseChild);
+                res.redirect("musteri_anasayfa");
+            }
+            res.render("pages/alt_musterilerim", {
+                layout: false,
+                session: req.session,
+                customer: req.session.customer,
+                childCustomers:responseChild
+            });
+        });
+    });
     
     //404 sayfası
     
