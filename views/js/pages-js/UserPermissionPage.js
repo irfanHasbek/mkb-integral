@@ -21,7 +21,9 @@ function otherScripts(){
                 return;
             }
             var resp = data.response;
+            console.log(resp)
             for(var i = 0; i < resp.permission.length; i++){
+                console.log(i + ' : ' + resp.permission[i].slice(1));
                 checkToCheckBox(resp.permission[i].slice(1));
             }
             alertify.success("Izinler listelendi.");
