@@ -1568,7 +1568,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     //müsteri tanımı
     app.get("/b2b_musteri_tanimi", AccountController.sessionCheckCustomer, function(req, res) {
         req.session.currentPage = "/b2b_musteri_tanimi";
-        req.session.pageLabel = "b2b_musteri_tanimi";
+        req.session.pageLabel = "musteriYonetim";
         cityservice.listAll(function(stateCity, responseCity) {
             if (!stateCity) {
                 console.error(responseCity);
@@ -1586,7 +1586,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     //offer tanımı
     app.get("/b2b_teklif", AccountController.sessionCheckCustomer, function(req, res) {
         req.session.currentPage = "/b2b_teklif?id=0";
-        req.session.pageLabel = "b2b_teklif";
+        req.session.pageLabel = "teklifYonetim";
         if (req.param('id') != 0) {
             offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
                 if (!stateOffer) {
@@ -1677,7 +1677,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     //müsteri tanımı
     app.get("/b2b_teklif_listesi", AccountController.sessionCheckCustomer, function(req, res) {
         req.session.currentPage = "/b2b_teklif_listesi";
-        req.session.pageLabel = "b2b_teklif_listesi";
+        req.session.pageLabel = "teklifYonetim";
         offerService.search({
             "firmCode": req.session.customer.firmCode,
             "customerInfo.customerId": req.session.customer._id
