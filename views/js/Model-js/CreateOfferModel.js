@@ -10,6 +10,10 @@ var OfferScheme = new mongoose.Schema({
         customerId :String,
         customerName :String
     },
+    childCustomerInfo:{
+        childCustomerId :String,
+        childCustomerName :String
+    },
     competentInfo:{
         competentId : String
     },

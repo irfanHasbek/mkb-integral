@@ -142,6 +142,11 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     var CustomerDefinitionService = require("./views/js/service-js/CustomerDefinitionService");
     var custservice = new CustomerDefinitionService();
     //end
+    //alt müşteri tanımı 
+    var ChildCustomerController = require("./views/js/controller-js/ChildCustomerController");
+    var ChildCustomerService = require("./views/js/service-js/ChildCustomerService");
+    var childcustservice = new ChildCustomerService();
+    //end
 
     //teklif oluşturma "abuzer" 10.03 start
     var CreateOfferController = require("./views/js/controller-js/CreateOfferController");
@@ -1620,7 +1625,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                             layout: false,
                                             session: req.session
                                         });
-                                    }
+                                    }   
                                     res.render('pages/b2b_teklif', {
                                         layout: false,
                                         session: req.session,
@@ -1629,12 +1634,11 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                         productGroups: responseProductGroup,
                                         operation: "update",
                                         units: responseUnit
-                                    });
-                           
+                                });
+                            });
                         });
                     });
                 });
-            });
         } else {
             cts.listAll(req.session.customer.firmCode, function(stateCoverType, responseCoverType) {
                 if (!stateCoverType) {
@@ -1888,6 +1892,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wscustomerdefinition/removeall", CustomerDefinitionController.removeAll);
     app.post("/wscustomerdefinition/getcustomerdefinition", CustomerDefinitionController.getCustomerDefinition);
     app.post("/wscustomerdefinition/updateb2binformation", CustomerDefinitionController.updateB2BInformation);
+    //end
+    // alt müsteri tanımları 
+    app.post("/wschildcustomer/addnew", ChildCustomerController.addNew);
+    app.post("/wschildcustomer/update", ChildCustomerController.update);
+    app.post("/wschildcustomer/remove", ChildCustomerController.remove);
+    app.post("/wschildcustomer/listall", ChildCustomerController.listAll);
+    app.get("/wschildcustomer/removeall", ChildCustomerController.removeAll);
+    app.post("/wschildcustomer/getchildcustomer", ChildCustomerController.getCustomerDefinition);
     //end
 
     //teklif oluşturma "abuzer" 10.03 start

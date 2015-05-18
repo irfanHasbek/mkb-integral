@@ -1,4 +1,13 @@
 function clickHandlers() {
+    $("#slctMusteriListesi").on("change",function(){
+        $("#divYeniMusteri").removeAttr("style");
+        $("#frmMusteri").attr("action","/wschildcustomer/update");
+        wsPost()
+    });
+    $("#btnYeniMusteri").click(function(){
+        $("#divYeniMusteri").removeAttr("style");
+        $("#frmMusteri").attr("action","/wschildcustomer/addnew");
+    });
     $('.next').on('click', function(){
         $('.wizard').removeClass('active');
         $('a[href=' + $(this).attr('href') + ']').closest('li').addClass('active');
@@ -281,7 +290,11 @@ function formHandlers() {
     });
 }
 
-function otherScripts() {    
+function otherScripts() {
+    var id=window.location.search.split("id=");
+    if(id[1]=="0"){
+        $("#modalYeniMusteriEkle").modal('show');
+    } 
     if ($('#generalDiscount').val() == '') {
         $('#generalDiscount').val(0);
     }
