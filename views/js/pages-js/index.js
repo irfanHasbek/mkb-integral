@@ -1,4 +1,5 @@
 var selectedEvent;
+var audioElement = document.createElement('audio');
 function clickHandlers(){
     $('#ulNotification').on('click', '.size', function(){
         //console.log('asd');
@@ -20,6 +21,7 @@ function formHandlers(){
     });
 }
 function otherScripts(){
+    playSound();
     $(function() {
            /* initialize the calendar
          -----------------------------------------------------------------*/
@@ -67,6 +69,13 @@ function fillNotification(notifyContent){
     var ul = $('#ulNotification');
     ul.append(notify);
 }
+
+function playSound(){
+    audioElement.setAttribute('src', '../sounds/notification.mp3');
+    //audioElement.load()
+
+    $.get();
+}
 function fillCalander(){
     wsPost('/wsoffer/search', {search : {
         'activities.owner.ownerName' : $('#inpUsernameForIndex').val()
@@ -106,6 +115,9 @@ function fillCalander(){
             var notifyCount = $('#ulNotification .size').children().length;
             $('#ulNotification .header').html(notifyCount + ' yeni bildiriminiz var');
             $('#sizeNotification').html(notifyCount);
+            if(notifyCount > 0){
+                audioElement.play();
+            }
             $("#calendar").fullCalendar('removeEvents');
             $('#calendar').fullCalendar('addEventSource', newEvents);
             $('#calendar').fullCalendar('rerenderEvents');
