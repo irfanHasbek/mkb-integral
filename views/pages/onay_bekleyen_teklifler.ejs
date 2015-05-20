@@ -98,11 +98,11 @@
                                                             <td><%=offers[i].offerDate%></td>
                                                             <td id="<%=offers[i].personPrepareOfferInfo.personName%>"><%=offers[i].personPrepareOfferInfo.personName%></td>
                                                             <td class="text-center" id="<%=offers[i]._id%>">
-                                                               <a class="btn btn-info btn-flat edit btn-sm"><i class="fa fa-search"></i></a>
-                                                               <a class="btn btn-warning  btn-flat btn-sm confirmOffer"><i class="fa fa-check"></i></a>
-                                                               <a class="btn btn-success btn-flat btn-sm save"><i class="fa fa-save"></i></a>
-                                                               <a class="btn btn-success btn-flat btn-sm createPdf"><i class="fa fa-download"></i></a>
-                                                               <a class="btn btn-primary btn-flat btn-sm sendMail" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i></a>
+                                                               <a class="btn btn-info btn-flat edit btn-sm" title="incele"><i class="fa fa-search"></i></a>
+                                                               <a class="btn btn-warning  btn-flat btn-sm confirmOffer" title="bitir"><i class="fa fa-check"></i></a>
+                                                               <a class="btn btn-success btn-flat btn-sm save" title="kaydet"><i class="fa fa-save"></i></a>
+                                                               <a  class="btn btn-success btn-flat btn-sm createPdf" title="pdf oluştur"><i class="fa fa-download"></i></a>
+                                                               <a class="btn btn-primary btn-flat btn-sm sendMail" title="mail at" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>

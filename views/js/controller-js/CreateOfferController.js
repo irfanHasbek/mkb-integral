@@ -96,13 +96,11 @@ function createB2bOffer(type,req) {
             note: req.body.note,
             vade : req.body.vade
         },
-        status: {
-            offerCase: "onay_bekleyen_teklifler"
-        },
         activities: [],
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
+         offerObj['status.offerCase'] = 'onay_bekleyen_teklifler';
     }else{
         offerObj.state = "B2b";
         offerObj.offerNo =  "";
@@ -115,6 +113,7 @@ function createB2bOffer(type,req) {
         offerObj['personPrepareJobInfo.personName'] = '';
         offerObj['personAcceptJobInfo.personId'] = '';
         offerObj['personAcceptJobInfo.personName'] = '';
+         offerObj['status.offerCase'] = 'onay_bekleyen_teklifler';
         offerObj['status.job'] = '';
         offerObj['status.losingReason'] = '';
         offerObj['status.winFirm'] = '';
