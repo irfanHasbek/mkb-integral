@@ -2,6 +2,7 @@ var mongoose = require('../../../app').mongoose;
 
 var OfferScheme = new mongoose.Schema({
     firmCode:String,
+    state:String,
     offerNo: String,
     offerDate:String,
     offerStatus:String,

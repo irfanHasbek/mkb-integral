@@ -6,6 +6,7 @@ function createOffer(type, req) {
 
     var offerObj = {
         firmCode: req.session.user.firmCode,
+        state:"sistem",
         offerNo: "",
         offerDate: req.body.offerDate,
         offerStatus: req.body.offerStatus,
@@ -75,10 +76,11 @@ function createOffer(type, req) {
     return offerObj;
 }
 
-function createB2bOffer(type,req) {
+function createB2bOffer(type,req) { 
 
     var offerObj = {
         firmCode: req.session.customer.firmCode,
+        state:"B2b",
         offerNo: "",
         offerDate: req.body.offerDate,
         offerStatus: "",
@@ -86,6 +88,10 @@ function createB2bOffer(type,req) {
         customerInfo: {
             customerId: req.body.customerId,
             customerName: req.body.customerName
+        },
+        childCustomerInfo:{
+            childCustomerId :req.body.childCustomerId,
+            childCustomerName :req.body.childCustomerName
         },
         competentInfo: {
             competentId: req.body.competentId

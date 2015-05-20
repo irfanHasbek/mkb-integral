@@ -9,6 +9,25 @@ function otherScripts() {
 }
 
 function clickHandlers() {
+    $(".childCustomer").click(function(){
+        var data={_id:$(this).attr("data")};
+        wsPost("/wschildcustomer/getchildcustomer",data,function(err,resp){
+            if(err){
+                console.error(err);
+                return;
+            }
+            $("#modalYeniMusteriEkle").modal('show');
+            $("input[name='firmaAdi']").val(resp.response.firmaAdi);
+            $("input[name='yetkiliAdi']").val(resp.response.yetkiliAdi);
+            $("input[name='tel']").val(resp.response.tel);
+            $("input[name='email']").val(resp.response.email);
+            $("input[name='vergiDairesi']").val(resp.response.vergiDairesi);
+            $("input[name='vergiNo']").val(resp.response.vergiNo);
+            $("textarea[name='firmaAdresi']").val(resp.response.firmaAdresi);
+            $("textarea[name='sevkiyat']").val(resp.response.sevkiyat);
+            $("textarea[name='not']").val(resp.response.not);
+        });
+    });
     $('#tableOpenOffers').on('click', '.edit', function() {
         var offerId = $(this).closest('tr').attr('id');
         if (offerId) {
@@ -138,6 +157,16 @@ function fillTable(response, respOfferStatus) {
         var tdCount = $('<td class="text-center">' + (i + 1) + '.</td>');
         var tdOfferTopic = $('<td>' + response[i].offerTopic + '</td>');
         var tdCustName = $('<td>' + response[i].customerInfo.customerName + '</td>');
+        var tdSysOrB2b="";
+        if(response[i].state=="sistem"){
+            tdSysOrB2b=$("<td>Sistem</td>");
+        }else{
+            if(response[i].childCustomerInfo.childCustomerId==""){
+                 tdSysOrB2b=$("<td>B2b firma</td>");
+            }else{
+            tdSysOrB2b=$('<td><a href="javascript:void(0)" class="childCustomer" data='+response[i].childCustomerInfo.childCustomerId+'>B2B (tıkla)</a></td>');
+            }
+        }
         var tdOfferStatus = $('<td></td>');
         var select = $('<select id="slctOrderStatus' + response[i]._id + '" class="form-control"></select>');
         for (var j = 0; j < respOfferStatus.length; j++) {
@@ -161,6 +190,7 @@ function fillTable(response, respOfferStatus) {
         tr.append(tdCount);
         tr.append(tdOfferTopic);
         tr.append(tdCustName);
+        tr.append(tdSysOrB2b);
         tr.append(tdOfferStatus);
         tr.append(tdOfferDate);
         tr.append(tdPerson);

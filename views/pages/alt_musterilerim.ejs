@@ -28,27 +28,27 @@
                                 <div class="box box-info">
                                     <!-- form start -->
                                     <form id="frmFirmaEkle" role="form" method="post" action="/wschildcustomer/addnew">
-                                <div class="box-body">
+                                <div class="box-body id">
                                     <input style="display:none;" id="inpFirma" name="ekleyenFirma" value="<%=session.customer.customerName%>">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label for="">Firma Adı :</label>
-                                    <input name="firmaAdi" type="text" class="form-control" placeholder="Firma Adı Giriniz">
+                                    <input name="firmaAdi" type="text" class="form-control" placeholder="Firma Adı Giriniz" required>
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="">Yetkili Adı :</label>
-                                    <input name="yetkiliAdi" type="text" class="form-control" placeholder="Yetkili Adı Giriniz" >
+                                    <input name="yetkiliAdi" type="text" class="form-control" placeholder="Yetkili Adı Giriniz" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label for=""> Telefon No: </label>
-                                    <input name="tel" type="text" class="form-control" placeholder="Müşteri Telefon numarası giriniz">
+                                    <input name="tel" type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="Müşteri Telefon numarası giriniz" required>
                                 </div>
                                 <div class="col-xs-6">
                                     <label for=""> E-mail: </label>
-                                    <input name="email" type="text" class="form-control" placeholder="Müşteri e-mail adresini giriniz">
+                                    <input name="email" type="text" class="form-control" placeholder="Müşteri e-mail adresini giriniz" required>
                                 </div>
                             </div>
                             <br>
@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <label for="">Firma Adresi: </label>
-                                    <textarea name="firmaAdresi" rows="3" style="resize:vertical;"  class="form-control" placeholder="firma adresi giriniz"></textarea>
+                                    <textarea name="firmaAdresi" rows="3" style="resize:vertical;"  class="form-control" placeholder="firma adresi giriniz" required></textarea>
                                 </div>
                             </div>
                             <br>
@@ -128,11 +128,11 @@
                                                          <td><%=childCustomers[i].email%></td>
                                                          <td><%=childCustomers[i].vergiDairesi%></td>
                                                          <td><%=childCustomers[i].vergiNo%></td>
-                                                         <td><%=childCustomers[i].firmaAdresi.substring(0,50)%>...</td>
-                                                         <td><%=childCustomers[i].sevkiyat.substring(0,50)%>...</td>
-                                                         <td><%=childCustomers[i].not.substring(0,50)%>...</td>
-                                                         <td id="<%=childCustomers[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>
-                                                         <button class="btn btn-info edit"><i class="fa fa-pencil"></i></button></td>
+                                                         <td><%=childCustomers[i].firmaAdresi.substring(0,50)%></td>
+                                                         <td><%=childCustomers[i].sevkiyat.substring(0,50)%></td>
+                                                         <td><%=childCustomers[i].not.substring(0,50)%></td>
+                                                         <td id="<%=childCustomers[i]._id%>"><button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                         <button class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></button></td>
                                                      </tr>
                                                  <%}%>
                                             </tbody>
