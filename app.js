@@ -170,6 +170,12 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     var UnitService = require('./views/js/service-js/UnitService');
     var UnitController = require('./views/js/controller-js/UnitController');
     var unitService = new UnitService();
+    
+    //Kapak sayfasi start
+    var CoverPageController = require("./views/js/controller-js/CoverPageController");
+    var CoverPageService = require("./views/js/service-js/CoverPageService");
+    var coverPageService = new CoverPageService();
+    //end
 
     app.get("/", function(req, res) {
         if (req.session.user) {
@@ -1737,6 +1743,19 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         res.render("pages/permission",{layout:"false",session:req.session});
     });
     
+    //permission sayfası
+    app.get("/kapak_sayfa_tanimi", AccountController.sessionCheck, function(req, res) {
+        req.session.currentPage = "/kapak_sayfa_tanimi";
+        req.session.pageLabel = "tanimlamalar";
+        coverPageService.listAll(req.session.user.firmCode, function(state, response){
+            if(!state){
+                res.redirect('/');
+                return;
+            }
+            res.render("pages/kapak_sayfa_tanimi",{layout:"false",session:req.session, covers : response});
+        });
+    });
+    
 
     app.get('/installation/addAdmin', InstallationController.addAdminUser);
     app.get('/installation/addFirms', InstallationController.addFirms);
@@ -1956,6 +1975,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.post('/wsdiscount/getdiscountonlycustomerid', DiscountController.getDiscountOnlyCustomerId);
     app.get('/wsdiscount/listall', DiscountController.listAll);
     //end
+    
+    //kapak sayfasi ops start
+    app.post("/wscoverpage/addnew", CoverPageController.addCoverPage);
+    app.get("/wscoverpage/listall", CoverPageController.listAll);
+    app.get("/wscoverpage/removeall", CoverPageController.removeAll);
+    app.post("/wscoverpage/remove", CoverPageController.remove);
+    //end
+    
     app.post("/wspricecalculate/calculate", function(req, res) {
         offerPriceCalculatorService.calculatePrice(req.body.info, function(state, response, message) {
             if (!state) {
