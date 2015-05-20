@@ -67,15 +67,6 @@
                                             </div>
                                             <hr>
                                             <br>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="">1</option>
-                                                        <option value="">2</option>
-                                                        <option value="">3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -96,7 +87,7 @@
                                                             <td class="text-center"><%=(i+1)%>.</td>
                                                             <td><%=offers[i].offerTopic%></td>
                                                             <td id="<%=offers[i].customerId%>"><%=offers[i].customerInfo.customerName%></td>
-                                                            <td><%if(offers[i].state=="sistem"){%>Sistem<%}else{if(offers[i].childCustomerInfo.childCustomerId==""){%>B2b firma<%}else{%><a href="javascript:void(0)" class="childCustomer" data="<%=offers[i].childCustomerInfo.childCustomerId%>">B2B alt Firma(tıkla)</a><%}%><%}%></td>
+                                                            <td><%if(offers[i].state=="Sistem"){%>Sistem<%}else{if(offers[i].childCustomerInfo.childCustomerId==""){%>B2b firma<%}else{%><a href="javascript:void(0)" class="childCustomer" data="<%=offers[i].childCustomerInfo.childCustomerId%>">B2B alt Firma(tıkla)</a><%}%><%}%></td>
                                                              <td>
                                                                <select id="slctOrderStatus<%=offers[i]._id%>" class="form-control">
                                                                 <%for(var j=0;j<orderStatuses.length;j++){%>

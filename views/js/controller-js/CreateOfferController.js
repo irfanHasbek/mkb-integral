@@ -6,7 +6,6 @@ function createOffer(type, req) {
 
     var offerObj = {
         firmCode: req.session.user.firmCode,
-        offerNo: "",
         offerDate: req.body.offerDate,
         offerStatus: req.body.offerStatus,
         offerTopic: req.body.offerTopic,
@@ -21,18 +20,6 @@ function createOffer(type, req) {
             personId: req.body.personId,
             personName: req.body.personName
         },
-        personAcceptOfferInfo: {
-            personId: '',
-            personName: ''
-        },
-        personPrepareJobInfo: {
-            personId: "",
-            personName: ""
-        },
-        personAcceptJobInfo: {
-            personId: '',
-            personName: ''
-        },
         basket: [],
         cost: {
             generalDiscount: req.body.generalDiscount,
@@ -46,32 +33,32 @@ function createOffer(type, req) {
             note: req.body.note,
             vade : req.body.vade
         },
-        status: {
-            job: '',
-            offerCase: "onay_bekleyen_teklifler",
-            losingReason: "",
-            winFirm: ""
-        },
         activities: [],
-        forwardingInfo: {
-            forwardId: '',
-            forwardLabel: ''
-        },
-        dates: {
-            deliveryDate: '',
-            startJobDate: '',
-            acceptOfferDate: ''
-        },
-        pdfInfo : {
-            pdfStatus : 'false',
-            pdfUrl : ''
-        },
         coverDescription : req.body.coverDescription
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
+        offerObj['status.offerCase'] = 'onay_bekleyen_teklifler';
     }else{
         offerObj.state="Sistem";
+        offerObj.offerNo = '';
+        offerObj['personAcceptOfferInfo.personId'] = '';
+        offerObj['personAcceptOfferInfo.personName'] = '';
+        offerObj['personPrepareJobInfo.personId'] = '';
+        offerObj['personPrepareJobInfo.personName'] = '';
+        offerObj['personAcceptJobInfo.personId'] = '';
+        offerObj['personAcceptJobInfo.personName'] = '';
+        offerObj['status.offerCase'] = 'onay_bekleyen_teklifler';
+        offerObj['status.job'] = '';
+        offerObj['status.losingReason'] = '';
+        offerObj['status.winFirm'] = '';
+        offerObj['forwardingInfo.forwardId'] = '';
+        offerObj['forwardingInfo.forwardLabel'] = '';
+        offerObj['dates.deliveryDate'] = '';
+        offerObj['dates.startJobDate'] = '';
+        offerObj['dates.acceptOfferDate'] = '';
+        offerObj['pdfInfo.pdfStatus'] = 'false';
+        offerObj['pdfInfo.pdfUrl'] = '';
     }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;
@@ -81,10 +68,7 @@ function createB2bOffer(type,req) {
 
     var offerObj = {
         firmCode: req.session.customer.firmCode,
-        offerNo: "",
         offerDate: req.body.offerDate,
-        offerStatus: "",
-        offerTopic: "",
         customerInfo: {
             customerId: req.body.customerId,
             customerName: req.body.customerName
@@ -100,22 +84,9 @@ function createB2bOffer(type,req) {
             personId: req.session.customer._id,
             personName: req.session.customer.customerName
         },
-        personAcceptOfferInfo: {
-            personId: '',
-            personName: ''
-        },
-        personPrepareJobInfo: {
-            personId: "",
-            personName: ""
-        },
-        personAcceptJobInfo: {
-            personId: '',
-            personName: ''
-        },
         basket: [],
         cost: {
             generalDiscount: req.body.generalDiscount,
-            roundingDiscount: "",
             sum: req.body.sum,
             kdv: req.body.productKDV,
             total: req.body.total
@@ -126,31 +97,35 @@ function createB2bOffer(type,req) {
             vade : req.body.vade
         },
         status: {
-            job: '',
-            offerCase: "onay_bekleyen_teklifler",
-            losingReason: "",
-            winFirm: ""
+            offerCase: "onay_bekleyen_teklifler"
         },
         activities: [],
-        forwardingInfo: {
-            forwardId: '',
-            forwardLabel: ''
-        },
-        dates: {
-            deliveryDate: '',
-            startJobDate: '',
-            acceptOfferDate: ''
-        },
-        pdfInfo : {
-            pdfStatus : 'false',
-            pdfUrl : ''
-        },
-        coverDescription : ''
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
     }else{
-        offerObj.state="B2b";
+        offerObj.state = "B2b";
+        offerObj.offerNo =  "";
+        offerObj.offerStatus =  "";
+        offerObj.offerTopic = "";
+        offerObj.cost.roundingDiscount = "";
+        offerObj['personAcceptOfferInfo.personId'] = '';
+        offerObj['personAcceptOfferInfo.personName'] = '';
+        offerObj['personPrepareJobInfo.personId'] = '';
+        offerObj['personPrepareJobInfo.personName'] = '';
+        offerObj['personAcceptJobInfo.personId'] = '';
+        offerObj['personAcceptJobInfo.personName'] = '';
+        offerObj['status.job'] = '';
+        offerObj['status.losingReason'] = '';
+        offerObj['status.winFirm'] = '';
+        offerObj['forwardingInfo.forwardId'] = '';
+        offerObj['forwardingInfo.forwardLabel'] = '';
+        offerObj['dates.deliveryDate'] = '';
+        offerObj['dates.startJobDate'] = '';
+        offerObj['dates.acceptOfferDate'] = '';
+        offerObj['pdfInfo.pdfStatus'] = 'false';
+        offerObj['pdfInfo.pdfUrl'] = '';
+        offerObj.coverDescription = '';
     }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;

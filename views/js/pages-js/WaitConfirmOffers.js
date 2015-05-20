@@ -158,7 +158,7 @@ function fillTable(response, respOfferStatus) {
         var tdOfferTopic = $('<td>' + response[i].offerTopic + '</td>');
         var tdCustName = $('<td>' + response[i].customerInfo.customerName + '</td>');
         var tdSysOrB2b="";
-        if(response[i].state=="sistem"){
+        if(response[i].state=="Sistem"){
             tdSysOrB2b=$("<td>Sistem</td>");
         }else{
             if(response[i].childCustomerInfo.childCustomerId==""){

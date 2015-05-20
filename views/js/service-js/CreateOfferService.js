@@ -7,7 +7,7 @@ function CreateOfferService()
 
 CreateOfferService.prototype.addNew = function(offer, callback){
     var newOffer = new CreateOfferModel(offer);
-    console.log(JSON.stringify(newOffer));
+    //console.log(JSON.stringify(newOffer));
     SequenceModel.findOne({name : 'teklifNoSeq'}, function(errSeq, seq){
         var counter = 0;
         var newSeq = false;
