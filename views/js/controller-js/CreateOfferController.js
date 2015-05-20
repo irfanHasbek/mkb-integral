@@ -6,7 +6,6 @@ function createOffer(type, req) {
 
     var offerObj = {
         firmCode: req.session.user.firmCode,
-        state:"sistem",
         offerNo: "",
         offerDate: req.body.offerDate,
         offerStatus: req.body.offerStatus,
@@ -71,6 +70,8 @@ function createOffer(type, req) {
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
+    }else{
+        offerObj.state="Sistem";
     }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;
@@ -80,7 +81,6 @@ function createB2bOffer(type,req) {
 
     var offerObj = {
         firmCode: req.session.customer.firmCode,
-        state:"B2b",
         offerNo: "",
         offerDate: req.body.offerDate,
         offerStatus: "",
@@ -149,6 +149,8 @@ function createB2bOffer(type,req) {
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
+    }else{
+        offerObj.state="B2b";
     }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;
