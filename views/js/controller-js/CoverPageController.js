@@ -76,6 +76,11 @@ module.exports = {
             label : req.body.label,
             content : req.body.content, 
             firmCode : req.session.user.firmCode
+        };
+        if(req.body.active == 'on'){
+            coverPage.active = true;
+        }else{
+            coverPage.active = false;
         }
         cts.update(coverPage, function(state, response){
             if(!state){

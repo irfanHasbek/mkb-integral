@@ -40,7 +40,14 @@ function formHandlers(){
             }   
          }else{
             $('#inpCoverPageId').attr('disabled');
-            $('#frmCoverPage').attr('action', '/wscoverpage/addnew'); 
+            $('#frmCoverPage').attr('action', '/wscoverpage/addnew');
+            if(data.state == true){
+                alertify.success("İşlem başarı ile gerçekleştirildi.");
+                location.reload();
+            }else{
+                alertify.error("İşlem başarısız.");
+                location.reload();
+            }
          }
     });
 }

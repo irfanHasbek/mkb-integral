@@ -51,7 +51,7 @@ CoverPageService.prototype.search = function(criteria,callback){
     });
 }
 CoverPageService.prototype.update = function(CoverPage, callback){
-    newCoverPage.update(CoverPage, function(err, affectedRow){
+    CoverPageModel.update(CoverPage, function(err, affectedRow){
         if(err){
             callback(false,error);
             return;
