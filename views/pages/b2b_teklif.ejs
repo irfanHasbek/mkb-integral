@@ -461,7 +461,7 @@
                                                         <div class="col-md-12">
                                                             <div style="text-align:center;">
                                                                 <button type="submit" class="btn btn-primary">Kaydet</button>
-                                                                <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.customer.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                                <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/b2b_teklif_yazdir?id=<%=offer._id%>&code=<%=session.customer.firmCode%>&altmus=<%=offer.childCustomerInfo.childCustomerId%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
                                                             </div>
                                                         </div>
                                                     </div>

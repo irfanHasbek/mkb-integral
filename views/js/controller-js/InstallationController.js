@@ -8,8 +8,8 @@ var us = new UserService();
 var fs = new FirmService();
 var rs = new RoleService();
 
-var firmCode = ['administrator','mkbAlize','mkbEntalpi','mkbIntegral','mkbDamla'];
-var adminEmail = ['admin@administrator.com','admin@alize.com','admin@entalpi.com','admin@integral.com','admin@damla.com'];
+var firmCode = ['administrator','mkbEntalpi','mkbIntegral','mkbDamla'];
+var adminEmail = ['admin@administrator.com','admin@entalpi.com','admin@integral.com','admin@damla.com'];
 
 function createFirm(firmName, firmCode){
     var firm = {
@@ -59,7 +59,7 @@ module.exports = {
         res.send({state : 'true', response : 'success'});
     },
     addFirms : function(req, res){
-        var firms = ['Integral Havalandirma','Alize','Entalpi','Integral','Damla'];
+        var firms = ['Integral Havalandirma','Entalpi','Integral','Damla'];
         for(var i = 0; i < firms.length; i++){
             fs.addNew(createFirm(firms[i], firmCode[i]), function(state, response){
                 if(!state){

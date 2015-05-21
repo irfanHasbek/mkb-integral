@@ -1555,6 +1555,64 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         });
     });
     //Tamamlanmıs End
+    
+    //Teklif Yazdır
+    app.get("/b2b_teklif_yazdir", function(req, res) {
+        req.session.currentPage = "/b2b_teklif_yazdir";
+        req.session.pageLabel = "b2b_teklif_yazdir";
+        offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
+            if (!stateOffer) {
+                console.error(resposeOffer);
+                res.render("/pages/index", {
+                    layout: false
+                });
+            }
+            var code = req.param('code');
+            firmService.getInformationFirmCode(code, function(stateFirm, responseFirm) {
+                if (!stateFirm) {
+                    console.error(responseFirm);
+                    res.render("/pages/index", {
+                        layout: false
+                    });
+                }
+                custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId, function(stateCustomer, responseCustomer){
+                     if (!stateCustomer) {
+                        console.error(responseCustomer);
+                        res.render("/pages/index", {
+                            layout: false
+                        });
+                     } 
+                    var altMusteri = req.param('altmus');
+                    if(altMusteri == ''){
+                        res.render('pages/b2b_teklif_yazdir', {
+                            layout: false,
+                            offer: resposeOffer,
+                            firm: responseFirm,
+                            customer : responseCustomer,
+                            childCustomer : null
+                        });
+                    }else{
+                        childcustservice.getChildCustomer(altMusteri, function(stateChildCustomer, responseChildCustomer){
+                            if(!stateChildCustomer){
+                                res.render("/pages/index", {
+                                    layout: false
+                                });   
+                                return;
+                            }
+                            res.render('pages/b2b_teklif_yazdir', {
+                                layout: false,
+                                offer: resposeOffer,
+                                firm: responseFirm,
+                                customer : responseCustomer,
+                                childCustomer : responseChildCustomer
+                            });
+                        })
+                    }
+                });
+            });
+        });
+    });
+    //Tamamlanmıs End
 
     //B2B Yönetim
     app.get("/hesap_bilgileri", AccountController.sessionCheck, function(req, res) {
