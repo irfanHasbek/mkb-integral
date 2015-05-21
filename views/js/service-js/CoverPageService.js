@@ -41,4 +41,22 @@ CoverPageService.prototype.listAll = function(firmCode,callback){
         callback(true, CoverPage);
     });
 }
+CoverPageService.prototype.search = function(criteria,callback){
+    CoverPageModel.find(criteria).exec(function(error, CoverPage){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, CoverPage);
+    });
+}
+CoverPageService.prototype.update = function(CoverPage, callback){
+    newCoverPage.update(CoverPage, function(err, affectedRow){
+        if(err){
+            callback(false,error);
+            return;
+        }
+        callback(true,affectedRow);
+    });
+}
 module.exports = CoverPageService;

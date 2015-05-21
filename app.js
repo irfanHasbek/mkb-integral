@@ -1996,6 +1996,8 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wscoverpage/listall", CoverPageController.listAll);
     app.get("/wscoverpage/removeall", CoverPageController.removeAll);
     app.post("/wscoverpage/remove", CoverPageController.remove);
+    app.post("/wscoverpage/search", CoverPageController.search);
+    app.post("/wscoverpage/update", CoverPageController.update);
     //end
     
     app.post("/wspricecalculate/calculate", function(req, res) {

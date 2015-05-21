@@ -58,5 +58,31 @@ module.exports = {
             }
             res.send(createResponse(true, response, "Kapak sayfalari başarıyla listelendi"));
         });   
+    },
+    search : function(req, res, next){
+        var criteria = req.body.criteria;
+        criteria.firmCode = req.session.user.firmCode;
+        cts.search(criteria, function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "Kapak sayfalari listelenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "Kapak sayfalari başarıyla listelendi"));
+        });   
+    },
+    update : function(req, res, next){
+        var coverPage = {
+            _id : req.body._id,
+            label : req.body.label,
+            content : req.body.content, 
+            firmCode : req.session.user.firmCode
+        }
+        cts.update(coverPage, function(state, response){
+            if(!state){
+                res.send(createResponse(false, null, "Kapak sayfasi guncellenemedi."));
+                return;
+            }
+            res.send(createResponse(true, response, "Kapak sayfasi başarıyla guncellendi"));
+        });   
     }
 };

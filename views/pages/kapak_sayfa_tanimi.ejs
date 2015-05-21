@@ -28,6 +28,7 @@
                                 <div class="box box-info">
                                     <!-- form start -->
                                     <form id="frmCoverPage" role="form" method="post" action="/wscoverpage/addnew">
+                                       <input name="_id" type="text" style="display:none;" id="inpCoverPageId" disabled>
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-10 col-md-offset-1">
@@ -57,7 +58,7 @@
 
                                         <div class="box-footer">
                                             <div style="text-align:center">
-                                                <button type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                                <button id="btnSave" type="submit" class="btn btn-primary btn-flat">Kaydet</button>
                                             </div>
                                         </div>
                                     </form>
@@ -85,7 +86,7 @@
                                                      <tr id="<%=covers[i]._id%>">
                                                          <td><%=(i+1)%></td>
                                                          <td><%=covers[i].label%></td>
-                                                         <td id="<%=covers[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>&nbsp;<button class="btn btn-info"><i class="fa fa-search update"></i></button></td>
+                                                         <td id="<%=covers[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>&nbsp;<button class="btn btn-info update"><i class="fa fa-search"></i></button></td>
                                                          <td data="<%=JSON.stringify(covers[i])%>" style="display:none;"></td>
                                                      </tr>
                                                  <%}%>
