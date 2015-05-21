@@ -89,6 +89,7 @@
                                             <li class="wizard"><a href="#tab_2" data-toggle="tab">İletişim Bilgileri</a></li>
                                             <li class="wizard"><a href="#tab_3" data-toggle="tab">Ürün Seçimi</a></li>
                                             <li class="wizard"><a href="#tab_4" data-toggle="tab">Ürün Sepeti</a></li>
+                                            <li class="wizard"><a href="#tab_6" data-toggle="tab">Kapak Sayfası</a></li>
                                             <li class="wizard"><a href="#tab_5" data-toggle="tab">Ödeme Bilgileri</a></li>
                                         </ul>
                                             <div class="tab-content">
@@ -461,6 +462,31 @@
                                                             <div style="text-align:center;">
                                                                 <button type="submit" class="btn btn-primary">Kaydet</button>
                                                                 <a id="btnPdfYazdir" target="_blank" class="btn btn-info" <%if(operation=="update"){%>href="/teklif_yazdir?id=<%=offer._id%>&code=<%=session.customer.firmCode%>"<%}else{%>disabled<%}%>>PDF Yazdır</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab_6">
+                                                    <div id="divPayMethod" class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="box-body">
+                                                                   <div class="form-group">
+                                                                    <label >Kapak Bilgileri</label>
+                                                                    <select name="coverDescription" id="" class="form-control" >
+                                                                          <option value="Seçiniz">Seçiniz</option>
+                                                                       <%for(var i=0;i<coverPages.length;i++){%>
+                                                                       <option value="<%=coverPages[i].content%>" <%if(operation == "update" && offer.coverDescription==coverPages[i].content ){%>selected<%}%>><%=coverPages[i].label%></option>
+                                                                       <%}%>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align:center;">
+                                                                <a href="#tab_5" data-toggle="tab" class="btn btn-primary next"> İleri</a>
                                                             </div>
                                                         </div>
                                                     </div>

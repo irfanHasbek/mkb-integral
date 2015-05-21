@@ -97,6 +97,7 @@ function createB2bOffer(type,req) {
             vade : req.body.vade
         },
         activities: [],
+        coverDescription:req.body.coverDescription
     };
     if(type == 'update') {
         offerObj._id = req.body._id;
@@ -124,7 +125,6 @@ function createB2bOffer(type,req) {
         offerObj['dates.acceptOfferDate'] = '';
         offerObj['pdfInfo.pdfStatus'] = 'false';
         offerObj['pdfInfo.pdfUrl'] = '';
-        offerObj.coverDescription = '';
     }
     offerObj.basket = JSON.parse(req.body.basket);
     return offerObj;

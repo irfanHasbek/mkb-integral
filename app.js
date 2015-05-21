@@ -1655,15 +1655,24 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                             layout: false,
                                             session: req.session
                                         });
-                                    }   
-                                    res.render('pages/b2b_teklif', {
+                                    }                          coverPageService.search({active:true,firmCode:req.session.customer.firmCode},function(stateCoverPage,responseCoverPage){
+                                            if(!stateCoverPage){
+                                                console.log(responseUnit);
+                                                res.render("/pages/index", {
+                                                    layout: false,
+                                                    session: req.session
+                                                });
+                                            }
+                                        res.render('pages/b2b_teklif', {
                                         layout: false,
                                         session: req.session,
                                         offer: resposeOffer,
                                         coverTypes: responseCoverType,
                                         productGroups: responseProductGroup,
                                         operation: "update",
-                                        units: responseUnit
+                                        units: responseUnit,
+                                        coverPages:responseCoverPage
+                                    });
                                 });
                             });
                         });
@@ -1694,13 +1703,23 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                 session: req.session
                             });
                         }
+                        coverPageService.search({active:true,firmCode:req.session.customer.firmCode},function(stateCoverPage,responseCoverPage){
+                            if(!stateCoverPage){
+                                console.log(responseUnit);
+                                res.render("/pages/index", {
+                                    layout: false,
+                                    session: req.session
+                                });
+                            }
                         res.render('pages/b2b_teklif', {
                             layout: false,
                             session: req.session,
                             coverTypes: responseCoverType,
                             productGroups: responseProductGroup,
                             operation: "add",
-                            units: responseUnit
+                            units: responseUnit,
+                            coverPages:responseCoverPage
+                            });
                         });
                     });
                 });
