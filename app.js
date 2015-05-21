@@ -1089,6 +1089,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                         session: req.session
                                                     });
                                                 }
+                                            coverPageService.listAll(req.session.user.firmCode,function(stateCoverPage,responseCoverPage){
+                                                if(!stateCoverPage){
+                                                    console.log(responseUnit);
+                                                    res.render("/pages/index", {
+                                                        layout: false,
+                                                        session: req.session
+                                                    });
+                                                }
                                                 res.render('pages/teklif_olusturma', {
                                                     layout: false,
                                                     session: req.session,
@@ -1100,9 +1108,11 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                     productGroups: responseProductGroup,
                                                     offerStatus: responseOfferStatus,
                                                     operation: "update",
-                                                    units: responseUnit
+                                                    units: responseUnit,
+                                                    coverPages:responseCoverPage
                                                 });
                                             });
+                                        });
                                     });
                                 });
                             });
@@ -1200,13 +1210,8 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                             stateUnit,
                                                             responseUnit
                                                         ) {
-                                                            if (!
-                                                                stateUnit
-                                                            ) {
-                                                                console
-                                                                    .log(
-                                                                        responseUnit
-                                                                    );
+                                                            if (!stateUnit) {
+                                                                console.log(responseUnit);
                                                                 res.render(
                                                                     "/pages/index", {
                                                                         layout: false,
@@ -1214,6 +1219,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                                             .session
                                                                     }
                                                                 );
+                                                            }
+                                                        coverPageService.listAll(req.session.user.firmCode,function(stateCoverPage,responseCoverPage){
+                                                            if(!stateCoverPage){
+                                                                console.log(responseUnit);
+                                                                res.render("/pages/index", {
+                                                                    layout: false,
+                                                                    session: req.session
+                                                                });
                                                             }
                                                             res.render(
                                                                 'pages/teklif_olusturma', {
@@ -1230,8 +1243,10 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                                     productGroups: responseProductGroup,
                                                                     offerStatus: responseOfferStatus,
                                                                     operation: "add",
-                                                                    units: responseUnit
+                                                                    units: responseUnit,
+                                                                    coverPages:responseCoverPage
                                                                 });
+                                                             });
                                                         });
                                                 });
                                         });
