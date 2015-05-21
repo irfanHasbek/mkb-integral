@@ -9,10 +9,6 @@ function createCustomerDefinition(type, req) {
         customerName: req.body.customerName,
         customerGroup: req.body.customerGroup,
         customerAgent: req.body.customerAgent,
-        userName: "",
-        password: "",
-        webAccess: false,
-        webOrder: false,
         competentInfo: [],
         contactInfo: {
             address: req.body.custDefContactAddress,
@@ -33,6 +29,11 @@ function createCustomerDefinition(type, req) {
     }
     if (type == 'update') {
         custDefObj._id = req.body._id;
+    }else{
+        custDefObj.userName = "",
+        custDefObj.password = "",
+        custDefObj.webAccess = false,
+        custDefObj.webOrder = false
     }
     custDefObj.competentInfo = JSON.parse(req.body.competent);
     custDefObj.forwardingInfo = JSON.parse(req.body.forwarding);

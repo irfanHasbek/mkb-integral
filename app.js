@@ -1534,10 +1534,19 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         layout: false
                     });
                 }
-                res.render('pages/teklif_yazdir', {
-                    layout: false,
-                    offer: resposeOffer,
-                    firm: responseFirm
+                custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId, function(stateCustomer, responseCustomer){
+                     if (!stateCustomer) {
+                        console.error(responseCustomer);
+                        res.render("/pages/index", {
+                            layout: false
+                        });
+                     }  
+                    res.render('pages/teklif_yazdir', {
+                        layout: false,
+                        offer: resposeOffer,
+                        firm: responseFirm,
+                        customer : responseCustomer
+                    });
                 });
             });
         });

@@ -32,23 +32,22 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <p style="font-size:8px; text-decoration:underline; font-weight:bold;">Fatura Adı ve Adresi :</p>
-                        <p style="font-size:8px;">Alize iklimlendirme Ekipmanları ve Aliüminyum Profil Çekme San. Tic. Ltd. Şti</p>
-                        <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
-                        <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
+                        <p style="font-size:8px;"><%=customer.billInfo.address%></p>
+                        <p style="font-size:8px; margin-top:-7px;"><%=customer.contactInfo.webAddress%> | <%=customer.userName%></p>
                     </div>
                     <div class="col-md-4" style="margin-left:815px; margin-top:-50px">
                         <p style="font-size:8px; margin-top:-7px;">Firma : <span><%=offer.customerInfo.customerName%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span><%=offer.dates.deliveryDate%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span><%=offer.payMethod.payMethod%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span><%=offer._id%></span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Tel : <span>0544 444 44 44</span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Tel : <span><%=customer.contactInfo.businessPhone%></span></p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <p style="font-size:14px; font-weight:bold;">Sayın <%=offer.customerInfo.customerName%> Bey - integral Fabrika,</p>
+                        <p style="font-size:14px; font-weight:bold;">Sayın <%=offer.customerInfo.customerName%>,</p>
                         <p style="font-size:12px; ">Talebiniz üzerine hazırlanan <span style="color:#f00"> "<%=offer.offerTopic%>" </span>fiyat teklifimiz ve diğer bilgiler aşağıda dikkatinize sunulmuştur.Teklifimizin olumlu olarak karşılanması dileğiyle, çalışmalarınızda başarılar dileriz.</p>
                     </div>
                 </div>
@@ -67,6 +66,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <label for=""><%-offer.coverDescription%></label>
+                            <p style="font-size:14px; font-weight:bold;"><%=firm.name%></p>
                         </div>
                     </div>
                 </div>
@@ -103,16 +103,15 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <p style="font-size:8px; text-decoration:underline; font-weight:bold;">Fatura Adı ve Adresi :</p>
-                        <p style="font-size:8px;">Alize iklimlendirme Ekipmanları ve Aliüminyum Profil Çekme San. Tic. Ltd. Şti</p>
-                        <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
-                        <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
+                        <p style="font-size:8px;"><%=customer.billInfo.address%></p>
+                        <p style="font-size:8px; margin-top:-7px;"><%=customer.contactInfo.webAddress%> | <%=customer.userName%></p>
                     </div>
                     <div class="col-md-4" style="margin-left:815px; margin-top:-50px">
                         <p style="font-size:8px; margin-top:-7px;">Firma : <span><%=offer.customerInfo.customerName%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span><%=offer.dates.deliveryDate%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span><%=offer.payMethod.payMethod%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span><%=offer._id%></span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Tel : <span>0544 444 44 44</span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Tel : <span><%=customer.contactInfo.businessPhone%></span></p>
                     </div>
                 </div>
             </div>
@@ -146,16 +145,15 @@
                         <div class="col-md-12">
                             <div class="col-md-4">
                                 <p style="font-size:8px; text-decoration:underline; font-weight:bold;">Fatura Adı ve Adresi :</p>
-                                <p style="font-size:8px;">Alize iklimlendirme Ekipmanları ve Aliüminyum Profil Çekme San. Tic. Ltd. Şti</p>
-                                <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
-                                <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
+                                <p style="font-size:8px;"><%=customer.billInfo.address%></p>
+                                <p style="font-size:8px; margin-top:-7px;"><%=customer.contactInfo.webAddress%> | <%=customer.userName%></p>
                             </div>
                             <div class="col-md-4" style="margin-left:815px; margin-top:-50px">
                                 <p style="font-size:8px; margin-top:-7px;">Firma : <span><%=offer.customerInfo.customerName%></span></p>
                                 <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span><%=offer.dates.deliveryDate%></span></p>
                                 <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span><%=offer.payMethod.payMethod%></span></p>
                                 <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span><%=offer._id%></span></p>
-                                <p style="font-size:8px; margin-top:-7px;">Tel : <span>0544 444 44 44</span></p>
+                                <p style="font-size:8px; margin-top:-7px;">Tel : <span><%=customer.contactInfo.businessPhone%></span></p>
                             </div>
                         </div>
                     </div>
@@ -207,12 +205,8 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <p style="font-size:8px; text-decoration:underline; font-weight:bold;">Fatura Adı ve Adresi :</p>
-                            <p style="font-size:8px; margin-top:-7px;">Alize iklimlendirme Ekipmanları ve Aliüminyum Profil Çekme San. Tic. Ltd. Şti</p>
-                            <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
-                            <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
-                            <p style="font-size:8px; margin-top:-7px;">HAZIRLAYAN</p>
-                            <p style="font-size:8px; margin-top:-7px;"><%=offer.personPrepareOfferInfo.personName%></p>
-
+                            <p style="font-size:8px;"><%=customer.billInfo.address%></p>
+                            <p style="font-size:8px; margin-top:-7px;"><%=customer.contactInfo.webAddress%> | <%=customer.userName%></p>
                         </div>
                         <div class="col-md-4" style="margin-left:450px; margin-top:-80px;">
                             <p style="font-size:8px;">NOT: <span><%=offer.payMethod.vade%> <%=offer.payMethod.note%> !</span></p>
@@ -251,16 +245,15 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <p style="font-size:8px; text-decoration:underline; font-weight:bold;">Fatura Adı ve Adresi :</p>
-                        <p style="font-size:8px;">Alize iklimlendirme Ekipmanları ve Aliüminyum Profil Çekme San. Tic. Ltd. Şti</p>
-                        <p style="font-size:8px; margin-top:-7px;">Karacaoğlan Mah. 6170 sok. No:17/F Işıkkent/İZMİR Bornova VD 053 049 3846</p>
-                        <p style="font-size:8px; margin-top:-7px;">www.alizeiklimlendirme.com | info@alizeiklimlendirme.com</p>
+                        <p style="font-size:8px;"><%=customer.billInfo.address%></p>
+                        <p style="font-size:8px; margin-top:-7px;"><%=customer.contactInfo.webAddress%> | <%=customer.userName%></p>
                     </div>
                     <div class="col-md-4" style="margin-left:815px; margin-top:-50px">
                         <p style="font-size:8px; margin-top:-7px;">Firma : <span><%=offer.customerInfo.customerName%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Teslim Tarihi : <span><%=offer.dates.deliveryDate%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">Ödeme Şekli : <span><%=offer.payMethod.payMethod%></span></p>
                         <p style="font-size:8px; margin-top:-7px;">İlgili Teklif No : <span><%=offer._id%></span></p>
-                        <p style="font-size:8px; margin-top:-7px;">Tel : <span>0544 444 44 44</span></p>
+                        <p style="font-size:8px; margin-top:-7px;">Tel : <span><%=customer.contactInfo.businessPhone%></span></p>
                     </div>
                 </div>
             </div>
