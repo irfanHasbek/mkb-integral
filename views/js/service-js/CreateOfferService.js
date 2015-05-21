@@ -277,6 +277,18 @@ CreateOfferService.prototype.search = function(criteria, callback){
         callback(true, offers);
     });
 }
+CreateOfferService.prototype.searchArr = function(criteria, callback){
+    //console.log("criteria : " + JSON.stringify(criteria));
+    CreateOfferModel.find({"status.offerCase" : { $in : criteria.statusList },firmCode:criteria.firmCode,"customerInfo.customerId":criteria.custId }, function(error, offers){
+        if(error){
+            //console.log("error : " + JSON.stringify(error));
+            //console.log("product : " + JSON.stringify(products));
+            callback(false, error);
+            return;
+        }
+        callback(true, offers);
+    });
+}
 CreateOfferService.prototype.searchandGetCount = function(criteria, callback){
     CreateOfferModel.count(criteria,function(error, offers){
         if(error){

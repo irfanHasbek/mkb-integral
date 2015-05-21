@@ -215,6 +215,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 return;
             }
             offerService.searchandGetCount({
+                "firmCode":req.session.user.firmCode,
                 "status.offerCase": "onay_bekleyen_teklifler"
             }, function(statePending, responsePending) {
                 if (!statePending) {
@@ -225,6 +226,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     return;
                 }
                 offerService.searchandGetCount({
+                    "firmCode":req.session.user.firmCode,
                     "status.offerCase": "kazanilmis"
                 }, function(statePending, responseContinue) {
                     if (!statePending) {
@@ -235,6 +237,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         return;
                     }
                     offerService.searchandGetCount({
+                        "firmCode":req.session.user.firmCode,
                         "status.offerCase": "kaybedilmis"
                     }, function(statePending, responseFinish) {
                         if (!statePending) {
@@ -1728,18 +1731,59 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     });
     //end
     //müsteri tanımı
-    app.get("/b2b_teklif_listesi", AccountController.sessionCheckCustomer, function(req, res) {
-        req.session.currentPage = "/b2b_teklif_listesi";
+    app.get("/b2b_onay_bekleyen_teklifler", AccountController.sessionCheckCustomer, function(req, res) {
+        req.session.currentPage = "/b2b_onay_bekleyen_teklifler";
         req.session.pageLabel = "teklifYonetim";
         offerService.search({
             "firmCode": req.session.customer.firmCode,
+            "status.offerCase":"onay_bekleyen_teklifler",
             "customerInfo.customerId": req.session.customer._id
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
                 res.redirect("musteri_anasayfa");
             }
-            res.render("pages/b2b_teklif_listesi", {
+            res.render("pages/b2b_onay_bekleyen_teklifler", {
+                layout: false,
+                session: req.session,
+                customer: req.session.customer,
+                offers: responseOffers
+            });
+        });
+    });   
+    app.get("/b2b_acik_teklifler", AccountController.sessionCheckCustomer, function(req, res) {
+        req.session.currentPage = "/b2b_acik_teklifler";
+        req.session.pageLabel = "teklifYonetim";
+        offerService.search({
+            "firmCode": req.session.customer.firmCode,
+            "status.offerCase":"acik_teklifler",
+            "customerInfo.customerId": req.session.customer._id
+        }, function(stateOffers, responseOffers) {
+            if (!stateOffers) {
+                console.error(responseOffers);
+                res.redirect("musteri_anasayfa");
+            }
+            res.render("pages/b2b_acik_teklifler", {
+                layout: false,
+                session: req.session,
+                customer: req.session.customer,
+                offers: responseOffers
+            });
+        });
+    });   
+    app.get("/b2b_kapali_teklifler", AccountController.sessionCheckCustomer, function(req, res) {
+        req.session.currentPage = "/b2b_kapali_teklifler";
+        req.session.pageLabel = "teklifYonetim";
+        offerService.searchArr({
+            "firmCode": req.session.customer.firmCode,
+            "statusList":["kazanilmis","kaybedilmis"],
+            "custId": req.session.customer._id
+        }, function(stateOffers, responseOffers) {
+            if (!stateOffers) {
+                console.error(responseOffers);
+                res.redirect("musteri_anasayfa");
+            }
+            res.render("pages/b2b_kapali_teklifler", {
                 layout: false,
                 session: req.session,
                 customer: req.session.customer,
@@ -1749,7 +1793,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     });
     app.get("/alt_musterilerim", AccountController.sessionCheckCustomer, function(req, res) {
         req.session.currentPage = "/alt_musterilerim";
-        req.session.pageLabel = "firmaYonetim";
+        req.session.pageLabel = "firmaYönetimi";
         childcustservice.listAll(req.session.customer.customerName,function(stateChild,responseChild){
             if(!stateChild){
                 console.error(responseChild);
