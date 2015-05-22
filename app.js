@@ -176,7 +176,25 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     var CoverPageService = require("./views/js/service-js/CoverPageService");
     var coverPageService = new CoverPageService();
     //end
+    app.use(app.router);
+    app.use(function(req, res, next){
+        res.status(404);
 
+  // respond with html page
+  if (req.accepts('html')) {
+    res.render('pages/404', { layout: false });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.render('pages/404', { layout: false });
+    return;
+  }
+
+  // default to plain-text. send()
+ res.render('pages/404', { layout: false });
+});
     app.get("/", function(req, res) {
         if (req.session.user) {
             if (!req.session.login) {
@@ -208,7 +226,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "anasayfa";
         custservice.getCount(req.session.user.firmCode, function(stateCust, responseCust) {
             if (!stateCust) {
-                res.render('pages/index', {
+                res.render('pages/503', {
                     layout: false,
                     session: req.session
                 });
@@ -219,7 +237,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 "status.offerCase": "onay_bekleyen_teklifler"
             }, function(statePending, responsePending) {
                 if (!statePending) {
-                    res.render('pages/index', {
+                    res.render('pages/503', {
                         layout: false,
                         session: req.session
                     });
@@ -230,7 +248,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     "status.offerCase": "kazanilmis"
                 }, function(statePending, responseContinue) {
                     if (!statePending) {
-                        res.render('pages/index', {
+                        res.render('pages/503', {
                             layout: false,
                             session: req.session
                         });
@@ -241,7 +259,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         "status.offerCase": "kaybedilmis"
                     }, function(statePending, responseFinish) {
                         if (!statePending) {
-                            res.render('pages/index', {
+                            res.render('pages/503', {
                                 layout: false,
                                 session: req.session
                             });
@@ -292,7 +310,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "kullanicilar";
         ads.listAll(req.session.user.firmCode, function(stateRoles, responseRoles) {
             if (!stateRoles) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -300,7 +318,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             }
             tds.listAll(req.session.user.firmCode, function(stateTasks, responseTasks) {
                 if (!stateTasks) {
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -309,7 +327,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 if (req.session.user.firmCode == 'administrator') {
                     userService.listAll(function(stateUser, responseUsers) {
                         if (!stateUser) {
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -326,7 +344,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 } else {
                     userService.listFirmUser(req.session.user.firmCode, function(stateUser, responseUsers) {
                         if (!stateUser) {
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -351,7 +369,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "kullanicilar";
         ads.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -371,7 +389,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "kullanicilar";
         tds.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -390,7 +408,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "kullanicilar";
         ads.listAll(req.session.user.firmCode, function(stateRole, resposeRole) {
             if (!stateRole) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -410,7 +428,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "tanimlamalar";
         crs.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -428,7 +446,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "tanimlamalar";
         cityservice.listAll(function(state, response) {
             if (!state) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -446,7 +464,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         req.session.pageLabel = "tanimlamalar";
         firmService.listAll(function(state, response) {
             if (!state) {
-                res.render('pages/index', {
+                res.render('pages/503', {
                     layout: false,
                     session: req.session
                 });
@@ -466,7 +484,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         cgs.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -486,7 +504,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         unitService.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -506,7 +524,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         ots.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -526,7 +544,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         oss.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -544,7 +562,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         lrs.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -564,7 +582,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(statePGroup, responsePGroup) {
                 if (!statePGroup) {
                     console.log(err);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -573,7 +591,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 productService.getProduct(req.param('id'), function(stateProduct, responseProduct) {
                     if (!statePGroup) {
                         console.log(err);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -591,7 +609,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(statePGroup, responsePGroup) {
                 if (!statePGroup) {
                     console.log(err);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -613,7 +631,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         productService.listAll(req.session.user.firmCode, function(stateProduct, responseProduct) {
             if (!stateProduct) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -633,7 +651,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         pds.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -653,7 +671,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         productService.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -662,7 +680,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(statePGroup, responsePGroup) {
                 if (!statePGroup) {
                     console.log(err);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -686,7 +704,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         mts.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -694,7 +712,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(stateProductGroup, responseProductGroup) {
                 if (!stateProductGroup) {
                     console.log(responseProductGroup);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -717,7 +735,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         cts.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -737,7 +755,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         sms.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -745,7 +763,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(stateProductGroup, responseProductGroup) {
                 if (!stateProductGroup) {
                     console.log(responseProductGroup);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -768,7 +786,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         as.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.log(response);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -778,7 +796,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 function(stateProductGroup, responseProductGroup) {
                     if (!stateProductGroup) {
                         console.log(responseProductGroup);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -804,7 +822,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 function(stateProductGroup, responseProductGroup) {
                     if (!stateProductGroup) {
                         console.log(responseProductGroup);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -828,7 +846,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             cgs.listAll(req.session.user.firmCode, function(stateCustGrp, responseCustGrp) {
                 if (!stateCustGrp) {
                     console.error(responseCustGrp);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -836,7 +854,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 userService.listCustomerAgent(req.session.user.firmCode, function(stateCustAgnt, responseCustAgnt) {
                     if (!stateCustGrp) {
                         console.error(responseCustAgnt);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -844,7 +862,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     cityservice.listAll(function(stateCity, responseCity) {
                         if (!stateCity) {
                             console.error(responseCity);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -852,7 +870,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         custservice.getCustomerDefinition(req.param('id'), function(stateCustDef, responseCusetDef) {
                             if (!stateCustDef) {
                                 console.error(responseCusetDef);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
@@ -862,7 +880,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                 responseDiscount) {
                                 if (!stateDiscount) {
                                     console.error(responseDiscount);
-                                    res.render("/pages/index", {
+                                    res.render("/pages/503", {
                                         layout: false,
                                         session: req.session
                                     });
@@ -887,7 +905,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
 
                 if (!stateCustGrp) {
                     console.error(err);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -896,7 +914,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 userService.listCustomerAgent(req.session.user.firmCode, function(stateCustAgnt, responseCustAgnt) {
                     if (!stateCustAgnt) {
                         console.error(err);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -905,7 +923,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     cityservice.listAll(function(stateCity, responseCity) {
                         if (!stateCity) {
                             console.error(err);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -914,7 +932,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                             responseDiscount) {
                             if (!stateDiscount) {
                                 console.error(responseDiscount);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
@@ -941,7 +959,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         custservice.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
                 console.error(err);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -949,7 +967,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             cgs.listAll(req.session.user.firmCode, function(stateCustGroup, responseCustGroup) {
                 if (!stateCustGroup) {
                     console.error(err);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -957,7 +975,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 userService.listCustomerAgent(req.session.user.firmCode, function(stateCustAgnt, responseCustAgnt) {
                     if (!stateCustAgnt) {
                         console.error(err);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -981,7 +999,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         custservice.listAll(req.session.user.firmCode, function(stateCustomer, responseCustomer) {
             if (!stateCustomer) {
                 console.error(responseCustomer);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -990,7 +1008,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             pds.listAll(req.session.user.firmCode, function(stateProductGroup, responseProductGroup) {
                 if (!stateProductGroup) {
                     console.error(responseProductGroup);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -999,7 +1017,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 discountService.listAll(req.session.user.firmCode, function(stateDiscount, responseDiscounts) {
                     if (!stateDiscount) {
                         console.error(responseDiscounts);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1026,7 +1044,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             ots.listAll(req.session.user.firmCode, function(stateOfferTopic, responseOfferTopic) {
                 if (!stateOfferTopic) {
                     console.error(responseOfferTopic);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1034,7 +1052,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
                     if (!stateOffer) {
                         console.error(resposeOffer);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1042,7 +1060,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     cts.listAll(req.session.user.firmCode, function(stateCoverType, responseCoverType) {
                         if (!stateCoverType) {
                             console.error(responseCoverType);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -1051,7 +1069,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                             responseCustId) {
                             if (!stateCustId) {
                                 console.error(responseCustId);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
@@ -1060,7 +1078,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                 responseProductGroup) {
                                 if (!stateProductGroup) {
                                     console.log(responseProductGroup);
-                                    res.render("/pages/index", {
+                                    res.render("/pages/503", {
                                         layout: false,
                                         session: req.session
                                     });
@@ -1069,7 +1087,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                     responseOfferStatus) {
                                     if (!stateOfferStatus) {
                                         console.log(responseOfferStatus);
-                                        res.render("/pages/index", {
+                                        res.render("/pages/503", {
                                             layout: false,
                                             session: req.session
                                         });
@@ -1078,7 +1096,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                         stateCust, responseCust) {
                                         if (!stateCust) {
                                             console.log(responseCust);
-                                            res.render("/pages/index", {
+                                            res.render("/pages/503", {
                                                 layout: false,
                                                 session: req.session
                                             });
@@ -1087,7 +1105,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                             function(stateUnit, responseUnit) {
                                                 if (!stateUnit) {
                                                     console.log(responseUnit);
-                                                    res.render("/pages/index", {
+                                                    res.render("/pages/503", {
                                                         layout: false,
                                                         session: req.session
                                                     });
@@ -1095,7 +1113,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                             coverPageService.listAll(req.session.user.firmCode,function(stateCoverPage,responseCoverPage){
                                                 if(!stateCoverPage){
                                                     console.log(responseUnit);
-                                                    res.render("/pages/index", {
+                                                    res.render("/pages/503", {
                                                         layout: false,
                                                         session: req.session
                                                     });
@@ -1127,7 +1145,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             ots.listAll(req.session.user.firmCode, function(stateOfferTopic, responseOfferTopic) {
                 if (!stateOfferTopic) {
                     console.error(responseOfferTopic);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1135,7 +1153,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 mts.listAll(req.session.user.firmCode, function(stateMontageType, responseMontageType) {
                     if (!stateMontageType) {
                         console.error(responseMontageType);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1143,7 +1161,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     cts.listAll(req.session.user.firmCode, function(stateCoverType, responseCoverType) {
                         if (!stateCoverType) {
                             console.error(responseCoverType);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -1151,7 +1169,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         sms.listAll(req.session.user.firmCode, function(stateSetMec, responseSetMec) {
                             if (!stateSetMec) {
                                 console.error(responseSetMec);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
@@ -1159,7 +1177,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                             as.listAll(req.session.user.firmCode, function(stateAccessory, responseAccessory) {
                                 if (!stateAccessory) {
                                     console.error(responseAccessory);
-                                    res.render("/pages/index", {
+                                    res.render("/pages/503", {
                                         layout: false,
                                         session: req.session
                                     });
@@ -1168,7 +1186,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                     responseBodyType) {
                                     if (!stateBodyType) {
                                         console.error(responseBodyType);
-                                        res.render("/pages/index", {
+                                        res.render("/pages/503", {
                                             layout: false,
                                             session: req.session
                                         });
@@ -1177,7 +1195,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                         stateProductGroup, responseProductGroup) {
                                         if (!stateProductGroup) {
                                             console.log(responseProductGroup);
-                                            res.render("/pages/index", {
+                                            res.render("/pages/503", {
                                                 layout: false,
                                                 session: req.session
                                             });
@@ -1187,7 +1205,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                             responseOfferStatus) {
                                             if (!stateOfferStatus) {
                                                 console.log(responseOfferStatus);
-                                                res.render("/pages/index", {
+                                                res.render("/pages/503", {
                                                     layout: false,
                                                     session: req.session
                                                 });
@@ -1201,7 +1219,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                             responseCust
                                                         );
                                                         res.render(
-                                                            "/pages/index", {
+                                                            "/pages/503", {
                                                                 layout: false,
                                                                 session: req
                                                                     .session
@@ -1216,7 +1234,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                             if (!stateUnit) {
                                                                 console.log(responseUnit);
                                                                 res.render(
-                                                                    "/pages/index", {
+                                                                    "/pages/503", {
                                                                         layout: false,
                                                                         session: req
                                                                             .session
@@ -1226,7 +1244,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                                         coverPageService.listAll(req.session.user.firmCode,function(stateCoverPage,responseCoverPage){
                                                             if(!stateCoverPage){
                                                                 console.log(responseUnit);
-                                                                res.render("/pages/index", {
+                                                                res.render("/pages/503", {
                                                                     layout: false,
                                                                     session: req.session
                                                                 });
@@ -1271,7 +1289,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.log(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1279,7 +1297,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             lrs.listAll(req.session.user.firmCode, function(stateLosingReason, responseLosingReason) {
                 if (!stateLosingReason) {
                     console.log(responseLosingReason);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1287,7 +1305,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 oss.listAll(req.session.user.firmCode, function(stateOfferStatus, responseOfferStatus) {
                     if (!stateOfferStatus) {
                         console.log(responseOfferStatus);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1296,7 +1314,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     userService.listFirmUser(req.session.user.firmCode, function(stateUser, responseUsers) {
                         if (!stateUser) {
                             console.log(stateUser);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -1324,7 +1342,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.log(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1332,7 +1350,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             lrs.listAll(req.session.user.firmCode, function(stateLosingReason, responseLosingReason) {
                 if (!stateLosingReason) {
                     console.log(responseLosingReason);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1340,7 +1358,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 oss.listAll(req.session.user.firmCode, function(stateOfferStatus, responseOfferStatus) {
                     if (!stateOfferStatus) {
                         console.log(responseOfferStatus);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1349,7 +1367,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     userService.listFirmUser(req.session.user.firmCode, function(stateUser, responseUsers) {
                         if (!stateUser) {
                             console.log(stateUser);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -1377,7 +1395,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1399,7 +1417,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1424,7 +1442,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1449,7 +1467,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1474,7 +1492,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         }, function(stateOffers, responseOffers) {
             if (!stateOffers) {
                 console.error(responseOffers);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1495,7 +1513,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
             if (!stateOffer) {
                 console.error(resposeOffer);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1504,7 +1522,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             firmService.getInformationFirmCode(code, function(stateFirm, responseFirm) {
                 if (!stateFirm) {
                     console.error(responseFirm);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false
                     });
                 }
@@ -1525,7 +1543,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
             if (!stateOffer) {
                 console.error(resposeOffer);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false
                 });
             }
@@ -1533,14 +1551,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             firmService.getInformationFirmCode(code, function(stateFirm, responseFirm) {
                 if (!stateFirm) {
                     console.error(responseFirm);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false
                     });
                 }
                 custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId, function(stateCustomer, responseCustomer){
                      if (!stateCustomer) {
                         console.error(responseCustomer);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false
                         });
                      }  
@@ -1563,7 +1581,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
         offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
             if (!stateOffer) {
                 console.error(resposeOffer);
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false
                 });
             }
@@ -1571,14 +1589,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             firmService.getInformationFirmCode(code, function(stateFirm, responseFirm) {
                 if (!stateFirm) {
                     console.error(responseFirm);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false
                     });
                 }
                 custservice.getCustomerDefinition(resposeOffer.customerInfo.customerId, function(stateCustomer, responseCustomer){
                      if (!stateCustomer) {
                         console.error(responseCustomer);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false
                         });
                      } 
@@ -1594,7 +1612,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     }else{
                         childcustservice.getChildCustomer(altMusteri, function(stateChildCustomer, responseChildCustomer){
                             if(!stateChildCustomer){
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false
                                 });   
                                 return;
@@ -1621,7 +1639,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
 
         custservice.listAll(req.session.user.firmCode, function(state, response) {
             if (!state) {
-                res.render("/pages/index", {
+                res.render("/pages/503", {
                     layout: false,
                     session: req.session
                 });
@@ -1687,7 +1705,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             offerService.getOffer(req.param('id'), function(stateOffer, resposeOffer) {
                 if (!stateOffer) {
                     console.error(resposeOffer);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1695,7 +1713,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 cts.listAll(req.session.customer.firmCode, function(stateCoverType, responseCoverType) {
                     if (!stateCoverType) {
                         console.error(responseCoverType);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1703,7 +1721,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         pds.listAll(req.session.customer.firmCode, function(stateProductGroup, responseProductGroup) {
                             if (!stateProductGroup) {
                                 console.log(responseProductGroup);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
@@ -1712,14 +1730,14 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                                     responseUnit) {
                                     if (!stateUnit) {
                                         console.log(responseUnit);
-                                        res.render("/pages/index", {
+                                        res.render("/pages/503", {
                                             layout: false,
                                             session: req.session
                                         });
                                     }                          coverPageService.search({active:true,firmCode:req.session.customer.firmCode},function(stateCoverPage,responseCoverPage){
                                             if(!stateCoverPage){
                                                 console.log(responseUnit);
-                                                res.render("/pages/index", {
+                                                res.render("/pages/503", {
                                                     layout: false,
                                                     session: req.session
                                                 });
@@ -1743,7 +1761,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             cts.listAll(req.session.customer.firmCode, function(stateCoverType, responseCoverType) {
                 if (!stateCoverType) {
                     console.error(responseCoverType);
-                    res.render("/pages/index", {
+                    res.render("/pages/503", {
                         layout: false,
                         session: req.session
                     });
@@ -1751,7 +1769,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                 pds.listAll(req.session.customer.firmCode, function(stateProductGroup, responseProductGroup) {
                     if (!stateProductGroup) {
                         console.log(responseProductGroup);
-                        res.render("/pages/index", {
+                        res.render("/pages/503", {
                             layout: false,
                             session: req.session
                         });
@@ -1759,7 +1777,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                     unitService.listAll(req.session.customer.firmCode, function(stateUnit, responseUnit) {
                         if (!stateUnit) {
                             console.log(responseUnit);
-                            res.render("/pages/index", {
+                            res.render("/pages/503", {
                                 layout: false,
                                 session: req.session
                             });
@@ -1767,7 +1785,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
                         coverPageService.search({active:true,firmCode:req.session.customer.firmCode},function(stateCoverPage,responseCoverPage){
                             if(!stateCoverPage){
                                 console.log(responseUnit);
-                                res.render("/pages/index", {
+                                res.render("/pages/503", {
                                     layout: false,
                                     session: req.session
                                 });
