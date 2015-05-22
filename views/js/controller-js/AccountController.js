@@ -85,12 +85,18 @@ module.exports = {
         }else{
             ActDefinitionModel.findOne({ act : req.session.user.role }, function(errorRole, foundedRole){
                 if(errorRole){
-                    res.send("Bu servisi kullanmaya izniniz yoktur.");
+                    res.render('pages/permission', {
+                        layout: false,
+                        session: req.session
+                    });
                     return;
                 }
                 UserPermissionModel.findOne({ roleId : foundedRole._id }, function(errorPermission, foundedPermission){
                     if(errorPermission){
-                        res.send("Bu servisi kullanmaya izniniz yoktur.");
+                        res.render('pages/permission', {
+                            layout: false,
+                            session: req.session
+                        });
                         return;
                     } 
                     var permissionStatus = false;
@@ -102,7 +108,10 @@ module.exports = {
                     if(permissionStatus){
                         next();   
                     }else{
-                        res.send("Bu servisi kullanmaya izniniz yoktur.");
+                        res.render('pages/permission', {
+                            layout: false,
+                            session: req.session
+                        });
                     }
                 });
             });    
