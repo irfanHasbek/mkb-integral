@@ -1663,7 +1663,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             req.session.currentPage = "/musteri_kayit";
             res.render("pages/musteri_kayit", {
                 layout: false,
-                firm: req.param('id')
+                firm: req.param('id'), session : req.session
             });
         }
     });
@@ -2167,6 +2167,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     });
 
     var wkhtmltopdf = require('wkhtmltopdf');
+    //wkhtmltopdf.command = __dirname  + "/tools/usr/local/bin/wkhtmltopdf";
     app.post("/wscreatepdf", function(req, res) {
         var pageURl = Config.url + req.body.pageUrl;
         wkhtmltopdf(pageURl, {
