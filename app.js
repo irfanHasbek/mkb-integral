@@ -1947,11 +1947,13 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wscustomergroup/listall", CustomerGroupController.listAll);
     app.get("/wscustomergroup/removeall", CustomerGroupController.removeAll);
     app.post("/wscustomergroup/remove", CustomerGroupController.remove);
+    app.post("/wscustomergroup/update", CustomerGroupController.update);
 
     app.post("/wsunit/addnew", UnitController.addNew);
     app.get("/wsunit/listall", UnitController.listAll);
     app.get("/wsunit/removeall", UnitController.removeAll);
     app.post("/wsunit/remove", UnitController.remove);
+    app.post("/wsunit/update", UnitController.update);
 
     app.post("/wspicture/upload", UploadService.uploadImage);
 
@@ -1960,6 +1962,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wscredit/listall", CreditController.listAll);
     app.get("/wscredit/removeall", CreditController.removeAll);
     app.post("/wscredit/remove", CreditController.remove);
+    app.post("/wscredit/update", CreditController.update);
     //end
 
     //city ops "abuzer"  start  26.02
@@ -2041,6 +2044,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wsoffertopic/listall", OfferTopicController.listAll);
     app.get("/wsoffertopic/removeall", OfferTopicController.removeAll);
     app.post("/wsoffertopic/remove", OfferTopicController.remove);
+    app.post("/wsoffertopic/update", OfferTopicController.update);
     //end
 
     //teklif konusu ops "abuzer" 03.03 start
@@ -2048,6 +2052,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wsofferstatus/listall", OfferStatusController.listAll);
     app.get("/wsofferstatus/removeall", OfferStatusController.removeAll);
     app.post("/wsofferstatus/remove", OfferStatusController.remove);
+    app.post("/wsofferstatus/update", OfferStatusController.update);
     //end
 
     //Kaybetme nedenleri ops "abuzer" 03.03 start
@@ -2055,6 +2060,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
     app.get("/wslosingreason/listall", LosingReasonController.listAll);
     app.get("/wslosingreason/removeall", LosingReasonController.removeAll);
     app.post("/wslosingreason/remove", LosingReasonController.remove);
+    app.post("/wslosingreason/update", LosingReasonController.update);
     //end
 
     //urun tanimlama
@@ -2165,9 +2171,27 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             });
         });
     });
+    
+    app.post("/wspricecalculate/updateprice", function(req, res) {
+        offerPriceCalculatorService.updatePrices(req.body._id, req.body.percent, function(state, response, message) {
+            if (!state) {
+                res.send({
+                    state: state,
+                    response: response,
+                    message: message
+                });
+                return;
+            }
+            res.send({
+                state: state,
+                response: response,
+                message: message
+            });
+        });
+    });
 
     var wkhtmltopdf = require('wkhtmltopdf');
-    //wkhtmltopdf.command = __dirname  + "/tools/usr/local/bin/wkhtmltopdf";
+    wkhtmltopdf.command = "/opt/integral/tools/usr/local/bin/wkhtmltopdf";
     app.post("/wscreatepdf", function(req, res) {
         var pageURl = Config.url + req.body.pageUrl;
         wkhtmltopdf(pageURl, {
@@ -2260,6 +2284,7 @@ mongoose.connect("mongodb://localhost:27017/integral", function(error) {
             });
         });
     });
-    app.listen(3000);
-    console.log("app > listening port 3000...");
+var port = 3000;
+    app.listen(port);
+    console.log("app > listening port :" + port);
 });
