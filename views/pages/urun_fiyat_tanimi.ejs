@@ -22,132 +22,175 @@
 
                 <!-- Main content -->
                 <section class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="box box-info">
-                                    <div class="box-body">
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-10 col-md-offset-1">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <label for="">Ürün Filtrele</label>
-                                                                <input class="form-control" id="textbox" type="text" />
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <label for="">Ürün Seçiniz</label>
-                                                                <select id="slProduct" class="select form-control">
-                                                                   <option value="Ürün Seçiniz" selected disabled>Ürün Seçiniz</option>
-                                                                    <%for(var i = 0; i < products.length; i++){%>
-                                                                        <option value="<%=products[i]._id%>"><%=products[i].name%></option>
-                                                                    <%}%>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="" ></label>
-                                                                <button id="btnGetPrice" class="btn btn-info btn-block" style="margin-top:5px;">Fiyat Getir</button>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <form id="formUploadCsv" action="/wsuploadprice" method="post">
-                                                            <input name="productId" type="text" id="productIdForPrice"  class="form-control" style="display:none;">
-                                                            <input type="text" id="inpSizeTypeForPrice" style="display:none;" name="dimensionType">
-                                                            <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <input id="inpCsvFile" name="csvFile" type="file" class="form-control" accept=".csv">
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <button type="submit" id="btnChooseFile" class="btn btn-block btn-success">Yükle</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    
-                                                    <form id="formPrice" action="/wsproductprice/update" method="post">
-                                                        <input name="productId" type="text" id="inpProductId"  class="form-control" style="display:none;">
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <label for="" style="margin-bottom:15px;">Tip Seçiniz</label>
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active wizard"><a href="#fiyat_tanimi" data-toggle="tab">Fiyat Tanimi</a></li>
+                            <li class="wizard"><a href="#fiyat_guncelle" data-toggle="tab">Fiyat Güncelle</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="fiyat_tanimi">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <div style="padding:0" class="box-info">
+                                                <div class="box-body">
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div>
+                                                                <div class="form-group">
                                                                     <div class="row">
-                                                                        <div class="col-md-12 no-padding">
-                                                                            <div class="col-md-4">
-                                                                                <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <a id="btnDiger" class="btn-block btn btn-default btn-flat" >Diger</a>
-                                                                            </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="">Ürün Filtrele</label>
+                                                                            <input class="form-control" id="textbox" type="text" />
                                                                         </div>
                                                                     </div>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-md-8">
+                                                                            <label for="">Ürün Seçiniz</label>
+                                                                            <select id="slProduct" class="select form-control">
+                                                                               <option value="Ürün Seçiniz" selected disabled>Ürün Seçiniz</option>
+                                                                                <%for(var i = 0; i < products.length; i++){%>
+                                                                                    <option value="<%=products[i]._id%>"><%=products[i].name%></option>
+                                                                                <%}%>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="" ></label>
+                                                                            <button id="btnGetPrice" class="btn btn-info btn-block" style="margin-top:5px;">Fiyat Getir</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <form id="formUploadCsv" action="/wsuploadprice" method="post">
+                                                                        <input name="productId" type="text" id="productIdForPrice"  class="form-control" style="display:none;">
+                                                                        <input type="text" id="inpSizeTypeForPrice" style="display:none;" name="dimensionType">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <input id="inpCsvFile" name="csvFile" type="file" class="form-control" accept=".csv">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <button type="submit" id="btnChooseFile" class="btn btn-block btn-success">Yükle</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
+
+                                                                <form id="formPrice" action="/wsproductprice/update" method="post">
+                                                                    <input name="productId" type="text" id="inpProductId"  class="form-control" style="display:none;">
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label for="" style="margin-bottom:15px;">Tip Seçiniz</label>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 no-padding">
+                                                                                        <div class="col-md-4">
+                                                                                            <a id="btnRect" class="btn btn-default btn-flat btn-block">Dikdörtgen</a>                                                                                    
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <a id="btnCir" class="btn-block btn btn-default btn-flat" >Dairesel</a>
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <a id="btnDiger" class="btn-block btn btn-default btn-flat" >Diger</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text" id="inpSizeType" style="display:none;" name="dimensionType">
+                                                                        <div id="divRec" class="row" style="display:none;">
+                                                                            <div class="col-md-12 no-padding">
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpEn" name="W" type="number" class="form-control" placeholder="En Giriniz" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpBoy" name="H" type="number" class="form-control" placeholder="Yukseklik Giriniz" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz" required>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="divCir" class="row" style="display:none;">
+                                                                            <div class="col-md-12 no-padding">
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpCap" name="W" type="number" class="form-control" placeholder="Çap Giriniz" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpDaireUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz" required>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="divDiger" class="row" style="display:none;">
+                                                                            <div class="col-md-12 no-padding">
+                                                                                <div class="col-md-4">
+                                                                                    <input id="inpDiger" name="W" type="number" class="form-control" placeholder="Olcu Giriniz" required>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                     </div>
+                                                                     <div class="form-group">
+                                                                         <div class="row">
+                                                                             <div class="col-md-12">
+                                                                                 <label for="">Fiyat Giriniz</label>
+                                                                                 <input type="number" class="form-control" id="inpPrice" name="price" placeholder="0.00 TL" step="0.01" required>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
                                                             </div>
-                                                            <br>
-                                                            <input type="text" id="inpSizeType" style="display:none;" name="dimensionType">
-                                                            <div id="divRec" class="row" style="display:none;">
-                                                                <div class="col-md-12 no-padding">
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpEn" name="W" type="number" class="form-control" placeholder="En Giriniz" required>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpBoy" name="H" type="number" class="form-control" placeholder="Yukseklik Giriniz" required>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div id="divCir" class="row" style="display:none;">
-                                                                <div class="col-md-12 no-padding">
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpCap" name="W" type="number" class="form-control" placeholder="Çap Giriniz" required>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpDaireUzunluk" name="L" type="number" class="form-control" placeholder="Boy Giriniz" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div id="divDiger" class="row" style="display:none;">
-                                                                <div class="col-md-12 no-padding">
-                                                                    <div class="col-md-4">
-                                                                        <input id="inpDiger" name="W" type="number" class="form-control" placeholder="Olcu Giriniz" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="form-group">
-                                                             <div class="row">
-                                                                 <div class="col-md-12">
-                                                                     <label for="">Fiyat Giriniz</label>
-                                                                     <input type="number" class="form-control" id="inpPrice" name="price" placeholder="0.00 TL" step="0.01" required>
-                                                                 </div>
-                                                             </div>
-                                                         </div>
-                                                     
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.box-body -->
+                                                <div class="box-footer">
+                                                    <div style="text-align:center">
+                                                        <button type="submit" id="btnSubmitPrice" class="btn btn-primary btn-flat">Kaydet</button>
+                                                    </div>
+                                                </div></form>
+                                            </div><!-- /.box -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="fiyat_guncelle">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label for="">Ürün Seçiniz</label>
+                                                        <select id="slProductForPrice" class="select form-control">
+                                                           <option value="Ürün Seçiniz" selected disabled>Ürün Seçiniz</option>
+                                                            <%for(var i = 0; i < products.length; i++){%>
+                                                                <option value="<%=products[i]._id%>"><%=products[i].name%></option>
+                                                            <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label for="">Yüzde Giriniz</label>
+                                                        <input type="number" class="form-control" id="inpPricePercent" placeholder="% 0.00" step="0.01" required>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                             <div class="box-footer">
+                                                <div style="text-align:center">
+                                                    <button type="submit" id="btnUpdatePrice" class="btn btn-primary btn-flat">Kaydet</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div><!-- /.box-body -->
-                                    <div class="box-footer">
-                                        <div style="text-align:center">
-                                            <button type="submit" id="btnSubmitPrice" class="btn btn-primary btn-flat">Kaydet</button>
-                                        </div>
-                                    </div></form>
-                                </div><!-- /.box -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-md-12">
+                            <div class="">
                                 <div class="box">
                                     <div class="box-header">
                                         <h3 class="box-title">Ürün Fiyat Listesi</h3>

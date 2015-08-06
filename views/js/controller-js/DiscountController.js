@@ -10,7 +10,8 @@ function createDiscount(firmCode, req){
         productGroupId : req.productGroupId,
         productGroupName : req.productGroupName,
         percent : req.percent,
-        owner : req.owner
+        owner : req.owner,
+        order : req.order
     }
 }
 
@@ -68,5 +69,14 @@ module.exports = {
             }
             res.send({state : state, response : response});
         })   
+    },
+    update : function(req, res){
+        ds.update(req.body, function(state, response){
+            if(!state){
+                res.send({state : state, response : response});   
+                return;
+            }
+            res.send({state : state, response : response});
+        });
     }
 }

@@ -38,4 +38,13 @@ CreditService.prototype.listAll = function(criteria, callback){
         callback(true, Credits);
     });
 }
+CreditService.prototype.update = function(credit, callback){
+    CreditModel.update({ _id : credit._id }, credit, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Vade guncellendi.");
+    });
+}
 module.exports = CreditService;

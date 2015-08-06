@@ -8,6 +8,7 @@ function DiscountService()
 function DiscountService(){}
 
 DiscountService.prototype.addNew = function(discount, callback){
+    console.log(discount)
     if(discount){
         new DiscountModel(discount).save(function(error, addedDiscount){
             if(error){
@@ -22,7 +23,7 @@ DiscountService.prototype.addNew = function(discount, callback){
 
 DiscountService.prototype.listAll = function(firmCode, callback){
     if(firmCode && firmCode != null){
-        DiscountModel.find({firmCode : firmCode}, function(error, foundedDiscounts){
+        DiscountModel.find({firmCode : firmCode},"", {sort : {order : -1}}, function(error, foundedDiscounts){
             if(error){
                 console.log(error);
                 callback(false, error);
@@ -80,6 +81,16 @@ DiscountService.prototype.getDiscountOnlyCustomerId = function(customerId, callb
             callback(true, foundedDiscount);
         });   
     }   
+}
+DiscountService.prototype.update = function(discount, callback){
+    console.log(discount)
+    DiscountModel.update({ _id : discount._id }, discount, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Iskonto guncellendi.");
+    });
 }
 
 module.exports = DiscountService;

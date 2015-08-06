@@ -82,6 +82,7 @@
                                                 <th>Ürün Grup Adı</th>
                                                 <th>Ürün Adı</th>
                                                 <th>Ürün Resmi</th>
+                                                <th>Ürün Sira</th>
                                                 <th class="text-center" style="width: 100px">Operasyon</th>
                                             </tr>
                                             <tbody id="tableProducts">
@@ -96,6 +97,7 @@
                                                             <img src="<%=products[i].pictureUrl%>" class="img-responsive img-center" style="width:auto; height:30px;">
                                                         </a>
                                                     </td>
+                                                    <td><%=products[i].order%></td>
                                                     <td>
                                                         <button class="btn btn-info btn-sm edit btn-flat"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-sm remove btn-flat"><i class="fa fa-trash-o"></i></button>

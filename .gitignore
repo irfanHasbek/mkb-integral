@@ -7,6 +7,7 @@ views/css
 views/fonts
 views/img
 views/sounds
+views/pdfs
 # OS generated files #
 ######################
 .DS_Store

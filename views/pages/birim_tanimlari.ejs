@@ -32,7 +32,8 @@
                                                 <div class="col-md-10 col-md-offset-1">
                                                     <div class="form-group ">
                                                         <label>Birim</label>
-                                                        <input type="text" class="form-control " name="unit"  placeholder="Birim Giriniz" required>
+                                                        <input id="inpId" type="text" name="_id" disabled style="display:none;">
+                                                        <input id="inpUnit" type="text" class="form-control " name="unit" data="0"  placeholder="Birim Giriniz" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,7 +41,7 @@
 
                                         <div class="box-footer">
                                             <div style="text-align:center">
-                                                <button type="submit" class="btn btn-primary btn-flat">Kaydet</button>
+                                                <button id="btnSubmit" type="submit" class="btn btn-primary btn-flat">Kaydet</button>
                                             </div>
                                         </div>
                                     </form>
@@ -62,7 +63,7 @@
                                                 <th class="text-center" style="width: 40px">#</th>
                                                 <th>Birim</th>
                                                 <th>İşlemi Yapan</th>
-                                                <th class="text-center" style="width: 40px"></th>
+                                                <th class="text-center" style="width: 100px"></th>
                                             </tr>
                                             <tbody>
                                                 <%for(var i=0;i<units.length;i++){%>
@@ -70,7 +71,8 @@
                                                         <td class="text-center"><%=i+1%>.</td>
                                                         <td><%=units[i].unit%></td>
                                                         <td><%=units[i].setBy%></td>
-                                                        <td st id="<%=units[i]._id%>">
+                                                        <td id="<%=units[i]._id%>">
+                                                            <button class="btn btn-info btn-sm guncelle"><i class="fa fa-pencil"></i></button>
                                                             <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
                                                         </td>
                                                     </tr>

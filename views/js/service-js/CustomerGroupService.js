@@ -41,4 +41,14 @@ CustomerGroupService.prototype.listAll = function(criteria,callback){
         callback(true, CustomerGroups);
     });
 }
+CustomerGroupService.prototype.update = function(group, callback){
+    console.log(group)
+    CustomerGroupModel.update({ _id : group._id }, group, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Grup guncellendi.");
+    });
+}
 module.exports = CustomerGroupService;

@@ -47,4 +47,13 @@ OfferStatusService.prototype.listOrder = function(criteria,callback){
         callback(true, OfferStatuss);
     });
 }
+OfferStatusService.prototype.update = function(offerStatus, callback){
+    OfferStatusModel.update({ _id : offerStatus._id }, offerStatus, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "teklif durumu guncellendi.");
+    });
+}
 module.exports = OfferStatusService;

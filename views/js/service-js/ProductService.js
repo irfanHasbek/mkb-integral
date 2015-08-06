@@ -61,7 +61,7 @@ ProductService.prototype.removeAll = function(callback){
 }
  
 ProductService.prototype.listAll = function(_firmCode, callback){
-    ProductModel.find({ firmCode : _firmCode }, function(error, products){
+    ProductModel.find({ firmCode : _firmCode },"", {sort :{order : -1}}, function(error, products){
         if(error){
             callback(false, error);
             return;
@@ -82,7 +82,7 @@ ProductService.prototype.getProduct = function(id, callback){
 
 ProductService.prototype.search = function(criteria, callback){
     //console.log('criteria : ' + JSON.stringify(criteria));
-    ProductModel.find().or([criteria]).exec(function(error, products){
+    ProductModel.find().or([criteria]).sort([['order', 'descending']]).exec(function(error, products){
         if(error){
             callback(false, error);
             return;

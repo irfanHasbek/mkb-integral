@@ -38,4 +38,13 @@ OfferTopicService.prototype.listAll = function(criteria,callback){
         callback(true, OfferTopics);
     });
 }
+OfferTopicService.prototype.update = function(offerTopic, callback){
+    OfferTopicModel.update({ _id : offerTopic._id }, offerTopic, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Birim guncellendi.");
+    });
+}
 module.exports = OfferTopicService;

@@ -41,4 +41,13 @@ UnitService.prototype.listAll = function(firmaCode, callback){
         callback(true, units);
     });
 }
+UnitService.prototype.update = function(unit, callback){
+    UnitModel.update({ _id : unit._id }, unit, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Birim guncellendi.");
+    });
+}
 module.exports = UnitService;

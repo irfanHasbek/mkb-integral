@@ -9,7 +9,8 @@ function createProduct(type, req){
         code : req.body.code,
         name : req.body.name,
         pictureUrl : req.body.pictureUrl,
-        description : req.body.description
+        description : req.body.description,
+        order : req.body.order
      };
     if(type == 'update'){
         product._id = req.body._id;

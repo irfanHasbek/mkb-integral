@@ -44,6 +44,15 @@ module.exports = {
             res.send(createResponse(state,response, "başarı ile silindi"));
         });
     },
+    update : function(req, res){
+        oss.update(req.body, function(state, response){
+            if(!state){
+                res.send(createResponse(state,response, "hata oluştu "));   
+                return;
+            }
+            res.send(createResponse(state,response, "başarı ile guncellendi"));
+        });
+    },
     listAll : function(req, res, next){
         oss.listAll(req.session.user.firmCode,function(state, response){
             if(!state){

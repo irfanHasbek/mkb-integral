@@ -79,7 +79,7 @@
                                                             <th>Teklif Durumu</th>
                                                             <th>Tarih</th>
                                                             <th>İşlemi Yapan</th>
-                                                            <th class="text-center" style="width:220px;"></th>
+                                                            <th class="text-center" style="width:240px;"></th>
                                                         </tr>
                                                         <tbody id="tableOpenOffers">
                                                            <%for(var i=0;i<offers.length;i++){%>
@@ -103,6 +103,7 @@
                                                                <a class="btn btn-success btn-flat btn-sm save" title="kaydet"><i class="fa fa-save"></i></a>
                                                                <a  class="btn btn-success btn-flat btn-sm createPdf" title="pdf oluştur"><i class="fa fa-download"></i></a>
                                                                <a class="btn btn-primary btn-flat btn-sm sendMail" title="mail at" <%if(offers[i].pdfInfo.pdfStatus == "false"){%> disabled<%}else{%> data='<%=offers[i].pdfInfo.pdfUrl%>' <%}%>><i class="fa fa-envelope-o"></i></a>
+                                                               <a  class="btn btn-danger btn-flat btn-sm sil" title="Sil"><i class="fa fa-trash-o"></i></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>

@@ -9,6 +9,8 @@ function otherScripts() {
 }
 
 function clickHandlers() {
+    removeFromTable("tblOpenOffer","/wsoffer/remove",function(id){});
+    
     $(".childCustomer").click(function(){
         var data={_id:$(this).attr("data")};
         wsPost("/wschildcustomer/getchildcustomer",data,function(err,resp){

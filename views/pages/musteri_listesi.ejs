@@ -91,6 +91,7 @@
                                                <thead>
                                                 <tr style="border-bottom:3px solid #3c8dbc; border-top:3px solid #3c8dbc;">
                                                     <th class="text-center" style="width: 40px">#</th>
+                                                    <th>Müşteri Kodu</th>
                                                     <th>Müşteri Grubu</th>
                                                     <th>Firma Ünvanı</th>
                                                     <th>Müşteri Temsilcisi</th>
@@ -105,6 +106,16 @@
                                                 <%for(var i=0;i<customers.length;i++){%>
                                                   <tr id="<%=customers[i]._id%>">
                                                       <td class="text-center"><%=i+1%>.</td>
+                                                      <td><%if(customers[i].firmCode == "mkbEntalpi"){%>
+                                                          ENT - <%=customers[i]['_id']%>
+                                                      <%}else if(customers[i].firmCode == "mkbDamla"){%>
+                                                          DAM - <%=customers[i]['_id']%>
+                                                      <%}else if(customers[i].firmCode == "administrator"){%>
+                                                          ADM - <%=customers[i]['_id']%>
+                                                      <%}else if(customers[i].firmCode == "mkbIntegral"){%>
+                                                          INT - <%=customers[i]['_id']%>
+                                                      <%}%>
+                                                      </td>
                                                       <td><%=customers[i].customerGroup%></td>
                                                       <td><%=customers[i].customerTitle%></td>
                                                       <td><%=customers[i].customerAgent%></td>
@@ -166,6 +177,7 @@
                                     <p><h4><strong>Yetkili Bilgileri</strong></h4></p>
                                     <hr>
                                     <p>-Yetkili Adı : <span id="spnYetkiliAdi"></span></p>
+                                    <p>-Yetkili GSM : <span id="spnYetkiliGsm"></span></p>
                                 </div>
                                 <div class="col-md-6">
                                     <p><h4><strong>Sevkiyat Bilgileri</strong></h4></p>
@@ -175,7 +187,6 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="btnModalActivitySave" type="submit" class="btn btn-primary btn-flat"> Kaydet</button>
                             <button type="button" class="btn btn-default btn-flat " data-dismiss="modal">Kapat</button>
                         </div>
                     </form>

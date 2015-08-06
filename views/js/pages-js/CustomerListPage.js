@@ -32,6 +32,7 @@ function clickHandlers(){
             $('#spnWeb').html(customer.contactInfo.webAddress);
             if(customer.competentInfo.length > 0){
                 $('#spnYetkiliAdi').html(customer.competentInfo[0].name);
+                $('#spnYetkiliGsm').html(customer.competentInfo[0].gsm);
             }
             if(customer.forwardingInfo.length > 0){
                 $('#spnSevkiyatAdresi').html(customer.forwardingInfo[0].label);

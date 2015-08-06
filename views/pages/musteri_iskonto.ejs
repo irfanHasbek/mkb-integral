@@ -32,8 +32,9 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-10 col-md-offset-1">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <input id="inpCustomerName" name="customerName"  style="display:none;">
+                                                        <input id="inpDiscountId" name="_id"  style="display:none;">
                                                         <select id="slctCustomer" class="form-control vade" name="customerId" required placeholder="Müsteri seciniz" required>
                                                             <option value="" disabled selected>Musteri seciniz</option>
                                                             <%for(var i = 0; i < customers.length; i++){%>
@@ -41,7 +42,7 @@
                                                             <%}%> 
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                        <input id="inpproductGroupName" name="productGroupName"  style="display:none;">
                                                         <select id="slctProductGroup" class="form-control vade" name="productGroupId" required placeholder="Urun Grubu seciniz">
                                                             <option value="" disabled selected>Urun Grubu seciniz</option>
@@ -50,10 +51,16 @@
                                                             <%}%> 
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="input-group">
                                                            <span class="input-group-addon">%</span>
                                                             <input id="inpDiscount" type="number" min="0" step="1" class="form-control vade" name="percent" required placeholder="yüzde giriniz">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                           <span class="input-group-addon">Sira</span>
+                                                            <input id="inpOrder" type="number" min="0" step="1" class="form-control vade" name="order" required placeholder="sira giriniz">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,9 +90,10 @@
                                                 <th class="text-center" style="width: 40px">#</th>
                                                 <th>Müşteri Adı</th>
                                                 <th>Ürün Grubu</th>
-                                                <th>İskonto Yüzdesi</th>
+                                                <th>İskonto Yüzdesi(%)</th>
+                                                <th>Sira</th>
                                                 <th>Ekleyen</th>
-                                                <th style="width: 40px">Operasyon</th>
+                                                <th style="width: 100px">Operasyon</th>
                                             </tr>
                                             <tbody id="discountTable">
                                                 <%for(var i=0;i<discounts.length;i++){%>
@@ -93,9 +101,13 @@
                                                         <td class="text-center"><%=(i+1)%></td>
                                                         <td><%=discounts[i].customerName%></td>
                                                         <td><%=discounts[i].productGroupName%></td>
-                                                        <td>% <%=discounts[i].percent%></td>
+                                                        <td><%=discounts[i].percent%></td>
+                                                        <td><%=discounts[i].order%></td>
                                                         <td><%=discounts[i].owner%></td>
-                                                        <td id="<%=discounts[i]._id%>"><button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button></td>
+                                                        <td id="<%=discounts[i]._id%>">
+                                                            <button class="btn btn-info guncelle"><i class="fa fa-pencil"></i></button>
+                                                            <button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>
+                                                        </td>
                                                     </tr>
                                                 <%}%>
                                             </tbody>

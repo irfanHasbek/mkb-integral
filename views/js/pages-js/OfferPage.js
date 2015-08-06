@@ -113,9 +113,9 @@ function clickHandlers() {
             }
             //console.log(response);
             if (response.state) {
-                basketItem.productPrice = response.response.total;
-                basketItem.productListPrice = response.response.listPrice;
-                basketItem.productPriceWithDiscount = response.response.discountPrice;
+                basketItem.productPrice = response.response.total.toFixed(2);
+                basketItem.productListPrice = response.response.listPrice.toFixed(2);
+                basketItem.productPriceWithDiscount = response.response.discountPrice.toFixed(2);
                 var basket = JSON.parse($('#inpBasket').val());
                 basket.push(basketItem);
                 $('#inpBasket').val(JSON.stringify(basket));
@@ -221,13 +221,13 @@ function fillItemToBasket(item) {
 
 function calculatePriceAfterOperation() {
     var sum = parseFloat(calculateBasketTotalPrice());
-    $('#productSum').val(sum);
+    $('#productSum').val(sum.toFixed(2));
     var discount = parseFloat(calculateBasketTotalDiscount());
-    $('#generalDiscount').val(discount);
+    $('#generalDiscount').val(discount.toFixed(2));
     
     var kdv = sum * (18 / 100);
-    $('#productKDV').val(kdv);
-    $('#productTotal').val(sum + kdv - parseFloat($('#RoundingDiscount').val()));
+    $('#productKDV').val(kdv.toFixed(2));
+    $('#productTotal').val((sum + kdv - parseFloat($('#RoundingDiscount').val())).toFixed(2));
 }
 
 function calculateBasketTotalPrice() {
@@ -249,7 +249,7 @@ function calculateBasketTotalDiscount() {
             total += parseFloat(basket[i].amount * parseFloat(basket[i].productListPrice - basket[i].productPriceWithDiscount));
         }
     }
-    return total;
+    return total.toFixed(2);
 }
 
 function removeFromBasketAndTable(id) {

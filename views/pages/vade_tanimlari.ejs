@@ -35,7 +35,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input type="number"min="0" step="1" class="form-control vade" name="credit" required placeholder="gün giriniz">
+                                                               <input id="inpId" type="text" name="_id" disabled style="display:none;">
+                                                                <input id="inpDay" type="number" min="0" step="1" class="form-control vade" name="credit" required placeholder="gün giriniz">
                                                                 <span class="input-group-addon">gün</span>
                                                             </div>
                                                         </div>
@@ -44,7 +45,7 @@
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                <span class="input-group-addon">%</span>
-                                                                <input type="number" min="0" step="1" class="form-control vade" name="percent" required placeholder="yüzde giriniz">
+                                                                <input id="inpCredit" type="number" min="0" step="1" class="form-control vade" name="percent" required placeholder="yüzde giriniz">
                                                                 
                                                             </div>
                                                         </div>
@@ -80,18 +81,22 @@
                                                 <th>Vade Süresi</th>
                                                 <th>Yüzde</th>
                                                 <th>Ekleyen</th>
-                                                <th style="width: 40px">Operasyon</th>
+                                                 <th class="text-center" style="width: 100px"></th>
                                             </tr>
+                                            <tbody>
                                              <%for(var i=0;i<credits.length;i++){%>
                                             <tr id="<%=credits[i]._id%>">
                                                 <td class="text-center"><%=i+1%>.</td>
                                                 <td><%=credits[i].credit%> gün</td>
                                                 <td>%<%=credits[i].percent%></td>
                                                 <td><%=credits[i].setBy%></td>
-                                                <td class="text-center" id="<%=credits[i]._id%>">
-                                                    <button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button></td>
+                                                <td id="<%=credits[i]._id%>">
+                                                     <button class="btn btn-info btn-sm edit"><i class="fa fa-pencil"></i></button>
+                                                     <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
+                                                </td>
                                             </tr>
                                             <%}%>
+                                            </tbody>
                                         </table>
                                     </div><!-- /.box-body -->
                                 </div><!-- /.box -->

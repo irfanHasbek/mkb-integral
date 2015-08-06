@@ -32,7 +32,8 @@
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <label >Grup Adı</label>
-                                                        <input type="text" class="form-control" name="groupName"  placeholder="Grup Adı Giriniz" required>
+                                                        <input id="inpId" type="text" name="_id" disabled style="display:none;">
+                                                        <input id="inpGroupName" type="text" class="form-control" name="groupName"  placeholder="Grup Adı Giriniz" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +70,8 @@
                                                 <td class="text-center"><%=i+1%>.</td>
                                                 <td><%=customerGroups[i].groupName%></td>
                                                 <td><%=customerGroups[i].setBy%></td>
-                                                <td st id="<%=customerGroups[i]._id%>">
+                                                <td id="<%=customerGroups[i]._id%>">
+                                                    <button class="btn btn-info btn-sm guncelle"><i class="fa fa-pencil"></i></button>
                                                     <button class="btn btn-danger btn-sm sil"><i class="fa fa-trash-o"></i></button>
                                                 </td>
                                             </tr>

@@ -1,29 +1,41 @@
+var discount = {};
 function clickHandlers(){
     removeFromTable("discountTable","/wsdiscount/remove",function(id){
     });
     
+    $('.discountTable').on('click', '.guncelle', function(){
+        var id = $(this).closest('td').attr('id');
+        var custName = $(this).closest('tr').find('td').eq(1).text().trim();
+        var productGroup = $(this).closest('tr').find('td').eq(2).text().trim();
+        var percent = $(this).closest('tr').find('td').eq(3).text();
+        var order = $(this).closest('tr').find('td').eq(4).text();
+        
+        $('#inpDiscountId').val(id);
+        
+        $('#slctCustomer option:contains(' + custName + ')').attr('selected', 'selected');
+        $('#slctProductGroup option:contains(' + productGroup + ')').attr('selected', 'selected')
+        
+        $('#inpCustomerName').val($('#slctCustomer option:selected').text().trim());
+        $('#inpproductGroupName').val($('#slctProductGroup option:selected').text().trim());
+        
+        discount = {
+            _id : id,
+            percent : percent,
+            order : order
+        };  
+        $("#frmDiscount").attr('action', '/wsdiscount/update');
+        $("#inpOrder").val(order);
+        $("#inpDiscount").val(percent);
+    });
 }
 function formHandlers(){
     $("#frmDiscount").ajaxForm(function(resp){
         if(resp.state==true){
             alertify.success("İşlem başarı ile gerçekleştirildi.");
-            var count= $(".discountTable tbody tr").size();
-            var tr=$("<tr id="+resp.response._id+"></>");
-            var td1=$("<td class='text-center'>"+count+"</td>");
-            var td2=$("<td>"+resp.response.customerName+"</td>");
-            var td3=$("<td>"+resp.response.productGroupName+"</td>");
-            var td5=$("<td><span>% </span>"+resp.response.percent+"</td>");
-            var td6=$("<td>"+resp.response.owner+"</td>");
-            var btnSil='<button class="btn btn-danger sil"><i class="fa fa-trash-o"></i></button>';
-            var td4=$("<td st id="+resp.response._id+">"+btnSil+"</td>");
-            tr.append(td1);tr.append(td2);tr.append(td3);tr.append(td5);tr.append(td6);tr.append(td4);
-            $(".discountTable tbody").last().append(tr);
-            $("input[type='text']").val("");
-            $("input[type='number']").val("");
-            $("#slctProductGroup").val("");
+            location.reload();
         }else{
             alertify.error("İşlem başarısız.");
-        }
+        }  
     });
 }
 

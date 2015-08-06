@@ -7,7 +7,8 @@ var Discount = new mongoose.Schema({
     productGroupId : String,
     productGroupName : String,
     percent : String,
-    owner : String
+    owner : String,
+    order : Number
 });
 
 module.exports = mongoose.model('discounts', Discount);

@@ -4,6 +4,25 @@ function OfferPriceCalculatorService(){
     
 }
 
+OfferPriceCalculatorService.prototype.updatePrices = function (id, percent, callback){
+       productPriceModel.findOne({ productId : id }, function(error, response){
+            if(error){
+                callback(false, response, 'Veritabani hatasi.');
+                return;   
+            }
+            for(var i = 0; i < response.dimension.length; i++){
+                response.dimension[i].price = parseFloat(response.dimension[i].price) + (parseFloat(response.dimension[i].price) * (parseFloat(percent) / 100));  
+            }
+            response.save(function(errorSave){
+                if(errorSave){
+                    callback(false, errorSave, 'Veritabani hatasi.');
+                    return;   
+                }
+                callback(true, {}, "Islem Basarili.");
+            });
+       });
+}
+
 OfferPriceCalculatorService.prototype.calculatePrice = function(info, callback){
     if(info.productType == 'Dikdörtgen'){
         if(!isNumber(parseFloat(info.W)) || !isNumber(parseFloat(info.H)) || !isNumber(parseFloat(info.L)) || !isNumber(parseFloat(info.amount))){

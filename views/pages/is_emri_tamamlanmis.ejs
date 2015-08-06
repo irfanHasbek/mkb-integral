@@ -97,7 +97,16 @@
                                                         <tr id="<%=offers[i]._id%>">
                                                             <td class="text-center"><%=(j+1)%></td>
                                                             <td class="text-center">IE<%=offers[i].offerNo%>-<%=(j+1)%></td>
-                                                            <td><%=offers[i].customerInfo.customerName%></td>
+                                                            <td><%if(offers[i].firmCode == "mkbEntalpi"){%>
+                                                                  ENT - <%=offers[i].customerInfo.customerId%>
+                                                              <%}else if(offers[i].firmCode == "mkbDamla"){%>
+                                                                  DAM - <%=offers[i].customerInfo.customerId%>
+                                                              <%}else if(offers[i].firmCode == "administrator"){%>
+                                                                  ADM - <%=offers[i].customerInfo.customerId%>
+                                                              <%}else if(offers[i].firmCode == "mkbIntegral"){%>
+                                                                  INT - <%=offers[i].customerInfo.customerId%>
+                                                              <%}%>
+                                                            </td>
                                                             <td><%=offers[i].basket[j].productName%></td>
                                                             <%if(offers[i].basket[j].productSizeType=="Dikdörtgen"){%>
                                                             <td><%=offers[i].basket[j].productSizeWidthOrDiameter%>x<%=offers[i].basket[j].productSizeLength%>x<%=offers[i].basket[j].productSizeHeight%></td>

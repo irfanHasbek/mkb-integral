@@ -106,6 +106,29 @@ function clickHandlers(){
                alertify.error('İşlem iptal edildi.');
         }); 
     });
+    
+    $('#btnUpdatePrice').on('click', function(){
+        var productId = $('#slProductForPrice').val(); 
+        //console.log(productId);
+        if(productId != null){
+            var percent = $('#inpPricePercent').val();
+            if(isNumber(percent)){
+                console.log(percent);
+                wsPost("/wspricecalculate/updateprice", {_id : productId, percent : percent}, function(err, resp){
+                    if(err){
+                        alertify.error('Webservis hatasi !');
+                        return;
+                    }
+                    alertify.success('Islem Basarili !');
+                    console.log(resp);
+                });
+            }else{
+                alertify.error('Lütfen gecerli bir sayi giriniz !');
+            }
+        }else{
+            alertify.error('Lütfen ürün seciniz !');
+        }
+    });
 }
 
 function fillPriceTable(product, dimension, count){
@@ -122,7 +145,7 @@ function fillPriceTable(product, dimension, count){
     else{
         tdDimension = '<td class="text-center">' + dimension.W + 'X' + dimension.L + '</td>';   
     }
-    var tdDimensionPrice = '<td class="text-center">' + dimension.price + '</td>';
+    var tdDimensionPrice = '<td class="text-center">' + parseFloat(dimension.price).toFixed(2) + '</td>';
     var tdButton = '<td class="text-center"><a class="btn btn-danger btn-sm btn-flat remove"><i class="fa fa-trash-o"></i></a></td>';
     
     tr.append(tdCount);

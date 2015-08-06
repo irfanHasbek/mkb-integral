@@ -38,4 +38,13 @@ LosingReasonService.prototype.listAll = function(criteria,callback){
         callback(true, LosingReasons);
     });
 }
+LosingReasonService.prototype.update = function(losingReason, callback){
+    LosingReasonModel.update({ _id : losingReason._id }, losingReason, function(error, numOfAffect){
+        if(error){
+            callback(false, error);
+            return;
+        }
+        callback(true, "Birim guncellendi.");
+    });
+}
 module.exports = LosingReasonService;
